@@ -12,8 +12,9 @@ gulp.task('server', function(cb) {
     server : {
       baseDir : require('../config').paths.dest
     },
-    notify: false,
-    open : true
+    notify : false,
+    open : false,
+    reloadOnRestart : true
   });
 
   return cb();

@@ -4,14 +4,31 @@ var PUBLIC_DIR = 'public/';
 var config = {
   paths : {
     source : {
-      jshint  : ASSETS_DIR + 'js/**/*.js',
-      styles  : ASSETS_DIR + 'css/**/*.{sass,scss}',
-      scripts : ASSETS_DIR + 'js/main.js',
-      images  : ASSETS_DIR + 'images/**/*.{png,jpg,jpeg,gif,svg}',
-      copy    : ASSETS_DIR + 'copy/**/*',
-      root    : ASSETS_DIR
+      templates   : ASSETS_DIR + 'templates/**/*.html',
+      jshint      : ASSETS_DIR + 'js/**/*.js',
+      styles      : ASSETS_DIR + 'css/**/*.{sass,scss}',
+      scripts     : ASSETS_DIR + 'js/main.js',
+      scripts_env : ASSETS_DIR + 'js/app/environment.js',
+      images      : ASSETS_DIR + 'images/**/*.{png,jpg,jpeg,gif,svg}',
+      copy        : ASSETS_DIR + 'copy/**/*',
+      rev         : ASSETS_DIR + 'rev/',
+      root        : ASSETS_DIR
     },
-    dest : PUBLIC_DIR
+    dest : PUBLIC_DIR,
+    destination : {
+      templates      : PUBLIC_DIR,
+      styles         : PUBLIC_DIR + 'css/',
+      scripts        : PUBLIC_DIR + 'js/',
+      images         : PUBLIC_DIR + 'images/',
+      root           : PUBLIC_DIR
+    }
+    // hosts : {
+    //   static : {
+    //     development : 'http://localhost:3000/',
+    //     testing : 'https://www-tracking.coureon.com',
+    //     production : 'https://tracking.coureon.com'
+    //   }
+    // }
   }
 };
 

@@ -3,7 +3,17 @@
 var gulp = require('gulp'),
   paths = require('../config').paths;
 
-gulp.task('scripts', function() {
+gulp.task('scripts:rev', function() {
+  var rev = require('gulp-rev');
+
+  return gulp.src(paths.destination.scripts + '**/*.js', {base : paths.destination.root})
+  .pipe(rev())
+  .pipe(gulp.dest(paths.destination.root))
+  .pipe(rev.manifest({path: 'js.json'}))
+  .pipe(gulp.dest(paths.source.rev));
+});
+
+gulp.task('scripts', gulp.series(function scriptsBuild() {
   var jshint = require('gulp-jshint');
 
   gulp.src(paths.source.jshint)
@@ -30,4 +40,4 @@ gulp.task('scripts', function() {
     .pipe(uglify())
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.dest + 'js'));
-});
+}, 'scripts:rev'));
