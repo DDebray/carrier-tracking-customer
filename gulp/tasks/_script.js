@@ -37,7 +37,7 @@ gulp.task('scripts', gulp.series(function scriptsBuild() {
     .pipe(source('bundle.js'))
     .pipe(buffer())
     .pipe(sourcemaps.init())
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.dest + 'js'));
 }, 'scripts:rev'));

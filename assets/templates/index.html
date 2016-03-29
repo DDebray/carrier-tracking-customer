@@ -11,8 +11,24 @@
     <base href="<%= basepath %>">
 </head>
 <body>
-    This is your NEW index template.
+  <body ng-app="application" ng-controller="PageDashboardCtrl as dashboard" ng-cloak="ng-cloak">
 
-    <script src="<%= asset('js/bundle.js') %>"></script>
+      <small><pre>dashboard: {{ dashboard | json }}</pre></small>
+
+      <div id="root" class="area-root" ng-class="{ 'behavior-view-filter-blur' : base.viewLocked() }">
+      </div>
+
+      <div ng-controller="UiCtrl as ui" class="print-hide">
+          <div ng-if="ui.tooltip()" ng-repeat="tooltip in [ui.tooltip()]" class="ui-tooltip" ng-class="tooltip.cssClass" ng-style="tooltip.css">
+              <span ng-if="tooltip.translation">
+                  <span class="fa fa-times area-panel-close" ng-if="tooltip.on === 'click' && !tooltip.hasCustomHideHandler" ng-click="ui.hideTooltip()"></span>
+                  <span ng-bind-html="(tooltip.translation | translate) | raw"></span>
+              </span>
+              <span ng-if="tooltip.template" ng-include="'/views/partials/tooltip/' + tooltip.template" ng-repeat="data in [tooltip.data]"></span>
+          </div>
+      </div>
+
+      <script src="<%= asset('js/bundle.js') %>"></script>
+  </body>
 </body>
 </html>
