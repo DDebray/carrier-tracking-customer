@@ -1,20 +1,16 @@
 .trackingTimeline {
-  position: relative;
-  padding: 2em 0;
-  margin-top: 2em;
-  margin-bottom: 2em;
 
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 18px;
-    height: 100%;
-    width: 4px;
-    background: black;
+  &::before {
+
   }
 
   & > ._event {
 
+    ._date {
+
+    }
+    ._description {
+
+    }
   }
 }
