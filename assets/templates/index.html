@@ -8,14 +8,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="/images/favicon.ico" type=image/x-icon />
     <link rel="stylesheet" href="<%= asset('css/main.css') %>" />
+    <link rel="stylesheet" href="https://www.coureon.com/public/css/main.css">
+
     <base href="<%= basepath %>">
 </head>
 <body>
-  <body ng-app="application" ng-controller="PageDashboardCtrl as dashboard" ng-cloak="ng-cloak">
+  <body ng-app="application" ng-controller="PageBaseCtrl as base" ng-cloak="ng-cloak">
 
-      <small><pre>dashboard: {{ dashboard | json }}</pre></small>
+      <!-- <small><pre>dashboard: {{ dashboard | json }}</pre></small> -->
+      <div id="root" class="area-root" ng-class="{ 'behavior-view-filter-blur' : base.viewLocked }">
 
-      <div id="root" class="area-root" ng-class="{ 'behavior-view-filter-blur' : base.viewLocked() }">
+          <header class="header header--small header--breaking">
+              <div class="header__inner">
+                  <a class="header__logo header__logo--small" href="/"></a>
+              </div>
+          </header>
+          <header class="header header--large">
+              <div class="header__inner">
+                  <a class="header__logo header__logo--large" href="/"></a>
+              </div>
+          </header>
+
+          <main class="main" ng-include="'/views/tracking.html'" ng-controller="PageTrackingCtrl as tracking"></main>
       </div>
 
       <div ng-controller="UiCtrl as ui" class="print-hide">

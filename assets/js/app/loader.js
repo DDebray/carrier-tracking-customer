@@ -19,7 +19,9 @@ application
   .provider('CommonUi', require('./ui/config'))
   .controller('UiCtrl', require('./ui/controller'))
 
-  .controller('PageDashboardCtrl', require('./page/dashboard'))
+  .controller('PageBaseCtrl', require('./page/base'))
+  // .controller('PageDashboardCtrl', require('./page/dashboard'))
+  .controller('PageTrackingCtrl', require('./page/tracking'))
   ;
 
 module.exports = application;

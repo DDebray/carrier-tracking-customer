@@ -1,0 +1,69 @@
+<section id="hero" class="section section--blue section--hero" style="background-image: url(https://www.coureon.com/content/1-home/1-hero/header-cta.jpg); ?>">
+  <div class="section__inner">
+
+    <div class="hero">
+      <h1 class="hero__title">Tracking</h1>
+
+      <div class="hero__register">
+        <form class="emailForm" action="https://www.coureon.com/register" method="GET">
+          <div class="emailForm__elements">
+
+            <input class="emailForm__input emailForm__input--default" type="email" name="email" placeholder="Tracking-Nr. eingeben">
+            <button class="emailForm__submit" type="submit" name="submit">Jetzt Sendung verfolgen</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- START facebook -->
+<img src="https://www.coureon.com/content/coureon-logo-square.png" alt="Häufige Fragen" style="display:none;">
+<img src="https://www.coureon.com/content/6-haeufige-fragen/4-versandanbieter/haeufige-fragen.jpg" alt="Häufige Fragen" style="display:none;">
+<!-- END facebook -->
+
+<small><pre>tracking: {{ tracking | json }}</pre></small>
+
+<ul class="trackingState">
+  <li class="readyForTransit"></li>
+  <li class="inTransit"></li>
+  <li class="inDistributionCenter"></li>
+  <li class="inDistributionCenter"></li>
+</ul>
+
+<section class="trackingTimeline">
+    <div class="_event -isProcessed">
+        <div class="_date">
+            Mo., 02.12.,
+            <br>
+            14:30 Uhr
+        </div>
+        <div class="_description">
+            Ihr Paket wurde im Paketshop in Kaiserslautern abgegeben
+        </div>
+    </div>
+    <div class="_event">
+        <div class="_date">
+            Di., 03.12.,
+            <br>
+            10:15 Uhr
+        </div>
+        <div class="_description">
+            Ihr Paket wurde im Verteilzentrum in Frankfurt am Main abgegeben
+        </div>
+    </div>
+</section>
+
+
+<section class="section section--black section--center" style="background-image: url(https://www.coureon.com/content/footer-cta.jpg)">
+  <div class="section__inner">
+    <h2 class="section__title">Einfach Pakete versenden.</h2>
+    <p class="section__subtitle">Kostenlose Nutzung. Keine Einrichtung notwendig.</p>
+
+    <div class="emailForm__elements">
+      <input class="emailForm__submit" type="button" name="submit" value="Jetzt Rücksende Etikett erstellen"></input>
+      <input class="emailForm__submit" type="button" name="submit" value="Jetzt Paketschein drucken"></input>
+    </div>
+  </div>
+</section>
