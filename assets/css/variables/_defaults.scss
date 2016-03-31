@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  font-size:$_fsDefault;
+  font-family:$_ffSans;
+  background:$_rgbWhite;
+  color:$_rgbMineShaft;
+}
+
+html, body {
+  font-family: $_ffSans;
+  font-size: 17px;
+  line-height: $_lhDefault;
+  color: $_rgbMineShaft;
+  height: 100%;
+  -webkit-tap-highlight-color: transparent;
+  margin: 0;
+  padding:0;
+  height:100%;
+  width:100%;
+}
+
+h1, h2, h3, h4, h5{
+  font-weight: normal;
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+input{
+  font-family: inherit;
+}
+
+button{
+  margin: 0;
+}
+
+ul {
+  margin: ($_ySpacing / 2) 0 $_ySpacing;
+  padding-left: $_xSpacing;
+}
+
+article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section,video {
+  display: block;
+}

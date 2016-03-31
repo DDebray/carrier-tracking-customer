@@ -1,5 +1,5 @@
-<section id="hero" class="section section--blue section--hero" style="background-image: url(https://www.coureon.com/content/1-home/1-hero/header-cta.jpg); ?>">
-  <div class="section__inner">
+<section id="hero" class="section -blue -hero" style="background-image: url(https://www.coureon.com/content/1-home/1-hero/header-cta.jpg); ?>">
+  <div class="_inner">
 
     <div class="hero">
       <h1 class="hero__title">Tracking</h1>
@@ -23,43 +23,97 @@
 <img src="https://www.coureon.com/content/6-haeufige-fragen/4-versandanbieter/haeufige-fragen.jpg" alt="Häufige Fragen" style="display:none;">
 <!-- END facebook -->
 
-<small><pre>tracking: {{ tracking | json }}</pre></small>
+<section class="section">
+  <div class="_inner -slim">
 
-<ul class="trackingState">
-  <li class="readyForTransit"></li>
-  <li class="inTransit"></li>
-  <li class="inDistributionCenter"></li>
-  <li class="inDistributionCenter"></li>
-</ul>
+    <!-- <small><pre>tracking: {{ tracking | json }}</pre></small> -->
 
-<section class="trackingTimeline">
-    <div class="_event -isProcessed">
-        <div class="_date">
-            Mo., 02.12.,
-            <br>
-            14:30 Uhr
-        </div>
-        <div class="_description">
-            Ihr Paket wurde im Paketshop in Kaiserslautern abgegeben
-        </div>
+    <div class="states">
+      <!-- <span class="_state fa fa-cube icon-action icon-action-outlined"></span> -->
+      <span class="_state -isActive fa fa-cube"></span>
+      <span class="_angle -isVisible fa fa-angle-right"></span>
+      <span class="_state -isActive fa fa-truck fa-flip-horizontal fa-rotate-180"></span>
+      <span class="_angle -isVisible fa fa-angle-right"></span>
+      <span class="_state -isActive fa fa-arrows-alt"></span>
+      <span class="_angle fa fa-angle-right"></span>
+      <span class="_state fa fa-home"></span>
+      <span class="_angle fa fa-angle-right"></span>
+      <span class="_state fa fa-check"></span>
     </div>
-    <div class="_event">
-        <div class="_date">
-            Di., 03.12.,
-            <br>
-            10:15 Uhr
+
+    <ul class="quickinfo">
+      <li class="_title">Tracking-Nummer:</li>
+      <li>CO-861874623876762</li>
+      <li class="_title">Status:</li>
+      <li>Ausgeliefert</li>
+    </ul>
+
+    <section class="timeline">
+        <div class="_event -isProcessed">
+            <span class="__date">
+                Mo., 02.12.,
+                <br>
+                14:30 Uhr
+            </span>
+            <span class="__state fa fa-check"></span>
+            <span class="__description">
+                Ihr Paket wurde im Paketshop in Kaiserslautern abgegeben
+            </span>
         </div>
-        <div class="_description">
-            Ihr Paket wurde im Verteilzentrum in Frankfurt am Main abgegeben
+        <div class="_event -isProcessed">
+            <span class="__date">
+                Di., 03.12.,
+                <br>
+                10:15 Uhr
+            </span>
+            <span class="__state fa fa-check"></span>
+            <span class="__description">
+                Ihr Paket wurde im Verteilzentrum in Frankfurt am Main abgegeben
+            </span>
         </div>
-    </div>
-</section>
+        <div class="_event">
+            <span class="__date">
+                Mo., 02.12.,
+                <br>
+                14:30 Uhr
+            </span>
+            <span class="__state fa fa-check"></span>
+            <span class="__description">
+                Ihr Paket wurde im Paketshop in Kaiserslautern abgegeben
+            </span>
+        </div>
+        <div class="_event">
+            <span class="__date">
+                Mo., 02.12.,
+                <br>
+                14:30 Uhr
+            </span>
+            <span class="__state fa fa-check"></span>
+            <span class="__description">
+                Ihr Paket wurde im Paketshop in Kaiserslautern abgegeben
+            </span>
+        </div>
+        <div class="_event">
+            <span class="__date">
+                Di., 03.12.,
+                <br>
+                10:15 Uhr
+            </span>
+            <span class="__state fa fa-check"></span>
+            <span class="__description">
+                Ihr Paket wurde im Verteilzentrum in Frankfurt am Main abgegeben
+            </span>
+        </div>
+    </section>
+  </div>
+</div>
 
 
-<section class="section section--black section--center" style="background-image: url(https://www.coureon.com/content/footer-cta.jpg)">
-  <div class="section__inner">
-    <h2 class="section__title">Einfach Pakete versenden.</h2>
-    <p class="section__subtitle">Kostenlose Nutzung. Keine Einrichtung notwendig.</p>
+
+<section class="section -black -center" style="background-image: url(https://www.coureon.com/content/footer-cta.jpg)">
+  <div class="_inner">
+    <h2 class="_title">Einfach Pakete versenden.</h2>
+    <p class="_subtitle">Kostenlose Nutzung. Keine Einrichtung notwendig.</p>
 
     <div class="emailForm__elements">
       <input class="emailForm__submit" type="button" name="submit" value="Jetzt Rücksende Etikett erstellen"></input>

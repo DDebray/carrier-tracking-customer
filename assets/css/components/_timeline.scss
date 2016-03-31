@@ -1,16 +1,82 @@
-.trackingTimeline {
+.timeline {
 
-  &::before {
+  $timeline-date-width: 105px;
+  $timeline-width: 4px;
+  $timeline-state-size: 20px;
 
+  position: relative;
+  padding: $_defaultSpacing 0;
+  margin: $_ySpacing 0;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: $timeline-date-width / 2;
+    left: $timeline-date-width + $timeline-state-size + $_xSpacing;
+    height: 75%;
+    width: $timeline-width;
+    background: $_rgbDustyGray;
   }
 
-  & > ._event {
-
-    ._date {
-
+  ._event {
+    position: relative;
+    margin: $_ySpacing 0;
+    @include clearfix;
+    &:first-child {
+      margin-top: 0;
     }
-    ._description {
+    &:last-child {
+      margin-bottom: 0;
+    }
 
+    .__date {
+      // position: absolute;
+      // top: 0;
+      // left: 0;
+      display: inline-block;
+      vertical-align:middle;
+      width: $timeline-date-width;
+      height: 68px;
+      border-radius: $_borderRadiusDefault;
+      color: $_rgbWhite;
+      font-weight: bold;
+      background-color: $_rgbPacificBlue;
+      padding: $_defaultSpacing;
+    }
+
+    .__state {
+      left: 0;
+      margin-left: $_xSpacing;
+      display: inline-block;
+      vertical-align:middle;
+      border-radius: 50%;
+      line-height: $timeline-state-size;
+      font-size: $timeline-state-size;
+      border: $timeline-width solid $_rgbDustyGray;
+      background-color: $_rgbWhite;
+      color: $_rgbWhite;
+      padding: $_defaultSpacing / 2;
+    }
+
+    &:first-child .__state,
+    &:last-child .__state {
+      border-radius: $_borderRadiusDefault;
+    }
+
+    &.-isProcessed .__state {
+      color: $_rgbBlush;
+    }
+
+    .__description {
+      position: relative;
+      vertical-align:middle;
+      display: inline-block;
+
+      margin-left: $_xSpacing + $timeline-width;
+      border-radius: $_borderRadiusDefault;
+      @include clearfix;
     }
   }
+
+
 }

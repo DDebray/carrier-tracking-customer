@@ -1,0 +1,14 @@
+.quickinfo {
+  list-style:none outside;
+  margin: ($_ySpacing * 2) 0;
+  padding:0;
+
+  li {
+    width: 25%;
+    display: inline-block;
+  }
+
+  & > ._title {
+    font-weight: bold;
+  }
+}
