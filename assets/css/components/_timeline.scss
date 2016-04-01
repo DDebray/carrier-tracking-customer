@@ -11,10 +11,10 @@
   }
 
   ._event {
+    @include clearfix;
     position: relative;
     margin: $_ySpacing 0;
-    // z-index: 1;
-    @include clearfix;
+
     &:before {
       content: '';
       position: absolute;
@@ -23,7 +23,7 @@
       height: calc(100% + #{$_ySpacing});
       width: $timeline-width;
       background: $_rgbDustyGray;
-      z-index: -1;  /* to be below the parent element */
+      z-index: -1;
     }
     &:first-child {
       margin-top: 0;
@@ -39,32 +39,7 @@
       }
     }
 
-    .__date {
-      display: inline-block;
-      vertical-align:middle;
-      width: $timeline-date-width;
-      height: 68px;
-      border-radius: $_borderRadiusDefault;
-      color: $_rgbWhite;
-      font-weight: bold;
-      background-color: $_rgbPacificBlue;
-      padding: $_defaultSpacing;
-    }
 
-    .__state {
-      position: absolute;
-      top: calc(50% - #{($timeline-state-size / 2)} - #{($_defaultSpacing)});
-      left: 132px;
-      vertical-align:middle;
-      border-radius: 50%;
-      line-height: $timeline-state-size;
-      font-size: $timeline-state-size;
-      border: $timeline-width solid $_rgbDustyGray;
-      background-color: $_rgbWhite;
-      color: $_rgbWhite;
-      padding: $_defaultSpacing / 2;
-      box-shadow: 0px 0px 0px 4px $_rgbWhite;
-    }
 
     &:first-child .__state,
     &:last-child .__state {
@@ -75,16 +50,42 @@
       color: $_rgbBlush;
     }
 
-    .__description {
-      position: relative;
-      vertical-align:middle;
-      display: inline-block;
-      max-width: 600px;
-      margin-left: ($_xSpacing * 2) + ($_defaultSpacing * 2) + $timeline-state-size;
-      border-radius: $_borderRadiusDefault;
-      @include clearfix;
-    }
+
   }
 
+  .__date {
+    display: inline-block;
+    vertical-align:middle;
+    width: $timeline-date-width;
+    height: 68px;
+    border-radius: $_borderRadiusDefault;
+    color: $_rgbWhite;
+    font-weight: bold;
+    background-color: $_rgbPacificBlue;
+    padding: $_defaultSpacing;
+  }
 
+  .__state {
+    position: absolute;
+    top: calc(50% - #{($timeline-state-size / 2)} - #{($_defaultSpacing)});
+    left: 132px;
+    vertical-align:middle;
+    border-radius: 50%;
+    line-height: $timeline-state-size;
+    font-size: $timeline-state-size;
+    border: $timeline-width solid $_rgbDustyGray;
+    background-color: $_rgbWhite;
+    color: $_rgbWhite;
+    padding: $_defaultSpacing / 2;
+    box-shadow: 0px 0px 0px 4px $_rgbWhite;
+  }
+.__description {
+    position: relative;
+    vertical-align:middle;
+    display: inline-block;
+    max-width: 600px;
+    margin-left: ($_xSpacing * 2) + ($_defaultSpacing * 2) + $timeline-state-size;
+    border-radius: $_borderRadiusDefault;
+    @include clearfix;
+  }
 }

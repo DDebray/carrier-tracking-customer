@@ -1,22 +1,4 @@
-<section id="hero" class="section -blue -hero" style="background-image: url(https://www.coureon.com/content/1-home/1-hero/header-cta.jpg); ?>">
-  <div class="_inner">
-
-    <div class="hero">
-      <h1 class="hero__title">Tracking</h1>
-
-      <div class="hero__register">
-        <form class="emailForm" ng-submit="tracking.getStatus()" autocomplete="off">
-          <div class="emailForm__elements">
-
-            <input class="emailForm__input emailForm__input--default" type="text" name="tracking_number" placeholder="Tracking-Nr. eingeben" required ng-model="tracking.trackingId" select-on-click>
-            <button class="emailForm__submit" type="submit" name="submit">Jetzt Sendung verfolgen</button>
-          </div>
-        </form>
-      </div>
-
-    </div>
-  </div>
-</section>
+<div ng-include="'/views/partials/header.html'" ng-repeat="data in [true]"></div>
 
 <section class="section">
   <div class="_inner -slim">
@@ -24,8 +6,7 @@
     <!-- <small><pre>tracking: {{ tracking | json }}</pre></small> -->
 
 
-    <div class="states">
-      <!-- <span class="_state fa fa-cube icon-action icon-action-outlined"></span> -->
+    <div class="states" ng-class="{ '-secondary' : !tracking.data}">
       <span class="_state fa fa-cube" ng-class="{ '-isActive' : tracking.data}"></span>
       <span class="_angle fa fa-angle-right" ng-class="{ '-isVisible' : tracking.data}"></span>
       <span class="_state fa fa-truck fa-flip-horizontal" ng-class="{ '-isActive' : tracking.data}"></span>
@@ -37,7 +18,7 @@
       <span class="_state fa fa-check"></span>
     </div>
 
-    <ul class="quickinfo" ng-if="tracking.data">
+    <ul class="overview" ng-if="tracking.data">
       <li>
         <span class="_title" ng-bind="'TEST.KEY' | translate"></span>
         <span ng-bind="tracking.data.id"></span>
@@ -48,22 +29,22 @@
       </li>
     </ul>
 
-    <div ng-if="!tracking.data" class="">Nix da.</div>
+    <!-- <div ng-if="!tracking.data" class="">Nix da.</div> -->
 
     <section class="timeline" ng-if="tracking.data.events.length">
 
-        <div class="_event -isProcessed" ng-repeat="event in tracking.data.events">
-            <span class="__date">
+      <div class="_event -isProcessed" ng-repeat="event in tracking.data.events">
+        <span class="__date">
               <div ng-bind="event.timestamp | date"></div>
               <div ng-bind="event.timestamp | date"></div>
             </span>
-            <span class="__state fa fa-check"></span>
-            <span class="__description" ng-bind="event.description"></span>
-            <!-- <span class="__description">
+        <span class="__state fa fa-check"></span>
+        <span class="__description" ng-bind="event.description"></span>
+        <!-- <span class="__description">
                 <small><pre>{{ event | json }}</pre></small>
             </span> -->
-        </div>
-        <!-- <div class="_event -isProcessed">
+      </div>
+      <!-- <div class="_event -isProcessed">
             <span class="__date">
                 Di., 03.12.,
                 <br>
@@ -108,19 +89,11 @@
             </span>
         </div> -->
     </section>
+
   </div>
-</div>
 
-
-
-<section class="section -black -center" style="background-image: url(https://www.coureon.com/content/footer-cta.jpg)">
-  <div class="_inner">
-    <h2 class="_title">Einfach Pakete versenden.</h2>
-    <p class="_subtitle">Kostenlose Nutzung. Keine Einrichtung notwendig.</p>
-
-    <div class="emailForm__elements">
-      <input class="emailForm__submit" type="button" name="submit" value="Jetzt Rücksende Etikett erstellen"></input>
-      <input class="emailForm__submit" type="button" name="submit" value="Jetzt Paketschein drucken"></input>
-    </div>
-  </div>
 </section>
+
+
+
+<div ng-include="'/views/partials/footer.html'"></div>
