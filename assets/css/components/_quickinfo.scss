@@ -4,11 +4,12 @@
   padding:0;
 
   li {
-    width: 25%;
+    width: 50%;
     display: inline-block;
   }
 
-  & > ._title {
+  ._title {
     font-weight: bold;
+    margin-right: $_defaultSpacing;
   }
 }

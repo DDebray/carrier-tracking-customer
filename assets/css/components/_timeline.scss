@@ -1,38 +1,45 @@
 .timeline {
 
   $timeline-date-width: 105px;
-  $timeline-width: 4px;
-  $timeline-state-size: 20px;
+  $timeline-width: 2px;
+  $timeline-state-size: 16px;
 
   position: relative;
-  padding: $_defaultSpacing 0;
-  margin: $_ySpacing 0;
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: $timeline-date-width / 2;
-    left: $timeline-date-width + $timeline-state-size + $_xSpacing;
-    height: 75%;
-    width: $timeline-width;
-    background: $_rgbDustyGray;
+  margin: {
+    top: $_ySpacing;
+    bottom: $_ySpacing * 3;
   }
 
   ._event {
     position: relative;
     margin: $_ySpacing 0;
+    // z-index: 1;
     @include clearfix;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: $timeline-date-width + $timeline-state-size + $_xSpacing;
+      height: calc(100% + #{$_ySpacing});
+      width: $timeline-width;
+      background: $_rgbDustyGray;
+      z-index: -1;  /* to be below the parent element */
+    }
     &:first-child {
       margin-top: 0;
+      &:before {
+        top: 50%;
+        height: calc(50% + #{$_ySpacing});
+      }
     }
     &:last-child {
       margin-bottom: 0;
+      &:before {
+        height: 50%;
+      }
     }
 
     .__date {
-      // position: absolute;
-      // top: 0;
-      // left: 0;
       display: inline-block;
       vertical-align:middle;
       width: $timeline-date-width;
@@ -45,9 +52,9 @@
     }
 
     .__state {
-      left: 0;
-      margin-left: $_xSpacing;
-      display: inline-block;
+      position: absolute;
+      top: calc(50% - #{($timeline-state-size / 2)} - #{($_defaultSpacing)});
+      left: 132px;
       vertical-align:middle;
       border-radius: 50%;
       line-height: $timeline-state-size;
@@ -56,6 +63,7 @@
       background-color: $_rgbWhite;
       color: $_rgbWhite;
       padding: $_defaultSpacing / 2;
+      box-shadow: 0px 0px 0px 4px $_rgbWhite;
     }
 
     &:first-child .__state,
@@ -71,8 +79,8 @@
       position: relative;
       vertical-align:middle;
       display: inline-block;
-
-      margin-left: $_xSpacing + $timeline-width;
+      max-width: 600px;
+      margin-left: ($_xSpacing * 2) + ($_defaultSpacing * 2) + $timeline-state-size;
       border-radius: $_borderRadiusDefault;
       @include clearfix;
     }

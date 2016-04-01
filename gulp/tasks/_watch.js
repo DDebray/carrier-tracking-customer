@@ -8,7 +8,7 @@ gulp.task('styles:watch', function () {
 });
 
 gulp.task('scripts:watch', function () {
-  gulp.watch(paths.source.jshint, gulp.series('scripts', 'rev', 'templates', 'server:reload'));
+  gulp.watch(paths.source.jshint, gulp.series('scripts:clean', 'scripts', 'rev', 'templates', 'server:reload'));
 });
 
 gulp.task('images:watch', function () {

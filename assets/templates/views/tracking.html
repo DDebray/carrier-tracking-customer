@@ -5,10 +5,10 @@
       <h1 class="hero__title">Tracking</h1>
 
       <div class="hero__register">
-        <form class="emailForm" action="https://www.coureon.com/register" method="GET">
+        <form class="emailForm" ng-submit="tracking.getStatus()" autocomplete="off">
           <div class="emailForm__elements">
 
-            <input class="emailForm__input emailForm__input--default" type="email" name="email" placeholder="Tracking-Nr. eingeben">
+            <input class="emailForm__input emailForm__input--default" type="text" name="tracking_number" placeholder="Tracking-Nr. eingeben" required ng-model="tracking.trackingId" select-on-click>
             <button class="emailForm__submit" type="submit" name="submit">Jetzt Sendung verfolgen</button>
           </div>
         </form>
@@ -18,49 +18,52 @@
   </div>
 </section>
 
-<!-- START facebook -->
-<img src="https://www.coureon.com/content/coureon-logo-square.png" alt="Häufige Fragen" style="display:none;">
-<img src="https://www.coureon.com/content/6-haeufige-fragen/4-versandanbieter/haeufige-fragen.jpg" alt="Häufige Fragen" style="display:none;">
-<!-- END facebook -->
-
 <section class="section">
   <div class="_inner -slim">
 
     <!-- <small><pre>tracking: {{ tracking | json }}</pre></small> -->
 
+
     <div class="states">
       <!-- <span class="_state fa fa-cube icon-action icon-action-outlined"></span> -->
-      <span class="_state -isActive fa fa-cube"></span>
-      <span class="_angle -isVisible fa fa-angle-right"></span>
-      <span class="_state -isActive fa fa-truck fa-flip-horizontal fa-rotate-180"></span>
-      <span class="_angle -isVisible fa fa-angle-right"></span>
-      <span class="_state -isActive fa fa-arrows-alt"></span>
+      <span class="_state fa fa-cube" ng-class="{ '-isActive' : tracking.data}"></span>
+      <span class="_angle fa fa-angle-right" ng-class="{ '-isVisible' : tracking.data}"></span>
+      <span class="_state fa fa-truck fa-flip-horizontal" ng-class="{ '-isActive' : tracking.data}"></span>
+      <span class="_angle fa fa-angle-right" ng-class="{ '-isVisible' : tracking.data}"></span>
+      <span class="_state fa fa-arrows-alt" ng-class="{ '-isActive' : tracking.data}"></span>
       <span class="_angle fa fa-angle-right"></span>
       <span class="_state fa fa-home"></span>
       <span class="_angle fa fa-angle-right"></span>
       <span class="_state fa fa-check"></span>
     </div>
 
-    <ul class="quickinfo">
-      <li class="_title">Tracking-Nummer:</li>
-      <li>CO-861874623876762</li>
-      <li class="_title">Status:</li>
-      <li>Ausgeliefert</li>
+    <ul class="quickinfo" ng-if="tracking.data">
+      <li>
+        <span class="_title" ng-bind="'TEST.KEY' | translate"></span>
+        <span ng-bind="tracking.data.id"></span>
+      </li>
+      <li>
+        <span class="_title" ng-bind="'Status:' | translate"></span>
+        <span ng-bind="tracking.data.current_state"></span>
+      </li>
     </ul>
 
-    <section class="timeline">
-        <div class="_event -isProcessed">
+    <div ng-if="!tracking.data" class="">Nix da.</div>
+
+    <section class="timeline" ng-if="tracking.data.events.length">
+
+        <div class="_event -isProcessed" ng-repeat="event in tracking.data.events">
             <span class="__date">
-                Mo., 02.12.,
-                <br>
-                14:30 Uhr
+              <div ng-bind="event.timestamp | date"></div>
+              <div ng-bind="event.timestamp | date"></div>
             </span>
             <span class="__state fa fa-check"></span>
-            <span class="__description">
-                Ihr Paket wurde im Paketshop in Kaiserslautern abgegeben
-            </span>
+            <span class="__description" ng-bind="event.description"></span>
+            <!-- <span class="__description">
+                <small><pre>{{ event | json }}</pre></small>
+            </span> -->
         </div>
-        <div class="_event -isProcessed">
+        <!-- <div class="_event -isProcessed">
             <span class="__date">
                 Di., 03.12.,
                 <br>
@@ -103,7 +106,7 @@
             <span class="__description">
                 Ihr Paket wurde im Verteilzentrum in Frankfurt am Main abgegeben
             </span>
-        </div>
+        </div> -->
     </section>
   </div>
 </div>

@@ -3,6 +3,11 @@
 var gulp = require('gulp'),
   paths = require('../config').paths;
 
+gulp.task('scripts:clean', function(cb) {
+  require('del').sync(paths.destination.scripts);
+  cb();
+});
+
 gulp.task('scripts:rev', function() {
   var rev = require('gulp-rev');
 
@@ -13,14 +18,13 @@ gulp.task('scripts:rev', function() {
   .pipe(gulp.dest(paths.source.rev));
 });
 
-gulp.task('scripts', gulp.series(function scriptsBuild() {
+gulp.task('scripts', gulp.series('scripts:clean', function scriptsBuild() {
   var jshint = require('gulp-jshint');
 
   gulp.src(paths.source.jshint)
     .pipe(jshint({ esnext : true }))
     .pipe(jshint.reporter('jshint-stylish'));
     // .pipe(jshint.reporter('fail'));
-
 
   var
     browserify = require('browserify'),
