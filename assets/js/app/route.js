@@ -58,13 +58,18 @@ module.exports = ['$routeProvider', '$locationProvider', '$httpProvider', 'Commo
 
   $routeProvider
     .when('/', {
-      controller : 'PageBaseCtrl as base',
-      template : '',
+      controller : 'PageTrackingCtrl as tracking',
+      templateUrl : 'views/landingpage.html',
       resolve : independentPageResolver,
     })
-    .when('/:packageId', {
-      controller : 'PageBaseCtrl as base',
-      template : '',
+    .when('/:trackingId', {
+      controller : 'PageTrackingCtrl as tracking',
+      templateUrl : 'views/tracking.html',
+      resolve : independentPageResolver,
+    })
+    .when('/tracking/:trackingId', {
+      controller : 'PageTrackingCtrl as tracking',
+      templateUrl : 'views/tracking.html',
       resolve : independentPageResolver,
     })
     .otherwise({

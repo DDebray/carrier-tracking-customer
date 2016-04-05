@@ -11,9 +11,9 @@
 
   transition: margin $_tMed ease;
 
-  &.-secondary {
-    margin: ($_ySpacing * 6) 0;
-  }
+  // &.-secondary {
+  //   margin: ($_ySpacing * 6) 0;
+  // }
 
   & > ._state {
     font-size: 2.5rem;

@@ -1,12 +1,10 @@
-<div ng-include="'/views/partials/header.html'" ng-repeat="data in [true]"></div>
-
 <section class="section">
   <div class="_inner -slim">
 
     <!-- <small><pre>tracking: {{ tracking | json }}</pre></small> -->
 
 
-    <div class="states" ng-class="{ '-secondary' : !tracking.data}">
+    <div class="states" ng-if="tracking.data">
       <span class="_state fa fa-cube" ng-class="{ '-isActive' : tracking.data}"></span>
       <span class="_angle fa fa-angle-right" ng-class="{ '-isVisible' : tracking.data}"></span>
       <span class="_state fa fa-truck fa-flip-horizontal" ng-class="{ '-isActive' : tracking.data}"></span>
@@ -90,7 +88,3 @@
   </div>
 
 </section>
-
-
-
-<div ng-include="'/views/partials/footer.html'"></div>
