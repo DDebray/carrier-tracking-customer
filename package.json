@@ -54,8 +54,10 @@
   },
   "dependencies": {
     "angular": "^1.5.3",
+    "angular-hotkeys": "^1.7.0",
     "angular-resource": "^1.5.3",
     "angular-route": "^1.5.3",
-    "angular-translate": "^2.11.0"
+    "angular-translate": "^2.11.0",
+    "moment": "^2.12.0"
   }
 }

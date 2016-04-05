@@ -57,13 +57,13 @@ module.exports = ['$routeProvider', '$locationProvider', '$httpProvider', 'Commo
   $locationProvider.html5Mode(true);
 
   $routeProvider
-    .when('/tracking', {
-      controller : 'PageTrackingCtrl as tracking',
+    .when('/', {
+      controller : 'PageBaseCtrl as base',
       template : '',
       resolve : independentPageResolver,
     })
-    .when('/tracking/:packageId', {
-      controller : 'PageTrackingCtrl as tracking',
+    .when('/:packageId', {
+      controller : 'PageBaseCtrl as base',
       template : '',
       resolve : independentPageResolver,
     })

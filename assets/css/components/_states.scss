@@ -9,7 +9,7 @@
   display: flex;
   justify-content: space-between;
 
-  transition: margin $_tMed;
+  transition: margin $_tMed ease;
 
   &.-secondary {
     margin: ($_ySpacing * 6) 0;
@@ -34,10 +34,12 @@
   & > ._angle {
     font-size: 2.5rem;
     margin-top: 24px;
-    color: lighten($_rgbMineShaft, 60%);
+    color: $_rgbWhite;
     text-align: center;
     min-width: 60px;
     opacity: 0;
+    transition: opacity $_tMed ease;
+
 
     &.-isVisible {
       opacity: 1;

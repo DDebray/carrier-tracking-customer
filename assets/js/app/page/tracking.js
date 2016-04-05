@@ -1,4 +1,4 @@
-module.exports = ['CommonRequest', function(CommonRequest) {
+module.exports = ['$routeParams', 'CommonRequest', 'CommonMoment', function($routeParams, CommonRequest, CommonMoment) {
   'use strict';
   var self = this;
 
@@ -11,8 +11,13 @@ module.exports = ['CommonRequest', function(CommonRequest) {
       trackingId: self.trackingId
     }, function(response) {
       if (response && response.content && response.content.result) {
-        console.log('response.content', response.content.result);
         self.data = response.content.result;
+
+        self.data.events.map(function (event) {
+          event.moment = CommonMoment(event.timestamp);
+        });
+        console.log('Tracking data: ', self.data);
+
       } else {
         self.data = null;
       }
@@ -20,5 +25,9 @@ module.exports = ['CommonRequest', function(CommonRequest) {
       self.data = null;
     });
   };
+
+  var trackingId = $routeParams.trackingId;
+
+  console.log('trackingId', trackingId);
 
 }];

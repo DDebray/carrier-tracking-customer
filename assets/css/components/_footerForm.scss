@@ -8,35 +8,4 @@
 
   box-shadow: 0 0 2px 0 rgba(0,0,0,0.3);
   overflow: hidden;
-
-  button {
-    @include resetButton;
-    display: inline-block;;
-    // width: 100%;
-    padding: 0 17px;
-    border-radius: $_borderRadiusDefault;
-
-    text-align: center;
-    font-family: $_ffSansBold;
-    font-size: $_fsDefaultFallback;
-    line-height: 2.588rem;
-    height: 2.588rem;
-
-    background: $_rgbBlush;
-    color: $_rgbWhite;
-
-    cursor: pointer;
-
-    transition: background $_tShort ease-in-out;
-
-    &:hover{
-      background: darken($_rgbBlush, 10);
-    }
-
-    & + & {
-      margin-right: $_defaultSpacing;
-    }
-  }
-
-
 }

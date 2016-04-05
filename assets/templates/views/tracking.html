@@ -34,15 +34,12 @@
     <section class="timeline" ng-if="tracking.data.events.length">
 
       <div class="_event -isProcessed" ng-repeat="event in tracking.data.events">
-        <span class="__date">
-              <div ng-bind="event.timestamp | date"></div>
-              <div ng-bind="event.timestamp | date"></div>
-            </span>
+        <span class="__date" title="{{ event.moment | moment:'long' }}">
+            <div ng-bind="event.moment | moment:'day'"></div>
+            <div ng-bind="event.moment | moment:'time'"></div>
+        </span>
         <span class="__state fa fa-check"></span>
         <span class="__description" ng-bind="event.description"></span>
-        <!-- <span class="__description">
-                <small><pre>{{ event | json }}</pre></small>
-            </span> -->
       </div>
       <!-- <div class="_event -isProcessed">
             <span class="__date">

@@ -1,6 +1,6 @@
 .timeline {
 
-  $timeline-date-width: 105px;
+  $timeline-date-width: 144px;
   $timeline-width: 2px;
   $timeline-state-size: 16px;
 
@@ -68,7 +68,8 @@
   .__state {
     position: absolute;
     top: calc(50% - #{($timeline-state-size / 2)} - #{($_defaultSpacing)});
-    left: 132px;
+    // left: 132px; bei timeline-date-width = 105
+    left: $timeline-date-width + $_xSpacing + ($_defaultSpacing / 2) - 1px;
     vertical-align:middle;
     border-radius: 50%;
     line-height: $timeline-state-size;
