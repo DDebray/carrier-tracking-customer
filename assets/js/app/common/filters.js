@@ -12,8 +12,6 @@ module.exports = function (application) {
         if (!input) {
           return '';
         }
-        console.log('input', input);
-        console.log('expression', expression);
 
         if (input.isValid()) {
           switch (expression) {
@@ -24,7 +22,6 @@ module.exports = function (application) {
               return input.format('dddd[, ]DD.MM.');
             case 'time' :
               return input.format('h:mm [ Uhr]');
-
             default:
               return input.format('DD.MM.YYYY');
           }

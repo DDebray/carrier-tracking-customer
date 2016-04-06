@@ -1,0 +1,82 @@
+.ui-notification {
+  transition:opacity $_tShort;
+  border-radius:$_borderRadiusDefault;
+  padding:($_defaultSpacing / 2) $_defaultSpacing;
+  padding-right: calc(#{$_defaultSpacing} + .5rem);
+  color:$_rgbWhite;
+  font-size:$_fsDefault;
+  text-align:left;
+  white-space:normal;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  background-color:$_rgbAlto;
+  position: relative;
+
+  &s {
+    position:fixed;
+    right:0;
+    top:0;
+    z-index:2;
+  }
+
+  &List {
+    margin:0;
+    padding:0;
+    list-style:none outside;
+
+    li + li {
+      margin-top:$_defaultSpacing / 2;
+    }
+  }
+
+  &.-global {
+    float:right;
+    clear:right;
+    margin:$_defaultSpacing;
+  }
+
+  &.-hidden {
+    opacity:0;
+  }
+
+  & > _close {
+    transition:opacity $_tShort;
+    opacity:0.3;
+    font-size:$_fsSmall * 1.15;
+    position: absolute;
+    right: ($_defaultSpacing / 2);
+    top: ($_defaultSpacing / 2);
+    padding: ($_defaultSpacing / 4);
+    margin: -($_defaultSpacing / 4);
+    cursor: pointer;
+  }
+
+  &:hover > _close {
+    opacity:0.6;
+  }
+
+  &.-closable > _close {
+    display:inline-block;
+  }
+
+  &.-error {
+    background-color:$_rgbBlush;
+  }
+
+  &.-ok {
+    background-color:$_rgbBlizzardBlue;
+  }
+
+  &.-transparent {
+    background-color: $_rgbWhite;
+    color: $_rgbMineShaft;
+    padding: 0;
+    overflow:visible;
+  }
+
+  &.-large {
+    font-size: $_fsMedium;
+    // font-weight: bold;
+    line-height: $_lhMedium;
+  }
+}

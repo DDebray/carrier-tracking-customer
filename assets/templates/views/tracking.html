@@ -1,8 +1,12 @@
+<div ng-include="'/views/partials/hero.html'" ng-repeat="data in [true]"></div>
+
 <section class="section">
   <div class="_inner -slim">
 
-    <!-- <small><pre>tracking: {{ tracking | json }}</pre></small> -->
-
+    <div class="ui-notification -transparent -large" ng-if="tracking.showError">
+        <span>Leider konnten wir Ihre Tracking-Nummer keiner Sendung zuordnen.</span>
+    </div>
+    <small ng-if="tracking.showError"><br><br><pre>tracking: {{ tracking | json }}</pre></small>
 
     <div class="states" ng-if="tracking.data">
       <span class="_state fa fa-cube" ng-class="{ '-isActive' : tracking.data}"></span>

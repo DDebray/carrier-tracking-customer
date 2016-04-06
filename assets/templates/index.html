@@ -18,24 +18,16 @@
       <!-- <small><pre>dashboard: {{ dashboard | json }}</pre></small> -->
       <!-- <div id="root" class="area-root" ng-class="{ 'behavior-view-filter-blur' : base.viewLocked }">
 
-          <header class="header header--small header--breaking">
-              <div class="header__inner">
-                  <a class="header__logo header__logo--small" href="/"></a>
-              </div>
-          </header>
-          <header class="header header--large">
-              <div class="header__inner">
-                  <a class="header__logo header__logo--large" href="/"></a>
-              </div>
-          </header>
+
 
           <main class="main" ng-include="'/views/tracking.html'" ng-controller="PageTrackingCtrl as tracking"></main>
       </div> -->
 
       <div id="root" class="area-root" ng-class="{ 'behavior-view-filter-blur' : base.viewLocked }">
-          <div ng-include="'/views/partials/header.html'" ng-repeat="data in [true]"></div>
+          <div ng-include="'/views/partials/header.html'"></div>
+          <!-- <div ng-include="'/views/partials/header.html'" ng-controller="PageTrackingCtrl as tracking"></div> -->
 
-          <div class="view-main area-content" ng-view></div>
+          <div class="view-main area-content" ng-view="ng-view"></div>
 
           <!-- <div class="view-main area-footer print-hide" ng-if="base.state() !== 'SETUP' && base.state() !== 'LOGGED_OUT'" ng-include="'/views/partials/footer.html'"></div> -->
 

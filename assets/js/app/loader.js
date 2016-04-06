@@ -18,11 +18,12 @@ application
   .factory('CommonBrowser', require('./common/browser'))
   .factory('CommonMoment', require('./common/moment'))
 
+  .factory('StorageTracking', require('./storage/tracking'))
+
   .provider('CommonUi', require('./ui/config'))
   .controller('UiCtrl', require('./ui/controller'))
 
   .controller('PageBaseCtrl', require('./page/base'))
-  // .controller('PageDashboardCtrl', require('./page/dashboard'))
   .controller('PageTrackingCtrl', require('./page/tracking'))
   ;
 
