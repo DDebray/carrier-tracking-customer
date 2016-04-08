@@ -5,6 +5,8 @@ var config = {
   paths : {
     source : {
       templates   : ASSETS_DIR + 'templates/**/*.html',
+      footer      : ASSETS_DIR + 'templates/views/partials/coureon_footer.html',
+      footer_url  : 'http://www.coureon.com',
       jshint      : ASSETS_DIR + 'js/**/*.js',
       styles      : ASSETS_DIR + 'css/**/*.{sass,scss}',
       scripts     : ASSETS_DIR + 'js/main.js',

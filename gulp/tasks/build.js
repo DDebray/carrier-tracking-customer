@@ -12,9 +12,8 @@
 var gulp = require('gulp');
 
 function environment(cb) {
-  var
-    fs          = require('fs'),
-    paths       = require('../config').paths;
+  var fs = require('fs'),
+    paths = require('../config').paths;
 
   fs.writeFileSync(paths.source.scripts_env, 'module.exports = \'' + (process.env.ENV ? process.env.ENV : 'development') + '\';');
   cb();

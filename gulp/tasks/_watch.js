@@ -4,19 +4,19 @@ var gulp  = require('gulp'),
   paths = require('../config').paths;
 
 gulp.task('styles:watch', function () {
-  gulp.watch(paths.source.styles, gulp.series('styles', 'rev', 'templates', 'server:reload'));
+  gulp.watch([paths.source.styles, '!' + paths.source.footer], gulp.series('styles', 'rev', 'templates', 'server:reload'));
 });
 
 gulp.task('scripts:watch', function () {
-  gulp.watch(paths.source.jshint, gulp.series('scripts:clean', 'scripts', 'rev', 'templates', 'server:reload'));
+  gulp.watch([paths.source.jshint, '!' + paths.source.footer], gulp.series('scripts:clean', 'scripts', 'rev', 'templates', 'server:reload'));
 });
 
 gulp.task('images:watch', function () {
-  gulp.watch(paths.source.templates, gulp.series('templates', 'server:reload'));
+  gulp.watch([paths.source.templates, '!' + paths.source.footer], gulp.series('templates', 'server:reload'));
 });
 
 gulp.task('copy:watch', function () {
-  gulp.watch(paths.source.copy, gulp.series('copy', 'server:reload'));
+  gulp.watch([paths.source.copy, '!' + paths.source.footer], gulp.series('copy', 'server:reload'));
 });
 
 /*******************************************************************************

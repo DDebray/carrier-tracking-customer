@@ -17,9 +17,6 @@
 
       <!-- <small><pre>dashboard: {{ dashboard | json }}</pre></small> -->
       <!-- <div id="root" class="area-root" ng-class="{ 'behavior-view-filter-blur' : base.viewLocked }">
-
-
-
           <main class="main" ng-include="'/views/tracking.html'" ng-controller="PageTrackingCtrl as tracking"></main>
       </div> -->
 
@@ -32,8 +29,8 @@
           <!-- <div class="view-main area-footer print-hide" ng-if="base.state() !== 'SETUP' && base.state() !== 'LOGGED_OUT'" ng-include="'/views/partials/footer.html'"></div> -->
 
           <div ng-include="'/views/partials/footer.html'"></div>
+          <div ng-include="'/views/partials/coureon_footer.html'"></div>
       </div>
-
 
       <div ng-controller="UiCtrl as ui" class="print-hide">
           <div ng-if="ui.tooltip()" ng-repeat="tooltip in [ui.tooltip()]" class="ui-tooltip" ng-class="tooltip.cssClass" ng-style="tooltip.css">
