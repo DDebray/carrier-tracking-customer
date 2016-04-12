@@ -37,9 +37,6 @@ module.exports = ['$translateProvider', function ($translateProvider) {
     production : self.endpoints.www.production + '/'
   };
 
-  console.log('environment', environment);
-  console.log('self.endpoints.ui', self.endpoints.ui);
-
   $translateProvider.useUrlLoader(self.endpoints.ui[environment] + 'translations/tracking/');
   $translateProvider.useSanitizeValueStrategy('escapeParameters');
   $translateProvider.preferredLanguage('de');

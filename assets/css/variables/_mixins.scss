@@ -79,3 +79,32 @@
   padding-left: ($_xGutter / 2);
   padding-right: ($_xGutter / 2);
 }
+
+// @mixin icon($name, $fs, $padding: 0){
+//   display: inline-block;
+//   position: relative;
+//   padding-left: $padding;
+//
+//   &:before{
+//     position: absolute;
+//     left: 0;
+//     top: 50%;
+//     margin: ($fs / -2) 0 0;
+//     font-size: $fs;
+//     font-style: normal;
+//     font-weight: normal;
+//     font-family: 'FontAwesome';
+//     line-height: 1;
+//     -webkit-font-smoothing: antialiased;
+//     -moz-osx-font-smoothing: grayscale;
+//
+//     @if $name == 'envelope' {
+//       content: $fa-var-envelope-o;
+//     }
+//
+//     @if $name == 'phone' {
+//       content: $fa-var-phone;
+//       margin: (($fs / -2) + 2px) 0 0;
+//     }
+//   }
+// }

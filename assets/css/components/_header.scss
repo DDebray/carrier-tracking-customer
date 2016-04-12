@@ -23,27 +23,6 @@
     }
   }
 
-  &.-small{
-    position: fixed;
-    z-index: 999;
-    width: 100%;
-    min-height: $_hSmallHeader;
-    left: 0;
-    top: (-$_hSmallHeader);
-    text-align: right;
-
-    transition: top $_tMed ease-in-out, opacity $_tShort ease-in-out, box-shadow $_tShort ease-in-out;
-
-    ._link{
-      height: $_hSmallHeader;
-      line-height: $_hSmallHeader;
-    }
-
-    .tions{
-      padding: 16px 0 16px;
-    }
-  }
-
 
   ._inner{
     max-width: $_maxPageWidth;
@@ -67,14 +46,14 @@
       height: 22px;
       padding: 22px 0;
 
-      // @include cif('coureon', 1.294rem, 11.764rem);
+      @include cif('coureon', 1.294rem, 11.764rem);
     }
 
     &.-small{
       height: $_hSmallHeader;
       padding: 20px 0;
 
-      // @include cif('coureon-logo', 1.352rem, 1.47rem);
+      @include cif('coureon-logo', 1.352rem, 1.47rem);
     }
   }
 }
@@ -141,18 +120,23 @@
   text-align: right;
   display: inline-block;
   vertical-align: top;
+  flex-grow: 1;
 }
 
 ._phone {
   display: inline-block;
   margin-right: 27px;
-  // @include cif('phone', 13px, 27px);
+
+  // @include icon('phone', $icon-width-smaler, 27px);
+  @include cif('phone', $icon-width-smallest, 27px);
+
 }
 
-._mail{
+._mail {
   display: inline-block;
   margin-right: 27px;
-  // @include cif('envelope', 13px, 27px);
+
+  @include cif('envelope', $icon-width-smallest, 27px);
 }
 
 
@@ -167,27 +151,3 @@
     display: none;
   }
 }
-
-//
-//
-// // smallest header (logo + burger)
-// @media (max-width: 390px) {
-//   .header--large{
-//     height: $_hSmallHeader - 20px;
-//
-//     .header__options{
-//       display: none;
-//     }
-//   }
-//
-//   .header--small{
-//     min-height: $_hSmallHeader - 20px;;
-//   }
-//
-//   .header__logo--small{
-//     height: $_hSmallHeader - 20px;
-//     padding: 10px 0;
-//
-//     @include cif('coureon-logo', 1.352rem, 1.47rem);
-//   }
-// }

@@ -3,6 +3,8 @@
 @include font-face('opensans-semibold');
 @include font-face('opensans-bold');
 
+@include font-face('coureon-icons');
+
 $_ffSans       : 'OpenSans-Light', sans-serif;
 $_ffSansBold   : 'OpenSans-Bold', sans-serif;
 $_ffCoureonIcon: 'coureon-icons';
