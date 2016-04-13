@@ -1,18 +1,16 @@
-<section id="hero" class="section -blue -hero" style="background-image: url(images/hero.jpg); ?>">
-  <div class="_inner">
+<section class="section --blue" style="background-image: url(images/hero.jpg); ?>">
+  <div class="section__inner">
 
     <div class="hero">
       <h1 class="hero__title">Tracking</h1>
 
-      <div class="hero__register">
-        <form class="emailForm" ng-submit="tracking.getStatus()" autocomplete="off">
-          <div class="emailForm__elements">
+      <form class="hero__form" ng-submit="tracking.getStatus()" autocomplete="off">
+        <div class="hero__form__elements">
 
-            <input class="emailForm__input emailForm__input--default" type="text" name="tracking_number" placeholder="Tracking-Nr. eingeben" required ng-model="tracking.trackingId" select-on-click>
-            <button class="emailForm__submit" type="submit" name="submit">Jetzt Sendung verfolgen</button>
-          </div>
-        </form>
-      </div>
+          <input class="hero__form__input hero__form__input--default" type="text" name="tracking_number" placeholder="Tracking-Nr. eingeben" required ng-model="tracking.trackingId" select-on-click autofocus>
+          <button class="hero__form__submit" type="submit" name="submit">Jetzt Sendung verfolgen</button>
+        </div>
+      </form>
 
     </div>
   </div>

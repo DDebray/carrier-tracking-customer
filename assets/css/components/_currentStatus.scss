@@ -1,6 +1,4 @@
-@import '../variables/colors';
-
-.states {
+.currentStatus {
   padding: 0;
   margin: $_ySpacing 0;
   list-style: none;
@@ -11,11 +9,7 @@
 
   transition: margin $_tMed ease;
 
-  // &.-secondary {
-  //   margin: ($_ySpacing * 6) 0;
-  // }
-
-  & > ._state {
+  &__state {
     font-size: 2.5rem;
     border:3px solid lighten($_rgbMineShaft, 60%);
     border-radius: 50%;
@@ -25,13 +19,13 @@
     min-width: 90px;
     min-height: 90px;
 
-    &.-isActive {
+    &.--isActive {
       color: $_rgbPacificBlue;
       border-color: $_rgbPacificBlue;
     }
   }
 
-  & > ._angle {
+  &__angle {
     font-size: 2.5rem;
     margin-top: 24px;
     color: $_rgbWhite;
@@ -41,7 +35,7 @@
     transition: opacity $_tMed ease;
 
 
-    &.-isVisible {
+    &.--isVisible {
       opacity: 1;
       color: $_rgbPacificBlue;
     }

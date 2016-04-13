@@ -1,4 +1,4 @@
-.overview {
+.summary {
   list-style:none outside;
   margin: ($_ySpacing * 2) 0;
   padding:0;
@@ -8,7 +8,7 @@
     display: inline-block;
   }
 
-  ._title {
+  &__title {
     font-weight: bold;
     margin-right: $_defaultSpacing;
   }

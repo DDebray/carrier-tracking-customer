@@ -10,82 +10,78 @@
   background-position: center !important;
   background-size: cover !important;
 
-  &.-center{
+  &.--center {
     text-align: center;
   }
 
-  &.-white{
+  &.--white {
     background: $_rgbWhite;
     color: $_rgbMineShaft;
   }
 
-  &.-blue{
+  &.--blue {
     background: $_rgbPacificBlue;
     color: $_rgbWhite;
   }
 
-  &.-black{
+  &.--black {
     background: $_rgbBlack;
     color: $_rgbWhite;
   }
 
-  &.-subchilds{
+  &.--subchilds {
     padding: 44px 0 0;
     background: $_rgbAthensGray;
   }
 
-  &.-hero{
-    padding-bottom: 70px;
-  }
-
-  &.-steps{
-    ._title{
+  &.--steps {
+    ._title {
       margin-bottom: 42px;
     }
   }
 
-  &.-about{
+  &.--about {
     padding-bottom: 5px;
   }
 
-  &.-testimonials{
+  &.--testimonials {
     padding-bottom: 72px;
     background-position: center right !important;
     color: $_rgbWhite;
 
-    ._subtitle{
+    ._subtitle {
       margin-top: -55px;
     }
   }
 
-  & > ._inner{
+  &__inner {
     max-width: $_maxPageWidth;
     margin: 0 auto;
     padding: 0 ($_xGutter / 2);
 
-    &.-slim {
+    &.--slim {
       max-width: $_maxSlimPageWidth;
     }
-
-    & > ._title{
-      margin-bottom: 72px;
-
-      text-align: center;
-      font-size: $_fsLarge;
-      line-height: $_lhLarge;
-
-      & + ._subtitle{
-        margin-top: -65px;
-      }
-    }
-
-    ._subtitle{
-      margin-bottom: 72px;
-
-      font-size: $_fsMedium;
-      line-height: $_lhMedium;
-      // color: $_rgbDustyGray;
-      color: $_rgbWhite;
-    }
   }
+
+  &__title {
+    margin-bottom: 72px;
+
+    text-align: center;
+    font-size: $_fsLarge;
+    line-height: $_lhLarge;
+  }
+
+  &__subtitle {
+    margin-bottom: 72px;
+
+    font-size: $_fsMedium;
+    line-height: $_lhMedium;
+    color: $_rgbWhite;
+  }
+
+  &__title + &__subtitle {
+    margin-top: -65px;
+  }
+
 }

@@ -1,13 +1,25 @@
 <div ng-include="'/views/partials/hero.html'" ng-repeat="data in [true]"></div>
 
 <section class="section">
-    <div class="_inner -slim">
-        Startseite
+    <div class="section__inner --slim">
+        <h2>Startseite</h2>
         <br>
         <br>
         <a href="/CO-1000200">/:trackingId ("CO-1000200")</a><br>
         <a href="/test321">/:trackingId ("test321")</a><br>
+    </div>
+</section>
 
+<section class="section --blue --center" style="background-image: url(https://www.coureon.com/content/footer-cta.jpg)">
+    <div class="section__inner">
+        <h2 class="section__title">Einfach Pakete versenden.</h2>
+        <p class="section__subtitle">Kostenlose Nutzung. Keine Einrichtung notwendig.</p>
 
+        <form class="footerForm">
+            <div class="footerForm__elements">
+                <button class="button button--blush" type="button" name="printReturnLabel">Jetzt Rücksende Etikett erstellen</button>
+                <button class="button button--blush" type="button" name="printLabel">Jetzt Paketschein drucken</button>
+            </div>
+        </form>
     </div>
 </section>

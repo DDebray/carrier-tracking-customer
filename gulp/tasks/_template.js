@@ -9,7 +9,7 @@
  */
 
 var gulp = require('gulp'),
-  config    = require('../config'),
+  config = require('../config'),
   fs = require('fs');
 
 gulp.task('templates:readFooter', function(cb) {
@@ -18,18 +18,12 @@ gulp.task('templates:readFooter', function(cb) {
     paths = require('../config').paths;
 
   env(config.paths.source.footer_url, function (errors, window) {
-    var $ = require('jquery')(window);
-
-    // var $footer = $('.footer').html();
-    var $footer = $('.footer').wrap('<footer></footer>').parent();
-    // console.log('$footer', $footer.find('.footer__link'));
+    var $ = require('jquery')(window),
+      $footer = $('.footer').wrap('<footer></footer>').parent();
 
     $footer.find('a.footer__link').each(function() {
-      // console.log('this', this);
       this.href = this.href;
     });
-
-
 
     fs.writeFileSync(config.paths.source.footer, $footer.html());
     cb();

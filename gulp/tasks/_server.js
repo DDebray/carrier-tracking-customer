@@ -21,7 +21,9 @@ gulp.task('server', function(cb) {
     },
     notify : false,
     open : false,
-    reloadOnRestart : true
+    reloadOnRestart : true,
+    // scrollRestoreTechnique: 'window.name'
+    scrollRestoreTechnique : 'cookie'
   });
 
   return cb();

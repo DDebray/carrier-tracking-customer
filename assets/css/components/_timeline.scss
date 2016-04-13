@@ -10,7 +10,7 @@
     bottom: $_ySpacing * 3;
   }
 
-  ._event {
+  &__event {
     @include clearfix;
     position: relative;
     margin: $_ySpacing 0;
@@ -39,21 +39,14 @@
       }
     }
 
-
-
-    &:first-child .__state,
-    &:last-child .__state {
+    &:first-child &__state,
+    &:last-child &__state.--processIsCompleted {
       border-radius: $_borderRadiusDefault;
     }
 
-    &.-isProcessed .__state {
-      color: $_rgbBlush;
-    }
-
-
   }
 
-  .__date {
+  &__date {
     display: inline-block;
     vertical-align:middle;
     width: $timeline-date-width;
@@ -63,12 +56,12 @@
     font-weight: bold;
     background-color: $_rgbPacificBlue;
     padding: $_defaultSpacing;
+    text-align: center;
   }
 
-  .__state {
+  &__state {
     position: absolute;
     top: calc(50% - #{($timeline-state-size / 2)} - #{($_defaultSpacing)});
-    // left: 132px; bei timeline-date-width = 105
     left: $timeline-date-width + $_xSpacing + ($_defaultSpacing / 2) - 1px;
     vertical-align:middle;
     border-radius: 50%;
@@ -76,11 +69,13 @@
     font-size: $timeline-state-size;
     border: $timeline-width solid $_rgbDustyGray;
     background-color: $_rgbWhite;
-    color: $_rgbWhite;
+    // color: $_rgbWhite;
+    color: $_rgbBlush;
     padding: $_defaultSpacing / 2;
     box-shadow: 0px 0px 0px 4px $_rgbWhite;
   }
-.__description {
+
+  &__description {
     position: relative;
     vertical-align:middle;
     display: inline-block;

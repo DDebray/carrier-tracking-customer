@@ -1,7 +1,7 @@
 module.exports = [
-  '$routeParams', '$location', 'CommonRequest', 'CommonMoment', 'StorageTracking',
+  '$routeParams', '$location', 'CommonRequest', 'CommonMoment', 'StorageTracking', 'CommonUi',
 function(
-  $routeParams, $location, CommonRequest, CommonMoment, StorageTracking
+  $routeParams, $location, CommonRequest, CommonMoment, StorageTracking, CommonUi
 ) {
   'use strict';
   var self = this;
@@ -9,58 +9,43 @@ function(
   self.trackingId = StorageTracking.trackingId || '';
   self.data = StorageTracking.data;
   self.showError = false;
+  self.states = ['NOT_AVAILABLE', 'IN_TRANSIT', 'HANDOVER', 'WAREHOUSE', 'DELIVERY_FAILED', 'DELIVERED', 'CANCELLED'];
+  self.state = -1;
 
   // get trackingId from URL
   if ($routeParams.trackingId) {
-    console.log('$routeParams.trackingId exists: ', $routeParams.trackingId);
     self.trackingId = $routeParams.trackingId;
     StorageTracking.trackingId = self.trackingId;
   }
 
   if (self.trackingId) {
     StorageTracking.track(self.trackingId, function (response) {
-      console.log('success response', response);
       self.data = response;
       self.showError = false;
+      if (response && response.data && response.data.current_state) {
+        self.state = self.states.indexOf(response.data.current_state);
+      }
+      // @todo: remove this line
+      self.state = Math.random() * self.states.length;
+
     }, function (error) {
-      console.log('error response', error);
       self.data = null;
       self.showError = true;
+      self.state = -1;
     });
   }
 
   self.getStatus = function () {
-    // CommonRequest.tracking.getStatus({
-    //   trackingId: self.trackingId
-    // }, function(response) {
-    //   if (response && response.content && response.content.result) {
-    //     self.data = response.content.result;
-    //
-    //     self.data.events.map(function (event) {
-    //       event.moment = CommonMoment(event.timestamp);
-    //     });
-    //     console.log('Tracking data: ', self.data);
-    //
-    //   } else {
-    //     self.data = null;
-    //   }
-    // }, function(response) {
-    //   self.data = null;
-    // });
-
-
-
-    // console.log('$location.path()', $location.path());
-    // console.log('$location.path().indexOf', $location.path().indexOf('tracking/'));
-
     if (self.trackingId) {
-      console.log('self.trackingId exists', self.trackingId);
-
       $location.path('/'+ self.trackingId);
-      // $location.replace();
     }
   };
 
-
-
+  var notFoundModalUrl = '/views/partials/no_content.html';
+  self.printReturnLabel = function () {
+    CommonUi.modal.show(notFoundModalUrl, true, { data : 'test123' });
+  };
+  self.printLabel = function () {
+    CommonUi.modal.show(notFoundModalUrl, true, { data : 'test123' });
+  };
 }];

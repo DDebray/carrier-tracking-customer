@@ -29,13 +29,13 @@
     }
   }
 
-  &.-global {
+  &.--global {
     float:right;
     clear:right;
     margin:$_defaultSpacing;
   }
 
-  &.-hidden {
+  &.--hidden {
     opacity:0;
   }
 
@@ -55,28 +55,15 @@
     opacity:0.6;
   }
 
-  &.-closable > _close {
+  &.--closable > _close {
     display:inline-block;
   }
 
-  &.-error {
+  &.--error {
     background-color:$_rgbBlush;
   }
 
-  &.-ok {
+  &.--ok {
     background-color:$_rgbBlizzardBlue;
-  }
-
-  &.-transparent {
-    background-color: $_rgbWhite;
-    color: $_rgbMineShaft;
-    padding: 0;
-    overflow:visible;
-  }
-
-  &.-large {
-    font-size: $_fsMedium;
-    // font-weight: bold;
-    line-height: $_lhMedium;
   }
 }

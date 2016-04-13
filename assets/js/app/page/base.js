@@ -1,7 +1,9 @@
-module.exports = [function() {
+module.exports = ['CommonUi', function(CommonUi) {
   'use strict';
   var self = this;
 
-  self.viewLocked = true;
+  self.viewLocked = function() {
+    return !!CommonUi.modal.template;
+  };
 
 }];

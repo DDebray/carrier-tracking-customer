@@ -19,5 +19,4 @@ function environment(cb) {
   cb();
 }
 
-// gulp.task('build', gulp.series(environment, 'version', gulp.parallel('sprite', 'scripts', 'images', 'copy'), 'styles', 'rev', 'template', 'size'));
 gulp.task('build', gulp.series(environment, 'clean', gulp.parallel('copy', 'scripts', 'images', 'styles'), 'rev', 'templates', 'size'));

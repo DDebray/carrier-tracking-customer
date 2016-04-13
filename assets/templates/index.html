@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Coureon</title>
-    <meta name="description" content="" />
+    <title>Coureon Tracking</title>
+    <meta name="description" content="Paket-Tracking von Coureon." />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="/images/favicon.ico" type=image/x-icon />
     <link rel="stylesheet" href="<%= asset('css/main.css') %>" />
@@ -12,37 +12,18 @@
 
     <base href="<%= basepath %>">
 </head>
-<body>
-  <body ng-app="application" ng-controller="PageBaseCtrl as base" ng-cloak="ng-cloak">
+<body ng-app="application" ng-controller="PageBaseCtrl as base" ng-cloak="ng-cloak">
+    <div id="root" class="areaRoot" ng-class="{ '--blur' : base.viewLocked() }">
+        <div ng-include="'/views/partials/header.html'"></div>
+        <div class="view-main area-content" ng-view="ng-view"></div>
+        <div ng-include="'/views/partials/coureon_footer.html'"></div>
+    </div>
 
-      <!-- <small><pre>dashboard: {{ dashboard | json }}</pre></small> -->
-      <!-- <div id="root" class="area-root" ng-class="{ 'behavior-view-filter-blur' : base.viewLocked }">
-          <main class="main" ng-include="'/views/tracking.html'" ng-controller="PageTrackingCtrl as tracking"></main>
-      </div> -->
+    <div ng-controller="UiCtrl as ui" class="print-hide" hotkey="{ 'alt+shift+v' : ui.openChangelog }">
+        <div class="ui-layer" ng-repeat="modal in [ui.modal()]" ng-if="modal.template" ng-include="'/views/partials/modal.html'" hotkey="{ esc : modal.hide }" ng-click="modal.closable ? modal.hide() : null"></div>
+        <div class="ui-layer" ng-if="ui.locked()"></div>
+    </div>
 
-      <div id="root" class="area-root" ng-class="{ 'behavior-view-filter-blur' : base.viewLocked }">
-          <div ng-include="'/views/partials/header.html'"></div>
-          <!-- <div ng-include="'/views/partials/header.html'" ng-controller="PageTrackingCtrl as tracking"></div> -->
-
-          <div class="view-main area-content" ng-view="ng-view"></div>
-
-          <!-- <div class="view-main area-footer print-hide" ng-if="base.state() !== 'SETUP' && base.state() !== 'LOGGED_OUT'" ng-include="'/views/partials/footer.html'"></div> -->
-
-          <div ng-include="'/views/partials/footer.html'"></div>
-          <div ng-include="'/views/partials/coureon_footer.html'"></div>
-      </div>
-
-      <div ng-controller="UiCtrl as ui" class="print-hide">
-          <div ng-if="ui.tooltip()" ng-repeat="tooltip in [ui.tooltip()]" class="ui-tooltip" ng-class="tooltip.cssClass" ng-style="tooltip.css">
-              <span ng-if="tooltip.translation">
-                  <span class="fa fa-times area-panel-close" ng-if="tooltip.on === 'click' && !tooltip.hasCustomHideHandler" ng-click="ui.hideTooltip()"></span>
-                  <span ng-bind-html="(tooltip.translation | translate) | raw"></span>
-              </span>
-              <span ng-if="tooltip.template" ng-include="'/views/partials/tooltip/' + tooltip.template" ng-repeat="data in [tooltip.data]"></span>
-          </div>
-      </div>
-
-      <script src="<%= asset('js/bundle.js') %>"></script>
-  </body>
+    <script src="<%= asset('js/bundle.js') %>"></script>
 </body>
 </html>

@@ -11,4 +11,4 @@
  */
 
 var gulp = require('gulp');
-gulp.task('dev', gulp.series('build', 'server', 'watch'));
+gulp.task('dev', gulp.parallel(gulp.series('build', 'server', 'watch'), 'deps'));
