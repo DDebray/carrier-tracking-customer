@@ -20,14 +20,14 @@ function(
     CommonRequest.tracking.getStatus({
       trackingId : trackingId
     }, function(response) {
-      console.log('response', response);
+      // console.log('response', response);
       if (response && response.content && response.content.result) {
         self.data = response.content.result;
 
         self.data.events.map(function (event) {
           event.moment = CommonMoment(event.timestamp);
         });
-        console.log('Tracking data: ', self.data);
+        // console.log('Tracking data: ', self.data);
 
         if (cb) {
           cb(self.data);

@@ -35,6 +35,20 @@ gulp.task('scripts', gulp.series('scripts:clean', function scriptsBuild() {
     path       = require('path'),
     gutil      = require('gutil');
 
+  // gulp.src(paths.source.scripts_vendor, {base : path.join(process.cwd(), paths.source.root)})
+  //   .pipe(sourcemaps.init())
+  //   .pipe(uglify())
+  //   .on('error', gutil.log)
+  //   .pipe(sourcemaps.write('./'))
+  //   .pipe(gulp.dest(paths.dest.root));
+
+  gulp.src(paths.source.scripts_vendor, {base : path.join(process.cwd(), paths.source.root)})
+    .pipe(sourcemaps.init())
+    .pipe(uglify())
+    .on('error', gutil.log)
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest(paths.dest));
+
   return browserify({ entries : paths.source.scripts })
     .bundle()
     .on('error', gutil.log)

@@ -17,6 +17,7 @@ application
   .factory('CommonRequest', require('./common/request'))
   .factory('CommonBrowser', require('./common/browser'))
   .factory('CommonMoment', require('./common/moment'))
+  .factory('CommonTracking', require('./common/tracking'))
 
   .factory('StorageTracking', require('./storage/tracking'))
 

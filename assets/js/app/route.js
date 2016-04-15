@@ -27,7 +27,8 @@ module.exports = ['$routeProvider', '$locationProvider', '$httpProvider', 'Commo
 
   $routeProvider
     .when('/', {
-      controller : 'PageBaseCtrl as base',
+      // the controller is set in the index.html template,
+      // as it needs to exists side by side with the routing controllers
       templateUrl : 'views/landingpage.html',
       resolve : independentPageResolver,
     })

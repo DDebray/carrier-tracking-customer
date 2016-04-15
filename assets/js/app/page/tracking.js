@@ -1,7 +1,7 @@
 module.exports = [
-  '$routeParams', '$location', 'CommonRequest', 'CommonMoment', 'StorageTracking', 'CommonUi',
+  '$routeParams', '$location', 'CommonRequest', 'CommonMoment', 'CommonTracking', 'StorageTracking', 'CommonUi',
 function(
-  $routeParams, $location, CommonRequest, CommonMoment, StorageTracking, CommonUi
+  $routeParams, $location, CommonRequest, CommonMoment, CommonTracking, StorageTracking, CommonUi
 ) {
   'use strict';
   var self = this;
@@ -37,15 +37,19 @@ function(
 
   self.getStatus = function () {
     if (self.trackingId) {
+      CommonTracking.addEvent('track', '"Jetzt Sendung verfolgen" button was used for "' + self.trackingId + '".' );
       $location.path('/'+ self.trackingId);
     }
   };
 
   var notFoundModalUrl = '/views/partials/no_content.html';
   self.printReturnLabel = function () {
+    CommonTracking.addEvent('track', 'print-return-label-button was clicked.' );
     CommonUi.modal.show(notFoundModalUrl, true, { data : 'test123' });
   };
+
   self.printLabel = function () {
+    CommonTracking.addEvent('track', 'print-label-button was clicked.' );
     CommonUi.modal.show(notFoundModalUrl, true, { data : 'test123' });
   };
 }];
