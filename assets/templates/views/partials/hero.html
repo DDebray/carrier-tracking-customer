@@ -1,17 +1,16 @@
 <section class="section --blue" style="background-image: url(images/hero.jpg); ?>">
-  <div class="section__inner">
+    <div class="section__inner">
 
-    <div class="hero">
-      <h1 class="hero__title">Tracking</h1>
+        <div class="hero">
+            <h1 class="hero__title" ng-bind="'SECTION.HERO.TITLE' | translate"></h1>
 
-      <form class="hero__form" ng-submit="tracking.getStatus()" autocomplete="off">
-        <div class="hero__form__elements">
-
-          <input class="hero__form__input hero__form__input--default" type="text" name="tracking_number" placeholder="Tracking-Nr. eingeben" required ng-model="tracking.trackingId" select-on-click autofocus>
-          <button class="hero__form__submit" type="submit" name="submit">Jetzt Sendung verfolgen</button>
+            <form class="hero__form" ng-submit="tracking.getStatus()" autocomplete="off">
+                <div class="hero__form__elements">
+                    <input class="hero__form__input hero__form__input--default" type="text" name="tracking_number" placeholder="{{'SECTION.HERO.PLACEHOLDER' | translate}}" required ng-model="tracking.trackingId" select-on-click autofocus>
+                    <button class="hero__form__submit" type="submit" name="submit" ng-bind="'SECTION.HERO.TRACK_BUTTON' | translate"></button>
+                </div>
+            </form>
         </div>
-      </form>
 
     </div>
-  </div>
 </section>

@@ -1,8 +1,10 @@
 <div ng-include="'/views/partials/hero.html'"></div>
 
 <section class="section">
-    <div class="section__inner --slim">
-        <h2 ng-if="tracking.showError">Leider konnten wir Ihre Tracking-Nummer keiner Sendung zuordnen.</h2 >
+    <div class="section__inner --slim" ng-class="{ '--centered' : tracking.showError }">
+
+        <h2 ng-if="tracking.showError" ng-bind="'PAGE.TRACKING.ERROR_TITLE' | translate"></h2>
+        <p ng-if="tracking.showError && ('PAGE.TRACKING.ERROR_DESCRIPTION' | translate) !== 'PAGE.TRACKING.ERROR_DESCRIPTION'" ng-bind="'PAGE.TRACKING.ERROR_DESCRIPTION' | translate"></p>
 
         <div class="currentStatus" ng-if="tracking.data">
             <span class="currentStatus__state --isActive fa fa-cube"></span>
@@ -22,12 +24,12 @@
 
         <ul class="summary" ng-if="tracking.data">
             <li>
-                <span class="summary__title" ng-bind="'TEST.KEY' | translate"></span>
-                <span ng-bind="tracking.data.id"></span>
+                <span class="summary__title" ng-bind="'PAGE.TRACKING.SUMMARY_TRACKING_NUMBER' | translate"></span>
+                <span ng-bind="tracking.data.id.toUpperCase()"></span>
             </li>
             <li>
-                <span class="summary__title" ng-bind="'Status:' | translate"></span>
-                <span ng-bind="tracking.data.current_state"></span>
+                <span class="summary__title" ng-bind="'PAGE.TRACKING.SUMMARY_STATE' | translate"></span>
+                <span ng-bind="('PAGE.TRACKING.SUMMARY_STATE.' + tracking.data.current_state.toUpperCase()) | translate"></span>
             </li>
         </ul>
 
@@ -40,64 +42,8 @@
                 <span class="timeline__state fa fa-check" ng-class="{ '--processIsCompleted' : ($last && tracking.data.current_state === 'DELIVERED')}"></span>
                 <span class="timeline__description" ng-bind="event.description"></span>
             </div>
-            <!-- <div class="timeline__event -isProcessed">
-                <span class="timeline__date">
-                    Di., 03.12.,
-                    <br>
-                    10:15 Uhr
-                </span>
-                <span class="timeline__state fa fa-check"></span>
-                <span class="timeline__description">
-                    Ihr Paket wurde im Verteilzentrum in Frankfurt am Main abgegeben, außerdem gibt es hier noch jede Menge Text
-                </span>
-            </div>
-            <div class="timeline__event">
-                <span class="timeline__date">
-                    Mo., 02.12.,
-                    <br>
-                    14:30 Uhr
-                </span>
-                <span class="timeline__state fa fa-check"></span>
-                <span class="timeline__description">
-                    Ihr Paket wurde im Paketshop in Kaiserslautern abgegeben
-                </span>
-            </div>
-            <div class="timeline__event">
-                <span class="timeline__date">
-                    Mo., 02.12.,
-                    <br>
-                    14:30 Uhr
-                </span>
-                <span class="timeline__state fa fa-check"></span>
-                <span class="timeline__description">
-                    Ihr Paket wurde im Paketshop in Kaiserslautern abgegeben
-                </span>
-            </div>
-            <div class="timeline__event">
-                <span class="timeline__date">
-                    Di., 03.12.,
-                    <br>
-                    10:15 Uhr
-                </span>
-                <span class="timeline__state fa fa-check"></span>
-                <span class="timeline__description">
-                    Ihr Paket wurde im Verteilzentrum in Frankfurt am Main abgegeben
-                </span>
-            </div> -->
         </div>
     </div>
 </section>
 
-<section class="section --blue --center" style="background-image: url(https://www.coureon.com/content/footer-cta.jpg)">
-    <div class="section__inner">
-        <h2 class="section__title">Einfach Pakete versenden.</h2>
-        <p class="section__subtitle">Kostenlose Nutzung. Keine Einrichtung notwendig.</p>
-
-        <form class="footerForm">
-            <div class="footerForm__elements">
-                <button class="button button--blush" type="button" name="printReturnLabel" ng-click="tracking.printReturnLabel()">Jetzt Rücksende Etikett erstellen</button>
-                <button class="button button--blush" type="button" name="printLabel" ng-click="tracking.printLabel()">Jetzt Paketschein drucken</button>
-            </div>
-        </form>
-    </div>
-</section>
+<div ng-include="'/views/partials/footer.html'"></div>

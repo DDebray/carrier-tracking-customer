@@ -1,17 +1,10 @@
 <header class="header -large">
     <div class="_inner">
-        <a class="_logo -large" href="https://www.coureon.com"></a>
-
-          <div class="_options">
-              <div class="_phone">
-                  <!-- <span class="fa fa-phone"></span> -->
-                  030 / 208 499 84
-              </div>
-              <a class="_mail" href="mailto:kontakt@coureon.com">
-                  <!-- <span class="fa fa-envelope-o"></span> -->
-                  kontakt@coureon.com
-              </a>
-              <a class="button--ghostBlush" href="https://app.coureon.com/login">Mein Konto</a>
-          </div>
-      </div>
+        <a class="_logo -large" ng-href="{{base.coureonUrl}}"></a>
+        <div class="_options">
+            <a class="_phone" ng-href="{{ 'tel:' + ('COMMON.HOTLINE' | translate) }}" ng-bind="'COMMON.HOTLINE.PRETTY' | translate"></a>
+            <a class="_mail" ng-href="{{ 'mailto:' + ('COMMON.MAIL' | translate) }}" ng-bind="'COMMON.MAIL' | translate"></a>
+            <a class="button--ghostBlush" ng-href="{{base.myAccountUrl}}" ng-bind="'SECTION.HEADER.MY_ACCOUNT' | translate"></a>
+        </div>
+    </div>
 </header>

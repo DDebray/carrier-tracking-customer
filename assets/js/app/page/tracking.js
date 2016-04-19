@@ -41,15 +41,4 @@ function(
       $location.path('/'+ self.trackingId);
     }
   };
-
-  var notFoundModalUrl = '/views/partials/no_content.html';
-  self.printReturnLabel = function () {
-    CommonTracking.addEvent('track', 'print-return-label-button was clicked.' );
-    CommonUi.modal.show(notFoundModalUrl, true, { data : 'test123' });
-  };
-
-  self.printLabel = function () {
-    CommonTracking.addEvent('track', 'print-label-button was clicked.' );
-    CommonUi.modal.show(notFoundModalUrl, true, { data : 'test123' });
-  };
 }];

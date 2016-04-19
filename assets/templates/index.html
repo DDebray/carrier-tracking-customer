@@ -3,16 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Coureon Tracking</title>
     <meta name="description" content="Paket-Tracking von Coureon." />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Coureon Tracking</title>
+
     <link rel="shortcut icon" href="/images/favicon.ico" type=image/x-icon />
     <link rel="stylesheet" href="<%= asset('css/main.css') %>" />
-    <!-- <link rel="stylesheet" href="https://www.coureon.com/public/css/main.css"> -->
 
     <base href="<%= basepath %>">
 </head>
 <body ng-app="application" ng-controller="PageBaseCtrl as base" ng-cloak="ng-cloak">
+
     <div id="root" class="areaRoot" ng-class="{ '--blur' : base.viewLocked() }">
         <div ng-include="'/views/partials/header.html'"></div>
 
@@ -27,5 +29,6 @@
     </div>
 
     <script src="<%= asset('js/bundle.js') %>"></script>
+
 </body>
 </html>
