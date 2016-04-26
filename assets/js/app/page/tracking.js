@@ -22,11 +22,12 @@ function(
     StorageTracking.track(self.trackingId, function (response) {
       self.data = response;
       self.showError = false;
-      if (response && response.data && response.data.current_state) {
-        self.state = self.states.indexOf(response.data.current_state);
+
+      if (response && response.coureon_tracking_status) {
+        self.state = self.states.indexOf(response.coureon_tracking_status);
       }
       // @todo: remove this line
-      self.state = Math.random() * self.states.length;
+      // self.state = Math.random() * self.states.length;
 
     }, function (error) {
       self.data = null;

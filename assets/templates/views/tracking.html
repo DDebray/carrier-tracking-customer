@@ -18,8 +18,8 @@
             <span class="currentStatus__angle fa fa-angle-right" ng-class="{ '--isVisible' : (tracking.state > 3) }"></span>
             <span class="currentStatus__state fa fa-home" ng-class="{ '--isActive' : (tracking.state > 3) }"></span>
 
-            <span class="currentStatus__angle fa fa-angle-right" ng-class="{ '--isVisible' : (tracking.state > 5) }"></span>
-            <span class="currentStatus__state fa fa-check" ng-class="{ '--isActive' : (tracking.state > 5) }"></span>
+            <span class="currentStatus__angle fa fa-angle-right" ng-class="{ '--isVisible' : (tracking.state > 4) }"></span>
+            <span class="currentStatus__state fa fa-check" ng-class="{ '--isActive' : (tracking.state > 4) }"></span>
         </div>
 
         <ul class="summary" ng-if="tracking.data">
@@ -29,7 +29,7 @@
             </li>
             <li>
                 <span class="summary__title" ng-bind="'PAGE.TRACKING.SUMMARY_STATE' | translate"></span>
-                <span ng-bind="('PAGE.TRACKING.SUMMARY_STATE.' + tracking.data.current_state.toUpperCase()) | translate"></span>
+                <span ng-bind="('PAGE.TRACKING.SUMMARY_STATE.' + tracking.data.coureon_tracking_status.toUpperCase()) | translate"></span>
             </li>
         </ul>
 
@@ -39,8 +39,10 @@
                     <div ng-bind="event.moment | moment:'day'"></div>
                     <div ng-bind="event.moment | moment:'time'"></div>
                 </span>
-                <span class="timeline__state fa fa-check" ng-class="{ '--processIsCompleted' : ($last && tracking.data.current_state === 'DELIVERED')}"></span>
-                <span class="timeline__description" ng-bind="event.description"></span>
+                <span class="timeline__state fa fa-check" ng-class="{ '--processIsCompleted' : ($last && tracking.data.coureon_tracking_status === 'DELIVERED')}"></span>
+                <span class="timeline__description" ng-bind="(event.description.replace('API.TRACKING.STATUS.MESSAGE', 'PAGE.TRACKING.TIMLINE.EVENT') | translate)
+                    .replace('%CITY%', event.location.city || '')
+                    .replace('%COUNTRY%', event.location.country || '')"></span>
             </div>
         </div>
     </div>

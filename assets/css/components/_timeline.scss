@@ -39,8 +39,8 @@
       }
     }
 
-    &:first-child &__state,
-    &:last-child &__state.--processIsCompleted {
+    &:first-child .timeline__state,
+    &:last-child .timeline__state.--processIsCompleted {
       border-radius: $_borderRadiusDefault;
     }
 
