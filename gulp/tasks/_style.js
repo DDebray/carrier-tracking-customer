@@ -11,7 +11,7 @@ gulp.task('styles:clean', function(cb) {
 
 gulp.task('styles', gulp.series('styles:clean', function stylesBuild() {
   var sass     = require('gulp-sass'),
-    cssnano    = require('gulp-cssnano'),
+    cleanCSS   = require('gulp-clean-css'),
     prefix     = require('gulp-autoprefixer'),
     path       = require('path'),
     rev        = require('gulp-rev'),
@@ -20,7 +20,7 @@ gulp.task('styles', gulp.series('styles:clean', function stylesBuild() {
   return gulp.src(paths.source.styles, {base : path.join(process.cwd(), paths.source.root)})
     .pipe(sourcemaps.init())
     .pipe(sass({includePaths: ['./' + paths.source.root  + ' css']}))
-    .pipe(cssnano())
+    .pipe(cleanCSS())
     .pipe(prefix('last 1 version', '> 1%'))
     .pipe(rev())
     .pipe(sourcemaps.write('./'))

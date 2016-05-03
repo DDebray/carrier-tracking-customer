@@ -1,0 +1,10 @@
+<div ng-include="'/views/partials/hero.html'" ng-controller="PageTrackingCtrl as tracking"></div>
+
+<section class="section">
+    <div class="section__inner --slim --centered">
+        <h2 ng-bind="'PAGE.LANDING.TITLE' | translate"></h2 >
+        <p ng-bind-html="('PAGE.LANDING.SUBTITLE' | translate) | raw"></p>
+    </div>
+</section>
+
+<div ng-include="'/views/partials/footer.html'"></div>

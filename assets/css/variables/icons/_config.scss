@@ -1,0 +1,25 @@
+// @import "fontawesome/variables";
+// @import "fontawesome/mixins";
+// @import "fontawesome/path";
+// @import "fontawesome/core";
+// @import "fontawesome/icons";
+
+@import "fontawesome/fontawesome";
+
+.icon {
+  &Inline {
+    &Left {
+      vertical-align:baseline;
+      margin-right:4px;
+    }
+
+    &Right {
+      vertical-align:baseline;
+      margin-left:4px;
+    }
+  }
+
+  &.-disabled {
+    opacity:0.5;
+  }
+}

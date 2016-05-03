@@ -4,8 +4,8 @@ module.exports = ['$resource', '$http', 'CommonConfig', function($resource, $htt
   var generateResource = function(route, endpoint, paramDefaults, actions, options) {
     if (actions) {
 
-      console.log('CommonConfig.endpoints', CommonConfig.endpoints);
-      console.log('CommonConfig.environment()', CommonConfig.environment());
+      // console.log('CommonConfig.endpoints', CommonConfig.endpoints);
+      // console.log('CommonConfig.environment()', CommonConfig.environment());
 
       angular.forEach(actions, function(action) {
         action.url = CommonConfig.endpoints[endpoint][CommonConfig.environment()] + action.url;
@@ -21,18 +21,15 @@ module.exports = ['$resource', '$http', 'CommonConfig', function($resource, $htt
   return {
     // baseConfig : generateResource('configs/base', 'ui'),
     dashboard : generateResource('dashboard', 'ui'),
-    clientPackages : generateResource('tracking', 'ui', null, {
+    tracking : generateResource('tracking', 'ui', null, {
       getStatus : {
-        method : 'PUT',
-        url : 'tracking/:packageId'
+        method : 'GET',
+        url : 'tracking/:trackingId'
       }
     }),
     cms : {
       news : generateResource('news', 'cms'),
       cooperations : generateResource('cooperations', 'cms')
-    },
-    setToken : function(token) {
-      $http.defaults.headers.common.token = token;
     }
   };
 }];

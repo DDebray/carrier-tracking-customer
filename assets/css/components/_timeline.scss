@@ -1,0 +1,87 @@
+.timeline {
+
+  $timeline-date-width: 164px;
+  $timeline-width: 2px;
+  $timeline-state-size: 16px;
+
+  position: relative;
+  margin: {
+    top: $_ySpacing;
+    bottom: $_ySpacing * 3;
+  }
+
+  &__event {
+    @include clearfix;
+    position: relative;
+    margin: $_ySpacing 0;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: $timeline-date-width + $timeline-state-size + $_xSpacing;
+      height: calc(100% + #{$_ySpacing});
+      width: $timeline-width;
+      background: $_rgbDustyGray;
+      z-index: -1;
+    }
+    &:first-child {
+      margin-top: 0;
+      &:before {
+        top: 50%;
+        height: calc(50% + #{$_ySpacing});
+      }
+    }
+    &:last-child {
+      margin-bottom: 0;
+      &:before {
+        height: 50%;
+      }
+    }
+
+    &:first-child .timeline__state,
+    &:last-child .timeline__state.--processIsCompleted {
+      border-radius: $_borderRadiusDefault;
+    }
+
+  }
+
+  &__date {
+    display: inline-block;
+    vertical-align:middle;
+    width: $timeline-date-width;
+    height: 68px;
+    border-radius: $_borderRadiusDefault;
+    color: $_rgbWhite;
+    font-weight: bold;
+    background-color: $_rgbPacificBlue;
+    padding: $_defaultSpacing;
+    text-align: center;
+  }
+
+  &__state {
+    position: absolute;
+    top: calc(50% - #{($timeline-state-size / 2)} - #{($_defaultSpacing)});
+    left: $timeline-date-width + $_xSpacing + ($_defaultSpacing / 2) - 1px;
+    vertical-align:middle;
+    border-radius: 50%;
+    line-height: $timeline-state-size;
+    font-size: $timeline-state-size;
+    border: $timeline-width solid $_rgbDustyGray;
+    background-color: $_rgbWhite;
+    // color: $_rgbWhite;
+    color: $_rgbBlush;
+    padding: $_defaultSpacing / 2;
+    box-shadow: 0px 0px 0px 4px $_rgbWhite;
+  }
+
+  &__description {
+    position: relative;
+    vertical-align:middle;
+    display: inline-block;
+    max-width: 600px;
+    margin-left: ($_xSpacing * 2) + ($_defaultSpacing * 2) + $timeline-state-size;
+    border-radius: $_borderRadiusDefault;
+    @include clearfix;
+  }
+}

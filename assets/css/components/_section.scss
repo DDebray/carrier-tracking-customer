@@ -1,0 +1,95 @@
+.section {
+  $section-margin-top: 0 !default;
+
+  overflow: hidden;
+  position: relative;
+  padding: 72px 0 100px;
+  margin: 0;
+  margin-top: $section-margin-top;
+
+  background-position: center !important;
+  background-size: cover !important;
+
+  &.--center {
+    text-align: center;
+  }
+
+  &.--white {
+    background: $_rgbWhite;
+    color: $_rgbMineShaft;
+  }
+
+  &.--blue {
+    background: $_rgbPacificBlue;
+    color: $_rgbWhite;
+  }
+
+  &.--black {
+    background: $_rgbBlack;
+    color: $_rgbWhite;
+  }
+
+  &.--subchilds {
+    padding: 44px 0 0;
+    background: $_rgbAthensGray;
+  }
+
+  &.--steps {
+    ._title {
+      margin-bottom: 42px;
+    }
+  }
+
+  &.--about {
+    padding-bottom: 5px;
+  }
+
+  &.--testimonials {
+    padding-bottom: 72px;
+    background-position: center right !important;
+    color: $_rgbWhite;
+
+    ._subtitle {
+      margin-top: -55px;
+    }
+  }
+
+  &__inner {
+    max-width: $_maxPageWidth;
+    margin: 0 auto;
+    padding: 0 ($_xGutter / 2);
+
+    &.--slim {
+      max-width: $_maxSlimPageWidth;
+    }
+
+    &.--centered {
+      text-align: center;
+    }
+  }
+
+  &__title {
+    margin-bottom: 72px;
+
+    text-align: center;
+    font-size: $_fsLarge;
+    line-height: $_lhLarge;
+  }
+
+  &__subtitle {
+    margin-bottom: 72px;
+
+    font-size: $_fsMedium;
+    line-height: $_lhMedium;
+    color: $_rgbWhite;
+  }
+
+  &__title + &__subtitle {
+    margin-top: -65px;
+  }
+
+  a {
+    color: $_rgbBlush;
+  }
+
+}

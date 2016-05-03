@@ -15,18 +15,18 @@ module.exports = ['$translateProvider', function ($translateProvider) {
   self.endpoints = {
     ui : {
       development : 'https://api-testing.coureon.com/ui/',
-      // development : 'http://localhost:8080/zooron-web/ui/',
       testing : 'https://api-testing.coureon.com/ui/',
-      staging : 'https://api-staging.coureon.com/ui/',
       production : 'https://api.coureon.com/ui/'
     },
     www : {
-      development: 'http://localhost:3000/login',
-      // development : 'https://www-local.coureon.com',
-      // development : 'http://localhost:8080',
+      development: 'http://localhost:3000',
       testing : 'https://www-testing.coureon.com',
-      staging : 'https://www-staging.coureon.com',
       production : 'https://www.coureon.com'
+    },
+    app : {
+      development: 'http://localhost:3000/login',
+      testing : 'https://app-testing.coureon.com/login',
+      production : 'https://app.coureon.com/login'
     }
   };
 
@@ -37,10 +37,7 @@ module.exports = ['$translateProvider', function ($translateProvider) {
     production : self.endpoints.www.production + '/'
   };
 
-  console.log('environment', environment);
-  console.log('self.endpoints.ui', self.endpoints.ui);
-
-  $translateProvider.useUrlLoader(self.endpoints.ui[environment] + 'translations/');
+  $translateProvider.useUrlLoader(self.endpoints.ui[environment] + 'translations/tracking/');
   $translateProvider.useSanitizeValueStrategy('escapeParameters');
   $translateProvider.preferredLanguage('de');
 }];

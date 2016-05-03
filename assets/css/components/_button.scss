@@ -1,0 +1,64 @@
+.button {
+    display: inline-block;
+    text-decoration: none;
+    padding: 0 17px;
+    font-family: $_ffSansBold;
+    font-size: $_fsDefaultFallback;
+    line-height: 2.588rem;
+    height: 2.588rem;
+    white-space: nowrap;
+    cursor: pointer;
+    border: none;
+
+    &:focus {
+        outline: 0;
+    }
+
+    & + & {
+        margin-left: $_xSpacing;
+    }
+}
+.button--ghost {
+    background: none;
+    border: 1px solid;
+    border-radius: $_borderRadiusDefault;
+
+    transition: background $_tShort ease-in-out, color $_tShort ease-in-out, border-color $_tShort ease-in-out;
+}
+.button--ghostWhite {
+    @extend .button;
+    @extend .button--ghost;
+
+    color: $_rgbWhite;
+    border-color: $_rgbWhite;
+
+    &:hover {
+        background: transparentize($_rgbWhite, 0.8);
+    }
+}
+.button--ghostBlush {
+    @extend .button;
+    @extend .button--ghost;
+
+    color: $_rgbBlush;
+    border-color: $_rgbBlush;
+    background: $_rgbWhite;
+
+    &:hover {
+        color: darken($_rgbBlush, 10);
+        border-color: darken($_rgbBlush, 10);
+        background: rgba($_rgbBlush, .06);
+    }
+}
+.button--blush {
+    @extend .button;
+
+    border-radius: $_borderRadiusDefault;
+    text-align: center;
+    background: $_rgbBlush;
+    color: $_rgbWhite;
+    transition: background $_tShort ease-in-out;
+    &:hover {
+        background: darken($_rgbBlush, 10);
+    }
+}

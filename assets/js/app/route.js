@@ -6,7 +6,7 @@ module.exports = ['$routeProvider', '$locationProvider', '$httpProvider', 'Commo
     needsToBeLoggedIn = false;
   };
 
-  $httpProvider.defaults.withCredentials = true;
+  $httpProvider.defaults.withCredentials = false;
   $httpProvider.interceptors.push(['$q', '$location', '$translate', function($q, $location, $translate) {
     return {
       request : function(config) {
@@ -19,37 +19,6 @@ module.exports = ['$routeProvider', '$locationProvider', '$httpProvider', 'Commo
       response : function(response) {
         CommonUi.busy = false;
         return response;
-      },
-      responseError: function(rejection) {
-        CommonUi.busy = false;
-
-        if (rejection.status === 503) {
-          window.setTimeout(function() {
-            document.location.reload();
-          }, 30000);
-          CommonUi.modal.show('/views/partials/user/maintenance.html', false, null);
-          return $q.reject(rejection);
-        }
-
-        if (rejection.data && rejection.data.messages && rejection.data.messages.length) {
-          angular.forEach(rejection.data.messages, function(message) {
-            CommonUi.notifications.autoRemove(CommonUi.notifications.add(message.type, message.text));
-          });
-
-          if (rejection.data.messages[0].key === 'api.access.denied') {
-            if (needsToBeLoggedIn) {
-              $location.path('/static');
-            } else {
-              CommonUi.notifications.reset();
-            }
-          }
-        } else {
-          $translate('MESSAGE.GENERIC.' + rejection.status).then(function(translation) {
-            CommonUi.notifications.autoRemove(CommonUi.notifications.add('ERROR', translation));
-          });
-        }
-
-        return $q.reject(rejection);
       }
     };
   }]);
@@ -57,14 +26,15 @@ module.exports = ['$routeProvider', '$locationProvider', '$httpProvider', 'Commo
   $locationProvider.html5Mode(true);
 
   $routeProvider
-    .when('/tracking', {
-      controller : 'PageTrackingCtrl as tracking',
-      template : '',
+    .when('/', {
+      // the controller is set in the index.html template,
+      // as it needs to exists side by side with the routing controllers
+      templateUrl : 'views/landingpage.html',
       resolve : independentPageResolver,
     })
-    .when('/tracking/:packageId', {
+    .when('/:trackingId', {
       controller : 'PageTrackingCtrl as tracking',
-      template : '',
+      templateUrl : 'views/tracking.html',
       resolve : independentPageResolver,
     })
     .otherwise({
