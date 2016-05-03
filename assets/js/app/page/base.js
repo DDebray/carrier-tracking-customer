@@ -13,15 +13,6 @@ function(
   CommonTracking.init();
 
   $rootScope.$on('$locationChangeSuccess', function () {
-    // HINT: Use this if different routes should have different titles
-    //
-    // document.title = 'Coureon Tracking';
-    // if ($route.current.title) {
-    //   $translate($route.current.title).then(function(translation) {
-    //     document.title = 'Coureon - ' + translation.replace('%%', '');
-    //   });
-    // }
-
     if ($route && $route.current && $route.current.originalPath) {
       CommonTracking.addEvent('page', $route.current.originalPath);
     }
@@ -40,4 +31,6 @@ function(
 
   self.myAccountUrl = CommonConfig.endpoints.app[CommonConfig.environment()];
   self.coureonUrl = CommonConfig.endpoints.www[CommonConfig.environment()];
+
+  self.env = CommonConfig.environment();
 }];

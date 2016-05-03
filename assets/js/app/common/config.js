@@ -16,6 +16,7 @@ module.exports = ['$translateProvider', function ($translateProvider) {
     ui : {
       development : 'https://api-testing.coureon.com/ui/',
       testing : 'https://api-testing.coureon.com/ui/',
+      staging : 'https://api-staging.coureon.com/ui/',
       production : 'https://api.coureon.com/ui/'
     },
     www : {
