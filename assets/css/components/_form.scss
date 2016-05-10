@@ -1,0 +1,51 @@
+.form {
+line-height: $_lhSmall;
+font-size:$_fsSmall;
+
+  &__row--block {
+    margin-bottom: $_ySpacing;
+    display: block;
+  }
+
+  &__row--inline {
+    margin-bottom: $_ySpacing;
+    display: inline-block;
+
+    &.large {
+      width: 75%;
+    }
+
+    &.medium {
+      width: 50%;
+    }
+
+    &.small {
+      width: 25%;
+    }
+
+    &.left {
+      padding-right: $_defaultSpacing;
+    }
+
+    &.right {
+      padding-left: $_defaultSpacing;
+    }
+  }
+
+  & label {
+    display: block;
+    cursor: pointer;
+    margin-bottom: $_defaultSpacing;
+
+    &.--required:after {
+      content: ' *';
+    }
+  }
+
+  & input, & select {
+    padding: .5rem;
+    display: block;
+    width: 100%;
+    height: $_hInput;
+  }
+}

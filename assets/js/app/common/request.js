@@ -19,9 +19,7 @@ module.exports = ['$resource', '$http', 'CommonConfig', function($resource, $htt
   $http.defaults.headers.common.locale = 'de-DE'; // todo: hard coded - COUREON-347
 
   return {
-    // baseConfig : generateResource('configs/base', 'ui'),
-    dashboard : generateResource('dashboard', 'ui'),
-    tracking : generateResource('tracking', 'ui', null, {
+    tracking : generateResource('tracking', 'cx', null, {
       getStatus : {
         method : 'GET',
         url : 'tracking/:trackingId'

@@ -13,8 +13,8 @@ module.exports = ['$translateProvider', function ($translateProvider) {
   };
 
   self.endpoints = {
-    ui : {
-      development : 'https://api-testing.coureon.com/ui/',
+    cx : {
+      development : 'http://localhost:8080/zooron-web/cx/',
       testing : 'https://api-testing.coureon.com/ui/',
       production : 'https://api.coureon.com/ui/'
     },
@@ -22,11 +22,6 @@ module.exports = ['$translateProvider', function ($translateProvider) {
       development: 'http://localhost:3000',
       testing : 'https://www-testing.coureon.com',
       production : 'https://www.coureon.com'
-    },
-    app : {
-      development: 'http://localhost:3000/login',
-      testing : 'https://app-testing.coureon.com/login',
-      production : 'https://app.coureon.com/login'
     }
   };
 
@@ -37,7 +32,7 @@ module.exports = ['$translateProvider', function ($translateProvider) {
     production : self.endpoints.www.production + '/'
   };
 
-  $translateProvider.useUrlLoader(self.endpoints.ui[environment] + 'translations/tracking/');
+  $translateProvider.useUrlLoader(self.endpoints.cx[environment] + 'translations/tracking/');
   $translateProvider.useSanitizeValueStrategy('escapeParameters');
   $translateProvider.preferredLanguage('de');
 }];

@@ -18,7 +18,9 @@
     <div id="root" class="areaRoot" ng-class="{ '--blur' : base.viewLocked() }">
         <div ng-include="'/views/partials/header.html'"></div>
 
-        <div class="view-main area-content" ng-view="ng-view"></div>
+        <div class="area-content">
+            <div class="view-main area-content" ng-view="ng-view"></div>
+        </div>
 
         <div ng-include="'/views/partials/coureon_footer.html'"></div>
     </div>

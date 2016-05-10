@@ -1,5 +1,11 @@
-<div ng-include="'/views/partials/hero.html'"></div>
-
+<section class="section --blue" ng-style="{ 'background-image' : 'url(images/hero/tracking.jpg)' }">
+    <div class="section__inner">
+        <div class="hero__content">
+            <h1 class="hero__title" ng-bind="'PAGE.TRACKING.TITLE' | translate"></h1>
+            <div ng-include="base.getHeroTemplate()"></div>
+        </div>
+    </div>
+</section>
 <section class="section">
     <div class="section__inner --slim" ng-class="{ '--centered' : tracking.showError }">
 
@@ -47,5 +53,3 @@
         </div>
     </div>
 </section>
-
-<div ng-include="'/views/partials/footer.html'"></div>

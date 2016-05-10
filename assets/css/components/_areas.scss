@@ -1,9 +1,0 @@
-.area {
-  &Root {
-    transition: filter .3s;
-
-    &.--blur{
-      filter:blur(5px);
-    }
-  }
-}

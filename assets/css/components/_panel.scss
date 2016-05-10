@@ -1,0 +1,38 @@
+.panel {
+  display: block;
+  border: $_borderWidthSmall solid $_rgbAlto;
+  border-radius: $_borderRadiusDefault;
+  width: $_wMedium;
+
+  &__tabList {
+    display: flex;
+    flex-flow: row nowrap;
+    font-size: $_fsDefault;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    &__element {
+      font-weight: bold;
+      flex: 1;
+      transition: border-bottom-color $_tShort, background-color $_tShort, color $_tShort;
+      padding: ($_ySpacing / 2) ($_xSpacing / 2);
+      text-align: center;
+      background-color: $_rgbAthensGray;
+      border: solid $_rgbAlto;
+      border-width: 0 $_borderWidthSmall $_borderWidthLarge 0;
+      cursor: pointer;
+
+      &--active {
+        background-color: $_rgbWhite;
+        border-bottom-color: $_rgbPacificBlue;
+        cursor: default;
+      }
+
+      &__content {
+        display: block;
+        padding: $_ySpacing $_xSpacing;
+      }
+    }
+  }
+}
