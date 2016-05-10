@@ -39,3 +39,6 @@ node_modules
 /public
 /assets/js/app/environment.js
 /assets/templates/views/partials/coureon_footer.html
+
+#IntelliJ
+carrier-tracking-customer.iml
