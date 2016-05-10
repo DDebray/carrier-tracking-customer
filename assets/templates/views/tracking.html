@@ -40,7 +40,7 @@
                     <div ng-bind="event.moment | moment:'time'"></div>
                 </span>
                 <span class="timeline__state fa fa-check" ng-class="{ '--processIsCompleted' : ($last && tracking.data.coureon_tracking_status === 'DELIVERED')}"></span>
-                <span class="timeline__description" ng-bind="(event.description.replace('API.TRACKING.STATUS.MESSAGE', 'PAGE.TRACKING.TIMLINE.EVENT') | translate)
+                <span class="timeline__description" ng-bind="('PAGE.TRACKING.TIMELINE.EVENT.' + event.description.toUpperCase() | translate)
                     .replace('%CITY%', event.location.city || '')
                     .replace('%COUNTRY%', event.location.country || '')"></span>
             </div>
