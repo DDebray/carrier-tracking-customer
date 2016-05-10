@@ -4,6 +4,12 @@
     <div class="section__inner --slim --centered">
         <h2 ng-bind="'PAGE.LANDING.TITLE' | translate"></h2 >
         <p ng-bind-html="('PAGE.LANDING.SUBTITLE' | translate) | raw"></p>
+
+        <p ng-if="base.env === 'development' || base.env === 'testing'">
+            <a href="/CO-54929534">CO-54929534</a>
+            <a href="/CO-56100681">CO-56100681</a>
+            <a href="/CO-55153679">CO-55153679</a>
+        </p>
     </div>
 </section>
 

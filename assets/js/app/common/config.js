@@ -22,13 +22,13 @@ module.exports = ['$translateProvider', function ($translateProvider) {
     www : {
       development: 'http://localhost:3000',
       testing : 'https://www-testing.coureon.com',
-      staging : 'https://api-staging.coureon.com',
+      staging : 'https://www-staging.coureon.com',
       production : 'https://www.coureon.com'
     },
     app : {
       development: 'http://localhost:3000/login',
       testing : 'https://app-testing.coureon.com/login',
-      staging : 'https://api-staging.coureon.com/login/',
+      staging : 'https://app-staging.coureon.com/login/',
       production : 'https://app.coureon.com/login'
     }
   };
