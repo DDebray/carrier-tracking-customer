@@ -1,34 +1,16 @@
-<hero
-  title="'PAGE.PRINTING.TITLE' | translate"
-  image="url(images/hero/printing.jpg)">
-</hero>
+<hero title="'PAGE.PRINTING.TITLE' | translate" image="url(images/hero/printing.jpg)"></hero>
 
-<section
-  class="section">
-
-<div
-  class="section__inner">
-
-<tab-panel
-  class="panel">
-    <tab
-      name="Empfängeradresse">
-      <div
-        ng-include="'views/partials/address.html'">
-      </div>
-    </tab>
-    <tab
-      name="Absenderadresse">
-      <div
-        ng-include="'views/partials/address.html'">
-      </div>
-    </tab>
-</tab-panel>
-
-</div>
-
+<section class="section">
+    <div class="section__inner">
+        <tab-panel class="panel">
+            <tab name="Empfängeradresse">
+                <div ng-include="'views/partials/address.html'"></div>
+            </tab>
+            <tab name="Absenderadresse">
+                <div ng-include="'views/partials/address.html'"></div>
+            </tab>
+        </tab-panel>
+    </div>
 </section>
 
-<div
-  ng-include="'/views/partials/footer.html'">
-</div>
+<div ng-include="'/views/partials/footer.html'"></div>

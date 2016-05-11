@@ -19,10 +19,9 @@ html {
 
 html, body {
   font-family: $_ffSans;
-  font-size: 17px;
+  font-size: $_fsDefault;
   line-height: $_lhDefault;
   color: $_rgbMineShaft;
-  height: 100%;
   -webkit-tap-highlight-color: transparent;
   margin: 0;
   padding:0;

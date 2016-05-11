@@ -1,97 +1,128 @@
 .hero {
-  height: 350px;
+  display: flex;
+  height: $_hBanner;
   background-position: center!important;
   background-size: cover!important;
-  display: flex;
   justify-content: center;
-}
 
-.hero__content {
-  align-self: center;
-}
+  &__content {
+    align-self: center;
+  }
 
-.hero__title {
-  font-family: $_ffSansBold;
-  font-size: $_fsLarge;
-  font-weight: $_fsDefault;
-  line-height: ($_fsLarge + 0.3rem);
-  margin: 0;
-  align-self: center;
-  color: white;
-}
+  &__title {
+    font-family: $_ffSansBold;
+    font-size: $_fsLarge;
+    line-height: normal;
+    font-weight: bold;
+    margin: 0;
+    align-self: center;
+    color: white;
+  }
 
-.hero__subtitle {
-  font-family: $_ffSansBold;
-  font-size: $_fsMedium;
-  line-height: $_lhMedium;
-}
+  &__subtitle {
+    font-family: $_ffSansBold;
+    font-size: $_fsMedium;
+    line-height: $_lhMedium;
+  }
 
-@media (max-width: $_wLarge) {
-  .hero__content {
-    text-align: center;
+  &__form {
+    @include clearfix;
+    margin-top: $_ySpacing;
+
+    &__elements {
+      margin: 0;
+
+      &__input {
+        @include resetInput;
+        @include placeholderColor($_rgbMineShaft);
+      }
+
+      &__button {
+        @include resetButton;
+        // .hero__form__submit {
+        //   @include resetButton;
+        //   display: block;
+        //   width: 100%;
+        //   padding: 0 17px;
+        //
+        //   text-align: center;
+        //   font-family: $_ffSansBold;
+        //   font-size: $_fsDefaultFallback;
+        //   line-height: 2.588rem;
+        //   height: 2.588rem;
+        //
+        //   background: $_rgbBlush;
+        //   color: $_rgbWhite;
+        //
+        //   cursor: pointer;
+        //
+        //   transition: background $_tShort ease-in-out;
+        //
+        //   &:hover {
+        //     background: darken($_rgbBlush, 10);
+        //   }
+}
+    }
   }
 }
 
-.hero__form {
-  @include clearfix;
-  margin-top: 25px;
-}
 
-.hero__form__elements {
-  display: block;
-  text-align: left;
-
-  box-shadow: 0 0 2px 0 rgba(0,0,0,0.3);
-  border-radius: $_borderRadiusDefault;
-  overflow: hidden;
-}
-
-.hero__form__input {
-  @include resetInput;
-  display: block;
-  padding: 0 17px;
-
-  font-size: 1rem;
-  line-height: 2.588rem;
-  height: 2.588rem;
-
-  @include placeholderColor($_rgbMineShaft);
-}
-
-.hero__form__input--default {
-  width: 100%;
-  text-align: center;
-}
-
-
-.hero__form__input--short {
-  width: 200px;
-  float: left;
-}
-
-.hero__form__submit {
-  @include resetButton;
-  display: block;
-  width: 100%;
-  padding: 0 17px;
-
-  text-align: center;
-  font-family: $_ffSansBold;
-  font-size: $_fsDefaultFallback;
-  line-height: 2.588rem;
-  height: 2.588rem;
-
-  background: $_rgbBlush;
-  color: $_rgbWhite;
-
-  cursor: pointer;
-
-  transition: background $_tShort ease-in-out;
-
-  &:hover {
-    background: darken($_rgbBlush, 10);
-  }
-}
+//
+// .hero__form__elements {
+//   display: inline-block;
+//   text-align: left;
+//
+//   box-shadow: 0 0 2px 0 rgba(0,0,0,0.3);
+//   border-radius: $_borderRadiusDefault;
+//   overflow: hidden;
+// }
+//
+// .hero__form__input {
+//   @include resetInput;
+//   display: block;
+//   padding: 0 17px;
+//
+//   font-size: 1rem;
+//   line-height: 2.588rem;
+//   height: 2.588rem;
+//
+//   @include placeholderColor($_rgbMineShaft);
+// }
+//
+// .hero__form__input--default {
+//   width: 100%;
+//   text-align: center;
+// }
+//
+//
+// .hero__form__input--short {
+//   width: 200px;
+//   float: left;
+// }
+//
+// .hero__form__submit {
+//   @include resetButton;
+//   display: block;
+//   width: 100%;
+//   padding: 0 17px;
+//
+//   text-align: center;
+//   font-family: $_ffSansBold;
+//   font-size: $_fsDefaultFallback;
+//   line-height: 2.588rem;
+//   height: 2.588rem;
+//
+//   background: $_rgbBlush;
+//   color: $_rgbWhite;
+//
+//   cursor: pointer;
+//
+//   transition: background $_tShort ease-in-out;
+//
+//   &:hover {
+//     background: darken($_rgbBlush, 10);
+//   }
+// }
 
 
 
@@ -99,25 +130,25 @@
 //  MEDIA QUERIES
 // ================
 
-@media (min-width: $_wLarge) {
-  .hero__form__elements {
-    display: inline-block;
-    margin-bottom: -5px;
-    overflow: hidden;
-    max-height: 44px;
-  }
-
-  .hero__form__input--default {
-    float: left;
-    width: 290px;
-    text-align: left;
-  }
-
-  .hero__form__submit {
-    float: left;
-    width: auto;
-  }
-}
+// @media (min-width: $_wLarge) {
+//   .hero__form__elements {
+//     display: inline-block;
+//     margin-bottom: -5px;
+//     overflow: hidden;
+//     max-height: 44px;
+//   }
+//
+//   .hero__form__input--default {
+//     float: left;
+//     width: 290px;
+//     text-align: left;
+//   }
+//
+//   .hero__form__submit {
+//     float: left;
+//     width: auto;
+//   }
+// }
 
 
 

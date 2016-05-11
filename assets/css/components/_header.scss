@@ -12,28 +12,31 @@
 
   &__logo {
     @include cif('coureon', 1.294rem, 11.764rem);
+    @include fade-in;
     align-self: center;
     color: $_rgbPacificBlue;
     cursor: pointer;
     height: 100%;
-    animation: fade-in $_tLong;
   }
 
   &__options {
+    margin: 0;
     text-align: right;
     flex-grow: 1;
     align-self: center;
 
-    &__phone {
-      @include cif('phone', $icon-width-smallest, 27px);
+    &--phone {
+      @include show-for(large);
+      @include cif('phone', $icon-width-smallest, $_xSpacing);
       display: inline-block;
-      margin-right: 27px;
+      margin-right: $_xSpacing;
     }
 
-    &__mail {
-      @include cif('phone', $icon-width-smallest, 27px);
+    &--mail {
+      @include show-for(large);
+      @include cif('phone', $icon-width-smallest, $_xSpacing);
       display: inline-block;
-      margin-right: 27px;
+      margin-right: $_xSpacing;
     }
   }
 }
