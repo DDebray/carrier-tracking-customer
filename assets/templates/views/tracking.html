@@ -6,7 +6,7 @@
         <h2 ng-if="tracking.showError" ng-bind="'PAGE.TRACKING.ERROR_TITLE' | translate"></h2>
         <p ng-if="tracking.showError && ('PAGE.TRACKING.ERROR_DESCRIPTION' | translate) !== 'PAGE.TRACKING.ERROR_DESCRIPTION'" ng-bind="'PAGE.TRACKING.ERROR_DESCRIPTION' | translate"></p>
 
-        <div class="currentStatus" ng-if="tracking.data">
+        <div class="currentStatus" ng-if="tracking.data && !tracking.showError">
             <span class="currentStatus__state --isActive fa fa-cube"></span>
 
             <span class="currentStatus__angle fa fa-angle-right" ng-class="{ '--isVisible' : (tracking.state > 1) }"></span>
@@ -22,7 +22,7 @@
             <span class="currentStatus__state fa fa-check" ng-class="{ '--isActive' : (tracking.state > 4) }"></span>
         </div>
 
-        <ul class="summary" ng-if="tracking.data">
+        <ul class="summary" ng-if="tracking.data  && !tracking.showError">
             <li>
                 <span class="summary__title" ng-bind="'PAGE.TRACKING.SUMMARY_TRACKING_NUMBER' | translate"></span>
                 <span ng-bind="tracking.data.id.toUpperCase()"></span>
@@ -33,7 +33,7 @@
             </li>
         </ul>
 
-        <div class="timeline" ng-if="tracking.data.events.length">
+        <div class="timeline" ng-if="tracking.data.events.length  && !tracking.showError">
             <div class="timeline__event" ng-repeat="event in tracking.data.events">
                 <span class="timeline__date" title="{{ event.moment | moment:'long' }}">
                     <div ng-bind="event.moment | moment:'day'"></div>
