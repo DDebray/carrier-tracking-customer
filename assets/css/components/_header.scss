@@ -1,153 +1,39 @@
-.header{
-  overflow: hidden;
+.header {
+  @include clearfix;
   background: $_rgbWhite;
-  box-shadow: 0px 0px 2px 0px rgba(36,59,126,0.50);
+  height: $_hHeader;
+  box-shadow: 0px 0px 2px 0px rgba($_rgbBayOfMany, .5);
 
-  &.-large{
-    height: $_hSmallHeader;
-    padding: 17px 0;
-    opacity: 1;
-
-    transition: opacity $_tShort ease-in-out ($_tShort / 2);
-
-    ._inner{
-      display: flex;
-    }
-
-    ._link{
-      line-height: 33px;
-    }
-
-    ._options{
-      flex-grow: 1;
-    }
+  &__inner {
+    @include pageWidth;
+    display: flex;
+    height: 100%;
   }
 
-
-  ._inner{
-    max-width: $_maxPageWidth;
-    margin: 0 auto;
-    padding: 0 ($_xGutter / 2) ;
-    @include clearfix;
-  }
-
-  ._logo{
-    float: left;
+  &__logo {
+    @include cif('coureon', 1.294rem, 11.764rem);
+    align-self: center;
     color: $_rgbPacificBlue;
+    cursor: pointer;
+    height: 100%;
+    animation: fade-in $_tLong;
+  }
 
-    img {
-      display: block;
-      height: 23px;
-      width: auto;
-      margin: 10px 0;
+  &__options {
+    text-align: right;
+    flex-grow: 1;
+    align-self: center;
+
+    &__phone {
+      @include cif('phone', $icon-width-smallest, 27px);
+      display: inline-block;
+      margin-right: 27px;
     }
 
-    &.-large{
-      height: 22px;
-      padding: 22px 0;
-
-      @include cif('coureon', 1.294rem, 11.764rem);
+    &__mail {
+      @include cif('phone', $icon-width-smallest, 27px);
+      display: inline-block;
+      margin-right: 27px;
     }
-
-    &.-small{
-      height: $_hSmallHeader;
-      padding: 20px 0;
-
-      @include cif('coureon-logo', 1.352rem, 1.47rem);
-    }
-  }
-}
-
-
-
-
-
-
-
-
-.header__links{
-  float: left;
-  text-align: left;
-}
-
-.header__link{
-  position: relative;
-  display: inline-block;
-  margin-left: 20px;
-  transition: color $_tShort ease-in-out;
-
-  &:hover, &.header__link--active{
-    color: $_rgbPacificBlue;
-
-    &:after{
-      bottom: 0;
-      opacity: 1;
-    }
-  }
-
-  &:after{
-    content: '';
-    display: block;
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: $_rgbPacificBlue;
-    opacity: 0;
-    transition: bottom $_tShort ease-in-out, opacity $_tShort ease-in-out;
-  }
-}
-
-.header__link--cta{
-  display: none !important;
-  background: $_rgbWhite;
-  font-family: $_ffSansBold;
-  float: left;
-  width: 100%;
-  white-space: nowrap;
-
-  &, &:hover, &.header__link--active{
-    color: $_rgbBlush;
-  }
-
-  &:after{
-    background: $_rgbBlush;
-  }
-}
-
-._options{
-  text-align: right;
-  display: inline-block;
-  vertical-align: top;
-  flex-grow: 1;
-}
-
-._phone {
-  display: inline-block;
-  margin-right: 27px;
-
-  // @include icon('phone', $icon-width-smaler, 27px);
-  @include cif('phone', $icon-width-smallest, 27px);
-
-}
-
-._mail {
-  display: inline-block;
-  margin-right: 27px;
-
-  @include cif('envelope', $icon-width-smallest, 27px);
-}
-
-
-// ================
-//  MEDIA QUERIES
-// ================
-
-// registration in navigation
-@media (max-width: 870px) {
-  ._phone,
-  ._mail {
-    display: none;
   }
 }
