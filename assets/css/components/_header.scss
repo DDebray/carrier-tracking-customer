@@ -6,13 +6,13 @@
 
   &__inner {
     @include pageWidth;
+    @include fade-in($_tLong);
     display: flex;
     height: 100%;
   }
 
   &__logo {
     @include cif('coureon', 1.294rem, 11.764rem);
-    @include fade-in;
     align-self: center;
     color: $_rgbPacificBlue;
     cursor: pointer;

@@ -1,8 +1,8 @@
 <hero title="'PAGE.PRINTING.TITLE' | translate" image="url(images/hero/printing.jpg)"></hero>
 
 <section class="section">
-    <div class="section__inner">
-        <tab-panel class="panel">
+    <div class="section__inner row">
+        <tab-panel class="panel columns large-6" padding>
             <tab name="Empfängeradresse">
                 <div ng-include="'views/partials/address.html'"></div>
             </tab>
@@ -10,7 +10,18 @@
                 <div ng-include="'views/partials/address.html'"></div>
             </tab>
         </tab-panel>
+
+        <tab-panel class="panel columns large-6">
+            <tab name="Nach Preis">
+              <list model="printing.labels"></list>
+            </tab>
+            <tab name="Nach Lieferzeit">
+              <list model="printing.labels"></list>
+            </tab>
+        </tab-panel>
     </div>
 </section>
 
-<div ng-include="'/views/partials/footer.html'"></div>
+<p ng-repeat="message in printing.messages">{{message.text}}</p>
+
+<div ng-include="'/views/partials/banner.html'"></div>

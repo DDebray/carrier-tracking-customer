@@ -2,11 +2,23 @@ module.exports = function(application) {
   'use strict';
 
   application
+    .directive('list', function() {
+      return {
+        restrict: 'E',
+        scope: {
+          list: '=model',
+        },
+        replace: true,
+        transclude: true,
+        templateUrl: '/views/partials/list.html'
+      };
+    })
     .directive('tabPanel', function() {
       return {
         restrict: 'E',
         transclude: true,
         templateUrl: '/views/partials/tab_panel.html',
+        scope: {},
         bindToController: true,
         controllerAs: 'tabPanel',
         controller: function() {
@@ -26,6 +38,9 @@ module.exports = function(application) {
             });
             selectedTab.active = true;
           };
+        },
+        link: function(scope, element, attr) {
+          scope.padding = 'padding' in attr;
         }
       };
     })

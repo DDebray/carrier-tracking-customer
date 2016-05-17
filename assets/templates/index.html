@@ -14,9 +14,8 @@
     <base href="<%= basepath %>">
 </head>
 <body ng-app="application" ng-controller="PageBaseCtrl as base" ng-cloak="ng-cloak">
-
     <div id="root" class="areaRoot" ng-class="{ '--blur' : base.viewLocked() }">
-        <div ng-include="'/views/partials/header.html'"></div>
+        <header class="header" ng-include="'/views/partials/header.html'"></header>
 
         <div class="areaContent">
             <div class="viewMain" ng-view="ng-view"></div>

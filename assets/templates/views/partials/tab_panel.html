@@ -12,6 +12,4 @@
     </li>
 </ul>
 
-<ng-transclude
-  class="panel__tabList__element__content">
-</ng-transclude>
+<div class="panel__tabList__element__content" ng-class="{'panel__tabList__element__content--nopadding' : padding == false }" ng-transclude></div>

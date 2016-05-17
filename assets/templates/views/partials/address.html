@@ -1,130 +1,64 @@
-<form
-  class="form">
-
-    <div
-      class="form__row--block">
-        <label
-          class="--required"
-          for="address_name">
-            Vor- und Nachname
-        </label>
-        <input
-          required
-          id="address_name"
-          type="text"/>
+<form class="form">
+    <div class="row">
+        <div class="large-12 columns">
+            <label for="address_name" class="form__label form__label--required">Vor- und Nachname</label>
+            <input id="address_name" name="address_name" placeholder="Vor- und Nachname" type="text" class="form__input" />
+        </div>
     </div>
 
-    <div
-      class="form__row--block">
-        <label
-          for="address_company">
-            Firmenname
-        </label>
-        <input
-          required
-          id="address_company"
-          type="text"/>
+    <div class="row">
+        <div class="large-12 columns">
+            <label for="address_company" class="form__label">Firmenname</label>
+            <input id="address_company" name="address_company" placeholder="Firmenname" type="text" class="form__input"/>
+        </div>
     </div>
 
-    <div
-      class="form__row--inline large left">
-        <label
-          class="--required"
-          for="address_street">
-            Straße
-        </label>
-        <input
-          required
-          id="address_street"
-          type="text"/>
+    <div class="row">
+        <div class="large-8 columns">
+            <label for="address_street" class="form__label form__label--required">Straße</label>
+            <input id="address_street" name="address_street" placeholder="Straße" type="text" class="form__input" />
+        </div>
+        <div class="large-4 columns">
+            <label for="address_street_number" class="form__label form__label--required">Hausnummer</label>
+            <input id="address_street_number" name="address_street_number" placeholder="Hausnummer" type="text" class="form__input"/>
+        </div>
     </div>
 
-    <div
-      class="form__row--inline small right">
-        <label
-          class="--required"
-          for="address_street_number">
-            Hausnummer
-        </label>
-        <input
-          required
-          id="address_street_number"
-          type="text"/>
+    <div class="row">
+        <div class="large-12 columns">
+            <label for="address_addition" class="form__label">Adresszusatz</label>
+            <input id="address_addition" name="address_addition" placeholder="Adresszusatz" type="text" class="form__input"/>
+        </div>
     </div>
 
-    <div
-      class="form__row--block">
-        <label
-          for="address_addition">
-            Adresszusatz
-        </label>
-        <input
-          required
-          id="address_addition"
-          type="text"/>
+    <div class="row">
+        <div class="large-4 columns">
+            <label for="address_postal_code" class="form__label form__label--required">Postleitzahl</label>
+            <input id="address_postal_code" name="address_company" placeholder="Postleitzahl" type="text" class="form__input"/>
+        </div>
+        <div class="large-8 columns">
+            <label for="address_city" class="form__label form__label--required">Stadt</label>
+            <input id="address_city" name="address_city" placeholder="Stadt" type="text" class="form__input"/>
+        </div>
     </div>
 
-    <div
-      class="form__row--inline small left">
-        <label
-          class="--required"
-          for="address_postal_code">
-            Postleitzahl
-        </label>
-        <input
-          required
-          id="address_postal_code"
-          type="text"/>
+    <div class="row">
+        <div class="large-12 columns">
+            <label for="address_country" class="form__label form__label--required">Land</label>
+            <select id="address_country" name="address_country" class="form__select">
+                <option value="germany">Deutschland</option>
+            </select>
+        </div>
     </div>
 
-    <div
-      class="form__row--inline large right">
-        <label
-          class="--required"
-          for="address_city">
-            Stadt
-        </label>
-        <input
-          required
-          id="address_city"
-          type="text"/>
-    </div>
-
-    <div
-      class="form__row--block">
-        <label
-          class="--required"
-          for="address_country">
-            Land
-        </label>
-        <select
-          required
-          id="address_country">
-          <option>Deutschland</option>
-        </select>
-    </div>
-
-    <div
-      class="form__row--inline medium left">
-        <label
-          for="address_phone">
-            Telefon
-        </label>
-        <input
-          required
-          id="address_phone"
-          type="text"/>
-    </div>
-
-    <div
-      class="form__row--inline medium right">
-        <label
-          for="address_email">
-            E-Mail
-        </label>
-        <input
-          required
-          id="address_email"
-          type="text"/>
-    </div>
+    <div class="row">
+        <div class="large-6 columns">
+            <label for="address_phone" class="form__label">Telefonnummer</label>
+            <input id="address_phone" name="address_phone" placeholder="Telefonnummer" type="text" class="form__input"/>
+        </div>
+        <div class="large-6 columns">
+            <label for="address_email" class="form__label">E-Mail</label>
+            <input id="address_email" name="address_email" placeholder="E-Mail" type="text" class="form__input"/>
+        </div>
+    <div>
 </form>

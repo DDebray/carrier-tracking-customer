@@ -1,37 +1,38 @@
 .panel {
-  display: block;
-  border: $_borderWidthSmall solid $_rgbAlto;
-  border-radius: $_borderRadiusDefault;
-  width: $_wMedium;
+  @include fade-in($_tLong);
 
   &__tabList {
+    @include resetList;
+    line-height: $_lhLarge;
     display: flex;
-    flex-flow: row nowrap;
-    font-size: $_fsDefault;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    border: $_borderWidthSmall solid $_rgbAlto;
 
     &__element {
-      font-weight: bold;
       flex: 1;
-      transition: border-bottom-color $_tShort, background-color $_tShort, color $_tShort;
-      padding: ($_ySpacing / 2) ($_xSpacing / 2);
-      text-align: center;
-      background-color: $_rgbAthensGray;
-      border: solid $_rgbAlto;
-      border-width: 0 $_borderWidthSmall $_borderWidthLarge 0;
+      text-align: left;
+      padding-left: $_xSpacing;
       cursor: pointer;
+      color: $_rgbDustyGray;
+      outline: $_borderWidthSmall solid $_rgbAlto;
+
 
       &--active {
-        background-color: $_rgbWhite;
-        border-bottom-color: $_rgbPacificBlue;
         cursor: default;
+        color: $_rgbPacificBlue;
+        font-weight: bold;
+        outline: none;
+
       }
 
       &__content {
+        border: $_borderWidthSmall solid $_rgbAlto;
+        border-top: none;
         display: block;
         padding: $_ySpacing $_xSpacing;
+
+        &--nopadding {
+          padding: 0;
+        }
       }
     }
   }

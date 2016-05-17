@@ -49,7 +49,7 @@ $font-weight-semibold : 400;
     }
 
     &-help {
-      @include fade-in();
+      @include fade-in($_tShort);
       z-index:$zindex-help;
       background-color:transparentize($background-color-gray-dark, 0.8);
     }

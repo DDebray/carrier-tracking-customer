@@ -1,51 +1,21 @@
 .form {
-line-height: $_lhSmall;
-font-size:$_fsSmall;
-
-  &__row--block {
-    margin-bottom: $_ySpacing;
-    display: block;
-  }
-
-  &__row--inline {
-    margin-bottom: $_ySpacing;
-    display: inline-block;
-
-    &.large {
-      width: 75%;
-    }
-
-    &.medium {
-      width: 50%;
-    }
-
-    &.small {
-      width: 25%;
-    }
-
-    &.left {
-      padding-right: $_defaultSpacing;
-    }
-
-    &.right {
-      padding-left: $_defaultSpacing;
-    }
-  }
-
-  & label {
-    display: block;
+  &__label {
+    color: $_rgbMineShaft;
     cursor: pointer;
-    margin-bottom: $_defaultSpacing;
+    font-size: $_fsSmall;
 
-    &.--required:after {
+    &--required:after {
       content: ' *';
     }
   }
 
-  & input, & select {
-    padding: .5rem;
-    display: block;
-    width: 100%;
-    height: $_hInput;
+  &__input {
+    margin: 0;
+    font-size: $_fsSmall;
+  }
+
+  &__select {
+    margin: 0;
+    font-size: $_fsSmall;
   }
 }
