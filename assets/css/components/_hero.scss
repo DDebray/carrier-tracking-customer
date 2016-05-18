@@ -62,6 +62,7 @@
 .hero__form__input--default {
   width: 100%;
   text-align: center;
+  margin: 0;
 }
 
 
@@ -112,6 +113,11 @@
     float: left;
     width: 290px;
     text-align: left;
+    overflow: hidden;
+
+    &:focus {
+      border: none;
+    }
   }
 
   .hero__form__submit {
