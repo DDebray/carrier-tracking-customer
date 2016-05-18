@@ -23,6 +23,11 @@
       color: $_rgbPacificBlue;
       border-color: $_rgbPacificBlue;
     }
+
+    &.--isError {
+      color: $_rgbBlush;
+      border-color: $_rgbBlush;
+    }
   }
 
   &__angle {

@@ -29,7 +29,7 @@ function(
     CommonUi.modal.show(notFoundModalUrl, true, { data : 'test123' });
   };
 
-  self.myAccountUrl = CommonConfig.endpoints.app[CommonConfig.environment()];
+  // self.myAccountUrl = CommonConfig.endpoints.app[CommonConfig.environment()];
   self.coureonUrl = CommonConfig.endpoints.www[CommonConfig.environment()];
 
   self.env = CommonConfig.environment();

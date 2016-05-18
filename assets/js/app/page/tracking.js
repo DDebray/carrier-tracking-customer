@@ -8,8 +8,9 @@ function(
 
   self.trackingId = StorageTracking.trackingId || '';
   self.data = StorageTracking.data;
-  self.showError = false;
+  self.showError = true;
   self.states = ['NOT_AVAILABLE', 'IN_TRANSIT', 'HANDOVER', 'WAREHOUSE', 'DELIVERY_FAILED', 'DELIVERED', 'CANCELLED'];
+  self.errorStates = ['NOT_AVAILABLE', /*'DELIVERY_FAILED',*/ 'CANCELLED'];
   self.state = -1;
 
   // get trackingId from URL
@@ -21,11 +22,18 @@ function(
   if (self.trackingId) {
     StorageTracking.track(self.trackingId, function (response) {
       self.data = response;
-      self.showError = false;
 
       if (response && response.coureon_tracking_status) {
         self.state = self.states.indexOf(response.coureon_tracking_status);
         self.showError = response.coureon_tracking_status === 'NOT_AVAILABLE';
+      }
+
+      if (tracking.data.events.length === 0) {
+        self.showError = true;
+      }
+
+      if (response.coureon_tracking_status === 'NOT_AVAILABLE' || tracking.data.events.length > 0) {
+        self.showError = false;
       }
 
     }, function (error) {

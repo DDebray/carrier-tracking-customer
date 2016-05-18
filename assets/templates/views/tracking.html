@@ -18,8 +18,11 @@
             <span class="currentStatus__angle fa fa-angle-right" ng-class="{ '--isVisible' : (tracking.state > 3) }"></span>
             <span class="currentStatus__state fa fa-home" ng-class="{ '--isActive' : (tracking.state > 3) }"></span>
 
-            <span class="currentStatus__angle fa fa-angle-right" ng-class="{ '--isVisible' : (tracking.state > 4) }"></span>
-            <span class="currentStatus__state fa fa-check" ng-class="{ '--isActive' : (tracking.state > 4) }"></span>
+            <span class="currentStatus__angle fa fa-angle-right" ng-if="tracking.errorStates.indexOf(tracking.data.coureon_tracking_status.toUpperCase()) === -1" ng-class="{ '--isVisible' : (tracking.state > 4) }"></span>
+            <span class="currentStatus__state fa fa-check" ng-if="tracking.errorStates.indexOf(tracking.data.coureon_tracking_status.toUpperCase()) === -1" ng-class="{ '--isActive' : (tracking.state > 4) }"></span>
+
+            <span class="currentStatus__angle fa fa-angle-right" ng-if="tracking.errorStates.indexOf(tracking.data.coureon_tracking_status.toUpperCase()) > -1" ng-class="{ '--isVisible' : (tracking.state > 4) }"></span>
+            <span class="currentStatus__state fa fa-times" ng-if="tracking.errorStates.indexOf(tracking.data.coureon_tracking_status.toUpperCase()) > -1" ng-class="{ '--isError' : (tracking.state > 4) }"></span>
         </div>
 
         <ul class="summary" ng-if="tracking.data  && !tracking.showError">
@@ -34,7 +37,7 @@
         </ul>
 
         <div class="timeline" ng-if="tracking.data.events.length  && !tracking.showError">
-            <div class="timeline__event" ng-repeat="event in tracking.data.events">
+            <div class="timeline__event" ng-repeat="event in tracking.data.events" ng-class="{'--isOnlyChild' : (tracking.data.events.length === 1)}">
                 <span class="timeline__date" title="{{ event.moment | moment:'long' }}">
                     <div ng-bind="event.moment | moment:'day'"></div>
                     <div ng-bind="event.moment | moment:'time'"></div>
