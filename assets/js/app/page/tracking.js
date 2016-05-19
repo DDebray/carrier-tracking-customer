@@ -37,10 +37,8 @@ function(
   }
 
   self.getStatus = function () {
-    console.log("ja");
     if (self.trackingId) {
       CommonTracking.addEvent('track', '"Jetzt Sendung verfolgen" button was used for "' + self.trackingId + '".' );
-      console.log($location.path('/tracking/'+ self.trackingId));
       $location.path('/tracking/'+ self.trackingId);
     }
   };

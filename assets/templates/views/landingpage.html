@@ -1,7 +1,6 @@
-{{tracking.trackingId}}
 
 <hero title="'PAGE.LANDING.TITLE' | translate" image="url(images/hero/default.jpg)">
-    <form class="hero__form" ng-submit="tracking.getStatus()" autocomplete="off">
+    <form class="hero__form" ng-submit="tracking.getStatus()" autocomplete="off" ng-controller="PageTrackingCtrl as tracking">
         <div class="hero__form__elements">
             <input class="hero__form__input hero__form__input--default" type="text" name="tracking_number" placeholder="{{'SECTION.HERO.PLACEHOLDER' | translate}}" required ng-model="tracking.trackingId" select-on-click autofocus>
             <button class="hero__form__submit" type="submit" name="submit" ng-bind="'SECTION.HERO.TRACK_BUTTON' | translate"></button>
@@ -9,21 +8,6 @@
     </form>
 </hero>
 
-
-
-<!-- <section class="section --blue" ng-style="{ 'background-image' : 'url(images/hero/default.jpg)' }">
-    <div class="section__inner">
-        <div class="hero__content">
-            <h1 class="hero__title" ng-bind="'PAGE.LANDING.TITLE' | translate"></h1>
-            <form class="hero__form" ng-submit="tracking.getStatus()" autocomplete="off">
-                <div class="hero__form__elements">
-                    <input class="hero__form__input hero__form__input--default" type="text" name="tracking_number" placeholder="{{'SECTION.HERO.PLACEHOLDER' | translate}}" required ng-model="tracking.trackingId" select-on-click autofocus>
-                    <button class="hero__form__submit" type="submit" name="submit" ng-bind="'SECTION.HERO.TRACK_BUTTON' | translate"></button>
-                </div>
-            </form>
-        </div>
-    </div>
-</section> -->
 <section class="section">
     <div class="section__inner --slim --centered">
         <h2 ng-bind="'PAGE.LANDING.TITLE' | translate"></h2 >
