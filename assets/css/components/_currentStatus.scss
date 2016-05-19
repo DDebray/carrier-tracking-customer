@@ -18,6 +18,52 @@
     text-align: center;
     min-width: 90px;
     min-height: 90px;
+    position: relative;
+
+    &__state {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      border-radius: 50%;
+      line-height: 16px;
+      background-color: #fff;
+      padding: 6px;
+      opacity: 0;
+      transform:rotate(45deg);
+      transition: opacity $_tShort ease,
+                  transform $_tMed ease;
+
+      &.fa-flip-horizontal {
+        right: auto;
+        left: 0;
+        transform: rotate(-45deg) scaleX(-1);
+      }
+
+      &.--success {
+        @extend .fa;
+        @extend .fa-check;
+        padding-top: 6px;
+        padding-bottom: 4px;
+        padding-left: 4px;
+        color: $_rgbFeijoa;
+        font-size: 16px;
+        opacity: 1;
+        transform: rotate(0deg);
+
+        &.fa-flip-horizontal {
+          transform: rotate(0deg) scaleX(-1);
+        }
+      }
+
+      &.--error {
+        @extend .fa;
+        @extend .fa-close;
+        color: $_rgbBlush;
+        font-size: 16px;
+        opacity: 1;
+        transform: rotate(0deg);
+      }
+    }
 
     &.--isActive {
       color: $_rgbPacificBlue;
