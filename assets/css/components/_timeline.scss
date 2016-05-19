@@ -23,7 +23,7 @@
       height: calc(100% + #{$_ySpacing});
       width: $timeline-width;
       background: $_rgbDustyGray;
-      z-index: -1;
+      z-index: $zindex-background;
     }
     &:first-child {
       margin-top: 0;
@@ -57,6 +57,7 @@
     background-color: $_rgbPacificBlue;
     padding: $_defaultSpacing;
     text-align: center;
+    z-index: $zindex-inner;
   }
 
   &__state {
@@ -73,6 +74,7 @@
     color: $_rgbBlush;
     padding: $_defaultSpacing / 2;
     box-shadow: 0px 0px 0px 4px $_rgbWhite;
+    z-index: $zindex-inner;
   }
 
   &__description {
@@ -83,5 +85,6 @@
     margin-left: ($_xSpacing * 2) + ($_defaultSpacing * 2) + $timeline-state-size;
     border-radius: $_borderRadiusDefault;
     @include clearfix;
+    z-index: $zindex-inner;
   }
 }

@@ -25,9 +25,8 @@ function(
 
       if (response && response.coureon_tracking_status) {
         self.state = self.states.indexOf(response.coureon_tracking_status);
+        self.showError = response.coureon_tracking_status === 'NOT_AVAILABLE';
       }
-      // @todo: remove this line
-      // self.state = Math.random() * self.states.length;
 
     }, function (error) {
       self.data = null;
