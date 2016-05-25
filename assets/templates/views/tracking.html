@@ -3,53 +3,17 @@
 <section class="section">
     <div class="section__inner --slim" ng-class="{ '--centered' : tracking.showError }">
 
+        <div class="currentStatus" ng-if="tracking.data && !tracking.showError">
+            <span class="currentStatus__angle fa fa-{{state.angle}}" ng-repeat-start="state in tracking.packageStates" ng-if="state.angle && state.isActive" ng-class="{ '--isVisible' : state.isActive() }"></span>
+
+            <span class="currentStatus__state fa fa-{{state.icon()}} {{state.iconModifier}}" ng-repeat-end ng-class="{ '--isActive' : state.isActive(), '--isError' : state.isError() }">
+                <span class="currentStatus__state__state {{state.iconModifier}}" ng-class="{ '--success' : state.success(), '--error' : state.error() }"></span>
+            </span>
+        </div>
+
         <h2 ng-if="tracking.showError" ng-bind="'PAGE.TRACKING.ERROR_TITLE' | translate"></h2>
         <p ng-if="tracking.showError && ('PAGE.TRACKING.ERROR_DESCRIPTION' | translate) !== 'PAGE.TRACKING.ERROR_DESCRIPTION'" ng-bind="'PAGE.TRACKING.ERROR_DESCRIPTION' | translate"></p>
 
-        <!-- <div class="currentStatus" ng-if="tracking.data && !tracking.showError"> -->
-        <div class="currentStatus">
-
-            <span class="currentStatus__angle fa fa-angle-right" ng-repeat-start="state in tracking.packageStates" ng-if="state.isAngleVisible" ng-class="{ '--isVisible' : state.isAngleVisible() }"></span>
-
-            <span class="" ng-repeat-end ng-class="{ '--isActive' : state.isStateActive() }">
-                <span class="currentStatus__state fa fa-{{state.icon}} {{state.iconModifier}}" ng-class="{ '--success' : state.success() }"></span>
-            </span>
-
-            <!-- <span class="currentStatus__state --isActive fa fa-cube">
-              <span class="currentStatus__state__state" ng-class="{
-                  '--success' : (tracking.state > 0)
-              } "></span>
-            </span>
-
-            <span class="currentStatus__angle fa fa-angle-right" ng-class="{ '--isVisible' : (tracking.state > 1) }"></span>
-            <span class="currentStatus__state fa fa-truck fa-flip-horizontal" ng-class="{ '--isActive' : (tracking.state > 1) }">
-                <span class="currentStatus__state__state fa-flip-horizontal" ng-class="{
-                    '--success' : (tracking.state > 1)
-                } "></span>
-            </span>
-
-            <span class="currentStatus__angle fa fa-angle-right" ng-class="{ '--isVisible' : (tracking.state > 2) }"></span>
-            <span class="currentStatus__state fa fa-arrows-alt" ng-class="{ '--isActive' : (tracking.state > 2) }">
-                <span class="currentStatus__state__state" ng-class="{
-                    '--success' : (tracking.state > 2)
-                } "></span>
-            </span>
-
-            <span class="currentStatus__angle fa fa-angle-right" ng-class="{ '--isVisible' : (tracking.state > 3) }"></span>
-            <span class="currentStatus__state fa fa-home" ng-class="{ '--isActive' : (tracking.state > 3) }">
-                <span class="currentStatus__state__state" ng-class="{
-                    '--success' : (tracking.state > 3), '--error' : (tracking.errorStates.indexOf(tracking.data.coureon_tracking_status.toUpperCase()) > -1)
-                } "></span>
-            </span> -->
-
-            <!-- ng-if="tracking.errorStates.indexOf(tracking.data.coureon_tracking_status.toUpperCase()) === -1" -->
-            <!-- <span class="currentStatus__angle fa fa-angle-right" ng-class="{ '--isVisible' : (tracking.state > 4) }"></span>
-            <span class="currentStatus__state fa fa-check" ng-class="{ '--isActive' : (tracking.state > 4 && tracking.errorStates.indexOf(tracking.data.coureon_tracking_status.toUpperCase()) === -1) }">
-                <span class="currentStatus__state__state" ng-class="{
-                    '--success' : (tracking.state > 4 && tracking.errorStates.indexOf(tracking.data.coureon_tracking_status.toUpperCase()) === -1), '--error' : (tracking.state > 4 && tracking.errorStates.indexOf(tracking.data.coureon_tracking_status.toUpperCase()) > -1)
-                } "></span>
-            </span> -->
-        </div>
 
         <ul class="summary" ng-if="tracking.data  && !tracking.showError">
             <li>
@@ -58,8 +22,7 @@
             </li>
             <li>
                 <span class="summary__title" ng-bind="'PAGE.TRACKING.SUMMARY_STATE' | translate"></span>
-                <span ng-bind="('PAGE.TRACKING.SUMMARY_STATE.' + tracking.data.coureon_tracking_status.toUpperCase()) | translate"></span>
-                <span>{{ tracking.state | json }}</span>
+                <span ng-bind="('PAGE.TRACKING.SUMMARY_STATE.' + tracking.data.events[tracking.data.events.length - 1].coureon_tracking_status.toUpperCase()) | translate"></span>
             </li>
         </ul>
 
@@ -69,7 +32,7 @@
                     <div ng-bind="event.moment | moment:'day'"></div>
                     <div ng-bind="event.moment | moment:'time'"></div>
                 </span>
-                <span class="timeline__state fa fa-check" ng-class="{ '--processIsCompleted' : ($last && tracking.data.coureon_tracking_status === 'DELIVERED')}"></span>
+                <span class="timeline__state fa fa-check" ng-class="{ '--processIsCompleted' : ($last && event.coureon_tracking_status === 'DELIVERED')}"></span>
                 <span class="timeline__description" ng-bind="('PAGE.TRACKING.TIMELINE.EVENT.' + event.description.toUpperCase() | translate)
                     .replace('%CITY%', event.location.city || '')
                     .replace('%COUNTRY%', event.location.country || '')"></span>
