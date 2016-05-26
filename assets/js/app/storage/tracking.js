@@ -11,7 +11,7 @@ function(
   self.data = null;
 
   self.track = function(trackingId, cb, cbErr) {
-    if (trackingId.indexOf('CO-') > -1) {
+    if (trackingId.indexOf('CO-') > -1 || trackingId.indexOf('CA-') > -1) {
 
       CommonRequest.tracking.getStatus({
         trackingId : trackingId
