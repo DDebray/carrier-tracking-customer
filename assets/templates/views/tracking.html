@@ -14,7 +14,6 @@
         <h2 ng-if="tracking.showError" ng-bind="'PAGE.TRACKING.ERROR_TITLE' | translate"></h2>
         <p ng-if="tracking.showError && ('PAGE.TRACKING.ERROR_DESCRIPTION' | translate) !== 'PAGE.TRACKING.ERROR_DESCRIPTION'" ng-bind="'PAGE.TRACKING.ERROR_DESCRIPTION' | translate"></p>
 
-
         <ul class="summary" ng-if="tracking.data  && !tracking.showError">
             <li>
                 <span class="summary__title" ng-bind="'PAGE.TRACKING.SUMMARY_TRACKING_NUMBER' | translate"></span>
@@ -22,7 +21,7 @@
             </li>
             <li>
                 <span class="summary__title" ng-bind="'PAGE.TRACKING.SUMMARY_STATE' | translate"></span>
-                <span ng-bind="('PAGE.TRACKING.SUMMARY_STATE.' + tracking.data.events[tracking.data.events.length - 1].coureon_tracking_status.toUpperCase()) | translate"></span>
+                <span ng-bind="('PAGE.TRACKING.SUMMARY_STATE.' + tracking.data.events[tracking.data.events.length - 1].status.toUpperCase()) | translate"></span>
             </li>
         </ul>
 
@@ -32,10 +31,12 @@
                     <div ng-bind="event.moment | moment:'day'"></div>
                     <div ng-bind="event.moment | moment:'time'"></div>
                 </span>
-                <span class="timeline__state fa fa-check" ng-class="{ '--processIsCompleted' : ($last && event.coureon_tracking_status === 'DELIVERED')}"></span>
+                <span class="timeline__state fa fa-check" ng-class="{ '--processIsCompleted' : ($last && event.status === 'DELIVERED')}"></span>
                 <span class="timeline__description" ng-bind="('PAGE.TRACKING.TIMELINE.EVENT.' + event.description.toUpperCase() | translate)
                     .replace('%CITY%', event.location.city || '')
-                    .replace('%COUNTRY%', event.location.country || '')"></span>
+                    .replace('%COUNTRY%', event.location.country || '')">
+                </span>
+                <span class="timeline__carrier" ng-if="event.carrier" ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"></span>
             </div>
         </div>
     </div>

@@ -86,9 +86,21 @@
     position: relative;
     vertical-align:middle;
     display: inline-block;
-    max-width: 600px;
+    max-width: 520px;
     margin-left: ($_xSpacing * 2) + ($_defaultSpacing * 2) + $timeline-state-size;
     border-radius: $_borderRadiusDefault;
+    // @include clearfix;
+    z-index: $zindex-inner;
+  }
+
+  &__carrier {
+    position: relative;
+    vertical-align:middle;
+    display: inline-block;
+    max-width: 64px;
+    margin-left: 16px;
+    // margin-left: ($_xSpacing * 2) + ($_defaultSpacing * 2) + $timeline-state-size;
+    // border-radius: $_borderRadiusDefault;
     @include clearfix;
     z-index: $zindex-inner;
   }

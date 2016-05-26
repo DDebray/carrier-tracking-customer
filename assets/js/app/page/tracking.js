@@ -18,8 +18,6 @@ function(
 // WAREHOUSE
 // NOT_AVAILABLE.RECEIVER.NEW_DELIVERY_ATTEMPT
 
-
-
   self.packageStates = [
     {
       icon : function () {
@@ -54,10 +52,10 @@ function(
         return 'arrows-alt';
       },
       isActive : function () {
-        return self.state > 4 && self.state < 7;
+        return self.state > 2 && self.state < 7;
       },
       showCheckmark : function () {
-        return self.state > 4 && self.state < 7;
+        return self.state > 2 && self.state < 7;
       }
     },
     {
@@ -101,9 +99,9 @@ function(
 
       if (response && response.events) {
         if (!!response.events.length) {
-          self.state = self.availableStates.indexOf(response.events[response.events.length - 1].coureon_tracking_status);
-          // self.showError = self.errorStates.indexOf(response.events[response.events.length - 1].coureon_tracking_status) !== -1;
-          self.showError = response.events[response.events.length - 1].coureon_tracking_status === 'NOT_AVAILABLE';
+          self.state = self.availableStates.indexOf(response.events[response.events.length - 1].status);
+          // self.showError = self.errorStates.indexOf(response.events[response.events.length - 1].status) !== -1;
+          self.showError = response.events[response.events.length - 1].status === 'NOT_AVAILABLE';
         } else {
           self.showError = true;
         }

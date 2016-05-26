@@ -27,11 +27,13 @@
 
 .footer__links {
     @include resetList;
-    text-align: center;
+    padding-bottom: 4px;
+    border-bottom: 1px solid $_rgbAlto;
+
     li {
       display: inline;
-
     }
+
     li + li {
       margin-left: 20px;
     }
