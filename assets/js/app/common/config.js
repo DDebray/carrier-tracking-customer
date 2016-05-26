@@ -25,6 +25,13 @@ module.exports = ['$translateProvider', function ($translateProvider) {
       staging : 'https://api-staging.coureon.com/cx/',
       production : 'https://api.coureon.com/cx/'
     },
+    // tracking/123
+    ruediger : {
+      development : 'http://172.30.8.34:8081/external/',
+      testing : 'http://172.30.8.34:8081/external/',
+      staging : 'http://172.30.8.34:8081/external/',
+      production : 'http://172.30.8.34:8081/external/'
+    },
     www : {
       development: 'http://localhost:3000',
       testing : 'https://www-testing.coureon.com',

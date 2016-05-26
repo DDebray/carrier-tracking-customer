@@ -20,6 +20,7 @@ function(
 
   self.packageStates = [
     {
+      tooltip: 'LABEL_PRINTED',
       icon : function () {
         return 'cube';
       },
@@ -34,6 +35,7 @@ function(
       }
     },
     {
+      tooltip: 'IN_TRANSIT',
       angle : 'angle-right',
       iconModifier : 'fa-flip-horizontal',
       icon : function () {
@@ -47,6 +49,7 @@ function(
       }
     },
     {
+      tooltip: 'HANDOVER_WAREHOUSE',
       angle : 'angle-right',
       icon : function () {
         return 'arrows-alt';
@@ -59,6 +62,7 @@ function(
       }
     },
     {
+      tooltip: 'DELIVERED',
       angle : 'angle-right',
       icon : function () {
         return 'home';
@@ -74,6 +78,7 @@ function(
       }
     },
     {
+      tooltip: 'SUCCESS',
       angle : 'angle-right',
       icon : function () {
         return self.state === 7 && false ? 'close' : 'check';

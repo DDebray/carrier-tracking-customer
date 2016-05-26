@@ -28,6 +28,54 @@ module.exports = function CommonUiProvider() {
 
   self.hidden = false;
 
+  self.tooltip = {
+    config : null,
+    hide : function() {
+      self.tooltip.config = null;
+      if(services.$scope && !services.$scope.$$phase) {
+        services.$scope.$apply();
+      }
+
+      angular.element(window).off('resize', this.updatePosition);
+    },
+    show : function(config) {
+      if (!config || !config.targetEl || !config.targetEl.offsetParent) {
+        return;
+      }
+
+      self.tooltip.config = config;
+      this.updatePosition();
+
+      if(services.$scope && !services.$scope.$$phase) {
+        services.$scope.$apply();
+      }
+
+      angular.element(window).off('resize', this.updatePosition).on('resize', this.updatePosition);
+    },
+    updatePosition : function(apply) {
+      var config = self.tooltip.config;
+      if (!config.targetEl || !config.targetEl.offsetParent) {
+        return self.tooltip.hide();
+      }
+
+      var acr = services.CommonBrowser.getAbsoluteClientRect(config.targetEl),
+        directionX = config.directionX || 'center',
+        directionY = config.directionY || (acr.fixed.bottom > (document.body.clientHeight - 200) ? 'up' : 'down');
+      config.cssClass = 'ui-tooltip-' + directionY + ' ' + 'ui-tooltip-' + directionX + ' ' + (config.class || '');
+      config.css = {
+        minWidth : acr.width + 'px',
+        top : directionY === 'down' ? (acr.bottom + 'px') : 'auto',
+        bottom : directionY === 'up' ? ((document.body.clientHeight - acr.top) + 'px') : 'auto',
+        left : directionX === 'center' ? (acr.left + (acr.width / 2)) + 'px' : (directionX === 'right' ? (acr.left + (acr.width / 2) - 25) + 'px' : 'auto'),
+        right : directionX === 'left' ? (((document.body.clientWidth - acr.right) + (acr.width / 2)) - 9) + 'px' : 'auto'
+      };
+
+      if(apply && services.$scope && !services.$scope.$$phase) {
+        services.$scope.$apply();
+      }
+    }
+  };
+
   self.modal = {
     template : null,
     data : null,
@@ -66,4 +114,5 @@ module.exports = function CommonUiProvider() {
       });
     }
   };
+
 };
