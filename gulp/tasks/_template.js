@@ -12,25 +12,26 @@ var gulp = require('gulp'),
   config = require('../config'),
   fs = require('fs');
 
-gulp.task('templates:readFooter', function(cb) {
-  var $ = require('jquery'),
-    env = require('jsdom').env,
-    paths = require('../config').paths;
+// gulp.task('templates:readFooter', function(cb) {
+//   var $ = require('jquery'),
+//     env = require('jsdom').env,
+//     paths = require('../config').paths;
+//
+//   env(config.paths.source.footer_url, function (errors, window) {
+//     var $ = require('jquery')(window),
+//       $footer = $('.footer').wrap('<footer></footer>').parent();
+//
+//     $footer.find('a.footer__link').each(function() {
+//       this.href = this.href;
+//     });
+//
+//     fs.writeFileSync(config.paths.source.footer, $footer.html());
+//     cb();
+//   });
+// });
 
-  env(config.paths.source.footer_url, function (errors, window) {
-    var $ = require('jquery')(window),
-      $footer = $('.footer').wrap('<footer></footer>').parent();
-
-    $footer.find('a.footer__link').each(function() {
-      this.href = this.href;
-    });
-
-    fs.writeFileSync(config.paths.source.footer, $footer.html());
-    cb();
-  });
-});
-
-gulp.task('templates', gulp.series('templates:readFooter', function() {
+// gulp.task('templates', gulp.series('templates:readFooter', function() {
+gulp.task('templates', gulp.series(function() {
   var template    = require('gulp-template'),
     minifyHTML  = require('gulp-minify-html'),
     connect     = require('gulp-connect'),

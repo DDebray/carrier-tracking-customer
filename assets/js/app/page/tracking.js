@@ -6,12 +6,19 @@ function(
   'use strict';
   var self = this;
 
-  self.trackingId = StorageTracking.trackingId || '';
   self.data = StorageTracking.data;
+  self.trackingId = StorageTracking.trackingId || '';
+  self.availableStates = ['NOT_AVAILABLE', 'LABEL_PRINTED', 'IN_TRANSIT', 'HANDOVER', 'WAREHOUSE', 'DELIVERY_FAILED', 'DELIVERED', 'CANCELLED'];
+  // self.errorStates = ['NOT_AVAILABLE', 'CANCELLED'];
   self.showError = false;
-  self.errorStates = ['NOT_AVAILABLE', /*'DELIVERY_FAILED',*/ 'CANCELLED'];
-  self.states = ['NOT_AVAILABLE', 'LABEL_PRINTED', 'IN_TRANSIT', 'HANDOVER', 'WAREHOUSE', 'DELIVERY_FAILED', 'DELIVERED', 'CANCELLED'];
   self.state = -1;
+
+// IN_TRANSIT.FORWARD.DISTRIBUTION_CENTER
+// HANDOVER.CARRIER.LOCATION
+// WAREHOUSE
+// NOT_AVAILABLE.RECEIVER.NEW_DELIVERY_ATTEMPT
+
+
 
   self.packageStates = [
     {
@@ -21,62 +28,62 @@ function(
       isActive : function () {
         return self.state > 0;
       },
-      success : function () {
+      showCheckmark : function () {
         return self.state > 0;
       },
-      error : function () {
+      showCross : function () {
         return self.state === 7;
       }
     },
     {
+      angle : 'angle-right',
+      iconModifier : 'fa-flip-horizontal',
       icon : function () {
         return 'truck';
       },
-      iconModifier : 'fa-flip-horizontal',
-      angle : 'angle-right',
       isActive : function () {
         return self.state > 1 && self.state < 7;
       },
-      success : function () {
+      showCheckmark : function () {
         return self.state > 1 && self.state < 7;
       }
     },
     {
+      angle : 'angle-right',
       icon : function () {
         return 'arrows-alt';
       },
-      angle : 'angle-right',
       isActive : function () {
         return self.state > 4 && self.state < 7;
       },
-      success : function () {
+      showCheckmark : function () {
         return self.state > 4 && self.state < 7;
       }
     },
     {
+      angle : 'angle-right',
       icon : function () {
         return 'home';
       },
-      angle : 'angle-right',
       isActive : function () {
         return self.state >= 5 && self.state < 7;
       },
-      success : function () {
+      showCheckmark : function () {
         return self.state > 5 && self.state < 7;
       },
-      error : function () {
+      showCross : function () {
         return self.state === 5 && self.state < 7;
       }
     },
     {
+      angle : 'angle-right',
       icon : function () {
         return self.state === 7 && false ? 'close' : 'check';
       },
-      angle : 'angle-right',
       isActive : function () {
         return self.state === 6;
       },
-      success : function () {
+      showCheckmark : function () {
         return false;
       }
     }
@@ -94,7 +101,8 @@ function(
 
       if (response && response.events) {
         if (!!response.events.length) {
-          self.state = self.states.indexOf(response.events[response.events.length - 1].coureon_tracking_status);
+          self.state = self.availableStates.indexOf(response.events[response.events.length - 1].coureon_tracking_status);
+          // self.showError = self.errorStates.indexOf(response.events[response.events.length - 1].coureon_tracking_status) !== -1;
           self.showError = response.events[response.events.length - 1].coureon_tracking_status === 'NOT_AVAILABLE';
         } else {
           self.showError = true;

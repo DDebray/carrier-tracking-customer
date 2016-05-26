@@ -7,7 +7,7 @@
             <span class="currentStatus__angle fa fa-{{state.angle}}" ng-repeat-start="state in tracking.packageStates" ng-if="state.angle && state.isActive" ng-class="{ '--isVisible' : state.isActive() }"></span>
 
             <span class="currentStatus__state fa fa-{{state.icon()}} {{state.iconModifier}}" ng-repeat-end ng-class="{ '--isActive' : state.isActive(), '--isError' : state.isError() }">
-                <span class="currentStatus__state__state {{state.iconModifier}}" ng-class="{ '--success' : state.success(), '--error' : state.error() }"></span>
+                <span class="currentStatus__state__state {{state.iconModifier}}" ng-class="{ '--success' : state.showCheckmark(), '--error' : state.showCross() }"></span>
             </span>
         </div>
 
