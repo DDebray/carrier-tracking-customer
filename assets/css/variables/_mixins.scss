@@ -89,6 +89,6 @@
   to { opacity:1; }
 }
 
-@mixin fade-in($time) {
+@mixin fade-in($time:$_tShort) {
   animation:fade-in $time linear 1;
 }

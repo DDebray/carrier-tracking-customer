@@ -3,10 +3,6 @@ module.exports = ['$resource', '$http', 'CommonConfig', function($resource, $htt
 
   var generateResource = function(route, endpoint, paramDefaults, actions, options) {
     if (actions) {
-
-      // console.log('CommonConfig.endpoints', CommonConfig.endpoints);
-      // console.log('CommonConfig.environment()', CommonConfig.environment());
-
       angular.forEach(actions, function(action) {
         action.url = CommonConfig.endpoints[endpoint][CommonConfig.environment()] + action.url;
       });
@@ -20,6 +16,12 @@ module.exports = ['$resource', '$http', 'CommonConfig', function($resource, $htt
 
   return {
     tracking : generateResource('tracking', 'cx', null, {
+      getStatus : {
+        method : 'GET',
+        url : 'tracking/:trackingId'
+      }
+    }),
+    externalTracking : generateResource('tracking', 'ruediger', null, {
       getStatus : {
         method : 'GET',
         url : 'tracking/:trackingId'

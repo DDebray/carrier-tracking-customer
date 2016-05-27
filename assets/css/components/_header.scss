@@ -18,25 +18,4 @@
     cursor: pointer;
     height: 100%;
   }
-
-  &__options {
-    margin: 0;
-    text-align: right;
-    flex-grow: 1;
-    align-self: center;
-
-    &--phone {
-      @include show-for(large);
-      @include cif('phone', $icon-width-smallest, $_xSpacing);
-      display: inline-block;
-      margin-right: $_xSpacing;
-    }
-
-    &--mail {
-      @include show-for(large);
-      @include cif('phone', $icon-width-smallest, $_xSpacing);
-      display: inline-block;
-      margin-right: $_xSpacing;
-    }
-  }
 }

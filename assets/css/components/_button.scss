@@ -51,6 +51,7 @@
     }
 }
 .button--blush {
+    // @include resetButton;
     @extend .button;
 
     border-radius: $_borderRadiusDefault;

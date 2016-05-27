@@ -16,11 +16,11 @@ module.exports = function (application) {
         if (input.isValid()) {
           switch (expression) {
             case 'long' :
-              return input.format('dddd[, ]DD.MM.YYYY[, ]h:mm[ Uhr]');
+              return input.format('dddd[, ]DD.MM.YYYY[, ]HH:mm:ss[ Uhr]');
             case 'day' :
               return input.format('dddd[, ]DD.MM.');
             case 'time' :
-              return input.format('h:mm [ Uhr]');
+              return input.format('HH:mm [ Uhr]');
             default:
               return input.format('DD.MM.YYYY');
           }

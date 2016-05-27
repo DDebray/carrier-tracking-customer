@@ -63,22 +63,29 @@
     }
   }
 
-
+  &__title {
+    margin-bottom: 72px;
+    font-size: $_fsLarge;
+    line-height: $_lhLarge;
+    color: $_rgbWhite;
+  }
 
   &__subtitle {
     margin-bottom: 72px;
-
     font-size: $_fsMedium;
     line-height: $_lhMedium;
     color: $_rgbWhite;
   }
 
-  a {
+  .section__title + .section__subtitle {
+    margin-top: -65px;
+  }
+
+  a:not(.button) {
     color: $_rgbBlush;
   }
 
-  a.nocolor {
+  a:not(.button).--nocolor {
     color: none;
   }
-
 }

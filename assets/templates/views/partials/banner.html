@@ -5,10 +5,8 @@
 
         <form class="footerForm">
             <div class="footerForm__elements">
-                <button class="button button--blush" type="button" name="printReturnLabel" ng-click="base.printReturnLabel()" ng-bind="'SECTION.FOOTER.PRINT_RETURN_LABEL_BUTTON' | translate"></button>
-
-                // TODO use another way for the redirect over controller see js controller.
-                <a class="--nocolor"href="/printing"><button class="button button--blush" type="button" name="printLabel" ng-click="base.printLabel()" ng-bind="'SECTION.FOOTER.PRINT_LABEL_BUTTON' | translate"></button></a>
+                <a class="button button--blush" href="/printing" ng-click="base.printReturnLabel()"><span ng-bind="'SECTION.FOOTER.PRINT_RETURN_LABEL_BUTTON' | translate"></span></a>
+                <a class="button button--blush" href="/printing" ng-click="base.printLabel()"><span ng-bind="'SECTION.FOOTER.PRINT_LABEL_BUTTON' | translate"></span></a>
             </div>
         </form>
     </div>

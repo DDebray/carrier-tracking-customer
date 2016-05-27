@@ -13,18 +13,18 @@
 .hero__title {
   font-family: $_ffSansBold;
   font-size: $_fsLarge;
-  font-weight: bold;
-  line-height: normal;
-  margin: 0;
-  align-self: center;
-  color: white;
+  font-weight: $_fsDefault;
+  line-height: ($_fsLarge + 0.3rem);
+  margin-bottom: 10px;
+  color: $_rgbWhite;
+  text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
 }
 
-//TODO Look into following code.
 .hero__subtitle {
   font-family: $_ffSansBold;
   font-size: $_fsMedium;
   line-height: $_lhMedium;
+  text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
 }
 
 @media (max-width: $_wLarge) {
