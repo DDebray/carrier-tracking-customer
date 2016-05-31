@@ -14,7 +14,7 @@ module.exports = ['$translateProvider', function ($translateProvider) {
 
   self.endpoints = {
     ui : {
-      development : 'http://localhost:8080/zooron-web/ui/',
+      development : 'http://api-testing.coureon.com/ui/',
       testing : 'https://api-testing.coureon.com/ui/',
       staging : 'https://api-staging.coureon.com/ui/',
       production : 'https://api.coureon.com/ui/'

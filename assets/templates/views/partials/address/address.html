@@ -1,0 +1,66 @@
+<highlight
+  ng-if="address.data.name"
+  keyword="{{ address.data.highlightKey }}"
+  field="{{ address.data.name }}">
+</highlight>
+
+<highlight
+  ng-if="address.data.company"
+  keyword="{{ address.data.highlightKey }}"
+  field="{{ address.data.company }}">
+</highlight>
+
+<highlight
+  ng-if="address.data.street1"
+  ng-class="{ 'left' : address.data.street_no }"
+  keyword="{{ address.data.highlightKey }}"
+  field="{{ address.data.street1 }}">
+</highlight>
+
+<highlight
+  ng-if="address.data.street_no"
+  keyword="{{ address.data.highlightKey }}"
+  field="{{ address.data.street_no }}">
+</highlight>
+
+<highlight
+  ng-if="address.data.street2"
+  keyword="{{ address.data.highlightKey }}"
+  field="{{ address.data.street2 }}">
+</highlight>
+
+<highlight
+  ng-if="address.data.postal_code"
+  ng-class="{ 'left' : address.data.city }"
+  keyword="{{ address.data.highlightKey }}"
+  field="{{ address.data.postal_code }}">
+</highlight>
+
+<highlight
+  ng-if="address.data.city"
+  keyword="{{ address.data.highlightKey }}"
+  field="{{ address.data.city }}">
+</highlight>
+
+<div
+  ng-if="address.data.state">
+  {{ address.data.state }}
+</div>
+
+<div
+  ng-if="address.getCountry(address.data.country).name">
+  {{ address.getCountry(address.data.country).name }}
+</div>
+
+<div
+  ng-if="address.data.phone">
+  {{ address.data.phone }}
+</div>
+
+<highlight
+  ng-if="address.data.email"
+  keyword="{{ address.data.highlightKey }}"
+  field="{{ address.data.email }}">
+</highlight>
+
+<span class="fa fa-pencil icon-action" ng-if="address.isEditable"></span>

@@ -2,14 +2,23 @@
 
 <section class="section">
     <div class="section__inner row">
-        <tab-panel class="panel columns large-6" padding>
+
+        <div class="panel columns large-6">
+            <address data="printing.receiver" is-editable="false"></address>
+
+            <div address-form="printing.senderFormConfig" address-model="printing.editing"></div>
+
+            <!-- <address data="customs.config.sender()" is-editable="false"></address> -->
+        </div>
+
+        <!-- <tab-panel class="panel columns large-6" padding>
             <tab name="Empfängeradresse">
                 <div ng-include="'views/partials/address.html'"></div>
             </tab>
             <tab name="Absenderadresse">
                 <div ng-include="'views/partials/address.html'"></div>
             </tab>
-        </tab-panel>
+        </tab-panel> -->
 
         <tab-panel class="panel columns large-6">
             <tab name="Nach Preis">
