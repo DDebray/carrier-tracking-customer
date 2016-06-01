@@ -81,14 +81,7 @@ function(
   self.editAddress = function(address, addressType) {
     var hasUser = StorageBase.config && StorageBase.config.user;
 
-    self.editing = address || {
-      address_type : addressType,
-      country : 'DE',
-      default : true
-      // name : hasUser ? StorageBase.config.user.name : null,
-      // company : hasUser ? StorageBase.config.user.company : null,
-      // phone : hasUser ? StorageBase.config.user.phone : null
-    };
+    self.editing = address || self.sender;
   };
 
   self.editing = false;
