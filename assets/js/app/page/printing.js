@@ -65,7 +65,7 @@ function(
 
     console.log('edit', address, addressType);
 
-    self.editing = address || self.sender;
+    self.editing = address;
   };
 
   self.editing = false;
@@ -77,7 +77,6 @@ function(
     //   StorageAddresses.reload(true, function() {
     //   });
     // });
-    console.log('message', message);
   };
 
   self.senderFormConfig = {
