@@ -65,7 +65,6 @@ module.exports = function(application) {
           switch (config.on) {
             case 'enter':
               elements.on('mouseenter', function() {
-                console.log('enter');
                 updateConfig();
                 CommonUi.tooltip.show(config);
               });
