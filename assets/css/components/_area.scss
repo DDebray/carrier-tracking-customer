@@ -1,8 +1,10 @@
+@import "areas/panel";
+
 .area {
-  &Root {
+  &-root {
     transition: filter $_tShort;
 
-    &.--blur{
+    &--blur{
       filter: blur(5px);
     }
   }

@@ -20,6 +20,7 @@ application
   .factory('CommonTracking', require('./common/tracking'))
 
   .factory('StorageTracking', require('./storage/tracking'))
+  .factory('StorageAddresses', require('./storage/addresses'))
   // .factory('StorageCountries', require('./storage/countries'))
 
   .provider('CommonUi', require('./ui/config'))

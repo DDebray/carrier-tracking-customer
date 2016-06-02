@@ -1,5 +1,6 @@
 .panel {
   // @include fade-in($_tLong);
+  @include clearfix();
 
   &__tabList {
     @include resetList;

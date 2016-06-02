@@ -1,10 +1,11 @@
 module.exports = [
-  'CommonUi', /*'StorageCountries',*/
+  'CommonUi', 'StorageAddresses', /*'StorageCountries',*/
 function(
-  CommonUi/*, StorageCountries*/
+  CommonUi, StorageAddresses/*, StorageCountries*/
 ) {
   'use strict';
   var self = this;
+  self.addresses = StorageAddresses.addresses;
 
   self.labels = [
     {
@@ -44,42 +45,25 @@ function(
   //
   // });
 
-  self.receiver = {
-  // self.sender = {
-    id: 1000033,
-    name: 'Andreas Kühnel',
-    company: null,
-    street1: 'Page St',
-    street_no: '386',
-    street2: null,
-    postal_code: '94102',
-    city: 'San Francisco',
-    state: 'CA',
-    country: 'US',
-    phone: '0123465465',
-    email: null,
-    residential: null
-  };
+  // var addresses = StorageAddresses.addresses;
+  // console.log('addresses', addresses);
 
-  self.sender = {
-  // self.receiver = {
-    id: 1000033,
-    name: 'Max Mustermann',
-    company: null,
-    street1: 'Julie-Wolfthorn-Straße',
-    street_no: '1',
-    street2: null,
-    postal_code: '10115',
-    city: 'Berlin',
-    state: null,
-    country: 'DE',
-    phone: '0123465465',
-    email: 'mustermx@coureon.com',
-    residential: null
+  self.addressItems = function() {
+    var addresses = StorageAddresses.addresses;
+
+    console.log('addresses', addresses);
+
+    if (addresses === false && !self.editing) {
+      self.edit();
+    }
+
+    return addresses;
   };
 
   self.editAddress = function(address, addressType) {
-    var hasUser = StorageBase.config && StorageBase.config.user;
+    // var hasUser = StorageBase.config && StorageBase.config.user;
+
+    console.log('edit', address, addressType);
 
     self.editing = address || self.sender;
   };

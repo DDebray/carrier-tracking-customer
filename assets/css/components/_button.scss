@@ -17,49 +17,50 @@
     & + & {
         margin-left: $_xSpacing;
     }
-}
-.button--ghost {
-    background: none;
-    border: 1px solid;
-    border-radius: $_borderRadiusDefault;
 
-    transition: background $_tShort ease-in-out, color $_tShort ease-in-out, border-color $_tShort ease-in-out;
-}
-.button--ghostWhite {
-    @extend .button;
-    @extend .button--ghost;
+    &--ghost {
+        background: none;
+        border: 1px solid;
+        border-radius: $_borderRadiusDefault;
 
-    color: $_rgbWhite;
-    border-color: $_rgbWhite;
-
-    &:hover {
-        background: transparentize($_rgbWhite, 0.8);
+        transition: background $_tShort ease-in-out, color $_tShort ease-in-out, border-color $_tShort ease-in-out;
     }
-}
-.button--ghostBlush {
-    @extend .button;
-    @extend .button--ghost;
+    &--ghostWhite {
+        @extend .button;
+        @extend .button--ghost;
 
-    color: $_rgbBlush;
-    border-color: $_rgbBlush;
-    background: $_rgbWhite;
+        color: $_rgbWhite;
+        border-color: $_rgbWhite;
 
-    &:hover {
-        color: darken($_rgbBlush, 10);
-        border-color: darken($_rgbBlush, 10);
-        background: rgba($_rgbBlush, .06);
+        &:hover {
+            background: transparentize($_rgbWhite, 0.8);
+        }
     }
-}
-.button--blush {
-    // @include resetButton;
-    @extend .button;
+    &--ghostBlush {
+        @extend .button;
+        @extend .button--ghost;
 
-    border-radius: $_borderRadiusDefault;
-    text-align: center;
-    background: $_rgbBlush;
-    color: $_rgbWhite;
-    transition: background $_tShort ease-in-out;
-    &:hover {
-        background: darken($_rgbBlush, 10);
+        color: $_rgbBlush;
+        border-color: $_rgbBlush;
+        background: $_rgbWhite;
+
+        &:hover {
+            color: darken($_rgbBlush, 10);
+            border-color: darken($_rgbBlush, 10);
+            background: rgba($_rgbBlush, .06);
+        }
+    }
+    &--blush {
+        // @include resetButton;
+        @extend .button;
+
+        border-radius: $_borderRadiusDefault;
+        text-align: center;
+        background: $_rgbBlush;
+        color: $_rgbWhite;
+        transition: background $_tShort ease-in-out;
+        &:hover {
+            background: darken($_rgbBlush, 10);
+        }
     }
 }
