@@ -16,6 +16,12 @@ module.exports = ['CommonUi', '$timeout', function(CommonUi, $timeout) {
     return CommonUi.hidden;
   };
 
+  self.tooltip = function() {
+    return CommonUi.tooltip.config;
+  };
+
+  self.hideTooltip = CommonUi.tooltip.hide;
+
   self.modal = function() {
     return CommonUi.modal;
   };

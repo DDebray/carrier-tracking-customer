@@ -3,10 +3,6 @@ module.exports = ['$resource', '$http', 'CommonConfig', function($resource, $htt
 
   var generateResource = function(route, endpoint, paramDefaults, actions, options) {
     if (actions) {
-
-      // console.log('CommonConfig.endpoints', CommonConfig.endpoints);
-      // console.log('CommonConfig.environment()', CommonConfig.environment());
-
       angular.forEach(actions, function(action) {
         action.url = CommonConfig.endpoints[endpoint][CommonConfig.environment()] + action.url;
       });
@@ -19,9 +15,13 @@ module.exports = ['$resource', '$http', 'CommonConfig', function($resource, $htt
   $http.defaults.headers.common.locale = 'de-DE'; // todo: hard coded - COUREON-347
 
   return {
-    // baseConfig : generateResource('configs/base', 'ui'),
-    dashboard : generateResource('dashboard', 'ui'),
-    tracking : generateResource('tracking', 'ui', null, {
+    tracking : generateResource('tracking', 'cx', null, {
+      getStatus : {
+        method : 'GET',
+        url : 'tracking/:trackingId'
+      }
+    }),
+    externalTracking : generateResource('tracking', 'ruediger', null, {
       getStatus : {
         method : 'GET',
         url : 'tracking/:trackingId'

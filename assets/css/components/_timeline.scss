@@ -23,7 +23,7 @@
       height: calc(100% + #{$_ySpacing});
       width: $timeline-width;
       background: $_rgbDustyGray;
-      z-index: -1;
+      z-index: $zindex-background;
     }
     &:first-child {
       margin-top: 0;
@@ -44,6 +44,11 @@
       border-radius: $_borderRadiusDefault;
     }
 
+    &.--isOnlyChild:before {
+      height: 0;
+      background: $_rgbWhite;
+    }
+
   }
 
   &__date {
@@ -57,6 +62,7 @@
     background-color: $_rgbPacificBlue;
     padding: $_defaultSpacing;
     text-align: center;
+    z-index: $zindex-inner;
   }
 
   &__state {
@@ -73,15 +79,32 @@
     color: $_rgbBlush;
     padding: $_defaultSpacing / 2;
     box-shadow: 0px 0px 0px 4px $_rgbWhite;
+    z-index: $zindex-inner;
   }
 
   &__description {
     position: relative;
     vertical-align:middle;
     display: inline-block;
-    max-width: 600px;
+    max-width: 520px;
     margin-left: ($_xSpacing * 2) + ($_defaultSpacing * 2) + $timeline-state-size;
     border-radius: $_borderRadiusDefault;
+    // @include clearfix;
+    z-index: $zindex-inner;
+  }
+
+  &__carrier {
+    position: relative;
+    vertical-align:middle;
+    display: inline-block;
+    max-width: 64px;
+    margin-left: 16px;
+    background-color: $_rgbAlto;
+    padding: $_defaultSpacing / 2 $_defaultSpacing;
+    border-radius: $_borderRadiusDefault;
+    // margin-left: ($_xSpacing * 2) + ($_defaultSpacing * 2) + $timeline-state-size;
+    // border-radius: $_borderRadiusDefault;
     @include clearfix;
+    z-index: $zindex-inner;
   }
 }
