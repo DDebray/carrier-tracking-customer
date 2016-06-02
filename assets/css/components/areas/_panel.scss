@@ -1,0 +1,32 @@
+.area-panel {
+  @include clearfix();
+  position: relative;
+  // padding: $_formSpacing;
+  padding: ($_ySpacing / 2) ($_xSpacing / 2);
+
+  border: 1px solid $_rgbAlto;
+  border-radius: $_borderRadiusDefault;
+  margin-bottom: $_formSpacing;
+  overflow: hidden;
+
+  &--merge {
+    margin-bottom: 0;
+    border-bottom-width: 0;
+    border-radius: 0;
+
+    &:first-child {
+      border-top-left-radius: $_borderRadiusDefault;
+      border-top-right-radius: $_borderRadiusDefault;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: $_borderRadiusDefault;
+      border-bottom-right-radius: $_borderRadiusDefault;
+      border-bottom-width: 1px;
+    }
+  }
+}
+
+form.area-panel {
+  padding: ($_formSpacing / 2) $_formSpacing;
+}
