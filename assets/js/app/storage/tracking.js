@@ -11,63 +11,63 @@ function(
   self.data = null;
 
   self.track = function(trackingId, cb, cbErr) {
-    if (trackingId.indexOf('CO-') > -1 || trackingId.indexOf('CA-') > -1) {
+    // if (trackingId.indexOf('CO-') > -1 || trackingId.indexOf('CA-') > -1) {
 
-      CommonRequest.tracking.getStatus({
-        trackingId : trackingId
-      }, function(response) {
-        if (response && response.content && response.content.result) {
-          self.data = response.content.result;
+    CommonRequest.tracking.getStatus({
+      trackingId : trackingId
+    }, function(response) {
+      if (response && response.content && response.content.result) {
+        self.data = response.content.result;
 
-          self.data.events.map(function (event) {
-            event.moment = CommonMoment(event.timestamp);
-          });
+        self.data.events.map(function (event) {
+          event.moment = CommonMoment(event.timestamp);
+        });
 
-          if (cb) {
-            cb(self.data);
-          }
-        } else {
-          self.data = null;
-          if (cbErr) {
-            cbErr(response);
-          }
+        if (cb) {
+          cb(self.data);
         }
-      }, function(response) {
+      } else {
         self.data = null;
         if (cbErr) {
           cbErr(response);
         }
-      });
+      }
+    }, function(response) {
+      self.data = null;
+      if (cbErr) {
+        cbErr(response);
+      }
+    });
 
-    } else {
-
-      CommonRequest.externalTracking.getStatus({
-        trackingId : trackingId
-      }, function(response) {
-        if (response && response.content && response.content.result) {
-          self.data = response.content.result;
-
-          self.data.events.map(function (event) {
-            event.moment = CommonMoment(event.timestamp);
-          });
-
-          if (cb) {
-            cb(self.data);
-          }
-        } else {
-          self.data = null;
-          if (cbErr) {
-            cbErr(response);
-          }
-        }
-      }, function(response) {
-        self.data = null;
-        if (cbErr) {
-          cbErr(response);
-        }
-      });
-
-    }
+  //   } else {
+  //
+  //     CommonRequest.externalTracking.getStatus({
+  //       trackingId : trackingId
+  //     }, function(response) {
+  //       if (response && response.content && response.content.result) {
+  //         self.data = response.content.result;
+  //
+  //         self.data.events.map(function (event) {
+  //           event.moment = CommonMoment(event.timestamp);
+  //         });
+  //
+  //         if (cb) {
+  //           cb(self.data);
+  //         }
+  //       } else {
+  //         self.data = null;
+  //         if (cbErr) {
+  //           cbErr(response);
+  //         }
+  //       }
+  //     }, function(response) {
+  //       self.data = null;
+  //       if (cbErr) {
+  //         cbErr(response);
+  //       }
+  //     });
+  //
+  //   }
   };
 
   return self;

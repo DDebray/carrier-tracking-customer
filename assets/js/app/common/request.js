@@ -21,12 +21,12 @@ module.exports = ['$resource', '$http', 'CommonConfig', function($resource, $htt
         url : 'tracking/:trackingId'
       }
     }),
-    externalTracking : generateResource('tracking', 'ruediger', null, {
-      getStatus : {
-        method : 'GET',
-        url : 'tracking/:trackingId'
-      }
-    }),
+    // externalTracking : generateResource('tracking', 'ruediger', null, {
+    //   getStatus : {
+    //     method : 'GET',
+    //     url : 'tracking/:trackingId'
+    //   }
+    // }),
     cms : {
       news : generateResource('news', 'cms'),
       cooperations : generateResource('cooperations', 'cms')
