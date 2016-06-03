@@ -63,4 +63,14 @@
             background: darken($_rgbBlush, 10);
         }
     }
+
+    &--filling {
+      width:100%;
+      text-align:center;
+    }
+}
+
+button,
+input[type=submit] {
+  @extend .button;
 }

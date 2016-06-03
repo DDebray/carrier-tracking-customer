@@ -1,4 +1,6 @@
 .form {
+  @include clearfix();
+
   &__label {
     color: $_rgbMineShaft;
     cursor: pointer;
@@ -9,13 +11,36 @@
     }
   }
 
-  &__input {
+  &__input,
+  input {
     margin: 0;
     font-size: $_fsSmall;
   }
 
-  &__select {
+  &__select
+  select {
     margin: 0;
     font-size: $_fsSmall;
+  }
+
+  &-row {
+    @include clearfix();
+    margin-bottom: $_formSpacing * 2;
+
+    &.row {
+      margin: - ($_formSpacing * 1.5);
+
+      // &:last-child .coulmn {
+      //   padding-top: 0;
+      // }
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    // label {
+    //   white-space: nowrap;
+    // }
   }
 }

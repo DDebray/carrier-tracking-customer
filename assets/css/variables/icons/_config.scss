@@ -12,7 +12,7 @@
     transition:background-color $_tShort;
     float:right;
     color:$_rgbWhite;
-    background-color:$_rgbAlto;
+    background-color:$_rgbBlush;
     width:$icon-width-default;
     height:$icon-width-default;
     border-radius:$icon-width-default / 2;
@@ -21,7 +21,7 @@
     cursor:pointer;
 
     &:hover {
-      background-color:$_rgbAthensGray;
+      background-color: darken($_rgbBlush, 10);
     }
 
     &-top {
@@ -36,14 +36,14 @@
 
     &-outlined {
       transition:color $_tShort, border-color $_tShort;
-      border:1px solid $_rgbAlto;
+      border:1px solid $_rgbBlush;
       line-height:$icon-width-default - 3px;
       background:transparent;
       color:$_rgbMineShaft;
 
       &:hover {
         background:transparent;
-        border-color:$_rgbAthensGray;
+        border-color: darken($_rgbBlush, 10);
       }
 
       &-status {

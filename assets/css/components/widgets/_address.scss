@@ -1,0 +1,29 @@
+.widget-address {
+  transition:background-color $_tShort, border-left-width $_tShort, border-left-color $_tShort;
+  position:relative;
+  line-height:1.85em;
+  cursor:pointer;
+
+  &:not(&--is-active):hover {
+    border-left-width:6px;
+    background-color:$_rgbAthensGray;
+    border-left-color:$_rgbBlush;
+
+    .icon-action {
+      background-color: darken($_rgbBlush, 10);
+    }
+  }
+  &--is-active {
+    // border-left-width:6px;
+    // border-left-color:$_rgbBlush;
+    // background-color:$_rgbAthensGray;
+    //
+    // .icon-action {
+    //   background-color: darken($_rgbBlush, 10);
+    // }
+  }
+}
+//
+// _rgbAlto
+// _rgbAthensGray
+// _rgbBlush

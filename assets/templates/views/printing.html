@@ -6,46 +6,34 @@
         <!-- <small><pre>{{ printing.addresses | json }}</pre></small> -->
 
         <div class="columns large-6">
-            <h4>Überschrift</h4>
+            <div
+                class="area-panel area-panel--merge widget-address"
+                ng-repeat="(addressType, address) in printing.addressItems()"
+                ng-click="printing.editAddress(address, addressType)"
+                ng-class="{ active : addresses.editing.address_type === addressType, 'widget-address--is-active' : (printing.editing.address_type == addressType) }"
+            >
 
-            <div>
+                <h3 class="address-headline" ng-bind="('PAGE.PRINTING.' + addressType) | translate"></h3>
 
-                <div
-                  class="area-panel area-panel--merge"
-                  ng-repeat="(addressType, address) in printing.addressItems()"
-                  ng-click="printing.editAddress(address, addressType)"
-                  ng-class="{ active : addresses.editing.address_type === addressType }">
-
-                    <h4 class="">Adresse {{addressType}}</h4>
-
+                <div class="address-container">
+                    <!-- ng-if="address && (!printing.editing || (printing.editing && printing.editing.address_type !== addressType))" -->
                     <address
-                        ng-if="address && (!printing.editing || (printing.editing && printing.editing.address_type !== addressType))"
-                        data="address"
-                        is-editable="true"
+                    class="address-display"
+                    ng-class="{ 'is-visible' : address && (!printing.editing || (printing.editing && printing.editing.address_type !== addressType)) }"
+                    data="address"
+                    is-editable="true"
                     ></address>
 
+                    <!-- ng-if="printing.editing && printing.editing.address_type === addressType" -->
                     <div
-                        ng-if="printing.editing && printing.editing.address_type === addressType"
-                        address-form="printing.senderFormConfig"
-                        address-model="printing.editing"
+                    class="address-form"
+                    ng-class="{ 'is-visible' : printing.editing && printing.editing.address_type === addressType }"
+                    address-form="printing.senderFormConfig"
+                    address-model="printing.editing"
                     ></div>
-
                 </div>
             </div>
-
-
-
-            <!-- <address data="customs.config.sender()" is-editable="false"></address> -->
         </div>
-
-        <!-- <tab-panel class="panel columns large-6" padding>
-            <tab name="Empfängeradresse">
-                <div ng-include="'views/partials/address.html'"></div>
-            </tab>
-            <tab name="Absenderadresse">
-                <div ng-include="'views/partials/address.html'"></div>
-            </tab>
-        </tab-panel> -->
 
         <tab-panel class="panel columns large-6">
             <tab name="Nach Preis">

@@ -88,7 +88,7 @@ function(
       return self.editing;
     },
     hide : {
-      country : true,
+      // country : true,
     }
   };
 
