@@ -3,27 +3,39 @@
   &-container {
     position: relative;
     overflow: hidden;
+    transition: height $_tShort ease;
+
+    &--no-animation {
+      transition: 0s;
+    }
+
   }
 
   &-display {
+    position:absolute;
     width:100%;
-    max-height: 0;
-    transition: max-height $_tShort ease;
-    overflow: hidden;
+    transition: right $_tShort ease;
+    opacity: 0;
+    right:100%;
 
     &.is-visible {
-      max-height: 170px;
+      right:0;
+      opacity: 1;
     }
+
   }
 
   &-form {
+    position:absolute;
     width:100%;
-    max-height: 0;
-    transition: max-height $_tShort ease;
-    overflow: hidden;
+    transition: left $_tShort ease;
+    opacity: 0;
+    left:100%;
 
     &.is-visible {
-      max-height: 620px;
+      opacity: 1;
+      left:0;
     }
   }
+
 }

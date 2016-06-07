@@ -4,7 +4,6 @@ module.exports = function(application) {
 
   application
     // directives without dependencies
-    // .directive('carrierLogo',     require('./directives/carrierLogo'))
     .directive('preventDefault',  require('./directives/preventDefault'))
     .directive('stopPropagation', require('./directives/stopPropagation'))
 
@@ -15,6 +14,7 @@ module.exports = function(application) {
     .directive('tabPanel', require('./directives/tabPanel'))
 
     // directives with dependencies
+    .directive('watchHeight',   ['$timeout', require('./directives/watchHeight')])
     .directive('address',       [/*'StorageCountries',*/ require('./directives/address')])
     .directive('addressForm',   [/*'StorageCountries',*/ require('./directives/addressForm')])
     .directive('autofocus',     ['$timeout', require('./directives/autofocus')])

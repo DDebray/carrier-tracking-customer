@@ -51,7 +51,7 @@ function(
   self.addressItems = function() {
     var addresses = StorageAddresses.addresses;
 
-    console.log('addresses', addresses);
+    // console.log('addresses', addresses);
 
     if (addresses === false && !self.editing) {
       self.edit();
@@ -63,7 +63,7 @@ function(
   self.editAddress = function(address, addressType) {
     // var hasUser = StorageBase.config && StorageBase.config.user;
 
-    console.log('edit', address, addressType);
+    // console.log('edit', address, addressType);
 
     self.editing = address;
   };

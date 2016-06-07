@@ -11,16 +11,17 @@
     }
   }
 
-  &__input,
-  input {
+  input,
+  select {
     margin: 0;
     font-size: $_fsSmall;
   }
 
-  &__select
+  input[type="file"],
+  input[type="checkbox"],
+  input[type="radio"],
   select {
-    margin: 0;
-    font-size: $_fsSmall;
+    outline: 0;
   }
 
   &-row {
@@ -29,18 +30,10 @@
 
     &.row {
       margin: - ($_formSpacing * 1.5);
-
-      // &:last-child .coulmn {
-      //   padding-top: 0;
-      // }
     }
 
     &:last-child {
       margin-bottom: 0;
     }
-
-    // label {
-    //   white-space: nowrap;
-    // }
   }
 }
