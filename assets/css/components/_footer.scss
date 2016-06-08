@@ -9,22 +9,6 @@
     overflow: hidden;
 }
 
-// .footer__column {
-//     margin-bottom: 20px;
-// }
-
-// .footer__headline {
-//     margin-bottom: 17px;
-//     font-family: $_ffSansBold;
-//     font-size: 17px;
-//     line-height: 23px;
-//     text-transform: uppercase;
-// }
-
-// .footer__text {
-//     margin-bottom: 1em;
-// }
-
 .footer__links {
     @include resetList;
     padding-bottom: 4px;
@@ -48,21 +32,3 @@
         color: $_rgbPacificBlue;
     }
 }
-
-// .footer__link--phone {
-//     @include cif( 'phone', 15px, 23px);
-// }
-//
-// .footer__link--email {
-//     @include cif( 'envelope', 12px, 23px);
-// }
-//
-// .footer__image {
-//     display: inline-block;
-//     max-width: 100%;
-//     height: auto;
-// }
-//
-// .footer__partner {
-//     min-height: 98px;
-// }

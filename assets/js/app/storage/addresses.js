@@ -9,6 +9,22 @@ function(
 
   self.addresses = null;
   var staticAddresses = [{
+    address_type: 'RECEIVER_ADDRESS',
+    id: 1000033,
+    name: 'Max Mustermann',
+    company: null,
+    street1: 'Julie-Wolfthorn-Straße',
+    street_no: '1',
+    street2: null,
+    postal_code: '10115',
+    city: 'Berlin',
+    state: null,
+    country: 'DE',
+    phone: '0123465465',
+    email: 'muster@coureon.com',
+    residential: null,
+    is_editable: true
+  },{
     address_type: 'SENDER_ADDRESS',
     id: 1000033,
     name: 'Andreas Kühnel',
@@ -22,22 +38,8 @@ function(
     country: 'US',
     phone: '0123465465',
     email: null,
-    residential: null
-  },{
-    address_type: 'RECEIVER_ADDRESS',
-    id: 1000033,
-    name: 'Max Mustermann',
-    company: null,
-    street1: 'Julie-Wolfthorn-Straße',
-    street_no: '1',
-    street2: null,
-    postal_code: '10115',
-    city: 'Berlin',
-    state: null,
-    country: 'DE',
-    phone: '0123465465',
-    email: 'mustermx@coureon.com',
-    residential: null
+    residential: null,
+    is_editable: true
   }];
 
   // StorageControl.addReset(function() {

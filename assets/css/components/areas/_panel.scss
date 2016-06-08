@@ -1,7 +1,6 @@
 .area-panel {
   @include clearfix();
   position: relative;
-  // padding: $_formSpacing;
   padding: ($_ySpacing / 2) ($_xSpacing / 2);
 
   border: 1px solid $_rgbAlto;
