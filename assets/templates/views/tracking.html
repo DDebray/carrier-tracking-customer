@@ -10,11 +10,11 @@
 <section class="section">
     <div class="section__inner section__inner--slim" ng-class="{ 'section__inner--centered' : tracking.showError }">
 
-        <div class="currentStatus" ng-if="tracking.data && !tracking.showError">
-            <span class="currentStatus__angle fa fa-{{state.angle}}" ng-repeat-start="state in tracking.packageStates" ng-if="state.angle && state.isActive" ng-class="{ 'currentStatus__angle--is-visible' : state.isActive() }"></span>
+        <div class="statecrumbs" ng-if="tracking.data && !tracking.showError">
+            <span class="statecrumbs__angle fa fa-{{state.angle}}" ng-repeat-start="state in tracking.packageStates" ng-if="state.angle && state.isActive" ng-class="{ 'statecrumbs__angle--is-visible' : state.isActive() }"></span>
 
-            <span class="currentStatus__state fa fa-{{state.icon()}} {{state.iconModifier}}" ng-repeat-end ng-class="{ 'currentStatus__state--is-active' : state.isActive(), 'currentStatus__state--is-error' : state.isError() }" tooltip="{ on : 'enter', translation : ('PAGE.TRACKING.SUMMARY.TOOLTIP.' + state.tooltip.toUpperCase()), directionY : 'up', class : (state.isActive() ? 'ui-tooltip--centered --is-active' : 'ui-tooltip--centered') }">
-                <span class="currentStatus__state__state {{state.iconModifier}}" ng-class="{ 'currentStatus__state__state--success' : state.showCheckmark(), 'currentStatus__state__state--error' : state.showCross() }"></span>
+            <span class="statecrumbs__state fa fa-{{state.icon()}} {{state.iconModifier}}" ng-repeat-end ng-class="{ 'statecrumbs__state--is-active' : state.isActive(), 'statecrumbs__state--is-error' : state.isError() }" tooltip="{ on : 'enter', translation : ('PAGE.TRACKING.SUMMARY.TOOLTIP' + (state.showCross() ? '_IS_ERROR.' : (state.isActive() ? '_IS_ACTIVE.' : '.')) + state.tooltip.toUpperCase()), directionY : 'up', class : (state.isActive() ? 'ui-tooltip--centered --is-active' : 'ui-tooltip--centered') }">
+                <span class="statecrumbs__icon {{state.iconModifier}}" ng-class="{ 'statecrumbs__icon--success' : state.showCheckmark(), 'statecrumbs__icon--error' : state.showCross() }"></span>
             </span>
         </div>
 

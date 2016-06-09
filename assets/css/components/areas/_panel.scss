@@ -24,6 +24,25 @@
       border-bottom-width: 1px;
     }
   }
+
+  &--container {
+    padding:0;
+  }
+
+  &__close {
+    transition: color $_tShort;
+    position: absolute;
+    padding: $_formSpacing / 2;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    color: $_rgbDustyGray;
+    z-index: $zindex-inner;
+
+    &:hover {
+      color: $_rgbBlush;
+    }
+  }
 }
 
 form.area-panel {
