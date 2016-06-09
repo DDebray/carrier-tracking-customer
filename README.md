@@ -22,18 +22,23 @@ $ rm -R node_modules
 $ npm cache clean
 $ npm install
 ```
-Maybe a rebuild of node-sass is needed: `npm rebuild node-sass`
+
+Maybe a rebuild of node-sass is needed:
+
+```
+$ npm rebuild node-sass
+```
 
 ## Usage
 
 ```
-gulp
+$ gulp
 ```
 ```
-gulp build
+$ gulp build
 ```
 ```
-gulp dev
+$ gulp dev
 ```
 
 ### Hints

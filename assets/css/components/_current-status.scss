@@ -39,7 +39,7 @@
         transform: rotate(-45deg) scaleX(-1);
       }
 
-      &.--success {
+      &--success {
         @extend .fa;
         @extend .fa-check;
         padding-top: 6px;
@@ -55,7 +55,7 @@
         }
       }
 
-      &.--error {
+      &--error {
         @extend .fa;
         @extend .fa-close;
         color: $_rgbBlush;
@@ -65,12 +65,12 @@
       }
     }
 
-    &.--isActive {
+    &--is-active {
       color: $_rgbPacificBlue;
       border-color: $_rgbPacificBlue;
     }
 
-    &.--isError {
+    &--is-error {
       color: $_rgbBlush;
       border-color: $_rgbBlush;
     }
@@ -86,7 +86,7 @@
     transition: opacity $_tMed ease;
 
 
-    &.--isVisible {
+    &--is-visible {
       opacity: 1;
       color: $_rgbPacificBlue;
     }

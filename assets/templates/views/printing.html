@@ -5,23 +5,23 @@
 
         <div class="columns large-6">
             <div
-                class="area-panel area-panel--merge widget-address"
+                class="area-panel area-panel--merge"
                 ng-repeat="(addressType, address) in printing.addressItems()"
-                ng-click="printing.editAddress(address, addressType)"
-                ng-class="{ active : addresses.editing.address_type === addressType, 'widget-address--is-active' : (printing.editing.address_type == addressType) }"
+                ng-click="address.is_editable ? printing.editAddress(address, addressType) : null"
+                ng-class="{ 'widget-address' : address.is_editable, 'widget-address--js-editing' : (address.is_editable && printing.editing.address_type == addressType) }"
             >
                 <h3 class="address-headline" ng-bind="('PAGE.PRINTING.' + addressType) | translate"></h3>
 
-                <div class="address-container" watch-height="{ condition: (!printing.editing || (printing.editing && printing.editing.address_type !== addressType)), targetOnTrue: '.js-target-on-true', targetOnFalse: '.js-target-on-false', disableAnimationClass: 'address-container--no-animation' }">
+                <div class="address-container" watch-height="{ condition: (!printing.editing || (printing.editing && printing.editing.address_type !== addressType)), targetOnTrue: 'js-target-on-true', targetOnFalse: 'js-target-on-false', disableAnimationClass: 'address-container--no-animation' }">
                     <address
                         class="address-display js-target-on-true"
-                        ng-class="{ 'is-visible' : (address && !printing.editing || (printing.editing && printing.editing.address_type !== addressType)) }"
+                        ng-class="{ 'address-display--is-visible' : (address && !printing.editing || (printing.editing && printing.editing.address_type !== addressType)) }"
                         data="address"
-                        is-editable="true"
+                        is-editable="address.is_editable"
                     ></address>
                     <div
                         class="address-form js-target-on-false"
-                        ng-class="{ 'is-visible' : (printing.editing && printing.editing.address_type === addressType) }"
+                        ng-class="{ 'address-form--is-visible' : (printing.editing && printing.editing.address_type === addressType) }"
                         address-form="printing.senderFormConfig"
                         address-model="printing.editing"
                     ></div>

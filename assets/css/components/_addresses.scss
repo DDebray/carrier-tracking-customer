@@ -3,39 +3,41 @@
   &-container {
     position: relative;
     overflow: hidden;
-    transition: height $_tShort ease;
+    transition: height $_tShort ease-out;
 
     &--no-animation {
       transition: 0s;
     }
+  }
 
+  &-display,
+  &-form {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+
+    &--is-visible {
+      opacity: 1;
+    }
   }
 
   &-display {
-    position:absolute;
-    width:100%;
-    transition: right $_tShort ease;
-    opacity: 0;
-    right:100%;
+    right: 100%;
+    transition: opacity $_tShort ease-out,
+      right 0ms ease-out;
 
-    &.is-visible {
-      right:0;
-      opacity: 1;
+    &--is-visible {
+      right: 0;
     }
-
   }
 
   &-form {
-    position:absolute;
-    width:100%;
-    transition: left $_tShort ease;
-    opacity: 0;
-    left:100%;
+    left: 100%;
+    transition: opacity $_tShort ease-out,
+      left 0ms ease-out;
 
-    &.is-visible {
-      opacity: 1;
-      left:0;
+    &--is-visible {
+      left: 0;
     }
   }
-
 }

@@ -8,13 +8,13 @@
 </hero>
 
 <section class="section">
-    <div class="section__inner --slim" ng-class="{ '--centered' : tracking.showError }">
+    <div class="section__inner section__inner--slim" ng-class="{ 'section__inner--centered' : tracking.showError }">
 
         <div class="currentStatus" ng-if="tracking.data && !tracking.showError">
-            <span class="currentStatus__angle fa fa-{{state.angle}}" ng-repeat-start="state in tracking.packageStates" ng-if="state.angle && state.isActive" ng-class="{ '--isVisible' : state.isActive() }"></span>
+            <span class="currentStatus__angle fa fa-{{state.angle}}" ng-repeat-start="state in tracking.packageStates" ng-if="state.angle && state.isActive" ng-class="{ 'currentStatus__angle--is-visible' : state.isActive() }"></span>
 
-            <span class="currentStatus__state fa fa-{{state.icon()}} {{state.iconModifier}}" ng-repeat-end ng-class="{ '--isActive' : state.isActive(), '--isError' : state.isError() }" tooltip="{ on : 'enter', translation : ('PAGE.TRACKING.SUMMARY.TOOLTIP.' + state.tooltip.toUpperCase()), directionY : 'up', class : (state.isActive() ? 'ui-tooltip-center --isActive' : 'ui-tooltip-center') }">
-                <span class="currentStatus__state__state {{state.iconModifier}}" ng-class="{ '--success' : state.showCheckmark(), '--error' : state.showCross() }"></span>
+            <span class="currentStatus__state fa fa-{{state.icon()}} {{state.iconModifier}}" ng-repeat-end ng-class="{ 'currentStatus__state--is-active' : state.isActive(), 'currentStatus__state--is-error' : state.isError() }" tooltip="{ on : 'enter', translation : ('PAGE.TRACKING.SUMMARY.TOOLTIP.' + state.tooltip.toUpperCase()), directionY : 'up', class : (state.isActive() ? 'ui-tooltip--centered --is-active' : 'ui-tooltip--centered') }">
+                <span class="currentStatus__state__state {{state.iconModifier}}" ng-class="{ 'currentStatus__state__state--success' : state.showCheckmark(), 'currentStatus__state__state--error' : state.showCross() }"></span>
             </span>
         </div>
 
@@ -33,12 +33,12 @@
         </ul>
 
         <div class="timeline" ng-if="tracking.data.events.length  && !tracking.showError">
-            <div class="timeline__event" ng-repeat="event in tracking.data.events" ng-class="{'--isOnlyChild' : (tracking.data.events.length === 1)}">
+            <div class="timeline__event" ng-repeat="event in tracking.data.events" ng-class="{'timeline__event--is-only-child' : (tracking.data.events.length === 1)}">
                 <span class="timeline__date" title="{{ event.moment | moment:'long' }}">
                     <div ng-bind="event.moment | moment:'day'"></div>
                     <div ng-bind="event.moment | moment:'time'"></div>
                 </span>
-                <span class="timeline__state fa fa-check" ng-class="{ '--processIsCompleted' : ($last && event.status === 'DELIVERED')}"></span>
+                <span class="timeline__state fa fa-check" ng-class="{ 'timeline__state--process-is-completed' : ($last && event.status === 'DELIVERED')}"></span>
                 <span class="timeline__description" ng-bind="('PAGE.TRACKING.TIMELINE.EVENT.' + event.description.toUpperCase() | translate)
                     .replace('%CITY%', event.location.city || '')
                     .replace('%COUNTRY%', event.location.country || '')">

@@ -1,15 +1,8 @@
-@import "ui/notifications";
 @import "ui/tooltip";
 @import "ui/modals";
 
 $text-color-blue : blue;
 $background-color-gray-dark : grey;
-//
-// $zindex-ontop : ;
-// $zindex-modal : ;
-// $zindex-help : ;
-// $zindex-area-absolute : ;
-// $zindex-inner : ;
 
 $form-spacing : 5px;
 $section-spacing : 50px;
@@ -18,8 +11,6 @@ $default-spacing : 10px;
 $font-size-headline-main : 20px;
 $font-size-default-sub : 30px;
 $font-weight-semibold : 400;
-
-
 
 .ui {
   &-busy {

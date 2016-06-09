@@ -6,7 +6,6 @@ module.exports = function(application) {
     // directives without dependencies
     .directive('preventDefault',  require('./directives/preventDefault'))
     .directive('stopPropagation', require('./directives/stopPropagation'))
-
     .directive('banner', require('./directives/banner'))
     .directive('hero', require('./directives/hero'))
     .directive('list', require('./directives/list'))
