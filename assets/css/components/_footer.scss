@@ -25,6 +25,8 @@
 
 .footer__link {
     transition: color $_tShort ease-in-out;
+    color: inherit;
+
     &:before {
         transition: background $_tShort ease-in-out;
     }

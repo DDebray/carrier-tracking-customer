@@ -25,6 +25,10 @@
     }
   }
 
+  &--container {
+    padding:0;
+  }
+
   &__close {
     transition: color $_tShort;
     position: absolute;
