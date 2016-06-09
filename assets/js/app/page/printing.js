@@ -11,7 +11,6 @@ module.exports = [
       StorageShipment.load($routeParams.trackingId);
     }
 
-    // Set addresses:
     self.addresses = function() {
       var addresses = StorageShipment.addresses;
       if (addresses === false && !self.editing) {
