@@ -22,6 +22,7 @@ module.exports = [
 
           setAddresses(response.content.result.address_from, response.content.result.address_to);
           self.rates = response.content.result.rates;
+          console.log(self.rates);
         }
       });
     };
@@ -29,9 +30,11 @@ module.exports = [
     var setAddresses = function(sender, receiver) {
       self.addresses.RECEIVER_ADDRESS = receiver;
       self.addresses.RECEIVER_ADDRESS.is_editable = false;
+      self.addresses.RECEIVER_ADDRESS.address_type = 'RECEIVER_ADDRESS';
 
       self.addresses.SENDER_ADDRESS = sender;
       self.addresses.SENDER_ADDRESS.is_editable = true;
+      self.addresses.SENDER_ADDRESS.address_type = 'SENDER_ADDRESS';
 
       console.log(self.addresses);
     };

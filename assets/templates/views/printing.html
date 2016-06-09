@@ -6,7 +6,7 @@
         <div class="columns large-6">
             <div
                 class="area-panel area-panel--merge"
-                ng-repeat="(addressType, address) in printing.addresses()"
+                ng-repeat="(addressType, address) in printing.addressItems()"
                 ng-click="address.is_editable ? printing.editAddress(address, addressType) : null"
                 ng-class="{ 'widget-address' : address.is_editable, 'widget-address--js-editing' : (address.is_editable && printing.editing.address_type == addressType) }"
             >
