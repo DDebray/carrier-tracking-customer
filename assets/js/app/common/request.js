@@ -27,7 +27,7 @@ module.exports = ['$resource', '$http', 'CommonConfig', function($resource, $htt
         url : 'tracking/:trackingId'
       }
     }),
-    shipment: generateResource('shipment', 'cx' , null),
+    shipment: generateResource('shipment', 'cx'),
     countries : generateResource('countries', 'ui'),
     cms : {
       news : generateResource('news', 'cms'),

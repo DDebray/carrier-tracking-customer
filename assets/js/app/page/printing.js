@@ -1,95 +1,60 @@
 module.exports = [
-  'CommonUi', 'StorageAddresses', /*'StorageCountries',*/
-function(
-  CommonUi, StorageAddresses/*, StorageCountries*/
-) {
-  'use strict';
-  var self = this;
-  self.addresses = StorageAddresses.addresses;
+  '$routeParams', 'CommonUi', 'CommonRequest', 'StorageShipment', 'StorageAddresses', /*'StorageCountries',*/
+  function(
+    $routeParams, CommonUi, CommonRequest, StorageShipment, StorageAddresses /*, StorageCountries*/
+  ) {
+    'use strict';
+    var self = this;
 
-  self.labels = [
-    {
-      title : 'DHL Paket Abgabe',
-      details : {
-        'fa fa-truck' : 'Abgabe im Pakteshop möglich',
-        'fa fa-tachometer' : '2-4 Tage Lieferzeit'
-      }
-    },
-    {
-      title : 'DHL Paket Abgabe',
-      details : {
-        'fa fa-truck' : 'Abgabe im Pakteshop möglich',
-        'fa fa-tachometer' : '2-4 Tage Lieferzeit'
-      }
-    },
-    {
-      title : 'DHL Paket Abgabe',
-      details : {
-        'fa fa-truck' : 'Abgabe im Pakteshop möglich',
-        'fa fa-tachometer' : '2-4 Tage Lieferzeit'
-      }
-    },
-    {
-      title : 'DHL Paket Abgabe',
-      details : {
-        'fa fa-truck' : 'Abgabe im Pakteshop möglich',
-        'fa fa-tachometer' : '2-4 Tage Lieferzeit'
-      }
-    }
-  ];
-
-  // StorageCountries.load(function(countries) {
-  //   // self.formConfig.receiver.countryList = countries;
-  //   self.countryList = countries;
-  //   console.log('countries', countries);
-  //
-  // });
-
-  // var addresses = StorageAddresses.addresses;
-  // console.log('addresses', addresses);
-
-  self.addressItems = function() {
-    var addresses = StorageAddresses.addresses;
-
-    // console.log('addresses', addresses);
-
-    if (addresses === false && !self.editing) {
-      self.edit();
+    // Get trackingId from url and load associated shipment.
+    if ($routeParams.trackingId) {
+      StorageShipment.load($routeParams.trackingId);
     }
 
-    return addresses;
-  };
+    // Set addresses:
+    self.addresses = function() {
+      var addresses = StorageShipment.addresses;
 
-  self.editAddress = function(address, addressType) {
-    // var hasUser = StorageBase.config && StorageBase.config.user;
+      console.log(addresses);
 
-    // console.log('edit', address, addressType);
+      if (addresses === false && !self.editing) {
+        self.edit();
+      }
 
-    self.editing = address;
-  };
+      return addresses;
+    };
 
-  self.editing = false;
+    self.editAddress = function(address, addressType) {
+      // var hasUser = StorageBase.config && StorageBase.config.user;
 
-  var save = function() {
+      // console.log('edit', address, addressType);
+
+      self.editing = address;
+    };
+
     self.editing = false;
 
-    // StorageAddresses.save(self.editing, function() {
-    //   StorageAddresses.reload(true, function() {
-    //   });
-    // });
-  };
+    var save = function() {
+      self.editing = false;
 
-  self.senderFormConfig = {
-    submit : {
-      label : 'PAGE.ADDRESSES.SAVE',
-      action : save
-    },
-    model : function() {
-      return self.editing;
-    },
-    hide : {
-      // country : true,
-    }
-  };
+      // StorageAddresses.save(self.editing, function() {
+      //   StorageAddresses.reload(true, function() {
+      //   });
+      // });
+    };
 
-}];
+    self.senderFormConfig = {
+      submit: {
+        label: 'PAGE.ADDRESSES.SAVE',
+        action: save
+      },
+      model: function() {
+        return self.editing;
+      },
+      hide: {
+        // country : true,
+      }
+    };
+
+  }
+];
