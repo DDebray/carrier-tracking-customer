@@ -1,0 +1,19 @@
+@include inline-classes((
+    ('amazon', 'carriers/amazon.png'),
+    ('atpost', 'carriers/atpost.png'),
+    ('boxberry', 'carriers/boxberry.png'),
+    ('borderguru', 'carriers/borderguru.png'),
+    ('btg', 'carriers/btg.png'),
+    ('cclogistics', 'carriers/cclogistics.png'),
+    ('dhl', 'carriers/dhl.png'),
+    ('dpag', 'carriers/dpag.png'),
+    ('dpd', 'carriers/dpd.png'),
+    ('gls', 'carriers/gls.png'),
+    ('gelexpress', 'carriers/gelexpress.png'),
+    ('hermes', 'carriers/hermes.png'),
+    ('ijs', 'carriers/ijs.png'),
+    ('nexive', 'carriers/nexive.png'),
+    ('sovereign', 'carriers/sovereign.png'),
+    ('ups', 'carriers/ups.png'),
+    ('yodel', 'carriers/yodel.png')
+), 'image-carrier');

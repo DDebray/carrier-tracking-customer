@@ -2,48 +2,46 @@
   @include resetList;
   display: block;
 
-  &-tabs {
-    display:flex;
-    flex-flow:row nowrap;
-    list-style:none outside;
-    padding:0;
-    margin:0;
-    // font-weight:$font-weight-semibold;
-    font-family:  $_ffSansBold;
-    color:$_rgbDustyGray;
-
-    li {
-      flex:1;
-      transition: border-bottom-color $_tShort,
-        background-color $_tShort,
-        color $_tShort;
-      padding:($_formSpacing / 1.5) $_formSpacing;
-      text-align:center;
-      background-color:$_rgbAthensGray;
-      border:solid $_rgbAlto;
-      border-width:0 1px 4px 0;
-      cursor:pointer;
-      user-select:none;
-
-      &:last-child {
-        border-right-width:0;
-      }
-
-      &.active {
-        background-color:$_rgbAlto;
-        border-bottom-color:$_rgbBlush;
-        color:$_rgbMineShaft;
-        cursor:default;
-      }
-    }
-
-    &-inset {
-      margin:-$_formSpacing;
-      margin-bottom:$_formSpacing;
-    }
-  }
-
-
+  // &-tabs {
+  //   display:flex;
+  //   flex-flow:row nowrap;
+  //   list-style:none outside;
+  //   padding:0;
+  //   margin:0;
+  //   // font-weight:$font-weight-semibold;
+  //   font-family:  $_ffSansBold;
+  //   color:$_rgbDustyGray;
+  //
+  //   li {
+  //     flex:1;
+  //     transition: border-bottom-color $_tShort,
+  //       background-color $_tShort,
+  //       color $_tShort;
+  //     padding:($_formSpacing / 1.5) $_formSpacing;
+  //     text-align:center;
+  //     background-color:$_rgbAthensGray;
+  //     border:solid $_rgbAlto;
+  //     border-width:0 1px 4px 0;
+  //     cursor:pointer;
+  //     user-select:none;
+  //
+  //     &:last-child {
+  //       border-right-width:0;
+  //     }
+  //
+  //     &.active {
+  //       background-color:$_rgbAlto;
+  //       border-bottom-color:$_rgbBlush;
+  //       color:$_rgbMineShaft;
+  //       cursor:default;
+  //     }
+  //   }
+  //
+  //   &-inset {
+  //     margin:-$_formSpacing;
+  //     margin-bottom:$_formSpacing;
+  //   }
+  // }
 
   &__item {
     @include clearfix;

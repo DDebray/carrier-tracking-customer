@@ -4,6 +4,7 @@ module.exports = function(application) {
 
   application
     // directives without dependencies
+    .directive('carrierLogo',     require('./directives/carrierLogo'))
     .directive('preventDefault',  require('./directives/preventDefault'))
     .directive('stopPropagation', require('./directives/stopPropagation'))
     .directive('banner', require('./directives/banner'))

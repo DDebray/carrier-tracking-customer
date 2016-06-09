@@ -30,27 +30,23 @@
         </div>
 
         <div class="columns large-6">
-            <div class="area-panel area-panel--container area-panel--merge">
-
-                <ul class="list-tabs">
-                    <li ng-repeat="sortItem in printing.sort.items" ng-class="{ active : printing.sort.current === sortItem }" ng-click="printing.sort.change(sortItem)" ng-bind="('PAGE.PRINTING.SORT_BY.' + sortItem.toUpperCase()) | translate"></li>
-                </ul>
-            </div>
             <div class="area-panel area-panel--merge">
-                <div class="widget-rate" ng-repeat="rate in printing.originalRates">
-                    <span ng-bind="rate.carrier_code"></span>
-                </div>
-            </div>
 
+                <!-- ng-class="{ 'widget-rate-disabled' : labelPrintOne.partialSearch.isActive }" data-text-disabled="{{ 'RATE.DISABLED' | translate }}" -->
+
+                <div class="widget-rate" ng-repeat="rate in printing.originalRates" ng-include="'/views/partials/widgets/rate.html'" ></div>
+
+            </div>
         </div>
 
-        <tab-panel class="panel columns large-6">
+
+        <!-- <tab-panel class="panel columns large-6">
             <tab name="Nach Preis">
                 <list model="printing.labels"></list>
             </tab>
             <tab name="Nach Lieferzeit">
                 <list model="printing.labels"></list>
             </tab>
-        </tab-panel>
+        </tab-panel> -->
     </div>
 </section>
