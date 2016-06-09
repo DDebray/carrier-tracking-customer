@@ -14,13 +14,9 @@ module.exports = [
     // Set addresses:
     self.addresses = function() {
       var addresses = StorageShipment.addresses;
-
-      console.log(addresses);
-
       if (addresses === false && !self.editing) {
         self.edit();
       }
-
       return addresses;
     };
 
