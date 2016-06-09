@@ -1,6 +1,7 @@
 .ui-tooltip {
   @include fade-in();
   position: absolute;
+  left: -999px;
   background-color: $_rgbWhite;
   z-index: $zindex-help;
   padding: $_defaultSpacing;
