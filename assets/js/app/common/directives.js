@@ -15,8 +15,8 @@ module.exports = function(application) {
 
     // directives with dependencies
     .directive('watchHeight',   ['$timeout', require('./directives/watchHeight')])
-    .directive('address',       [/*'StorageCountries',*/ require('./directives/address')])
-    .directive('addressForm',   [/*'StorageCountries',*/ require('./directives/addressForm')])
+    .directive('address',       ['StorageCountries', require('./directives/address')])
+    .directive('addressForm',   ['StorageCountries', require('./directives/addressForm')])
     .directive('autofocus',     ['$timeout', require('./directives/autofocus')])
     .directive('selectOnClick', ['$window', require('./directives/selectOnClick')])
     .directive('tooltip',       ['CommonUi', require('./directives/tooltip')])

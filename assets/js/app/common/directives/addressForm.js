@@ -1,4 +1,4 @@
-module.exports = function(/*StorageCountries*/) {
+module.exports = function(StorageCountries) {
   'use strict';
 
   return {
@@ -16,18 +16,10 @@ module.exports = function(/*StorageCountries*/) {
       var config = scope.config();
 
       scope.countryList = null;
-      // StorageCountries.load(function(countries) {
-      //   scope.countryList = countries;
-      // });
-      scope.countryList = [{
-        code : 'DE',
-        name : 'Deutschland',
-        needsZipCode : false
-      },{
-        code : 'US',
-        name : 'Vereinigte Staaten',
-        needsZipCode : true
-      }];
+
+      StorageCountries.load(function(countries) {
+        scope.countryList = countries;
+      });
 
       scope.form = {
         data: config.model ? config.model() : (config.data || {}),
