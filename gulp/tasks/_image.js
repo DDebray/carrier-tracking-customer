@@ -46,7 +46,7 @@ gulp.task('images', function() {
         // { transformsWithOnePath : false }
       ],
       use : [
-        jpegRecompress({ loops : 1})
+        jpegRecompress({ loops : 2 })
       ]
     }))
     .pipe(gulp.dest(paths.dest + 'images'));

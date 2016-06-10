@@ -1,7 +1,7 @@
 .area-panel {
   @include clearfix();
   position: relative;
-  padding: ($_ySpacing / 2) ($_xSpacing / 2);
+  padding: $_ySpacing $_xSpacing;
 
   border: 1px solid $_rgbAlto;
   border-radius: $_borderRadiusDefault;

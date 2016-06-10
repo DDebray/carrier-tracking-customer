@@ -92,3 +92,35 @@
 @mixin fade-in($time:$_tShort) {
   animation:fade-in $time linear 1;
 }
+
+@mixin inline-image($imgPath, $scale : 0.5, $size : contain) {
+  display:inline-block;
+  background:inline($imgPath) center center no-repeat;
+  background-size:$size;
+
+  &.dimensions {
+    $dimensions : map-get($_inlineDimensionsData, $imgPath);
+    @if $dimensions {
+      &-big {
+        width : #{map-get($dimensions, 'width') * $scale}px;
+        height : #{map-get($dimensions, 'height') * $scale}px;
+      }
+      &-medium {
+        width : #{map-get($dimensions, 'width') * ($scale / 1.3)}px;
+        height : #{map-get($dimensions, 'height') * ($scale / 1.3)}px;
+      }
+      &-small {
+        width : #{map-get($dimensions, 'width') * ($scale / 2)}px;
+        height : #{map-get($dimensions, 'height') * ($scale / 2)}px;
+      }
+    }
+  }
+}
+
+@mixin inline-classes($inlineList, $prefix) {
+  @each$item in $inlineList {
+    .#{$prefix}-#{nth($item, 1)} {
+      @include inline-image(nth($item, 2));
+    }
+  }
+}
