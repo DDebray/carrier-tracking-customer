@@ -67,13 +67,10 @@ module.exports = function(StorageCountries) {
             return true;
           },
           phone: function() {
-            return !scope.receiver();
+            return false;
           },
           email: function() {
-            return false;
-          },
-          marketplace_order_id: function() {
-            return false;
+            return true;
           }
         }, config.required)
       };

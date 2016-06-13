@@ -1,44 +1,48 @@
 <!DOCTYPE html>
-<hero title="'PAGE.PRINTING.TITLE' | translate" image="url(images/hero/printing.jpg)"></hero>
+
+<hero title="'PAGE.PRINTING.TITLE' | translate"
+    image="url(images/hero/printing.jpg)">
+</hero>
 
 <section class="section">
     <div class="section__inner row">
 
+        <!-- ADDRESSES: -->
         <div class="columns large-6">
-            <div
-                class="area-panel area-panel--merge"
-                ng-repeat="(addressType, address) in printing.addressItems()"
+            <div class="area-panel area-panel--merge"
+                ng-repeat="(addressType, address) in printing.addresses()"
                 ng-click="address.is_editable ? printing.editAddress(address, addressType) : null"
-                ng-class="{ 'widget-address' : address.is_editable, 'widget-address--js-editing' : (address.is_editable && printing.editing.address_type == addressType) }"
-            >
-                <h3 class="address-headline" ng-bind="('PAGE.PRINTING.' + addressType) | translate"></h3>
+                ng-class="{ 'widget-address' : address.is_editable,
+                            'widget-address--js-editing' : (address.is_editable && printing.currentAddress.address_type == addressType) }">
 
-                <div class="address-container" watch-height="{ condition: (!printing.editing || (printing.editing && printing.editing.address_type !== addressType)), targetOnTrue: 'js-target-on-true', targetOnFalse: 'js-target-on-false', disableAnimationClass: 'address-container--no-animation' }">
-                    <address
-                        class="address-display js-target-on-true"
-                        ng-class="{ 'address-display--is-visible' : (address && !printing.editing || (printing.editing && printing.editing.address_type !== addressType)) }"
+                <h3 class="address-headline"
+                    ng-bind="('PAGE.PRINTING.' + addressType) | translate"></h3>
+
+                <div class="address-container"
+                    watch-height="{ condition: (!printing.currentAddress || (printing.currentAddress && printing.currentAddress.address_type !== addressType)), targetOnTrue: 'js-target-on-true', targetOnFalse: 'js-target-on-false', disableAnimationClass: 'address-container--no-animation' }">
+                    <address class="address-display js-target-on-true"
+                        ng-class="{ 'address-display--is-visible' : (address && !printing.currentAddress || (printing.currentAddress && printing.currentAddress.address_type !== addressType)) }"
                         data="address"
-                        is-editable="address.is_editable"
-                    ></address>
-                    <div
-                        class="address-form js-target-on-false"
-                        ng-class="{ 'address-form--is-visible' : (printing.editing && printing.editing.address_type === addressType) }"
-                        address-form="printing.senderFormConfig"
-                        address-model="printing.editing"
-                    ></div>
+                        is-editable="address.is_editable"></address>
+
+                    <div class="address-form js-target-on-false"
+                        ng-class="{ 'address-form--is-visible' : (printing.currentAddress && printing.currentAddress.address_type === addressType) }"
+                        address-form="printing.formConfig"
+                        address-model="printing.currentAddress"></div>
                 </div>
+
             </div>
         </div>
 
-        <div class="columns large-6">
+        <!-- <div class="columns large-6">
             <div class="area-panel area-panel--merge">
 
-                <!-- ng-class="{ 'widget-rate-disabled' : labelPrintOne.partialSearch.isActive }" data-text-disabled="{{ 'RATE.DISABLED' | translate }}" -->
+                <!-- ng-class="{ 'widget-rate-disabled' : labelPrintOne.partialSearch.isActive }" data-text-disabled="{{ 'RATE.DISABLED' | translate }}"
 
                 <div class="widget-rate" ng-repeat="rate in printing.originalRates" ng-include="'/views/partials/widgets/rate.html'" ></div>
 
             </div>
-        </div>
+        </div> -->
 
 
         <!-- <tab-panel class="panel columns large-6">

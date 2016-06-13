@@ -16,6 +16,4 @@ module.exports = ['$scope', 'CommonRequest', function($scope, CommonRequest) {
       self.status = response.content.dashboard || {};
     }
   });
-
-  console.log('dahboard loaded');
 }];
