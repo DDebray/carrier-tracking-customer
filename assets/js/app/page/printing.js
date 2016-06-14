@@ -1,51 +1,11 @@
 module.exports = [
-  '$routeParams', 'CommonUi', 'StorageShipment', 'StorageTransaction',
+  '$routeParams', 'StorageShipment', 'StorageTransaction',
 function(
-  $routeParams, CommonUi, StorageShipment, StorageTransaction
+  $routeParams, StorageShipment, StorageTransaction
 ) {
   'use strict';
   var self = this;
 
-  self.sort = {
-    items : ['price', 'speed'],
-    current : 'price',
-    priceRange : [],
-    change : function(method, rates) {
-      rates = rates || self.originalRates;
-
-      this.current = method || this.current;
-      this.priceRange = this.methods.price([].concat(rates)).filter(function(rate, index) {
-        return index === 0 || index === rates.length - 1;
-      }).filter(function(rate, index, rateArray) {
-        var rateAmountArray = rateArray.map(function(rate) {
-          return rate.amount;
-        });
-
-        return rateAmountArray.indexOf(rate.amount) === index;
-      });
-
-      self.originalRates = this.methods[this.current]([].concat(rates));
-    },
-    methods : {
-      price : function(rates) {
-        rates.sort(function(a, b) {
-          return a.amount - b.amount;
-        });
-
-        return rates;
-      },
-      speed : function(rates) {
-        rates = this.price(rates);
-        rates.sort(function(a, b) {
-          return (a.days_min + a.days_max) - (b.days_min + b.days_max);
-        });
-
-        return rates;
-      }
-    }
-  };
-
-  //FOLLOWING CODE IS CLEAN!!!
   self.currentAddress = false;
 
   if ($routeParams.trackingId) {
@@ -85,8 +45,6 @@ function(
   };
 
   //TEST MODALS!!!
-
   // StorageTransaction.openPaymentMethodModal();
-
 
 }];
