@@ -86,7 +86,7 @@ function(
 
   //TEST MODALS!!!
 
-  StorageTransaction.openPaymentMethodModal();
+  // StorageTransaction.openPaymentMethodModal();
 
 
 }];
