@@ -11,9 +11,9 @@ require('./common/directives')(application);
 application
   .provider('CommonConfig', require('./common/config'))
 
-.config(require('./route'))
+  .config(require('./route'))
 
-.factory('$translateUrlLoader', require('./translation/service'))
+  .factory('$translateUrlLoader', require('./translation/service'))
   .factory('CommonRequest', require('./common/request'))
   .factory('CommonBrowser', require('./common/browser'))
   .factory('CommonMoment', require('./common/moment'))
@@ -23,9 +23,9 @@ application
   .factory('StorageTransaction', require('./storage/transaction'))
   .factory('StorageCountries', require('./storage/countries'))
 
-.provider('CommonUi', require('./ui/config'))
+  .provider('CommonUi', require('./ui/config'))
 
-.controller('UiCtrl', require('./ui/controller'))
+  .controller('UiCtrl', require('./ui/controller'))
   .controller('PageBaseCtrl', require('./page/base'))
   .controller('PageTrackingCtrl', require('./page/tracking'))
   .controller('PagePrintingCtrl', require('./page/printing'));
