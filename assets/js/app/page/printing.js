@@ -45,43 +45,17 @@ function(
     }
   };
 
-  self.labels = [
-    {
-      title : 'DHL Paket Abgabe',
-      details : {
-        'fa fa-truck' : 'Abgabe im Pakteshop möglich',
-        'fa fa-tachometer' : '2-4 Tage Lieferzeit'
-      }
-    },
-    {
-      title : 'DHL Paket Abgabe',
-      details : {
-        'fa fa-truck' : 'Abgabe im Pakteshop möglich',
-        'fa fa-tachometer' : '2-4 Tage Lieferzeit'
-      }
-    },
-    {
-      title : 'DHL Paket Abgabe',
-      details : {
-        'fa fa-truck' : 'Abgabe im Pakteshop möglich',
-        'fa fa-tachometer' : '2-4 Tage Lieferzeit'
-      }
-    },
-    {
-      title : 'DHL Paket Abgabe',
-      details : {
-        'fa fa-truck' : 'Abgabe im Pakteshop möglich',
-        'fa fa-tachometer' : '2-4 Tage Lieferzeit'
-      }
-    }
-  ];
-
   //FOLLOWING CODE IS CLEAN!!!
   self.currentAddress = false;
 
   if ($routeParams.trackingId) {
     StorageShipment.load($routeParams.trackingId);
   }
+
+  self.rates = function() {
+    var rates = StorageShipment.rates;
+    return rates;
+  };
 
   self.addresses = function() {
     var addresses = StorageShipment.addresses;

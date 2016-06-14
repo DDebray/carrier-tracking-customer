@@ -35,15 +35,17 @@
             </div>
         </div>
 
-        <!-- <div class="columns large-6">
+        <div class="columns large-6">
             <div class="area-panel area-panel--merge">
 
-                <!-- ng-class="{ 'widget-rate-disabled' : labelPrintOne.partialSearch.isActive }" data-text-disabled="{{ 'RATE.DISABLED' | translate }}"
+                <!-- ng-class="{ 'widget-rate-disabled' : labelPrintOne.partialSearch.isActive }" data-text-disabled="{{ 'RATE.DISABLED' | translate }}"-->
 
-                <div class="widget-rate" ng-repeat="rate in printing.originalRates" ng-include="'/views/partials/widgets/rate.html'" ></div>
+                <div class="widget-rate"
+                    ng-repeat="rate in printing.rates()"
+                    ng-include="'/views/partials/widgets/rate.html'"></div>
 
             </div>
-        </div> -->
+        </div>
 
 
         <!-- <tab-panel class="panel columns large-6">
