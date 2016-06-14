@@ -42,3 +42,6 @@ node_modules
 
 #IntelliJ
 carrier-tracking-customer.iml
+
+#Atom
+.htmlhintrc

@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <div class="widget-rate-content-wrapper">
     <div class="widget-rate-title">
         <div class="behavior-view-left">
@@ -29,11 +28,9 @@
                     <span class="fa" ng-class="{ 'fa-truck' : rate.is_pickup_rate, 'fa-cube' : !rate.is_pickup_rate }"></span>
                 </span>
                 <span ng-if="!rate.is_pickup_rate" ng-bind="'RATE.IS_NOT_PICKUP' | translate"></span>
-                <span ng-if="rate.is_pickup_rate"
-                    compile="('RATE.PICKUP_POSSIBLE' | translate)
+                <span ng-if="rate.is_pickup_rate" compile="('RATE.PICKUP_POSSIBLE' | translate)
                     .replace('%DATE%', '<b>' + (labelPrintOne.calculatePickupDate(rate) | moment:'short') + '</b>')
-                    .replace('%TIME%', (rate.pickup_registration_deadline_in_hours + labelPrintOne.utcOffset))"
-                ></span>
+                    .replace('%TIME%', (rate.pickup_registration_deadline_in_hours + labelPrintOne.utcOffset))"></span>
             </div>
 
             <div>
