@@ -1,7 +1,7 @@
 module.exports = [
-  '$routeParams', 'CommonUi', 'StorageShipment',
+  '$routeParams', 'CommonUi', 'StorageShipment', 'StorageTransaction',
 function(
-  $routeParams, CommonUi, StorageShipment
+  $routeParams, CommonUi, StorageShipment, StorageTransaction
 ) {
   'use strict';
   var self = this;
@@ -73,7 +73,7 @@ function(
 
   self.formConfig = {
     submit : {
-      label : 'PAGE.ADDRESSES.SAVE',
+      label : 'COMMON.ADDRESSES.SAVE',
       action : update
     },
     model : function() {
@@ -83,4 +83,10 @@ function(
       enhanceFields : true
     }
   };
+
+  //TEST MODALS!!!
+
+  StorageTransaction.openPaymentMethodModal();
+
+
 }];
