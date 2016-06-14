@@ -28,7 +28,8 @@
                     <div class="address-form js-target-on-false"
                         ng-class="{ 'address-form--is-visible' : (printing.currentAddress && printing.currentAddress.address_type === addressType) }"
                         address-form="printing.formConfig"
-                        address-model="printing.currentAddress"></div>
+                        address-model="printing.currentAddress"
+                        sender="printing.currentAddress.address_type == 'SENDER_ADDRESS'"></div>
                 </div>
 
             </div>

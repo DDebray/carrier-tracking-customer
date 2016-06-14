@@ -43,6 +43,12 @@ module.exports = [
       });
     };
 
+    self.isZipcodeNecessary = function(countryCode) {
+      return ((self.items || []).filter(function(country) {
+        return country.code === countryCode;
+      })[0] || {}).needsZipCode;
+    };
+
     return self;
   }
 ];

@@ -18,18 +18,14 @@ application
   .factory('CommonBrowser', require('./common/browser'))
   .factory('CommonMoment', require('./common/moment'))
   .factory('CommonTracking', require('./common/tracking'))
-
-.factory('StorageTracking', require('./storage/tracking'))
+  .factory('StorageTracking', require('./storage/tracking'))
   .factory('StorageShipment', require('./storage/shipment'))
   .factory('StorageCountries', require('./storage/countries'))
-
-.factory('StorageAddresses', require('./storage/addresses'))
 
 .provider('CommonUi', require('./ui/config'))
 
 .controller('UiCtrl', require('./ui/controller'))
-
-.controller('PageBaseCtrl', require('./page/base'))
+  .controller('PageBaseCtrl', require('./page/base'))
   .controller('PageTrackingCtrl', require('./page/tracking'))
   .controller('PagePrintingCtrl', require('./page/printing'));
 

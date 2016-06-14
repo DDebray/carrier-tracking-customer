@@ -7,7 +7,7 @@ module.exports = function(StorageCountries) {
       model: '&addressModel',
       config: '&addressForm',
       reference: '&reference',
-      receiver: '&receiver'
+      sender: '&sender'
     },
     templateUrl: function(element, attrs) {
       return '/views/partials/address/' + (attrs.template || 'address_form.html');
@@ -56,21 +56,19 @@ module.exports = function(StorageCountries) {
             return false;
           },
           postal_code: function() {
-            return ((scope.countryList || []).filter(function(country) {
-              return country.code === scope.form.data.country;
-            })[0] || {}).needsZipCode;
+            return true;
           },
           city: function() {
             return true;
           },
           country: function() {
-            return true;
+            return false;
           },
           phone: function() {
             return false;
           },
           email: function() {
-            return true;
+            return scope.sender();
           }
         }, config.required)
       };

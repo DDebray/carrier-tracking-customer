@@ -1,7 +1,7 @@
 module.exports = [
-  '$routeParams', 'CommonUi', 'StorageShipment', 'StorageAddresses', /*'StorageCountries',*/
+  '$routeParams', 'CommonUi', 'StorageShipment',
 function(
-  $routeParams, CommonUi, StorageShipment, StorageAddresses/*, StorageCountries*/
+  $routeParams, CommonUi, StorageShipment
 ) {
   'use strict';
   var self = this;
@@ -93,7 +93,6 @@ function(
   };
 
   var update = function() {
-    // TODO: Put code for updating here.
     StorageShipment.update(self.currentAddress);
     self.currentAddress = false;
   };
