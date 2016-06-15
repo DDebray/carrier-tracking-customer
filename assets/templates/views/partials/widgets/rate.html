@@ -1,4 +1,4 @@
-<div class="widget-rate-content-wrapper">
+<div class="widget-rate-content-wrapper" ng-click="printing.selectRate(rate)">
     <div class="widget-rate-title">
         <div class="behavior-view-left">
             <!-- <small><pre>{{ rate | json }}</pre></small> -->
@@ -38,7 +38,7 @@
             </div>
 
         </span>
-        <span class="widget-rate-price" ng-class="{ cta : true }" ng-click="printing.selectRate(rate)">
+        <span class="widget-rate-price" ng-class="{ cta : true }">
             <span ng-bind-html="(
                 rate.gross_amount ?
                     ('RATE.PRICE' | translate).replace('%%', '<span class=\'widget-rate-price-value\'>' + rate.gross_amount.toFixed(2).replace('.', ',') + ' ' + rate.currency + '</span>')

@@ -4,9 +4,8 @@
     <div class="section__inner row">
 
         <!-- ADDRESSES: -->
-        <div class="columns large-6 xlarge-5">
-            <div class="area-panel area-panel--merge" ng-repeat="(addressType, address) in printing.addresses()" ng-click="address.is_editable ? printing.editAddress(address, addressType) : null" ng-class="{ 'widget-address' : address.is_editable,
-                            'widget-address--js-editing' : (address.is_editable && printing.currentAddress.address_type == addressType) }">
+        <div class="columns large-6">
+            <div class="area-panel area-panel--merge" ng-repeat="(addressType, address) in printing.addresses()" ng-click="address.is_editable ? printing.editAddress(address, addressType) : null" ng-class="{ 'widget-address' : address.is_editable, 'widget-address--js-editing' : (address.is_editable && printing.currentAddress.address_type == addressType) }">
 
                 <h3 class="address-headline" ng-bind="('COMMON.ADDRESSES.' + addressType) | translate"></h3>
 
@@ -19,7 +18,7 @@
             </div>
         </div>
 
-        <div class="columns large-6 xlarge-7">
+        <div class="columns large-6">
             <div class="area-panel area-panel--container area-panel--merge">
                 <div class="widget-rate" ng-repeat="rate in printing.rates()" ng-class="{ 'widget-rate-disabled' : false }" ng-include="'/views/partials/widgets/rate.html'" data-text-disabled="{{ 'RATE.DISABLED' | translate }}"></div>
             </div>

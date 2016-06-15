@@ -1,14 +1,12 @@
 module.exports = [
-  '$routeParams', 'CommonBrowser', 'StorageShipment', 'StorageTransaction',
+  '$routeParams', 'StorageShipment', 'StorageTransaction',
 function(
-  $routeParams, CommonBrowser, StorageShipment, StorageTransaction
+  $routeParams, StorageShipment, StorageTransaction
 ) {
   'use strict';
   var self = this;
 
   self.currentAddress = false;
-
-  CommonBrowser.enableElementQueries();
 
   if ($routeParams.trackingId) {
     StorageShipment.load($routeParams.trackingId);
@@ -44,13 +42,14 @@ function(
     }
   };
 
+  // This isn't like super clean
   self.partialSearch = function () { return true; };
   self.selectRate = function () { return true; };
   self.calculatePickupDate = function () { return true; };
   self.utcOffset = function () { return true; };
   self.getSelectedSurcharge = function () { return true; };
 
-  //TEST MODALS!!!
+  // TEST MODALS!!!
   // StorageTransaction.openPaymentMethodModal();
 
 }];
