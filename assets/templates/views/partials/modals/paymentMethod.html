@@ -1,20 +1,21 @@
-<h3 class="headline-sub row-marge-bottom-wide" ng-bind="'PAGE.PRINTING.MODAL.PAYMENT_METHOD.TITLE' | translate"></h3> {{}}
-<ul>
-    <li ng-repeat="method in modal.data.availableMethods" ng-click="modal.action.selectMethod(method)">
-        {{method}}
-    </li>
+<h3 class="headline-sub row-marge-bottom-wide" ng-bind="'PAGE.PRINTING.MODAL.PAYMENT_METHOD.TITLE' | translate"></h3>
 
-    <li class="behavior-cursor-no-select behavior-text-cohesive" ng-class="{ active : (billing.selected === availableMethod && !billing.isInitialState) }" ng-click="billing.select(availableMethod)">
-
-
-
-        <!--
+<ul class="area-panel">
+    <li ng-repeat="(method, icon) in modal.data.availableMethods" ng-click="modal.action.selectMethod(method)">
         <span class="icon-action icon-action-outlined">
-            <span ng-if="billing.selected === availableMethod || (billing.data.payment_method === availableMethod && !billing.selected)" class="fa fa-check"></span>
+            <span ng-if="method === modal.data.selectedMethod" class="fa fa-check"></span>
         </span>
-        <span class="fa fa-fixed fa-centered row-marge-right" ng-class="'fa-' + billing.icons[availableMethod]" help="{ translation : 'ACTION.HELP.TEXT.BILLING_METHOD_' + availableMethod }"></span>
-        <span ng-bind="('PAGE.BILLING.' + availableMethod) | translate"></span>
-        <span ng-if="billing.accountBalance.charge_payment_fees && billing.demandCharges &&('PAGE.BILLING.CUSTOMER_PAYMENT_FEE' | translate)" ng-bind-html="('PAGE.BILLING.CUSTOMER_PAYMENT_FEE' | translate) | raw"></span> -->
+        <span class="fa fa-fixed fa-centered row-marge-right" ng-class="icon"></span>
+        <span ng-bind="('PAGE.PRINTING.PAYMENT_METHOD.' + method) | translate"></span>
     </li>
-
+    <!-- <form name="billing.form_{{ availableMethod.toLowerCase() }}" class="form list-options-wide-form" ng-repeat-end ng-if="billing.selected === availableMethod && !billing.isInitialState && !(!billing.demandCharges && availableMethod === 'INVOICE' && ('PAGE.BILLING.INVOICE.NOTE' | translate) === '-')" ng-submit="billing.save()" autocomplete="off">
+        <div ng-include="'/views/partials/billing/payment/' + availableMethod.toLowerCase() + '.html'"></div>
+        <button type="submit"
+            class="filling"
+            ng-class="{ 'cta' : billing.active !== billing.selected, 'row-marge-top' : availableMethod !== 'CREDIT_CARD' }"
+            ng-if="billing.valid() && ((billing.isSEPAEnabled && availableMethod === 'SEPA_LASTSCHRIFT') || availableMethod !== 'SEPA_LASTSCHRIFT')"
+            ng-bind="((billing.active === billing.selected ? 'PAGE.BILLING.MODIFY_' : 'PAGE.BILLING.SAVE_') + availableMethod) | translate"
+            help="{ translation : 'ACTION.HELP.TEXT.BILLING_SAVE' }"
+        ></button>
+    </form> -->
 </ul>
