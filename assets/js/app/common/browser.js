@@ -75,6 +75,10 @@ module.exports = [function() {
 
       document.documentElement.scrollTop = Math.round((acr.top + (toElementTop ? 0 : (acr.height / 2))) - (toElementTop ? 0 : (windowHeight / 2)));
       document.body.scrollTop = Math.round((acr.top + (acr.height / 2)) - (windowHeight / 2));
+    },
+    enableElementQueries : function () {
+      var ElementQueries = require('css-element-queries/src/ElementQueries');
+      ElementQueries.listen();
     }
   };
 

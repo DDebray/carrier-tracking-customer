@@ -68,9 +68,21 @@
       width:100%;
       text-align:center;
     }
+
 }
 
-button,
+.cta {
+    border-radius: $_borderRadiusDefault;
+    text-align: center;
+    background: $_rgbBlush;
+    color: $_rgbWhite;
+    transition: background $_tShort ease-in-out;
+    &:hover {
+        background: darken($_rgbBlush, 10);
+    }
+}
+
+// button,
 input[type=submit] {
   @extend .button;
 }

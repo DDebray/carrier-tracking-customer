@@ -1,47 +1,50 @@
 <div class="widget-rate-content-wrapper">
     <div class="widget-rate-title">
         <div class="behavior-view-left">
-            <span ng-bind="rate.service_name"></span>
+            <!-- <small><pre>{{ rate | json }}</pre></small> -->
+            <!-- <span ng-bind="rate.service_name"></span> -->
+            <!-- remove me -->
+            <span ng-bind="rate.code"></span>
+            <!-- remove me -->
             <span class="icon-inline-right behavior-cursor-clickable" tooltip="{ on : 'click', translation : 'CARRIER.TERMS.' + (rate.code.toUpperCase()), directionX : 'right', directionY : 'up', provideOverlay : true }">
                 <span class="fa fa-info-circle"></span>
             </span>
         </div>
     </div>
-    <div class="clearfix">
-        <button class="widget-rate-price" ng-class="{ cta : !labelPrintOne.partialSearch.isActive }" ng-click="labelPrintOne.selectRate(rate)" help="{ translation : 'ACTION.HELP.TEXT.SP_RESULT_ITEM', slot : 'sp_result_item', directionX : 'left' }">
-            <span ng-bind-html="(
-            base.state() === 'DEMO' ?
-                ('CARRIER.PRICE_HIDDEN' | translate)
-            :
-                (
-                    rate.amount ?
-                        ('RATE.PRICE' | translate).replace('%%', '<span class=\'widget-rate-price-value\'>' + labelPrintOne.calculateAmount(rate).toFixed(2).replace('.', ',') + ' ' + rate.currency + '</span>')
-                    :
-                        ('CARRIER.PRICE_CUSTOM' | translate))) | raw"></span>
-        </button>
-
-        <div class="widget-rate-carrier" carrier-logo="rate"></div>
-
-        <div class="widget-rate-details">
+    <div class="widget-rate-flex">
+        <span class="widget-rate-carrier" carrier-logo="rate"></span>
+        <span class="widget-rate-details">
             <div>
                 <span class="icon-inline-left">
-                    <span class="fa" ng-class="{ 'fa-truck' : rate.is_pickup_rate, 'fa-cube' : !rate.is_pickup_rate }"></span>
+                    <span class="fa fa-cube"></span>
                 </span>
-                <span ng-if="!rate.is_pickup_rate" ng-bind="'RATE.IS_NOT_PICKUP' | translate"></span>
-                <span ng-if="rate.is_pickup_rate" compile="('RATE.PICKUP_POSSIBLE' | translate)
-                    .replace('%DATE%', '<b>' + (labelPrintOne.calculatePickupDate(rate) | moment:'short') + '</b>')
-                    .replace('%TIME%', (rate.pickup_registration_deadline_in_hours + labelPrintOne.utcOffset))"></span>
+                <span ng-bind="'RATE.IS_NOT_PICKUP' | translate"></span>
+            </div>
+
+            <div>
+                <span class="icon-inline-left">
+                    <span class="fa fa-money"></span>
+                </span>
+                <span ng-bind="(('RATE.INSURANCE' + (rate.insurance_amount ? '' : '_NONE')) | translate).replace('%%', rate.insurance_amount ? (rate.insurance_amount + ' ' + rate.insurance_currency) : '')"></span>
             </div>
 
             <div>
                 <span class="icon-inline-left">
                     <span class="fa fa-tachometer"></span>
                 </span>
-                <span ng-bind="(('RATE.DELIVERY_SPEED' + ((labelPrintOne.getSelectedSurcharge(rate).days_min || rate.days_min) ? '' : '.VARYING')) | translate)
-                    .replace('%%', labelPrintOne.getSelectedSurcharge(rate).days_min || rate.days_min)
-                    .replace('%%', (labelPrintOne.getSelectedSurcharge(rate).days_max || rate.days_max) && (labelPrintOne.getSelectedSurcharge(rate).days_max !== labelPrintOne.getSelectedSurcharge(rate).days_min || rate.days_max !== rate.days_min) ? ' - ' +  (labelPrintOne.getSelectedSurcharge(rate).days_max || rate.days_max) : '')"></span>
+                <span ng-bind="(('RATE.DELIVERY_SPEED' + ((printing.getSelectedSurcharge(rate).days_min || rate.days_min) ? '' : '.VARYING')) | translate)
+                    .replace('%%', printing.getSelectedSurcharge(rate).days_min || rate.days_min)
+                    .replace('%%', (printing.getSelectedSurcharge(rate).days_max || rate.days_max) && (printing.getSelectedSurcharge(rate).days_max !== printing.getSelectedSurcharge(rate).days_min || rate.days_max !== rate.days_min) ? ' - ' +  (printing.getSelectedSurcharge(rate).days_max || rate.days_max) : '')"></span>
             </div>
 
-        </div>
+        </span>
+        <span class="widget-rate-price" ng-class="{ cta : true }" ng-click="printing.selectRate(rate)">
+            <span ng-bind-html="(
+                rate.gross_amount ?
+                    ('RATE.PRICE' | translate).replace('%%', '<span class=\'widget-rate-price-value\'>' + rate.gross_amount.toFixed(2).replace('.', ',') + ' ' + rate.currency + '</span>')
+                :
+                    ('CARRIER.PRICE_CUSTOM' | translate)) | raw"
+            ></span>
+        </span>
     </div>
 </div>
