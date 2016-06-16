@@ -50,7 +50,6 @@ function(
   self.utcOffset = function () { return true; };
   self.getSelectedSurcharge = function () { return true; };
 
-  //TEST MODALS!!!
-  // StorageTransaction.openPaymentMethodModal();
+  StorageTransaction.openPaymentMethodModal();
 
 }];
