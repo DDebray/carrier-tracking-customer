@@ -1,25 +1,66 @@
-// @import "fontawesome/variables";
-// @import "fontawesome/mixins";
-// @import "fontawesome/path";
-// @import "fontawesome/core";
-// @import "fontawesome/icons";
-
 @import "fontawesome/fontawesome";
 
 .icon {
-  &Inline {
-    &Left {
+
+  &-action {
+    transition:background-color $_tShort;
+    float:right;
+    color:$_rgbWhite;
+    background-color:$_rgbBlush;
+    width:$icon-width-default;
+    height:$icon-width-default;
+    border-radius:$icon-width-default / 2;
+    text-align:center;
+    line-height:$icon-width-default;
+    cursor:pointer;
+
+    &:hover {
+      background-color: darken($_rgbBlush, 10);
+    }
+
+    &-top {
+      &-right {
+        position:absolute;
+        float:none;
+        right:$icon-width-default / -2;
+        top:$icon-width-default / -2;
+        z-index:$zindex-inner;
+      }
+    }
+
+    &-outlined {
+      transition:color $_tShort, border-color $_tShort;
+      border:1px solid $_rgbBlush;
+      line-height:$icon-width-default - 3px;
+      background:transparent;
+      color:$_rgbMineShaft;
+
+      &:hover {
+        background:transparent;
+        border-color: darken($_rgbBlush, 10);
+      }
+
+      &-status {
+        &-ok {
+          color:$_rgbFeijoa;
+        }
+      }
+    }
+  }
+
+  &-inline {
+    &-left {
       vertical-align:baseline;
       margin-right:4px;
     }
 
-    &Right {
+    &-right {
       vertical-align:baseline;
       margin-left:4px;
     }
   }
 
-  &.-disabled {
+  &--disabled {
     opacity:0.5;
   }
 }

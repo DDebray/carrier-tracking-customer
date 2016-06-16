@@ -1,0 +1,43 @@
+.address {
+
+  &-container {
+    position: relative;
+    overflow: hidden;
+    transition: height $_tShort ease-out;
+
+    &--no-animation {
+      transition: 0s;
+    }
+  }
+
+  &-display,
+  &-form {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+
+    &--is-visible {
+      opacity: 1;
+    }
+  }
+
+  &-display {
+    right: 100%;
+    transition: opacity $_tShort ease-out,
+      right 0ms ease-out;
+
+    &--is-visible {
+      right: 0;
+    }
+  }
+
+  &-form {
+    left: 100%;
+    transition: opacity $_tShort ease-out,
+      left 0ms ease-out;
+
+    &--is-visible {
+      left: 0;
+    }
+  }
+}

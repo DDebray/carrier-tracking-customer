@@ -1,7 +1,7 @@
 module.exports = [
-  '$rootScope', '$location', '$route', '$translate', 'CommonUi', 'CommonTracking', 'CommonConfig',
+  '$rootScope', '$location', '$route', '$translate', 'CommonUi', 'CommonConfig', 'CommonTracking',
 function(
-  $rootScope, $location, $route, $translate, CommonUi, CommonTracking, CommonConfig
+  $rootScope, $location, $route, $translate, CommonUi, CommonConfig, CommonTracking
 ) {
   'use strict';
   var self = this;

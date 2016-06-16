@@ -1,0 +1,13 @@
+<ul class="list">
+    <li class="list__item" ng-repeat="item in list">
+        <div class="list__item__title">{{ item.title }}</div>
+        <div class="list__item__image"></div>
+        <div class="list__item__details">
+          <div ng-repeat="(key, value) in item.details">
+            <span class="list__item__details__icon {{ key }}"></span>
+            <span class="list__item__details__info">{{value}}</span>
+          </div>
+        </div>
+        <div class="list__item__action">Drucken</div>
+    </li>
+</ul>

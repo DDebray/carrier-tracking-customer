@@ -1,0 +1,13 @@
+<section class="section section--blue section--center" style="background-image: url(https://www.coureon.com/content/footer-cta.jpg)">
+    <div class="section__inner">
+        <h2 class="section__title" ng-bind="{{ title }}"></h2>
+        <p class="section__subtitle" ng-bind="{{ subtitle }}"></p>
+
+        <form class="footerForm">
+            <div class="footerForm__elements">
+                <a class="button button--blush" href="/printing" ng-click="base.printReturnLabel()"><span ng-bind="'SECTION.FOOTER.PRINT_RETURN_LABEL_BUTTON' | translate"></span></a>
+                <a class="button button--blush" href="/printing" ng-click="base.printLabel()"><span ng-bind="'SECTION.FOOTER.PRINT_LABEL_BUTTON' | translate"></span></a>
+            </div>
+        </form>
+    </div>
+</section>

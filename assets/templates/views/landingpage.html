@@ -1,36 +1,44 @@
-<div ng-include="'/views/partials/hero.html'" ng-controller="PageTrackingCtrl as tracking"></div>
+<hero title="'SECTION.HERO.TITLE' | translate" image="url(images/hero/default.jpg)">
+    <form class="hero__form" ng-submit="tracking.getStatus()" autocomplete="off" ng-controller="PageTrackingCtrl as tracking">
+        <div class="hero__form__elements">
+            <input class="hero__form__input hero__form__input--default" type="text" name="tracking_number" placeholder="{{'SECTION.HERO.PLACEHOLDER' | translate}}" required ng-model="tracking.trackingId" select-on-click autofocus>
+            <button class="hero__form__submit" type="submit" name="submit" ng-bind="'SECTION.HERO.TRACK_BUTTON' | translate"></button>
+        </div>
+    </form>
+</hero>
 
 <section class="section">
-    <div class="section__inner --slim --centered">
+    <div class="section__inner section__inner--slim section__inner--centered">
         <h2 ng-bind="'PAGE.LANDING.TITLE' | translate"></h2 >
         <p ng-bind-html="('PAGE.LANDING.SUBTITLE' | translate) | raw"></p>
 
         <p ng-if="base.env === 'development' || base.env === 'testing'">
             <b>
-                <a href="/CO-T1">CO-T1</a>
-                <a href="/CO-T2">CO-T2</a>
-                <a href="/CO-T3">CO-T3</a>
-                <a href="/CO-T4">CO-T4</a>
-                <a href="/CO-T5">CO-T5</a>
-                <a href="/CO-T6">CO-T6</a>
-                <a href="/CO-T7">CO-T7</a>
-                <a href="/CO-T8">CO-T8</a>
+                <a href="/tracking/CO-T1">CO-T1</a>
+                <a href="/tracking/CO-T2">CO-T2</a>
+                <a href="/tracking/CO-T3">CO-T3</a>
+                <a href="/tracking/CO-T4">CO-T4</a>
+                <a href="/tracking/CO-T5">CO-T5</a>
+                <a href="/tracking/CO-T6">CO-T6</a>
+                <a href="/tracking/CO-T7">CO-T7</a>
+                <a href="/tracking/CO-T8">CO-T8</a>
                 <br>
                 <br>
-                <a href="/CA-T1-1">CA-T1-1</a>
-                <a href="/CA-T2-1">CA-T2-1</a>
-                <a href="/CA-T3-1">CA-T3-1</a>
-                <a href="/CA-T4-1">CA-T4-1</a>
-                <a href="/CA-T5-1">CA-T5-1</a>
-                <a href="/CA-T6-1">CA-T6-1</a>
-                <a href="/CA-T7-1">CA-T7-1</a>
-                <a href="/CA-T8-1">CA-T8-1</a>
+                <a href="/tracking/CA-T1-1">CA-T1-1</a>
+                <a href="/tracking/CA-T2-1">CA-T2-1</a>
+                <a href="/tracking/CA-T3-1">CA-T3-1</a>
+                <a href="/tracking/CA-T4-1">CA-T4-1</a>
+                <a href="/tracking/CA-T5-1">CA-T5-1</a>
+                <a href="/tracking/CA-T6-1">CA-T6-1</a>
+                <a href="/tracking/CA-T7-1">CA-T7-1</a>
+                <a href="/tracking/CA-T8-1">CA-T8-1</a>
                 <br>
                 <br>
-                <a href="/123">123</a> (only works when Rüdiger is in the office)
+                <a href="/tracking/123">123</a>
+                <a href="/printing/CO-1000200">/printing/CO-1000200</a>
             </b>
         </p>
     </div>
 </section>
 
-<div ng-include="'/views/partials/footer.html'"></div>
+<banner title="'SECTION.FOOTER.TITLE' | translate" subtitle="'SECTION.FOOTER.SUBTITLE' | translate"></banner>

@@ -1,0 +1,65 @@
+.list {
+  @include resetList;
+  display: block;
+
+  &-bullets {
+    list-style:disc inside;
+    padding: 0;
+    margin:0 0 .5em 1em;
+
+    li {
+      text-indent:-1em;
+    }
+  }
+
+  &__item {
+    @include clearfix;
+    padding: $_ySpacing ($_xSpacing / 2);
+    border-bottom: $_borderWidthSmall solid $_rgbAlto;
+
+    &:last-child {
+      border: none;
+    }
+
+    &__title {
+      font-weight: bold;
+      font-size: $_fsDefault;
+      margin-bottom: $_defaultSpacing;
+    }
+
+    &__image {
+      width: 100px;
+      height: 80px;
+      border: $_borderWidthSmall solid $_rgbAlto;
+      float: left;
+      display: inline-block;
+      background-color: #D8D8D8;
+    }
+
+    &__details {
+      display: inline-block;
+      float: left;
+      padding: 8px;
+      font-size: $_fsSmall;
+
+      &__icon {}
+
+      &__info {}
+    }
+
+    &__action {
+      width: 100px;
+      height: 80px;
+      border: $_borderWidthSmall solid $_rgbBlush;
+      border-radius: $_borderRadiusDefault;
+      text-align: center;
+      display: inline-block;
+      float: right;
+      line-height: 80px;
+      vertical-align: middle;
+      font-size: $_fsDefault;
+      font-family: $_ffSansBold;
+      color: $_rgbBlush;
+    }
+  }
+}

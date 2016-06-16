@@ -15,7 +15,6 @@ module.exports = function (application) {
 
         if (input.isValid()) {
           switch (expression) {
-
             case 'long' :
               return input.format('dddd[, ]DD.MM.YYYY[, ]HH:mm:ss[ Uhr]');
             case 'day' :
@@ -26,9 +25,8 @@ module.exports = function (application) {
               return input.format('DD.MM.YYYY');
           }
         }
-
         return input;
       };
-    }])
-    ;
+    }]);
+
 };

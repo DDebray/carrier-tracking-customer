@@ -1,42 +1,48 @@
-<!doctype html>
+<!DOCTYPE HTML>
+
 <html lang="de">
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="Paket-Tracking von Coureon." />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Coureon Tracking</title>
+    <head>
 
-    <link rel="shortcut icon" href="/images/favicon.ico" type=image/x-icon />
-    <link rel="stylesheet" href="<%= asset('css/main.css') %>" />
+        <title>Coureon Tracking</title>
 
-    <base href="<%= basepath %>">
-</head>
-<body ng-app="application" ng-controller="PageBaseCtrl as base" ng-cloak="ng-cloak">
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="Paket-Tracking von Coureon." />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
 
-    <div id="root" class="areaRoot" ng-class="{ '--blur' : base.viewLocked() }">
-        <div ng-include="'/views/partials/header.html'"></div>
+        <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="<%= asset('css/main.css') %>" />
 
-        <div class="view-main area-content" ng-view="ng-view"></div>
+        <base href="<%= basepath %>">
 
-        <div ng-include="'/views/partials/coureon_footer.html'"></div>
-    </div>
+    </head>
 
-    <div ng-controller="UiCtrl as ui" class="print-hide" hotkey="{ 'alt+shift+v' : ui.openChangelog }">
-        <div class="ui-layer" ng-repeat="modal in [ui.modal()]" ng-if="modal.template" ng-include="'/views/partials/modal.html'" hotkey="{ esc : modal.hide }" ng-click="modal.closable ? modal.hide() : null"></div>
-        <div class="ui-layer" ng-if="ui.locked()"></div>
+    <body ng-app="application" ng-controller="PageBaseCtrl as base" ng-cloak="ng-cloak">
 
-        <div ng-if="ui.tooltip()" ng-repeat="tooltip in [ui.tooltip()]" class="ui-tooltip" ng-class="tooltip.cssClass" ng-style="tooltip.css">
-            <span ng-if="tooltip.translation">
-                <span class="fa fa-times area-panel-close" ng-if="tooltip.on === 'click' && !tooltip.hasCustomHideHandler" ng-click="ui.hideTooltip()"></span>
-                <span ng-bind-html="(tooltip.translation | translate) | raw"></span>
-            </span>
-            <span ng-if="tooltip.template" ng-include="'/views/partials/tooltip/' + tooltip.template" ng-repeat="data in [tooltip.data]"></span>
+        <!-- GENERAL STRUCTURE OF PAGE -->
+        <div id="root" class="area-root" ng-class="{ 'area-root--blur' : base.viewLocked() }">
+            <header class="header" ng-include="'/views/partials/header.html'"></header>
+            <div ng-view="ng-view"></div>
+            <footer class="footer" ng-include="'/views/partials/footer.html'"></footer>
         </div>
-    </div>
 
-    <script src="<%= asset('js/bundle.js') %>"></script>
+        <!-- UI ELEMENTS: MODALS, TOOLTIPS -->
+        <div ng-controller="UiCtrl as ui" class="print-hide" hotkey="{ 'alt+shift+v' : ui.openChangelog }">
+            <div class="ui-layer" ng-repeat="modal in [ui.modal()]" ng-if="modal.template" ng-include="'/views/partials/modal.html'" hotkey="{ esc : modal.hide }" ng-click="modal.closable ? modal.hide() : null"></div>
+            <div class="ui-layer" ng-if="ui.locked()"></div>
 
-</body>
+            <div ng-if="ui.tooltip()" ng-repeat="tooltip in [ui.tooltip()]" class="ui-tooltip" ng-class="tooltip.cssClass" ng-style="tooltip.css">
+                <span ng-if="tooltip.translation">
+                <span class="fa fa-times area-panel__close" ng-if="tooltip.on === 'click' && !tooltip.hasCustomHideHandler" ng-click="ui.hideTooltip()"></span>
+                <span ng-bind-html="(tooltip.translation | translate) | raw"></span>
+                </span>
+                <span ng-if="tooltip.template" ng-include="'/views/partials/tooltip/' + tooltip.template" ng-repeat="data in [tooltip.data]"></span>
+            </div>
+        </div>
+
+        <script src="<%= asset('js/bundle.js') %>"></script>
+
+    </body>
+
 </html>

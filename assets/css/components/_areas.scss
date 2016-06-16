@@ -1,9 +1,2 @@
-.area {
-  &Root {
-    transition: filter .3s;
-
-    &.--blur{
-      filter:blur(5px);
-    }
-  }
-}
+@import "areas/panel";
+@import "areas/root";

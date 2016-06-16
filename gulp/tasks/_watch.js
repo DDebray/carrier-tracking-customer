@@ -5,7 +5,8 @@ var gulp  = require('gulp'),
 
 gulp.task('styles:watch', function () {
   // gulp.watch([paths.source.styles, '!' + paths.source.footer], gulp.series('styles', 'rev', 'templates', 'server:reload'));
-  gulp.watch([paths.source.styles], gulp.series('styles', 'rev', 'templates', 'server:reload'));
+
+  gulp.watch([paths.source.styles, '!' + paths.destination.sprite.scss + '_inline-dimensions.scss'], gulp.series('styles', 'rev', 'templates', 'server:reload'));
 });
 
 gulp.task('scripts:watch', function () {

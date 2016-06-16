@@ -1,0 +1,39 @@
+.panel {
+  @include clearfix();
+
+  &__tabList {
+    @include resetList;
+    line-height: $_lhLarge;
+    display: flex;
+    border: $_borderWidthSmall solid $_rgbAlto;
+
+    &__element {
+      flex: 1;
+      text-align: left;
+      padding-left: $_xSpacing;
+      cursor: pointer;
+      color: $_rgbDustyGray;
+      outline: $_borderWidthSmall solid $_rgbAlto;
+
+
+      &--active {
+        cursor: default;
+        color: $_rgbPacificBlue;
+        font-weight: bold;
+        outline: none;
+
+      }
+
+      &__content {
+        border: $_borderWidthSmall solid $_rgbAlto;
+        border-top: none;
+        display: block;
+        padding: $_ySpacing $_xSpacing;
+
+        &--nopadding {
+          padding: 0;
+        }
+      }
+    }
+  }
+}

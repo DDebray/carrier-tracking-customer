@@ -1,0 +1,15 @@
+ {{ address.data.name }}
+<br />
+
+<span ng-if="address.data.company">{{ address.data.company }}<br /></span> {{ address.data.street1 }} {{ address.data.street_no }}
+<br />
+
+<span ng-if="address.data.street2">{{ address.data.street2 }}<br /></span> {{ address.data.postal_code }} {{ address.data.city }}
+<br />
+
+<span ng-if="address.data.state">{{ address.data.state }}<br /></span> {{ address.getCountry(address.data.country).name }}
+<span ng-if="address.data.phone"><br />{{ address.data.phone }}</span>
+<span ng-if="address.data.email"><br />{{ address.data.email }}</span>
+
+<span class="fa fa-pencil icon-action"
+    ng-if="address.isEditable"></span>

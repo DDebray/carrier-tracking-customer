@@ -32,9 +32,14 @@ module.exports = ['$routeProvider', '$locationProvider', '$httpProvider', 'Commo
       templateUrl : 'views/landingpage.html',
       resolve : independentPageResolver,
     })
-    .when('/:trackingId', {
+    .when('/tracking/:trackingId', {
       controller : 'PageTrackingCtrl as tracking',
       templateUrl : 'views/tracking.html',
+      resolve : independentPageResolver,
+    })
+    .when('/printing/:trackingId', {
+      controller : 'PagePrintingCtrl as printing',
+      templateUrl : 'views/printing.html',
       resolve : independentPageResolver,
     })
     .otherwise({

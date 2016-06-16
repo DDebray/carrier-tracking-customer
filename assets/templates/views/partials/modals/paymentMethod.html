@@ -1,0 +1,20 @@
+<h3 class="headline-sub row-marge-bottom-wide" ng-bind="'PAGE.PRINTING.MODAL.PAYMENT_METHOD.TITLE' | translate"></h3> {{}}
+<ul>
+    <li ng-repeat="method in modal.data.availableMethods" ng-click="modal.action.selectMethod(method)">
+        {{method}}
+    </li>
+
+    <li class="behavior-cursor-no-select behavior-text-cohesive" ng-class="{ active : (billing.selected === availableMethod && !billing.isInitialState) }" ng-click="billing.select(availableMethod)">
+
+
+
+        <!--
+        <span class="icon-action icon-action-outlined">
+            <span ng-if="billing.selected === availableMethod || (billing.data.payment_method === availableMethod && !billing.selected)" class="fa fa-check"></span>
+        </span>
+        <span class="fa fa-fixed fa-centered row-marge-right" ng-class="'fa-' + billing.icons[availableMethod]" help="{ translation : 'ACTION.HELP.TEXT.BILLING_METHOD_' + availableMethod }"></span>
+        <span ng-bind="('PAGE.BILLING.' + availableMethod) | translate"></span>
+        <span ng-if="billing.accountBalance.charge_payment_fees && billing.demandCharges &&('PAGE.BILLING.CUSTOMER_PAYMENT_FEE' | translate)" ng-bind-html="('PAGE.BILLING.CUSTOMER_PAYMENT_FEE' | translate) | raw"></span> -->
+    </li>
+
+</ul>
