@@ -1,11 +1,10 @@
 <div class="widget-rate-content-wrapper" ng-click="printing.selectRate(rate)">
     <div class="widget-rate-title">
         <div class="behavior-view-left">
-            <!-- <small><pre>{{ rate | json }}</pre></small> -->
-            <!-- <span ng-bind="rate.service_name"></span> -->
-            <!-- remove me -->
-            <span ng-bind="rate.code"></span>
-            <!-- remove me -->
+
+            <!-- service name still missing -->
+            <span ng-bind="rate.service_name || rate.code"></span>
+
             <span class="icon-inline-right behavior-cursor-clickable" tooltip="{ on : 'click', translation : 'CARRIER.TERMS.' + (rate.code.toUpperCase()), directionX : 'right', directionY : 'up', provideOverlay : true }">
                 <span class="fa fa-info-circle"></span>
             </span>
@@ -20,23 +19,21 @@
                 </span>
                 <span ng-bind="'RATE.IS_NOT_PICKUP' | translate"></span>
             </div>
-
             <div>
                 <span class="icon-inline-left">
                     <span class="fa fa-money"></span>
                 </span>
                 <span ng-bind="(('RATE.INSURANCE' + (rate.insurance_amount ? '' : '_NONE')) | translate).replace('%%', rate.insurance_amount ? (rate.insurance_amount + ' ' + rate.insurance_currency) : '')"></span>
             </div>
-
             <div>
                 <span class="icon-inline-left">
                     <span class="fa fa-tachometer"></span>
                 </span>
                 <span ng-bind="(('RATE.DELIVERY_SPEED' + ((printing.getSelectedSurcharge(rate).days_min || rate.days_min) ? '' : '.VARYING')) | translate)
                     .replace('%%', printing.getSelectedSurcharge(rate).days_min || rate.days_min)
-                    .replace('%%', (printing.getSelectedSurcharge(rate).days_max || rate.days_max) && (printing.getSelectedSurcharge(rate).days_max !== printing.getSelectedSurcharge(rate).days_min || rate.days_max !== rate.days_min) ? ' - ' +  (printing.getSelectedSurcharge(rate).days_max || rate.days_max) : '')"></span>
+                    .replace('%%', (printing.getSelectedSurcharge(rate).days_max || rate.days_max) && (printing.getSelectedSurcharge(rate).days_max !== printing.getSelectedSurcharge(rate).days_min || rate.days_max !== rate.days_min) ? ' - ' +  (printing.getSelectedSurcharge(rate).days_max || rate.days_max) : '')"
+                ></span>
             </div>
-
         </span>
         <span class="widget-rate-price" ng-class="{ cta : true }">
             <span ng-bind-html="(
