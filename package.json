@@ -48,7 +48,6 @@
     "gulp-util": "^3.0.7",
     "gutil": "^1.6.4",
     "imagemin-jpeg-recompress": "^5.0.0",
-    "jquery": "^2.2.3",
     "jshint": "^2.8.0",
     "jshint-stylish": "^2.1.0",
     "path": "^0.12.7",
