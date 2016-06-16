@@ -3,65 +3,71 @@ $form-spacing : 5px;
 $font-size-default : 16px;
 
 .modal {
-  position:relative;
-  top:50%;
-  transform:translateY(-50%);
+  @include fade-in($_tShort / 2);
 
   &-centered {
-    position:relative;
-    margin:0 auto;
-    float:none;
-    padding:$_ySpacing $_xSpacing;
-    background-color:$_rgbWhite;
-    border:1px solid $_rgbDustyGray;
-    border-radius:$_borderRadiusDefault;
-    max-height:100%;
-    overflow-y:auto;
+    position: relative;
+    margin: 0 auto;
+    float: none;
+    padding: $_ySpacing $_xSpacing;
+    background-color: $_rgbWhite;
+    border: 1px solid $_rgbAlto;
+    border-radius: $_borderRadiusDefault;
+    max-height: 100%;
+    overflow-y: auto;
   }
+
   &-close {
-    position:absolute;
-    right:1px;
-    top:1px;
+    position: absolute;
+    right: 1px;
+    top: 1px;
     padding: ($_ySpacing / 3) ($_xSpacing / 3);
-    color:$_rgbPacificBlue;
-    cursor:pointer;
-    font-size:$_fsMedium;
+    color: $_rgbDustyGray;
+    cursor: pointer;
+    font-size: $_fsMedium;
+    transition: color $_tShort;
+    z-index: $zindex-inner;
+
+    &:hover {
+      color: $_rgbBlush;
+    }
   }
+
   &-actions {
     @include clearfix();
-    list-style:none outside;
-    padding:0;
-    margin:0;
-    text-align:center;
+    list-style: none outside;
+    padding: 0;
+    margin: 0;
+    text-align: center;
 
     .left {
-      float:left;
+      float: left;
     }
 
     .right {
-      float:right;
+      float: right;
     }
 
     button {
       + button {
-        margin-left:$form-spacing;
+        margin-left: $form-spacing;
       }
     }
   }
 
   &-icon {
     &-busy {
-      font-size:$font-size-default * 2;
-      color:$_rgbPacificBlue;
-      cursor:wait;
+      font-size: $font-size-default * 2;
+      color: $_rgbPacificBlue;
+      cursor: wait;
     }
   }
 
   &-title {
-    margin:($_defaultSpacing * (-1)) ($_defaultSpacing * (-1)) $_defaultSpacing;
-    padding:($form-spacing / 2) $_defaultSpacing;
+    margin: ($_defaultSpacing * (-1)) ($_defaultSpacing * (-1)) $_defaultSpacing;
+    padding: ($form-spacing / 2) $_defaultSpacing;
     background-image: linear-gradient(to bottom, transparent 1px, $_rgbAthensGray 1px, $_rgbAthensGray 100%);
-    border-bottom:1px solid $_rgbAlto;
+    border-bottom: 1px solid $_rgbAlto;
   }
   &-dino {
     text-align: left;

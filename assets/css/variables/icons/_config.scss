@@ -28,39 +28,45 @@
       }
     }
 
-    &-outlined {
-      transition:color $_tShort, border-color $_tShort;
+    &--outlined {
+      transition: color $_tShort,
+        border-color $_tShort;
       border:1px solid $_rgbBlush;
       line-height:$icon-width-default - 3px;
       background:transparent;
-      color:$_rgbMineShaft;
+      color:$_rgbBlush;
 
       &:hover {
         background:transparent;
         border-color: darken($_rgbBlush, 10);
+        color: darken($_rgbBlush, 10);
       }
 
       &-status {
         &-ok {
-          color:$_rgbFeijoa;
+          color: $_rgbFeijoa;
         }
       }
     }
   }
 
   &-inline {
-    &-left {
-      vertical-align:baseline;
-      margin-right:4px;
+    &--left {
+      vertical-align: baseline;
+      margin-right: 4px;
     }
 
-    &-right {
-      vertical-align:baseline;
-      margin-left:4px;
+    &--right {
+      vertical-align: baseline;
+      margin-left: 4px;
+    }
+
+    &--middle {
+      vertical-align: middle;
     }
   }
 
   &--disabled {
-    opacity:0.5;
+    opacity: 0.5;
   }
 }

@@ -13,7 +13,8 @@ var config = {
       scripts_vendor  : ASSETS_DIR + 'js/vendor/**/*.js',
       scripts_env     : ASSETS_DIR + 'js/app/environment.js',
       // images          : ASSETS_DIR + 'images/**/*.{png,jpg,jpeg,gif,svg}',
-      images         : [ASSETS_DIR + 'images/**/*', '!' + ASSETS_DIR + 'images/sprite/**/*'],
+      images          : [ASSETS_DIR + 'images/**/*', '!' + ASSETS_DIR + 'images/sprite/**/*'],
+      sprite          : ASSETS_DIR + 'images/sprite/**/*.{png,jpg,jpeg}',
       copy            : ASSETS_DIR + 'copy/**/*',
       rev             : ASSETS_DIR + 'rev/',
       root            : ASSETS_DIR

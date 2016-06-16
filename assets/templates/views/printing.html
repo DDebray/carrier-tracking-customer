@@ -20,7 +20,7 @@
 
         <!-- rates -->
         <div class="columns large-6">
-            <div class="area-panel area-panel--container area-panel--merge">
+            <div class="area-panel area-panel--container area-panel--merge" ng-if="printing.rates()">
                 <div class="widget-rate" ng-repeat="rate in printing.rates()" ng-class="{ 'widget-rate-disabled' : !printing.addresses }" ng-include="'/views/partials/widgets/rate.html'" data-text-disabled="{{ 'RATE.DISABLED' | translate }}"></div>
             </div>
         </div>

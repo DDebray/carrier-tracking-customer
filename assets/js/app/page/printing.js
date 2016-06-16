@@ -1,12 +1,13 @@
 module.exports = [
-  '$routeParams', 'StorageShipment', 'StorageTransaction',
+  '$routeParams', 'CommonUi', 'StorageShipment', 'StorageTransaction',
 function(
-  $routeParams, StorageShipment, StorageTransaction
+  $routeParams, CommonUi, StorageShipment, StorageTransaction
 ) {
   'use strict';
   var self = this;
 
   self.currentAddress = false;
+  self.selectedRate = null;
 
   if ($routeParams.trackingId) {
     StorageShipment.load($routeParams.trackingId);
@@ -44,6 +45,8 @@ function(
 
   self.selectRate = function (rate) {
     console.log('selectRate: ', rate);
+    self.selectedRate = rate;
+    CommonUi.modal.show('/views/partials/modals/print_one.html', true, { rate : rate });
   };
 
   // TEST MODALS!!!

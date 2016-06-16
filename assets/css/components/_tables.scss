@@ -1,0 +1,159 @@
+.table {
+  table-layout: auto;
+  border-collapse: collapse;
+  page-break-inside: auto;
+
+  tr.row:after,
+  tr.row:before {
+    display: none;
+  }
+
+  &--spacing {
+    margin: ($_defaultSpacing / 2) 0;
+  }
+
+  &--filling {
+    width: 100%;
+  }
+
+  &--saving {
+    th,
+    td {
+      padding: ($_formSpacing / 1.5) $_formSpacing;
+      font-size: $_fsSmall;
+    }
+  }
+
+  td,
+  th {
+    transition: background-color $_tShort;
+    position: static;
+    float: none !important;
+  }
+
+  th {
+    padding: ($_formSpacing / 2) $_formSpacing;
+  }
+
+  td {
+    padding: $_formSpacing;
+  }
+
+  caption {
+    caption-side: bottom;
+  }
+
+  caption,
+  &__caption {
+    font-size: $_fsSmall;
+    color: $_rgbDustyGray;
+    text-align: left;
+    margin: 0;
+    padding: ($_formSpacing / 1.5) $_formSpacing;
+    &-item + &-item {
+      margin-left: $_defaultSpacing * 0.5;
+    }
+  }
+
+  &-align {
+    &-top {
+      td,
+      th {
+        vertical-align: top;
+      }
+    }
+    &-middle {
+      td,
+      th {
+        vertical-align: middle;
+      }
+    }
+    &-center {
+      text-align: center;
+    }
+    &-bottom {
+      td,
+      th {
+        vertical-align: bottom;
+      }
+    }
+  }
+
+  &-row {
+    &--bordered {
+      td,
+      th {
+        border-top: 1px solid $_rgbAlto;
+        border-bottom: 1px solid $_rgbAlto;
+
+        &:first-child,
+        &.table-column-first {
+          border-left: 1px solid $_rgbAlto;
+        }
+        &:last-child,
+        &.table-column-last {
+          border-right: 1px solid $_rgbAlto;
+        }
+      }
+    }
+  }
+
+  &-column {
+    &--bordered {
+      td,
+      th {
+        border-left: 1px solid $_rgbAlto;
+        border-right: 1px solid $_rgbAlto;
+      }
+    }
+    &--equalize {
+      table-layout: fixed;
+
+      th {
+        width: 1px;
+      }
+    }
+    &--numeric {
+      text-align: right;
+      white-space: nowrap;
+    }
+    &--required:after {
+      content: '\a0 *';
+    }
+    &__legend {
+      &-one:after {
+        content: '\a0 \b9';
+      }
+      &-two:after {
+        content: '\a0 \b2';
+      }
+      &-three:after {
+        content: '\a0 \b3';
+      }
+    }
+    &--slim {
+      width: 1px;
+    }
+    &--medium {
+      min-width: 100px;
+    }
+    &--semilarge {
+      min-width: 175px;
+    }
+    &--large {
+      min-width: 250px;
+    }
+  }
+
+  tr {
+    page-break-inside:avoid;
+    page-break-after:auto;
+
+    &:nth-child(odd) .table-column--highlight {
+      background-color: $_rgbAthensGray;
+    }
+    &:nth-child(even) .table-column--highlight {
+      background-color: $_rgbWhite;
+    }
+  }
+}

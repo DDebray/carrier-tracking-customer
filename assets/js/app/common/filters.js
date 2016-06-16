@@ -27,6 +27,11 @@ module.exports = function (application) {
         }
         return input;
       };
-    }]);
-
+    }])
+    .filter('jsonParse', function () {
+      return function (input) {
+        return JSON.parse(input);
+      };
+    })
+    ;
 };

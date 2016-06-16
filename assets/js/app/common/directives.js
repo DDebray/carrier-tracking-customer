@@ -13,11 +13,12 @@ module.exports = function(application) {
     .directive('tabPanel',        require('./directives/tabPanel'))
 
     // directives with dependencies
-    .directive('address',       ['StorageCountries', require('./directives/address')])
-    .directive('addressForm',   ['StorageCountries', require('./directives/addressForm')])
-    .directive('autofocus',     ['$timeout', require('./directives/autofocus')])
-    .directive('selectOnClick', ['$window', require('./directives/selectOnClick')])
-    .directive('tooltip',       ['CommonUi', require('./directives/tooltip')])
-    .directive('watchHeight',   ['$timeout', require('./directives/watchHeight')])
+    .directive('address',         ['StorageCountries', require('./directives/address')])
+    .directive('addressForm',     ['StorageCountries', require('./directives/addressForm')])
+    .directive('autofocus',       ['$timeout', require('./directives/autofocus')])
+    .directive('selectOnClick',   ['$window', require('./directives/selectOnClick')])
+    .directive('tooltip',         ['CommonUi', require('./directives/tooltip')])
+    .directive('watchHeight',     ['$timeout', require('./directives/watchHeight')])
+    .directive('centerVertical',  ['$timeout', '$window', require('./directives/centerVertical')])
     ;
 };
