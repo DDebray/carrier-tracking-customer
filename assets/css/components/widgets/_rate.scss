@@ -1,77 +1,78 @@
 .widget-rate {
   transition: background-color $_tShort,
     border-left-width $_tShort;
-  border-bottom:1px solid $_rgbAlto;
-  border-left:0 solid $_rgbAlto;
-  cursor:pointer;
+  border-bottom: 1px solid $_rgbAlto;
+  border-left: 0 solid $_rgbAlto;
+  cursor: pointer;
 
   &-stacked {
-    border:0 none;
-    box-shadow:0 0 1px $_rgbAlto;
+    border: 0 none;
+    box-shadow: 0 0 1px $_rgbAlto;
   }
 
   &:hover {
-    border-left-width:5px;
-    background-color:$_rgbAthensGray;
+    border-left-width: 5px;
+    background-color: $_rgbAthensGray;
   }
 
   &-disabled {
-    position:relative;
-    cursor:not-allowed;
+    position: relative;
+    cursor: not-allowed;
 
     &-clickable {
-      cursor:pointer;
+      cursor: pointer;
     }
 
     &:before {
-      transition:opacity $_tShort;
-      display:block;
-      position:absolute;
-      left:0;
-      top:0;
-      right:0;
-      bottom:0;
-      content:'';
-      background-color:transparentize($_rgbAlto, 0.25);
-      z-index:$zindex-inner;
-      opacity:0;
+      transition: opacity $_tShort;
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      content: '';
+      background-color: transparentize($_rgbAthensGray, 0.25);
+      z-index: $zindex-inner;
+      opacity: 0;
     }
 
     &:after {
-      transition:opacity $_tShort, transform $_tShort;
-      transform:scale(1.25);
-      content:attr(data-text-disabled);
-      display:block;
-      position:absolute;
-      left:$_defaultSpacing;
-      right:$_defaultSpacing;
-      top:50%;
-      margin-top:$_fsDefault / (-2);
-      text-align:center;
-      font-size:$_fsDefault;
-      // font-weight:$font-weight-semibold;
-      z-index:$zindex-inner;
-      opacity:0;
+      transition: opacity $_tShort,
+        transform $_tShort;
+      transform: scale(1.25);
+      content: attr(data-text-disabled);
+      color: $_rgbMineShaft;
+      display: block;
+      position: absolute;
+      left: $_defaultSpacing;
+      right: $_defaultSpacing;
+      top: 50%;
+      margin-top: - $_fsDefault;
+      text-align: center;
+      font-family: $_ffSansBold;
+      z-index: $zindex-inner;
+      opacity: 0;
     }
 
     &:hover {
-      border-left-width:0;
-      background-color:transparent;
+      border-left-width: 0;
+      background-color: transparent;
 
       &:before,
       &:after {
-        opacity:1;
-        transform:scale(1);
+        opacity: 1;
+        transform: scale(1);
       }
     }
   }
 
   &:last-child {
-    border-bottom:0 none;
+    border-bottom: 0 none;
   }
 
   &-title {
-    margin-bottom:$_defaultSpacing / 2;
+    margin-bottom: $_defaultSpacing / 2;
   }
 
   &-content-wrapper {
@@ -88,42 +89,39 @@
   &-price {
     display: flex;
     flex-grow: 0;
-    flex-flow:column nowrap;
-    justify-content:center;
+    flex-flow: column;
+    justify-content: center;
     height: 81px;
-    // flex-basis: 112px;
     border-radius: $_borderRadiusDefault;
 
-
-    text-align:center;
-    line-height:1.4em;
-    padding:($_defaultSpacing / 2) $_defaultSpacing;
+    text-align: center;
+    line-height: 1.4em;
+    padding: ($_defaultSpacing / 2) $_defaultSpacing;
 
     &-value {
-      display:block;
-      font-size:1.25em;
-      font-weight:600;
+      display: block;
+      font-size: 1.25em;
+      font-weight: 600;
     }
   }
 
   &-carrier {
-    display:flex;
+    display: flex;
     flex-shrink: 0;
-    flex-flow:column nowrap;
-    justify-content:center;
-    // float:left;
-    width:100px;
-    height:81px;
-    border:1px solid $_rgbDustyGray;
-    border-radius:$_borderRadiusDefault;
-    overflow:hidden;
-    background-color:$_rgbWhite;
-    padding:($_defaultSpacing / 2);
+    flex-flow: column nowrap;
+    justify-content: center;
+    width: 100px;
+    height: 81px;
+    border: 1px solid $_rgbDustyGray;
+    border-radius: $_borderRadiusDefault;
+    overflow: hidden;
+    background-color: $_rgbWhite;
+    padding: ($_defaultSpacing / 2);
 
     &-item {
-      position:relative;
-      flex:1;
-      max-height:50%;
+      position: relative;
+      flex: 1;
+      max-height: 50%;
 
       & + & {
         margin-top: ($_defaultSpacing / 2);
@@ -134,33 +132,25 @@
         &-cclogistics,
         &-ups,
         &-dpd {
-          max-height:40%;
+          max-height: 40%;
         }
       }
     }
-
-    // & > &-item {
-    //   margin:($_defaultSpacing / 4);
-    // }
   }
 
   &-details {
-    // float:left;
-    // width:auto;
     flex-grow: 1;
     flex-basis: 50.15%;
     display: inline-block;
-    // display:block;
-    font-size:$_fsSmall;
-    color:$_rgbMineShaft;
+    font-size: $_fsSmall;
+    color: $_rgbMineShaft;
     padding: 0 $_defaultSpacing;
     line-height: 26px;
 
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-
 }
 
 @media #{$medium-only}, #{$small-only} {
@@ -169,17 +159,14 @@
     &-price {
       flex-grow: 1;
       margin-top: $_defaultSpacing;
-      // height: auto;
       height: 2.588rem;
 
       &-value {
         display: inline-block;
         font-size: inherit;
-        // font-weight: inherit;
         line-height: 2.588rem;
       }
     }
-
   }
 }
 
