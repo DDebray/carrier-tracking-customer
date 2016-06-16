@@ -93,7 +93,7 @@ module.exports = [
       });
     };
 
-    self.openPaymentMethodModal();
+    // self.openPaymentMethodModal();
 
   }
 ];
