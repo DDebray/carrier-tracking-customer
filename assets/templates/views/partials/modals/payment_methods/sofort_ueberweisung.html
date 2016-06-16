@@ -1,10 +1,8 @@
-{{printing}}
-
 <div class="form-row">
-    <label class="required" for="iban" ng-bind="'PAGE.PRINTING.PAYMENT_METHOD.SOFORT_UEBERWEISUNG.IBAN' | translate"></label>
+    <label class="required" for="iban" ng-bind="'PAGE.PRINTING.MODAL.PAYMENT_METHOD.SOFORT_UEBERWEISUNG.IBAN' | translate"></label>
     <input required id="iban" type="text" ng-model="modal.data.account.iban" ng-model-options="{ allowInvalid : true }" pattern="^[a-zA-Z]{2}\d{2}\w{11,30}$" ng-change="modal.action.cleanData('iban')" autofocus />
 </div>
 <div class="form-row">
-    <label class="required" for="bic" ng-bind="'PAGE.PRINTING.PAYMENT_METHOD.SOFORT_UEBERWEISUNG.BIC' | translate"></label>
+    <label class="required" for="bic" ng-bind="'PAGE.PRINTING.MODAL.PAYMENT_METHOD.SOFORT_UEBERWEISUNG.BIC' | translate"></label>
     <input required id="bic" type="text" ng-model="modal.data.account.bic" ng-model-options="{ allowInvalid : true }" pattern="^[a-zA-Z]{6}(\w{2}|\w{5})$" ng-change="modal.action.cleanData('bic')" />
 </div>

@@ -1,0 +1,30 @@
+.widget-payment-methods {
+    @include resetList;
+    & li {
+        transition: background-color $_tShort,color $_tShort;
+        padding: $_defaultSpacing/2 $_defaultSpacing;
+        border-bottom: $_borderWidthSmall solid $_rgbAlto;
+        cursor: pointer;
+
+        &.--active {
+            background-color: $_rgbAlto;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        & .icon {
+            width: $_defaultSpacing*2;
+        }
+    }
+}
+.widget-payment-methods-form {
+    background-color: $_rgbAthensGray;
+    border-bottom: $_borderWidthSmall solid $_rgbAlto;
+    padding: $_defaultSpacing;
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
