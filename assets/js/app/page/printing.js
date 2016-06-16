@@ -42,21 +42,9 @@ module.exports = [
       }
     };
 
-    self.partialSearch = function() {
-      return true;
-    };
-    self.selectRate = function() {
-      return true;
-    };
-    self.calculatePickupDate = function() {
-      return true;
-    };
-    self.utcOffset = function() {
-      return true;
-    };
-    self.getSelectedSurcharge = function() {
-      return true;
-    };
+  self.selectRate = function (rate) {
+    console.log('selectRate: ', rate);
+  };
 
 
 
