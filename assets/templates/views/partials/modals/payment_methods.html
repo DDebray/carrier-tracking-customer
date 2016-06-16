@@ -1,0 +1,17 @@
+<h3 class="headline-sub row-marge-bottom-wide" ng-bind="'PAGE.PRINTING.MODAL.PAYMENT_METHOD.TITLE' | translate"></h3>
+
+<div class="area-panel area-panel--container">
+    <ul class="widget-payment-methods">
+        <li ng-repeat-start="method in modal.data.methods" ng-click="modal.action.selectMethod(method)" ng-class="{'--active' : (method === modal.data.selected)}">
+            <span class="icon-action">
+            <span ng-if="method === modal.data.selected" class="fa fa-check"></span>
+            </span>
+            <span class="icon fa fa-fixed fa-centered" ng-class="modal.data.icons[method.toLowerCase()]"></span>
+            <span ng-bind="('PAGE.PRINTING.MODAL.PAYMENT_METHOD.' + method) | translate"></span>
+        </li>
+        <form id="submit" class="widget-payment-methods-form" ng-repeat-end ng-if="method === modal.data.selected" ng-submit="modal.action.submit()">
+            <div ng-include="'/views/partials/modals/payment_methods/' + method.toLowerCase() + '.html'"></div>
+        </form>
+    </ul>
+</div>
+<button form="submit" type="submit" class="button button--blush button--filling" ng-bind="('PAGE.PRINTING.MODAL.PAYMENT_METHOD.CHOOSE' ) | translate"></button>
