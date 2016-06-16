@@ -29,13 +29,25 @@ html, body {
   width:100%;
 }
 
-h1, h2, h3, h4, h5 {
-  font-weight: normal;
+@for $index from 1 through 6 {
+  h#{$index}{
+    margin-top: 0;
+    font-weight: normal;
+  }
 }
 
-a {
+a,
+.link {
   text-decoration: none;
   color: $_rgbBlush;
+  cursor: pointer;
+  padding: 0 ($_formSpacing / 2);
+  transition: text-shadow $_tShort ease-out;
+
+  &:hover {
+    // text-shadow: 0px 0px 1px transparentize($_rgbBlush,0.5);
+    color: darken($_rgbBlush, 10);
+  }
 }
 
 input {
@@ -59,10 +71,4 @@ article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section,vid
 address {
   display:block;
   font-style:normal;
-}
-
-@for $index from 1 through 6 {
-  h#{$index}{
-    margin-top: 0;
-  }
 }

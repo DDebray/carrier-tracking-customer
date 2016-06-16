@@ -1,14 +1,12 @@
 <div class="widget-rate-content-wrapper" ng-click="printing.selectRate(rate)">
     <div class="widget-rate-title">
-        <div class="behavior-view-left">
 
-            <!-- service name still missing -->
-            <span ng-bind="rate.service_name || rate.code"></span>
+        <!-- service name still missing -->
+        <span ng-bind="rate.service_name || rate.code"></span>
 
-            <span class="icon-inline-right behavior-cursor-clickable" tooltip="{ on : 'click', translation : 'CARRIER.TERMS.' + (rate.code.toUpperCase()), directionX : 'right', directionY : 'up', provideOverlay : true }">
-                <span class="fa fa-info-circle"></span>
-            </span>
-        </div>
+        <span class="icon-inline-right" tooltip="{ on : 'click', translation : 'CARRIER.TERMS.' + (rate.code.toUpperCase()), directionX : 'right', directionY : 'up', provideOverlay : true }" stop-propagation="click">
+            <span class="fa fa-info-circle"></span>
+        </span>
     </div>
     <div class="widget-rate-flex">
         <span class="widget-rate-carrier" carrier-logo="rate"></span>

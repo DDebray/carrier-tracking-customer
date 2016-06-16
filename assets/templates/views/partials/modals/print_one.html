@@ -1,0 +1,53 @@
+<h3 class="h-center" ng-bind="'PAGE.PRINTING.MODAL.LABEL_PRINT.TITLE' | translate"></h3>
+
+<div class="h-right h-spacing-bottom--wide">
+    <a ng-click="modal.hide()">
+        <span ng-bind="'PAGE.PRINTING.MODAL.LABEL_PRINT.EDIT_ADDRESS' | translate"></span>
+        <span class="icon-action icon-action-outlined icon-inline--right">
+            <span class="fa fa-pencil"></span>
+        </span>
+    </a>
+</div>
+
+<table class="table table--filling table--spacing table--saving table-row--bordered">
+    <tbody>
+        <tr ng-repeat="rate in [modal.data.rate]">
+            <td class="table-column--slim">1x</td>
+            <td>
+                <span class="table-column__legend-one" ng-bind="rate.service_name || rate.code"></span>
+                <span class="icon-inline--right icon-inline--middle">
+                    <span class="fa fa-cube"></span>
+                </span>
+            </td>
+            <td>
+                <span class="icon-inline--left icon-inline--middle">
+                    <span class="image-layout-a5"></span>
+                </span>
+                <span ng-bind="'COMMON.LABEL.LAYOUT_A5' | translate"></span>
+            </td>
+            <td class="table-column--slim table-column--numeric" ng-bind="rate.gross_amount ? (rate.gross_amount.toFixed(2) + ' ' + rate.currency) : ('CARRIER.PRICE_CUSTOM' | translate)">
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="3" class="table-column--highlight">
+            <strong ng-bind="('PAGE.PRINTING.MODAL.LABEL_PRINT.TOTAL' | translate)"></strong>
+        </td>
+        <td class="table-column--highlight table-column--slim table-column--numeric h-right">
+            <strong ng-bind="modal.data.rate.gross_amount ? (modal.data.rate.gross_amount.toFixed(2) + ' ' + modal.data.rate.currency) : ('CARRIER.PRICE_CUSTOM' | translate)"></strong>
+        </td>
+    </tr>
+    </tfoot>
+    <caption>
+        <span class="table__caption-item" ng-repeat="item in ('PAGE.PRINTING.MODAL.LABEL_PRINT.VAT_CHARGES' | translate) | jsonParse" ng-bind-html="item | raw"></span>
+    </caption>
+</table>
+
+<div class="h-center">
+    <button class="button button--blush button--filling" ng-click="modal.hide()" ng-dblclick="modal.data.dblclick()" ng-bind="('PAGE.PRINTING.MODAL.LABEL_PRINT.BUY' | translate)"></button>
+</div>
+
+<div class="h-center h-spacing-top--wide">
+  <span class="link" ng-click="modal.hide()" ng-bind="'PAGE.PRINTING.MODAL.LABEL_PRINT.CANCEL' | translate"></span>
+</div>

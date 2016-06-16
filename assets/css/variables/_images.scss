@@ -17,3 +17,28 @@
     ('ups', 'carriers/ups.png'),
     ('yodel', 'carriers/yodel.png')
 ), 'image-carrier');
+
+@include sprite-classes((
+    ('a4', $sprite-layouts-full),
+    ('a5', $sprite-layouts-full),
+    ('b5', $sprite-layouts-full),
+    ('c5', $sprite-layouts-full),
+    ('a6', $sprite-layouts-full),
+    ('c6', $sprite-layouts-full),
+    ('a4_by_2', $sprite-layouts-half),
+    ('a5_by_2', $sprite-layouts-half),
+    ('a4_by_4', $sprite-layouts-quarter),
+    ('a4_by_10', $sprite-layouts-tenth),
+    ('a4_by_12', $sprite-layouts-tenth),
+    ('a4_by_24', $sprite-layouts-tenth),
+    ('a4_by_32', $sprite-layouts-tenth),
+    ('a4_by_8', $sprite-layouts-tenth),
+    ('brother_dk_11202', $sprite-layouts-roll),
+    ('brother_dk_22113', $sprite-layouts-roll),
+    ('dhl_910_300_300', $sprite_layouts-full),
+    ('dhl_910_300_400', $sprite_layouts-roll),
+    ('dhl_910_300_100', $sprite_layouts-full),
+    ('dhl_910_300_200', $sprite_layouts-roll),
+    ('dhl_910_300_600', $sprite_layouts-roll),
+    ('dhl_online_label', $sprite_layouts-half)
+), 'image-layout');

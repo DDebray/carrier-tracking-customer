@@ -7,6 +7,8 @@ module.exports = [
     var self = this;
 
     self.currentAddress = false;
+    self.selectedRate = null;
+
 
     if ($routeParams.trackingId) {
       StorageShipment.load($routeParams.trackingId);
@@ -44,6 +46,8 @@ module.exports = [
 
   self.selectRate = function (rate) {
     console.log('selectRate: ', rate);
+    self.selectedRate = rate;
+    CommonUi.modal.show('/views/partials/modals/print_one.html', true, { rate : rate });
   };
 
 
