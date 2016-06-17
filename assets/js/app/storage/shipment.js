@@ -6,8 +6,38 @@ module.exports = [
     'use strict';
 
     var self = this;
-    self.addresses = {};
     self.rates = null;
+
+
+    // Keep this field private in this factory!
+    var sender = {
+      address_type: 'RECEIVER_ADDRESS',
+      city: 'Berlin',
+      company: null,
+      country: 'DE',
+      email: 'test@example.com',
+      id: null,
+      is_editable: false,
+      name: 'Andreas Kühnel',
+      phone: null,
+      postal_code: '10409',
+      residential: null,
+      state: null,
+      street1: 'Pieskower Weg',
+      street2: null,
+      street_no: '36',
+    };
+    var receiver = {};
+
+    self.addresses = {
+      get: function() {
+        return {
+          SENDER_ADDRESS: sender,
+          RECEIVER_ADDRESS: receiver
+        };
+      },
+      set: function() {}
+    };
 
     /**
      * This method loads the return shipment for the orginal shipment associated with the given tracking number.
@@ -16,21 +46,29 @@ module.exports = [
      */
     self.load = function(trackingId) {
 
-      var setAddresses = function(sender, receiver) {
-        self.addresses.RECEIVER_ADDRESS = receiver;
-        self.addresses.RECEIVER_ADDRESS.is_editable = false;
-        self.addresses.RECEIVER_ADDRESS.address_type = 'RECEIVER_ADDRESS';
+      var setAddresses = function(response) {
+        sender = response.content.result.address_from;
+        sender.is_editable = true;
+        sender.address_type = 'SENDER_ADDRESS';
 
-        self.addresses.SENDER_ADDRESS = sender;
-        self.addresses.SENDER_ADDRESS.is_editable = true;
-        self.addresses.SENDER_ADDRESS.address_type = 'SENDER_ADDRESS';
+        receiver = response.content.result.address_to;
+        receiver.is_editable = false;
+        receiver.address_type = 'RECEIVER_ADDRESS';
+      };
+
+      var setRates = function(response) {
+
       };
 
       CommonRequest.shipment.get({
         trackingNumber: trackingId
       }, function(response) {
         if (response && response.content) {
-          setAddresses(response.content.result.address_from, response.content.result.address_to);
+          setAddresses(response);
+
+          console.log(self.addresses.get());
+
+          // refactor
           self.rates = response.content.result.rates;
         }
       });
@@ -41,7 +79,11 @@ module.exports = [
      * @param  {object} address The new address information with the address_type.
      */
     self.update = function(address) {
+      console.log(self.addresses);
+
       self.addresses[address.address_type] = address;
+      // update request
+      console.log(self.addresses);
     };
 
     return self;

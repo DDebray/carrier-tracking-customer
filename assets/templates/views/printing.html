@@ -10,6 +10,7 @@
                 <h3 class="address-headline" ng-bind="('COMMON.ADDRESSES.' + addressType) | translate"></h3>
 
                 <div class="address-container" watch-height="{ condition: (!printing.currentAddress || (printing.currentAddress && printing.currentAddress.address_type !== addressType)), targetOnTrue: 'js-target-on-true', targetOnFalse: 'js-target-on-false', disableAnimationClass: 'address-container--no-animation' }">
+
                     <address class="address-display js-target-on-true" ng-class="{ 'address-display--is-visible' : (address && !printing.currentAddress || (printing.currentAddress && printing.currentAddress.address_type !== addressType)) }" data="address" is-editable="address.is_editable"></address>
 
                     <div class="address-form js-target-on-false" ng-class="{ 'address-form--is-visible' : (printing.currentAddress && printing.currentAddress.address_type === addressType) }" address-form="printing.formConfig" address-model="printing.currentAddress" sender="printing.currentAddress.address_type == 'SENDER_ADDRESS'"></div>
@@ -18,7 +19,7 @@
             </div>
         </div>
 
-        <!-- rates -->
+        <!-- RATES -->
         <div class="columns large-6">
             <div class="area-panel area-panel--container area-panel--merge" ng-if="printing.rates()">
                 <div class="widget-rate" ng-repeat="rate in printing.rates()" ng-class="{ 'widget-rate-disabled' : !printing.addresses }" ng-include="'/views/partials/widgets/rate.html'" data-text-disabled="{{ 'RATE.DISABLED' | translate }}"></div>
