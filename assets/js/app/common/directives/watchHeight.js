@@ -11,15 +11,13 @@ module.exports = function($timeout) {
           var targetOnTrue = element[0].querySelector('.' + config.targetOnTrue),
             targetOnFalse = element[0].querySelector('.' + config.targetOnFalse),
             target = condition ? targetOnTrue : targetOnFalse;
-            console.log(targetOnTrue);
-            console.log(target.offsetHeight);
             element.css('height', target.offsetHeight + 'px');
         };
 
       $timeout(function() {
         element.addClass(config.disableAnimationClass);
         action(scope.getValues().condition);
-      }, 25);
+      }, 750);
 
       $timeout(function() {
         element.removeClass(config.disableAnimationClass);

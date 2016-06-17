@@ -10,30 +10,14 @@ module.exports = [
 
 
     // Keep this field private in this factory!
-    var sender = {
-      address_type: 'RECEIVER_ADDRESS',
-      city: 'Berlin',
-      company: null,
-      country: 'DE',
-      email: 'test@example.com',
-      id: null,
-      is_editable: false,
-      name: 'Andreas Kühnel',
-      phone: null,
-      postal_code: '10409',
-      residential: null,
-      state: null,
-      street1: 'Pieskower Weg',
-      street2: null,
-      street_no: '36',
-    };
     var receiver = {};
+    var sender = {};
 
     self.addresses = {
       get: function() {
         return {
-          SENDER_ADDRESS: sender,
-          RECEIVER_ADDRESS: receiver
+          RECEIVER_ADDRESS: receiver,
+          SENDER_ADDRESS: sender
         };
       },
       set: function() {}
@@ -47,13 +31,13 @@ module.exports = [
     self.load = function(trackingId) {
 
       var setAddresses = function(response) {
-        sender = response.content.result.address_from;
-        sender.is_editable = true;
-        sender.address_type = 'SENDER_ADDRESS';
-
         receiver = response.content.result.address_to;
         receiver.is_editable = false;
         receiver.address_type = 'RECEIVER_ADDRESS';
+
+        sender = response.content.result.address_from;
+        sender.is_editable = true;
+        sender.address_type = 'SENDER_ADDRESS';
       };
 
       var setRates = function(response) {
