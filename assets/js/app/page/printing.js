@@ -19,7 +19,7 @@ module.exports = [
     };
 
     self.addresses = function() {
-      return StorageShipment.addresses.get();
+      return StorageShipment.addresses;
     };
 
     self.editAddress = function(address, addressType) {

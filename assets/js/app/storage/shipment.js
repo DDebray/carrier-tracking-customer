@@ -6,22 +6,8 @@ module.exports = [
     'use strict';
 
     var self = this;
+    self.addresses = {};
     self.rates = null;
-
-
-    // Keep this field private in this factory!
-    var receiver = {};
-    var sender = {};
-
-    self.addresses = {
-      get: function() {
-        return {
-          RECEIVER_ADDRESS: receiver,
-          SENDER_ADDRESS: sender
-        };
-      },
-      set: function() {}
-    };
 
     /**
      * This method loads the return shipment for the orginal shipment associated with the given tracking number.
@@ -30,29 +16,21 @@ module.exports = [
      */
     self.load = function(trackingId) {
 
-      var setAddresses = function(response) {
-        receiver = response.content.result.address_to;
-        receiver.is_editable = false;
-        receiver.address_type = 'RECEIVER_ADDRESS';
+      var setAddresses = function(sender, receiver) {
+        self.addresses.RECEIVER_ADDRESS = receiver;
+        self.addresses.RECEIVER_ADDRESS.is_editable = false;
+        self.addresses.RECEIVER_ADDRESS.address_type = 'RECEIVER_ADDRESS';
 
-        sender = response.content.result.address_from;
-        sender.is_editable = true;
-        sender.address_type = 'SENDER_ADDRESS';
-      };
-
-      var setRates = function(response) {
-
+        self.addresses.SENDER_ADDRESS = sender;
+        self.addresses.SENDER_ADDRESS.is_editable = true;
+        self.addresses.SENDER_ADDRESS.address_type = 'SENDER_ADDRESS';
       };
 
       CommonRequest.shipment.get({
         trackingNumber: trackingId
       }, function(response) {
         if (response && response.content) {
-          setAddresses(response);
-
-          console.log(self.addresses.get());
-
-          // refactor
+          setAddresses(response.content.result.address_from, response.content.result.address_to);
           self.rates = response.content.result.rates;
         }
       });
@@ -63,11 +41,7 @@ module.exports = [
      * @param  {object} address The new address information with the address_type.
      */
     self.update = function(address) {
-      console.log(self.addresses);
-
       self.addresses[address.address_type] = address;
-      // update request
-      console.log(self.addresses);
     };
 
     return self;

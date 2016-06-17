@@ -17,7 +17,7 @@ module.exports = function($timeout) {
       $timeout(function() {
         element.addClass(config.disableAnimationClass);
         action(scope.getValues().condition);
-      }, 750);
+      }, 25);
 
       $timeout(function() {
         element.removeClass(config.disableAnimationClass);
