@@ -1,13 +1,14 @@
 module.exports = [
-  '$routeParams', 'CommonUi', 'StorageShipment', 'StorageTransaction',
+  '$routeParams', '$timeout', 'CommonUi', 'StorageShipment', 'StorageTransaction',
   function(
-    $routeParams, CommonUi, StorageShipment, StorageTransaction
+    $routeParams, $timeout, CommonUi, StorageShipment, StorageTransaction
   ) {
     'use strict';
     var self = this;
 
     self.currentAddress = false;
     self.selectedRate = null;
+    self.state = 'IDLE'; // PENDING, COMPLETED
 
 
     if ($routeParams.trackingId) {
@@ -44,11 +45,42 @@ module.exports = [
       }
     };
 
-  self.selectRate = function (rate) {
-    console.log('selectRate: ', rate);
-    self.selectedRate = rate;
-    CommonUi.modal.show('/views/partials/modals/print_one.html', true, { rate : rate });
-  };
+    self.buy = function () {
+      console.log('buy');
+      CommonUi.modal.data.status = 'PENDING';
+      self.redraw = true;
+
+      // $timeout(function() {
+      //   console.log('timeout');
+      //
+      //   CommonUi.modal.data.status = 'COMPLETED';
+      //
+      // }, 2000);
+
+    };
+
+    self.redraw = false;
+
+    self.triggerRedraw = function () {
+      self.redraw = true;
+    };
+
+    self.selectRate = function (rate) {
+      console.log('selectRate: ', rate);
+      self.selectedRate = rate;
+      CommonUi.modal.show('/views/partials/modals/print_one.html', true, {
+        rate : rate,
+        status : 'IDLE',
+        buy : self.buy,
+        redrawTrigger : self.triggerRedraw
+      }, null, null, function () {
+        return self.redraw;
+      });
+
+      console.log('should redraw: ', CommonUi.modal.redraw);
+    };
+
+
 
 
 

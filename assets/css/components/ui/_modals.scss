@@ -56,10 +56,10 @@ $font-size-default : 16px;
     }
   }
 
-  &-icon {
+  &__icon {
     &-busy {
       font-size: $font-size-default * 2;
-      color: $_rgbPacificBlue;
+      color: $_rgbBlush;
       cursor: wait;
     }
   }

@@ -1,9 +1,23 @@
-module.exports = function($timeout, $window) {
+module.exports = function($parse, $timeout, $window) {
   'use strict';
 
   return {
     restrict: 'A',
-    link: function(scope, element) {
+    scope: {
+      getValues: '&centerVertical'
+    },
+    link: function(scope, element, attrs) {
+      var config = {},
+        updateConfig = function() {
+          config = scope.getValues();
+        };
+      updateConfig();
+
+      if (!config) {
+        return;
+      }
+
+      console.log('config', config);
 
       var pixels,
         w = angular.element($window),
@@ -30,6 +44,14 @@ module.exports = function($timeout, $window) {
         calculateMargin();
       });
 
+      scope.$watch('getValues().redraw', function (flag) {
+        if(flag){
+          console.log('redraw...');
+          $timeout(function() {
+            calculateMargin();
+          }, 100);
+        }
+      });
     }
   };
 };

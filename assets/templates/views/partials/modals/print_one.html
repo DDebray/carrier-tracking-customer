@@ -1,6 +1,6 @@
 <h3 class="h-center" ng-bind="'PAGE.PRINTING.MODAL.LABEL_PRINT.TITLE' | translate"></h3>
 
-<div class="h-right h-spacing-bottom--wide">
+<div ng-if="modal.data.status === 'IDLE'" class="h-right h-spacing-bottom--wide">
     <a ng-click="modal.hide()">
         <span ng-bind="'PAGE.PRINTING.MODAL.LABEL_PRINT.EDIT_ADDRESS' | translate"></span>
         <span class="icon-action icon-action-outlined icon-inline--right">
@@ -8,8 +8,8 @@
         </span>
     </a>
 </div>
-
-<table class="table table--filling table--spacing table--saving table-row--bordered">
+<!-- <small><pre>{{ modal.data | json }}</pre></small> -->
+<table ng-if="modal.data.status === 'IDLE'" class="table table--filling table--spacing table--saving table-row--bordered">
     <tbody>
         <tr ng-repeat="rate in [modal.data.rate]">
             <td class="table-column--slim">1x</td>
@@ -39,15 +39,26 @@
         </td>
     </tr>
     </tfoot>
-    <caption>
-        <span class="table__caption-item" ng-repeat="item in ('PAGE.PRINTING.MODAL.LABEL_PRINT.VAT_CHARGES' | translate) | jsonParse" ng-bind-html="item | raw"></span>
-    </caption>
+    <caption class="table__caption-item" ng-repeat="item in ('PAGE.PRINTING.MODAL.LABEL_PRINT.VAT_CHARGES' | translate) | jsonParse" ng-bind-html="item | raw"></caption>
 </table>
 
-<div class="h-center">
-    <button class="button button--blush button--filling" ng-click="modal.hide()" ng-dblclick="modal.data.dblclick()" ng-bind="('PAGE.PRINTING.MODAL.LABEL_PRINT.BUY' | translate)"></button>
+<div ng-if="modal.data.status === 'IDLE'" class="h-center">
+    <button class="button button--blush button--filling" ng-click="modal.data.buy()" ng-dblclick="modal.data.dblclick()" ng-bind="('PAGE.PRINTING.MODAL.LABEL_PRINT.BUY' | translate)"></button>
 </div>
 
-<div class="h-center h-spacing-top--wide">
+<div ng-if="modal.data.status === 'IDLE'" class="h-center h-spacing-top--wide">
   <span class="link" ng-click="modal.hide()" ng-bind="'PAGE.PRINTING.MODAL.LABEL_PRINT.CANCEL' | translate"></span>
 </div>
+
+<div ng-if="modal.data.status === 'PENDING'" class="h-center">
+
+  <span class="fa fa-circle-o-notch fa-spin modal__icon-busy"></span>
+  <!-- <span class="fa fa-circle-o-notch modal__icon-busy"></span> -->
+  <div class="legend h-spacing-top" ng-bind="'PAGE.PRINTING.MODAL.LABEL_PRINT.PENDING_MESSAGE' | translate"></div>
+</div>
+
+<div ng-if="modal.data.status === 'COMPLETED'">
+  Ready
+</div>
+
+<button type="button" name="button" ng-click="modal.data.redrawTrigger()">redraw</button>
