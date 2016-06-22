@@ -105,5 +105,4 @@ module.exports = function CommonUiProvider() {
       this.action = action;
     }
   };
-
 };

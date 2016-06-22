@@ -8,8 +8,7 @@ module.exports = [
 
     self.currentAddress = false;
     self.selectedRate = null;
-    self.state = 'IDLE'; // PENDING, COMPLETED
-
+    self.state = 'IDLE'; // PENDING, COMPLETED, ERROR
 
     if ($routeParams.trackingId) {
       StorageShipment.load($routeParams.trackingId);
@@ -46,41 +45,54 @@ module.exports = [
     };
 
     self.buy = function () {
-      console.log('buy');
       CommonUi.modal.data.status = 'PENDING';
-      self.redraw = true;
 
-      // $timeout(function() {
-      //   console.log('timeout');
-      //
-      //   CommonUi.modal.data.status = 'COMPLETED';
-      //
-      // }, 2000);
+      // TODO: comunicate with the backend...
 
+      $timeout(function() {
+        CommonUi.modal.data.status = 'COMPLETED';
+      }, 1000);
+
+      $timeout(function() {
+        CommonUi.modal.data.status = 'ERROR';
+      }, 2500);
     };
 
-    self.redraw = false;
-
-    self.triggerRedraw = function () {
-      self.redraw = true;
-    };
-
+    // MODAL CONFIGURATION
     self.selectRate = function (rate) {
       console.log('selectRate: ', rate);
       self.selectedRate = rate;
+
+      // TODO: insert releveant data into modal data...
       CommonUi.modal.show('/views/partials/modals/print_one.html', true, {
         rate : rate,
         status : 'IDLE',
         buy : self.buy,
-        redrawTrigger : self.triggerRedraw
+        download_result : {
+          download_urls : [
+            {
+              url : ['http://www.coureon.com'],
+              format: 'a5',
+              count: 1
+            }, {
+              url : ['http://www.coureon.com'],
+              format: 'a4',
+              name: 'DPD_DROPOFF_RECEIPT_LABEL',
+              count: 1
+            }
+          ],
+          customs_urls : {
+            hints: []
+            // hints : [
+            //   {
+            //     carrier_code: 'dpd',
+            //     link: 'dpd'
+            //   }
+            // ]
+          }
+        }
       });
     };
-
-
-
-
-
-    // MODAL CONFIGURATION
 
     // DEBUGGING
 
@@ -124,8 +136,5 @@ module.exports = [
         submit : submitSelection
       });
     };
-
-    // self.openPaymentMethodModal();
-
   }
 ];
