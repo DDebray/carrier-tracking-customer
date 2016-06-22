@@ -14,6 +14,8 @@ module.exports = function(CommonUi) {
         };
       updateConfig();
 
+      console.log('tooltip config', config);
+
       if (!config) {
         return;
       }

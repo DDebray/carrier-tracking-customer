@@ -73,11 +73,7 @@ module.exports = [
         status : 'IDLE',
         buy : self.buy,
         redrawTrigger : self.triggerRedraw
-      }, null, null, function () {
-        return self.redraw;
       });
-
-      console.log('should redraw: ', CommonUi.modal.redraw);
     };
 
 

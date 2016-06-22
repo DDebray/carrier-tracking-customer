@@ -51,14 +51,10 @@
 </div>
 
 <div ng-if="modal.data.status === 'PENDING'" class="h-center">
-
   <span class="fa fa-circle-o-notch fa-spin modal__icon-busy"></span>
-  <!-- <span class="fa fa-circle-o-notch modal__icon-busy"></span> -->
   <div class="legend h-spacing-top" ng-bind="'PAGE.PRINTING.MODAL.LABEL_PRINT.PENDING_MESSAGE' | translate"></div>
 </div>
 
 <div ng-if="modal.data.status === 'COMPLETED'">
   Ready
 </div>
-
-<button type="button" name="button" ng-click="modal.data.redrawTrigger()">redraw</button>

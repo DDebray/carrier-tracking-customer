@@ -80,12 +80,9 @@ module.exports = function CommonUiProvider() {
     template : null,
     data : null,
     closable : true,
-    redraw : false,
     onClose : null,
     action : null,
     hide : function() {
-      self.redraw = null;
-
       if (!this && !self.modal.closable) {
         // triggered by hotkey & modal not closable
         return;
@@ -98,7 +95,7 @@ module.exports = function CommonUiProvider() {
       self.modal.onClose = null;
       self.modal.action = null;
     },
-    show : function(template, closable, data, onClose, action, redraw) {
+    show : function(template, closable, data, onClose, action) {
       (this.onClose || function(){})();
 
       this.template = template;
@@ -106,16 +103,6 @@ module.exports = function CommonUiProvider() {
       this.data = data;
       this.onClose = onClose;
       this.action = action;
-      this.redraw = redraw;
-    },
-    showGeneric : function(headlineKey, textKey, showSpinner, isClosable) {
-      isClosable = isClosable === undefined ? true : isClosable;
-
-      this.show('/views/partials/modal_generic.html', isClosable, {
-        headline : headlineKey,
-        text : textKey,
-        showSpinner : showSpinner
-      });
     }
   };
 

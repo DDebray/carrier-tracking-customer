@@ -6,7 +6,11 @@ $font-size-default : 16px;
   @include fade-in($_tShort / 2);
   box-shadow: 0px 0px 8px 0px transparentize($_rgbDustyGray, 0.2);
 
-  &-centered {
+  position:relative;
+  top:50%;
+  transform:translateY(-50%);
+
+  &--centered {
     position: relative;
     margin: 0 auto;
     float: none;
@@ -18,7 +22,13 @@ $font-size-default : 16px;
     overflow-y: auto;
   }
 
-  &-close {
+  &__dino {
+    text-align: left;
+    float: left;
+    margin-right: 2rem;
+  }
+
+  &__close {
     position: absolute;
     right: 1px;
     top: 1px;
@@ -34,45 +44,11 @@ $font-size-default : 16px;
     }
   }
 
-  &-actions {
-    @include clearfix();
-    list-style: none outside;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-
-    .left {
-      float: left;
-    }
-
-    .right {
-      float: right;
-    }
-
-    button {
-      + button {
-        margin-left: $form-spacing;
-      }
-    }
-  }
-
   &__icon {
     &-busy {
       font-size: $font-size-default * 2;
       color: $_rgbBlush;
       cursor: wait;
     }
-  }
-
-  &-title {
-    margin: ($_defaultSpacing * (-1)) ($_defaultSpacing * (-1)) $_defaultSpacing;
-    padding: ($form-spacing / 2) $_defaultSpacing;
-    background-image: linear-gradient(to bottom, transparent 1px, $_rgbAthensGray 1px, $_rgbAthensGray 100%);
-    border-bottom: 1px solid $_rgbAlto;
-  }
-  &-dino {
-    text-align: left;
-    float: left;
-    margin-right: 2rem;
   }
 }
