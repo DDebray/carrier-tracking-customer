@@ -20,6 +20,20 @@ module.exports = [
       }
     };
 
+    self.make = function() {
+      CommonRequest.shipment.get({
+        trackingNumber: trackingId,
+        postalCode: postalCode
+      }, function(response) {
+        if (response && response.content) {
+          fillAddresses(response.content.result.address_from, response.content.result.address_to);
+          self.rates = response.content.result.rates;
+        }
+      }, function(error) {
+        errorCallback();
+      });
+    };
+
     return self;
   }
 ];

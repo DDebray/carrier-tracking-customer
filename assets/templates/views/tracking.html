@@ -13,7 +13,11 @@
         <div class="statecrumbs" ng-if="tracking.data && !tracking.showError">
             <span class="statecrumbs__angle fa fa-{{state.angle}}" ng-repeat-start="state in tracking.packageStates" ng-if="state.angle && state.isActive" ng-class="{ 'statecrumbs__angle--is-visible' : state.isActive() }"></span>
 
-            <span class="statecrumbs__state fa fa-{{state.icon()}} {{state.iconModifier}}" ng-repeat-end ng-class="{ 'statecrumbs__state--is-active' : state.isActive(), 'statecrumbs__state--is-error' : state.isError() }" tooltip="{ on : 'enter', translation : ('PAGE.TRACKING.SUMMARY.TOOLTIP' + (state.showCross() ? '_IS_ERROR.' : (state.isActive() ? '_IS_ACTIVE.' : '.')) + state.tooltip.toUpperCase()), directionY : 'up', class : (state.isActive() ? 'ui-tooltip--centered --is-active' : 'ui-tooltip--centered') }">
+            <span
+                class="statecrumbs__state fa fa-{{state.icon()}} {{state.iconModifier}}"
+                ng-repeat-end
+                ng-class="{ 'statecrumbs__state--is-active' : state.isActive(), 'statecrumbs__state--is-error' : state.isError() }"
+                tooltip="{ on : 'enter', translation : ('PAGE.TRACKING.SUMMARY.TOOLTIP' + (state.showCross() ? '_IS_ERROR.' : (state.isActive() ? '_IS_ACTIVE.' : '.')) + state.tooltip.toUpperCase()), directionY : 'up', class : (state.isActive() ? 'ui-tooltip--centered --is-active' : 'ui-tooltip--centered') }">
                 <span class="statecrumbs__icon {{state.iconModifier}}" ng-class="{ 'statecrumbs__icon--success' : state.showCheckmark(), 'statecrumbs__icon--error' : state.showCross() }"></span>
             </span>
         </div>
@@ -39,10 +43,11 @@
                     <div ng-bind="event.moment | moment:'time'"></div>
                 </span>
                 <span class="timeline__state fa fa-check" ng-class="{ 'timeline__state--process-is-completed' : ($last && event.status === 'DELIVERED')}"></span>
-                <span class="timeline__description" ng-bind="('PAGE.TRACKING.TIMELINE.EVENT.' + event.description.toUpperCase() | translate)
+                <span
+                    class="timeline__description"
+                    ng-bind="('PAGE.TRACKING.TIMELINE.EVENT.' + event.description.toUpperCase() | translate)
                     .replace('%CITY%', event.location.city || '')
-                    .replace('%COUNTRY%', event.location.country || '')">
-                </span>
+                    .replace('%COUNTRY%', event.location.country || '')"></span>
                 <span class="timeline__carrier" ng-if="event.carrier" ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"></span>
             </div>
         </div>

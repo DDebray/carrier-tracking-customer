@@ -15,23 +15,38 @@ module.exports = ['$resource', '$http', 'CommonConfig', function($resource, $htt
   $http.defaults.headers.common.locale = 'de-DE'; // todo: hard coded - COUREON-347
 
   return {
-    countries : generateResource('countries', 'cx'),
-    shipment: generateResource('shipment', 'cx'),
-    tracking : generateResource('tracking', 'cx', null, {
-      getStatus : {
-        method : 'GET',
-        url : 'tracking/:trackingId'
+    tracking: generateResource('tracking', 'cx', null, {
+      getStatus: {
+        method: 'GET',
+        url: 'tracking/:trackingId'
       }
     }),
+    shipment : generateResource('shipment', 'cx', null, {
+      create : {
+        method : 'POST',
+        url : 'shipment/create'
+      }
+    }),
+    countries : generateResource('countries', 'cx'),
+
+
+
+
+    // transaction: generateResource('transaction', 'cx', null, {
+    //   start: {
+    //     method: 'POST',
+    //     url:
+    //   }
+    // }),
     // externalTracking : generateResource('tracking', 'ruediger', null, {
     //   getStatus : {
     //     method : 'GET',
     //     url : 'tracking/:trackingId'
     //   }
     // }),
-    cms : {
-      news : generateResource('news', 'cms'),
-      cooperations : generateResource('cooperations', 'cms')
+    cms: {
+      news: generateResource('news', 'cms'),
+      cooperations: generateResource('cooperations', 'cms')
     }
   };
 }];

@@ -6,13 +6,13 @@
 
         <title>Coureon Tracking</title>
 
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="description" content="Paket-Tracking von Coureon." />
-        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="description" content="Paket-Tracking von Coureon."/>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 
-        <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
-        <link rel="stylesheet" href="<%= asset('css/main.css') %>" />
+        <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"/>
+        <link rel="stylesheet" href="<%= asset('css/main.css') %>"/>
 
         <base href="<%= basepath %>">
 
@@ -34,8 +34,8 @@
 
             <div ng-if="ui.tooltip()" ng-repeat="tooltip in [ui.tooltip()]" class="ui-tooltip" ng-class="tooltip.cssClass" ng-style="tooltip.css">
                 <span ng-if="tooltip.translation">
-                <span class="fa fa-times area-panel__close" ng-if="tooltip.on === 'click' && !tooltip.hasCustomHideHandler" ng-click="ui.hideTooltip()"></span>
-                <span ng-bind-html="(tooltip.translation | translate) | raw"></span>
+                    <span class="fa fa-times area-panel__close" ng-if="tooltip.on === 'click' && !tooltip.hasCustomHideHandler" ng-click="ui.hideTooltip()"></span>
+                    <span ng-bind-html="(tooltip.translation | translate) | raw"></span>
                 </span>
                 <span ng-if="tooltip.template" ng-include="'/views/partials/tooltip/' + tooltip.template" ng-repeat="data in [tooltip.data]"></span>
             </div>

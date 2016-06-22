@@ -1,0 +1,17 @@
+<h3 class="h-center" ng-bind="'PAGE.PRINTING.MODAL.POSTAL_CODE_VERIFICATION.TITLE' | translate"></h3>
+
+<div ng-bind="'PAGE.PRINTING.MODAL.POSTAL_CODE_VERIFICATION.TEXT' | translate"></div>
+<div class="h-spacing-bottom--wide" ng-bind="'PAGE.PRINTING.MODAL.POSTAL_CODE_VERIFICATION.TEXT2' | translate"></div>
+
+<form class="h-spacing-bottom--wide" id="verification" ng-submit="modal.action.submitVerification()">
+    <div class="form-row">
+        <div class="small-6 columns">
+            <input autofocus type="text" id="postal_code" placeholder="{{'PAGE.PRINTING.MODAL.POSTAL_CODE_VERIFICATION.POSTAL_CODE' | translate}}" ng-model="modal.data.postalCode" ng-change="modal.action.test()" autocomplete="off">
+        </div>
+        <div class="small-3 columns">
+            <button form="verification" type="submit" class="button button--blush button--right" ng-bind="('PAGE.PRINTING.MODAL.POSTAL_CODE_VERIFICATION.SUBMIT' ) | translate"></button>
+        </div>
+    </div>
+</form>
+
+<sup ng-bind="'PAGE.PRINTING.MODAL.POSTAL_CODE_VERIFICATION.FOOTNOTE' | translate"></sup>

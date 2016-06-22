@@ -6,35 +6,21 @@ module.exports = [
     'use strict';
     var self = this;
 
+    /* GLOBAL FIELDS: */
+
+    self.notificationIcons = {
+      warning: 'fa-exclamation-triangle',
+      error: 'fa-exclamation',
+    };
     self.currentAddress = false;
     self.selectedRate = null;
-
-
-    if ($routeParams.trackingId) {
-      StorageShipment.load($routeParams.trackingId);
-    }
-
-    self.rates = function() {
-      return StorageShipment.rates;
-    };
-
-    self.addresses = function() {
-      return StorageShipment.addresses;
-    };
-
-    self.editAddress = function(address, addressType) {
-      self.currentAddress = address;
-    };
-
-    var update = function() {
-      StorageShipment.update(self.currentAddress);
-      self.currentAddress = false;
-    };
-
     self.formConfig = {
       submit: {
         label: 'COMMON.ADDRESSES.SAVE',
-        action: update
+        action: function() {
+          StorageShipment.updateResource(self.currentAddress);
+          self.currentAddress = false;
+        }
       },
       model: function() {
         return self.currentAddress;
@@ -44,20 +30,52 @@ module.exports = [
       }
     };
 
-  self.selectRate = function (rate) {
-    console.log('selectRate: ', rate);
-    self.selectedRate = rate;
-    CommonUi.modal.show('/views/partials/modals/print_one.html', true, { rate : rate });
-  };
+    /* GLOBAL FUNCTIONS */
+
+    self.showError = function() {
+      return StorageShipment.error;
+    };
+
+    self.showNotifications = function() {
+      return StorageShipment.notifications;
+    };
+
+    self.addresses = function() {
+      return StorageShipment.addresses;
+    };
+
+    self.rates = function() {
+      return StorageShipment.rates;
+    };
+
+    self.editAddress = function(address, addressType) {
+      self.currentAddress = address;
+    };
+
+    self.selectRate = function(rate) {
+      console.log('selectRate: ', rate);
+      self.selectedRate = rate;
+      self.openPaymentMethodModal();
+    };
 
 
+    /* MODALS DEFINITION: */
+    self.openVerificationModal = function() {
+      var template = '/views/partials/modals/postal_code_verification.html';
+      var submitPostalCodeVerification = function() {
+        if ($routeParams.trackingId) {
+          console.log(StorageShipment.createResource($routeParams.trackingId, CommonUi.modal.data.postalCode));
+        }
+        CommonUi.modal.hide();
+      };
 
-    // MODAL CONFIGURATION
-
-    // DEBUGGING
+      CommonUi.modal.show(template, false, null, null, {
+        submitVerification: submitPostalCodeVerification
+      });
+    };
 
     self.openPaymentMethodModal = function() {
-      var url = 'views/partials/modals/payment_methods.html';
+      var template = 'views/partials/modals/payment_methods.html';
 
       var selectPaymentMethod = function(paymentMethod) {
         CommonUi.modal.data.selected = paymentMethod;
@@ -72,32 +90,42 @@ module.exports = [
         }
       };
 
-      var submitSelection = function() {
+      var submitPaymentMethodSelection = function() {
         StorageTransaction.selectedPaymentMethod = CommonUi.modal.data.selected;
         if (CommonUi.modal.data.account !== null) {
           StorageTransaction.paymentMethods[StorageTransaction.selectedPaymentMethod].data = {};
           StorageTransaction.paymentMethods[StorageTransaction.selectedPaymentMethod].data.iban = CommonUi.modal.data.account.iban;
           StorageTransaction.paymentMethods[StorageTransaction.selectedPaymentMethod].data.bic = CommonUi.modal.data.account.bic;
         }
+        console.log(StorageTransaction.selectedPaymentMethod);
+        console.log(StorageTransaction.paymentMethods);
+        CommonUi.modal.data.status = 'SUBMIT';
+        // CommonUi.modal.hide();
+        // CommonUi.modal.show('/views/partials/modals/print_one.html', true, {
+        //   rate: rate
+        // });
       };
 
-      CommonUi.modal.show(url, true, {
-        methods : Object.keys(StorageTransaction.paymentMethods),
-        icons : {
-          credit_card : 'fa-credit-card',
-          paypal : 'fa-paypal',
-          sofort_ueberweisung : 'fa-university'
+      CommonUi.modal.show(template, true, {
+        methods: Object.keys(StorageTransaction.paymentMethods),
+        icons: {
+          credit_card: 'fa-credit-card',
+          paypal: 'fa-paypal',
+          sofort_ueberweisung: 'fa-university'
         },
-        selected : 'SOFORT_UEBERWEISUNG',
-        account : null
+        selected: 'SOFORT_UEBERWEISUNG',
+        account: null,
+        status: 'SELECT'
       }, null, {
-        selectMethod : selectPaymentMethod,
-        cleanData : cleanPaymentDataInput,
-        submit : submitSelection
+        selectMethod: selectPaymentMethod,
+        cleanData: cleanPaymentDataInput,
+        submit: submitPaymentMethodSelection
       });
     };
 
-    // self.openPaymentMethodModal();
+    /* PROCESS */
 
+    /* 1. */
+    self.openVerificationModal();
   }
 ];
