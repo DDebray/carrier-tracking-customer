@@ -19,5 +19,6 @@ module.exports = function(application) {
     .directive('selectOnClick',   ['$window', require('./directives/selectOnClick')])
     .directive('tooltip',         ['CommonUi', require('./directives/tooltip')])
     .directive('watchHeight',     ['$timeout', require('./directives/watchHeight')])
+    .directive('unblur',          ['$timeout', require('./directives/unblur')])
     ;
 };
