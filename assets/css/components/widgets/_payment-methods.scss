@@ -6,6 +6,15 @@
         border-bottom: $_borderWidthSmall solid $_rgbAlto;
         cursor: pointer;
 
+        & .icon-action {
+          background-color: transparent;
+          color: $_rgbMineShaft;
+
+          &:hover {
+            background-color: lighten($_rgbAlto, 10);
+          }
+        }
+
         &.--active {
             background-color: $_rgbAlto;
         }
@@ -20,9 +29,13 @@
     }
 }
 .widget-payment-methods-form {
-    background-color: $_rgbAthensGray;
+    background-color: lighten($_rgbAlto, 15);
+
     border-bottom: $_borderWidthSmall solid $_rgbAlto;
-    padding: $_defaultSpacing;
+
+    &-inputs {
+      margin: $_defaultSpacing;
+    }
 
     &:last-child {
         border-bottom: none;

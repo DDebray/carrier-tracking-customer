@@ -31,7 +31,8 @@
     float: none !important;
   }
 
-  th {
+  th,
+  &__head {
     padding: ($_formSpacing / 2) $_formSpacing;
   }
 
@@ -79,7 +80,7 @@
     }
   }
 
-  &-row {
+  &__row {
     &--bordered {
       td,
       th {
@@ -98,7 +99,7 @@
     }
   }
 
-  &-column {
+  &__column {
     &--bordered {
       td,
       th {
@@ -120,17 +121,6 @@
     &--required:after {
       content: '\a0 *';
     }
-    &__legend {
-      &-one:after {
-        content: '\a0 \b9';
-      }
-      &-two:after {
-        content: '\a0 \b2';
-      }
-      &-three:after {
-        content: '\a0 \b3';
-      }
-    }
     &--slim {
       width: 1px;
     }
@@ -142,6 +132,18 @@
     }
     &--large {
       min-width: 250px;
+    }
+  }
+
+  &__legend {
+    &-one:after {
+      content: '\a0 \b9';
+    }
+    &-two:after {
+      content: '\a0 \b2';
+    }
+    &-three:after {
+      content: '\a0 \b3';
     }
   }
 

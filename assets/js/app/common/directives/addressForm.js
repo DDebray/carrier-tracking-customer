@@ -68,7 +68,8 @@ module.exports = function(StorageCountries) {
             return false;
           },
           email: function() {
-            return scope.sender();
+            // return scope.sender();
+            return false;
           }
         }, config.required)
       };

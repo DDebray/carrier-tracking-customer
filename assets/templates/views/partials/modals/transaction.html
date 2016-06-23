@@ -1,0 +1,6 @@
+<div ng-if="modal.data.status == 'SELECT_METHOD'" ng-include="'/views/partials/modals/transaction/select_method.html'"></div>
+<div ng-if="modal.data.status === 'PENDING'" class="h-center">
+    <span class="fa fa-circle-o-notch fa-spin modal__icon-busy"></span>
+    <div class="legend h-spacing-top" ng-bind="'PAGE.PRINTING.MODAL.LABEL_PRINT.PENDING_MESSAGE' | translate"></div>
+</div>
+<div ng-if="modal.data.status == 'DO_TRANSACTION'" ng-include="'/views/partials/modals/transaction/do_transaction.html'"></div>

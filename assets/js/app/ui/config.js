@@ -103,16 +103,6 @@ module.exports = function CommonUiProvider() {
       this.data = data;
       this.onClose = onClose;
       this.action = action;
-    },
-    showGeneric : function(headlineKey, textKey, showSpinner, isClosable) {
-      isClosable = isClosable === undefined ? true : isClosable;
-
-      this.show('/views/partials/modal_generic.html', isClosable, {
-        headline : headlineKey,
-        text : textKey,
-        showSpinner : showSpinner
-      });
     }
   };
-
 };

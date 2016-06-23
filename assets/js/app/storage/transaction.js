@@ -19,6 +19,7 @@ module.exports = [
         data: null
       }
     };
+    self.selectedRate = null;
 
     self.make = function() {
       CommonRequest.shipment.get({

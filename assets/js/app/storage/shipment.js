@@ -48,11 +48,11 @@ module.exports = [
      * This function semantically creates a new shipment resource out of a tracking number.
      * This will be the return shipment for the original shipment associated to that tracking number.
      * It needs the postal code so the server can check for the access permission.
-     * @param  {String} trackingNumber a string holding the tracking number.
+     * @param  {String} trackingId a string holding the tracking number.
      * @param  {String} postalCode a string holding the postal code for verification
      */
-    self.createResource = function(trackingNumber, postalCode) {
-      requestParameters.tracking_number = trackingNumber;
+    self.createResource = function(trackingId, postalCode) {
+      requestParameters.tracking_number = trackingId;
       requestParameters.postal_code = postalCode;
 
       doRequest();
@@ -75,7 +75,7 @@ module.exports = [
      * It may use the tracking number in combination with the postal code
      * to create a return shipment for the shipment associated to the tracking number.
      * The shipment data are saved as global fields: addresses and rates.
-     * @param  {String} trackingNumber a string holding the tracking number.
+     * @param  {String} trackingId a string holding the tracking number.
      * @param  {String} postalCode a string holding the postal code for verification
      */
 
