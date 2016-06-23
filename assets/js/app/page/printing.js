@@ -4,14 +4,11 @@ module.exports = [
     $routeParams, CommonUi, StorageShipment, StorageTransaction
   ) {
     'use strict';
+
     var self = this;
 
     /* GLOBAL FIELDS: */
 
-    self.notificationIcons = {
-      warning: 'fa-exclamation-triangle',
-      error: 'fa-exclamation',
-    };
     self.currentAddress = false;
     self.selectedRate = null;
     self.formConfig = {
@@ -29,16 +26,12 @@ module.exports = [
         enhanceFields: true
       }
     };
+    self.notificationIcons = {
+      warning: 'fa-exclamation-triangle',
+      error: 'fa-exclamation',
+    };
 
     /* GLOBAL FUNCTIONS */
-
-    self.showError = function() {
-      return StorageShipment.error;
-    };
-
-    self.showNotifications = function() {
-      return StorageShipment.notifications;
-    };
 
     self.addresses = function() {
       return StorageShipment.addresses;
@@ -58,13 +51,20 @@ module.exports = [
       self.openPaymentMethodModal();
     };
 
+    self.showError = function() {
+      return StorageShipment.error;
+    };
+
+    self.showNotifications = function() {
+      return StorageShipment.notifications;
+    };
 
     /* MODALS DEFINITION: */
     self.openVerificationModal = function() {
       var template = '/views/partials/modals/postal_code_verification.html';
       var submitPostalCodeVerification = function() {
         if ($routeParams.trackingId) {
-          console.log(StorageShipment.createResource($routeParams.trackingId, CommonUi.modal.data.postalCode));
+          StorageShipment.createResource($routeParams.trackingId, CommonUi.modal.data.postalCode);
         }
         CommonUi.modal.hide();
       };
