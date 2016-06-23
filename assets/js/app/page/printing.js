@@ -96,8 +96,8 @@ module.exports = [
       });
     };
 
-    // showVerificationModal();
-    StorageShipment.createResource($routeParams.trackingId, '10409');
+    showVerificationModal();
+    // StorageShipment.createResource($routeParams.trackingId, '10409');
 
 
     // ,
