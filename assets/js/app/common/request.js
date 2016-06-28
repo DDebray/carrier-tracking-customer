@@ -27,6 +27,12 @@ module.exports = ['$resource', '$http', 'CommonConfig', function($resource, $htt
         url : 'shipment/create'
       }
     }),
+    transaction : generateResource('transaction', 'cx', null, {
+      start : {
+        method : 'POST',
+        url : 'transaction/start'
+      }
+    }),
     countries : generateResource('countries', 'cx'),
 
 

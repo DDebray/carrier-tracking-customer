@@ -3,26 +3,20 @@
     & li {
         transition: background-color $_tShort,color $_tShort;
         padding: $_defaultSpacing/2 $_defaultSpacing;
-        border-bottom: $_borderWidthSmall solid $_rgbAlto;
         cursor: pointer;
-
         & .icon-action {
-          background-color: transparent;
-          color: $_rgbMineShaft;
-
-          &:hover {
-            background-color: lighten($_rgbAlto, 10);
-          }
+            background-color: transparent;
+            color: $_rgbMineShaft;
+            &:hover {
+                background-color: lighten($_rgbAlto, 10);
+            }
         }
-
         &.--active {
-            background-color: $_rgbAlto;
+            background-color: $_rgbAthensGray;
         }
-
         &:last-child {
             border-bottom: none;
         }
-
         & .icon {
             width: $_defaultSpacing*2;
         }
@@ -30,13 +24,9 @@
 }
 .widget-payment-methods-form {
     background-color: lighten($_rgbAlto, 15);
-
-    border-bottom: $_borderWidthSmall solid $_rgbAlto;
-
     &-inputs {
-      margin: $_defaultSpacing;
+        margin: 0 $_defaultSpacing $_defaultSpacing;
     }
-
     &:last-child {
         border-bottom: none;
     }
