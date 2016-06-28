@@ -53,8 +53,10 @@ module.exports = [
     };
 
     self.selectRate = function(rate) {
-      StorageTransaction.selectedRate = rate;
-      showTransactionModal();
+      if (!self.openAddress) {
+        StorageTransaction.selectedRate = rate;
+        showTransactionModal();
+      }
     };
 
     self.showError = function() {
@@ -68,14 +70,16 @@ module.exports = [
     var showVerificationModal = function() {
       CommonUi.modal.show('/views/partials/modals/verification.html', false, null, null, {
         submitVerification: function() {
-          StorageShipment.createResource(self.trackingId, CommonUi.modal.data.postalCode);
-          CommonUi.modal.hide();
+          if (CommonUi.modal.data.postalCode && CommonUi.modal.data.postalCode != '') {
+            StorageShipment.createResource(self.trackingId, CommonUi.modal.data.postalCode);
+            CommonUi.modal.hide();
+          }
         }
       });
     };
 
     var showTransactionModal = function() {
-      CommonUi.modal.show('views/partials/modals/transaction.html', true, {
+      CommonUi.modal.show('views/partials/modals/transaction.html', false, {
         methods: Object.keys(StorageTransaction.methods),
         methodsIcons: self.methodsIcons,
         selectedMethod: 'SOFORT_UEBERWEISUNG',
@@ -104,7 +108,6 @@ module.exports = [
         finishTransaction: function(successful, downloads) {
           $timeout(function() {
             if (successful) {
-
               CommonUi.modal.data.status = 'SHOW_APPROVAL';
               downloads.forEach(
                 function(file) {
@@ -113,10 +116,7 @@ module.exports = [
                   CommonUi.modal.data.downloads[file.name].format = file.format;
                   CommonUi.modal.data.downloads[file.name].count = file.count;
                 });
-
-              console.log(CommonUi.modal.data.downloads);
-              // console.log(CommonUi.modal.data.downloads);
-
+              CommonUi.modal.closable = true;
             } else {
               CommonUi.modal.data.status = 'SHOW_ERROR';
             }
@@ -127,11 +127,6 @@ module.exports = [
     };
 
     showVerificationModal();
-    // StorageShipment.createResource($routeParams.trackingId, '10409');
-
-
-
-
 
     // donwloads: {
     //   urls: [{
@@ -154,7 +149,8 @@ module.exports = [
     //       // ]
     //   }
     // }
-
+    //
+    //
 
 
     // ,
@@ -166,80 +162,6 @@ module.exports = [
     //     CommonUi.modal.data.account[property] = CommonUi.modal.data.account[property].replace(/\W/g, '');
     //   }
     // }
-
-
-
-    /* GLOBAL FIELDS: */
-
-    // self.state = 'IDLE'; // PENDING, COMPLETED, ERROR
-
-
-
-    /* GLOBAL FUNCTIONS */
-
-
-
-
-
-
-
-
-
-    // self.buy = function() {
-    //   CommonUi.modal.data.status = 'PENDING';
-    // };
-    //
-    // /* MODALS DEFINITION: */
-    //
-    //
-    //
-    // $timeout(function() {
-    //   CommonUi.modal.data.status = 'COMPLETED';
-    // }, 1000);
-    //
-    // $timeout(function() {
-    //   CommonUi.modal.data.status = 'ERROR';
-    // }, 2500);
-    //
-    // self.selectRate = function(rate) {
-    //   console.log('selectRate: ', rate);
-    //   self.selectedRate = rate;
-    //
-    //   // TODO: insert releveant data into modal data...
-    //   CommonUi.modal.show('/views/partials/modals/print_one.html', true, {
-    //     rate: rate,
-    //     status: 'IDLE',
-    //     buy: self.buy,
-    //     download_result: {
-    //       download_urls: [{
-    //         url: ['http://www.coureon.com'],
-    //         format: 'a5',
-    //         count: 1
-    //       }, {
-    //         url: ['http://www.coureon.com'],
-    //         format: 'a4',
-    //         name: 'DPD_DROPOFF_RECEIPT_LABEL',
-    //         count: 1
-    //       }],
-    //       customs_urls: {
-    //         hints: []
-    //           // hints : [
-    //           //   {
-    //           //     carrier_code: 'dpd',
-    //           //     link: 'dpd'
-    //           //   }
-    //           // ]
-    //       }
-    //     }
-    //   });
-    // };
-
-    // DEBUGGING
-
-
-    //
-    //
-    // };
 
   }
 ];

@@ -36,4 +36,9 @@
       margin-bottom: 0;
     }
   }
+
+  & .error {
+    color: $_rgbBlush;
+    font-style: italic;
+  }
 }
