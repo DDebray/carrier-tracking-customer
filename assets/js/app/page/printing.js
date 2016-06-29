@@ -70,7 +70,7 @@ module.exports = [
     var showVerificationModal = function() {
       CommonUi.modal.show('/views/partials/modals/verification.html', false, null, null, {
         submitVerification: function() {
-          if (CommonUi.modal.data.postalCode && CommonUi.modal.data.postalCode != '') {
+          if (CommonUi.modal.data.postalCode && CommonUi.modal.data.postalCode !== '') {
             StorageShipment.createResource(self.trackingId, CommonUi.modal.data.postalCode);
             CommonUi.modal.hide();
           }

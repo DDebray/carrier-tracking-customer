@@ -6,11 +6,11 @@
 <form novalidate class="h-spacing-bottom--wide form" name="verification" id="verification" ng-submit="modal.action.submitVerification()">
     <div class="form-row">
         <div class="small-6 columns">
-            <input required autofocus type="text" name="postalcode" id="postalcode" ng-model="modal.data.postalCode" autocomplete="off" ng-pattern="/^[0-9]{5}$/">
+            <!-- ng-init="modal.data.postalCode = (base.env === 'development') ? '10409' : modal.data.postalCode" -->
+            <input required autofocus type="text" name="postalcode" id="postalcode" ng-model="modal.data.postalCode" autocomplete="off" ng-pattern="/^[0-9]{5}$/" ng-init="modal.data.postalCode = (base.env === 'development') ? '10409' : modal.data.postalCode">
             <small class="error" ng-show="verification.postalcode.$error.pattern" ng-bind="'PAGE.PRINTING.MODAL.POSTAL_CODE_VERIFICATION.ERROR.POSTAL_CODE.WRONG_FORMAT' | translate"></small>
             <small class="error" ng-show="verification.postalcode.$error.required" ng-bind="'PAGE.PRINTING.MODAL.POSTAL_CODE_VERIFICATION.ERROR.POSTAL_CODE.MISSING' | translate"></small>
         </div>
-        <!-- ng-init="modal.data.postalCode = (base.env === 'development') ? '10409' : modal.data.postalCode" -->
         <div class="small-3 columns">
             <button form="verification" type="submit" class="button button--blush button--right" ng-bind="('PAGE.PRINTING.MODAL.POSTAL_CODE_VERIFICATION.SUBMIT' ) | translate"></button>
         </div>

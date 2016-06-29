@@ -1,4 +1,4 @@
-module.exports = function($timeout) {
+module.exports = function($timeout, $window) {
   'use strict';
 
   return {
@@ -12,29 +12,29 @@ module.exports = function($timeout) {
     },
     transclude: true,
     replace: true,
-    controller: function( $scope ) {
+    controller: ['$scope', function ($scope) {
       $scope.style = {
         position : 'relative',
         display : 'none',
         height : '1px'
       };
-    },
+    }],
     link: function(scope, element, attrs) {
+
       var targetElem = document.getElementById(scope.el),
-        placeholder = element,
-        isPlaceholderVisible = false,
-        isWatching = 0;
+        isPlaceholderVisible = false;
 
-      scope.$watch(function() {
+      scope.contentHeight = function () {
         return targetElem.offsetHeight;
-      }, function(newValue, oldValue) {
+      };
 
+      scope.$watch(scope.contentHeight, function(newValue, oldValue) {
         if (isPlaceholderVisible) {
           oldValue = oldValue - 1;
           newValue = newValue - 1;
         }
 
-        if (newValue !== oldValue && isWatching < 2) {
+        if (newValue !== oldValue) {
           var remainder = newValue % 2;
 
           if (remainder === 1) {
@@ -44,15 +44,13 @@ module.exports = function($timeout) {
           }
 
           isPlaceholderVisible = scope.style.display === 'block';
-          isWatching++;
         }
 
-        $timeout(function () {
-          isWatching = 0;
-        }, 25);
+        angular.element($window).bind('resize', function() {
+          scope.$apply();
+        });
 
-      }, false); //ADD A BOOLEAN TO DEEPWATCH ALL THE PROPERTIES OF THE OBJECT
-
+      }, false);
     }
   };
 };
