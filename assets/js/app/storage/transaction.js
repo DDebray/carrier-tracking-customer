@@ -52,6 +52,8 @@ module.exports = [
         requestParameters.bic = self.methods[self.selectedMethod].data.bic;
       }
 
+      self.popup = window.open('/wait.html', '', 'width=' + (screen.availWidth * 0.8) + ',height=' + (screen.availHeight * 0.8) + ',resizable=yes');
+
       doRequest(callback);
     };
 
@@ -69,16 +71,15 @@ module.exports = [
 
     var openPopup = function(responseContent, callback) {
       if (responseContent.redirect_url) {
-        var popup = window.open('/wait.html', '', 'width=' + (screen.availWidth * 0.8) + ',height=' + (screen.availHeight * 0.8) + ',resizable=yes');
 
-        if (popup) {
-          popup.moveTo(screen.availWidth * 0.1, screen.availHeight * 0.1);
-          popup.focus();
-          popup.location.href = responseContent.redirect_url;
+        if (self.popup) {
+          self.popup.moveTo(screen.availWidth * 0.1, screen.availHeight * 0.1);
+          self.popup.focus();
+          self.popup.location.href = responseContent.redirect_url;
         }
 
         var sendMessage = window.setInterval(function() {
-          popup.postMessage('COUREON', '*');
+          self.popup.postMessage('COUREON', '*');
         }, 100);
 
         var receiveMessage = function(e) {
@@ -108,8 +109,8 @@ module.exports = [
           window.removeEventListener('message', receiveMessage);
           window.removeEventListener('focus', resume);
 
-          if (popup) {
-            popup.close();
+          if (self.popup) {
+            self.popup.close();
           }
         };
 
