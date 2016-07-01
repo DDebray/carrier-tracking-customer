@@ -67,17 +67,6 @@ module.exports = [
       return StorageShipment.notifications;
     };
 
-    var showVerificationModal = function() {
-      CommonUi.modal.show('/views/partials/modals/verification.html', false, null, null, {
-        submitVerification: function() {
-          if (CommonUi.modal.data.postalCode && CommonUi.modal.data.postalCode !== '') {
-            StorageShipment.createResource(self.trackingId, CommonUi.modal.data.postalCode);
-            CommonUi.modal.hide();
-          }
-        }
-      });
-    };
-
     var showTransactionModal = function() {
       CommonUi.modal.show('views/partials/modals/transaction.html', false, {
         methods: Object.keys(StorageTransaction.methods),
@@ -122,6 +111,17 @@ module.exports = [
             }
             CommonUi.unlock();
           }, 1000, true);
+        }
+      });
+    };
+
+    var showVerificationModal = function() {
+      CommonUi.modal.show('/views/partials/modals/verification.html', false, null, null, {
+        submitVerification: function() {
+          if (CommonUi.modal.data.postalCode && CommonUi.modal.data.postalCode !== '') {
+            StorageShipment.createResource(self.trackingId, CommonUi.modal.data.postalCode);
+            CommonUi.modal.hide();
+          }
         }
       });
     };
