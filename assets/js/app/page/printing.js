@@ -95,7 +95,6 @@ module.exports = [
           StorageTransaction.start(self.trackingId, this.finishTransaction);
         },
         finishTransaction: function(successful, downloads) {
-          $timeout(function() {
             if (successful) {
               CommonUi.modal.data.status = 'SHOW_APPROVAL';
               downloads.forEach(
@@ -105,12 +104,11 @@ module.exports = [
                   CommonUi.modal.data.downloads[file.name].format = file.format;
                   CommonUi.modal.data.downloads[file.name].count = file.count;
                 });
-              CommonUi.modal.closable = true;
             } else {
               CommonUi.modal.data.status = 'SHOW_ERROR';
             }
+            CommonUi.modal.closable = true;
             CommonUi.unlock();
-          }, 1000, true);
         }
       });
     };
