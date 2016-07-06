@@ -1,6 +1,12 @@
 <hero title="'PAGE.PRINTING.TITLE' | translate" image="url(images/hero/printing.jpg)"></hero>
 
-<section class="section">
+<section class="section" ng-if="!printing.isPostalCodeVerified">
+    <div class="section__inner row">
+        <div ng-include="'/views/partials/modals/verification.html'"></div>
+    </div>
+</section>
+
+<section class="section" ng-if="printing.isPostalCodeVerified">
     <div class="section__inner row" ng-class="{ 'section__inner--centered' : printing.showError() }">
 
         <h2 ng-if="printing.showError()" ng-bind="'PAGE.PRINTING.ERROR_TITLE' | translate"></h2>

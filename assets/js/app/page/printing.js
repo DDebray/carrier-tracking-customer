@@ -10,6 +10,9 @@ module.exports = [
     self.trackingId = $routeParams.trackingId;
 
     self.openAddress = false;
+    self.postalCode = '';
+    self.isPostalCodeVerified = false;
+
 
     self.addressForm = {
       model: function() {
@@ -115,6 +118,15 @@ module.exports = [
       });
     };
 
+
+    self.submitVerification = function() {
+      if (self.postalCode && self.postalCode !== '') {
+        StorageShipment.createResource(self.trackingId, self.postalCode);
+        // CommonUi.modal.hide();
+      }
+    };
+
+
     var showVerificationModal = function() {
       CommonUi.modal.show('/views/partials/modals/verification.html', false, null, null, {
         submitVerification: function() {
@@ -126,7 +138,7 @@ module.exports = [
       });
     };
 
-    showVerificationModal();
+    // showVerificationModal();
 
     // donwloads: {
     //   urls: [{
