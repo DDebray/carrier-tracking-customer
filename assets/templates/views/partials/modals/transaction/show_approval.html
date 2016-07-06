@@ -1,27 +1,26 @@
 <div class="h-center h-spacing-bottom--wide" ng-bind="'PAGE.PRINTING.MODAL.LABEL_PRINT.APPROVAL' | translate"></div>
 
-<!-- <div class="h-center h-spacing-bottom--wide" ng-repeat="hint in modal.data.download_result.customs_urls.hints">
+<div class="h-center h-spacing-bottom--wide" ng-repeat="hint in modal.data.download_result.customs_urls.hints">
     <div class="h-spacing-top" ng-bind="('COMMON.LABEL.CUSTOMS_HINT.' + hint.carrier_code.toUpperCase() | translate)"></div>
     <a href="{{hint.link}}" target="_blank">
         <span ng-bind="('COMMON.LABEL.CUSTOMS_HINT.' + hint.carrier_code.toUpperCase() + '.LINK.TEXT' | translate)"></span>
     </a>
-</div> -->
+</div>
 
 <table class="table table--filling table--spacing table--saving table__row--bordered h-spacing-top">
     <thead>
-        <tr>
+        <tr class="table-row--highlight">
             <td class="table__head" ng-bind="'Papierlayout' | translate"></td>
             <td class="table__head h-right" ng-bind="'Herunterladen' | translate"></td>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="(name, values) in modal.data.downloads">
+        <tr ng-repeat="(name, values) in modal.data.downloads" class="table-row--highlight">
             <td>
                 <span class="icon-inline--left icon-inline--middle">
-                    <span ng-class="'image-layout-' + values.format"></span>
+                    <span ng-class="'image-layout-' + (values.format || 'a4').toLowerCase()"></span>
                 </span>
-                <span ng-bind="('COMMON.LABEL.LAYOUT_' + values.format.toUpperCase()) | translate"></span>
-
+                <span ng-bind="('COMMON.LABEL.LAYOUT_' + (values.format || 'a4').toUpperCase()) | translate"></span>
             </td>
             <td class="table__column--numeric">
                 <a ng-href="{{ values.url }}" target="_blank" ng-bind="(('PAGE.PRINTING.MODAL.LABEL_PRINT.DOWNLOAD.' + (name ? ('_CUSTOM.' + name.toUpperCase()) : '')) | translate).replace('%%', values.count || '')"></a>

@@ -22,12 +22,16 @@
         }
     }
 }
+
 .widget-payment-methods-form {
-    background-color: lighten($_rgbAlto, 15);
-    &-inputs {
-        margin: 0 $_defaultSpacing $_defaultSpacing;
-    }
+    // background-color: lighten($_rgbAlto, 15);
+    padding: $_defaultSpacing;
+
     &:last-child {
         border-bottom: none;
+    }
+
+    input {
+      margin-bottom: 0;
     }
 }
