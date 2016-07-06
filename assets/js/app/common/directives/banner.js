@@ -5,7 +5,8 @@ module.exports = function() {
     restrict: 'E',
     scope: {
       title: '@title',
-      subtitle: '@subtitle'
+      subtitle: '@subtitle',
+      trackingId: '@trackingId'
     },
     transclude: true,
     replace: true,

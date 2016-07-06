@@ -8,24 +8,24 @@
 </div>
 
 <table class="table table--filling table--spacing table--saving table__row--bordered h-spacing-top">
-    <thead>
-        <tr class="table-row--highlight">
-            <td class="table__head" ng-bind="'Papierlayout' | translate"></td>
-            <td class="table__head h-right" ng-bind="'Herunterladen' | translate"></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="(name, values) in modal.data.downloads" class="table-row--highlight">
-            <td>
-                <span class="icon-inline--left icon-inline--middle">
-                    <span ng-class="'image-layout-' + (values.format || 'a4').toLowerCase()"></span>
-                </span>
-                <span ng-bind="('COMMON.LABEL.LAYOUT_' + (values.format || 'a4').toUpperCase()) | translate"></span>
-            </td>
-            <td class="table__column--numeric">
-                <a ng-href="{{ values.url }}" target="_blank" ng-bind="(('PAGE.PRINTING.MODAL.LABEL_PRINT.DOWNLOAD.' + (name ? ('_CUSTOM.' + name.toUpperCase()) : '')) | translate).replace('%%', values.count || '')"></a>
-                <span class="fa fa-file-pdf-o icon-inline-right"></span>
-            </td>
-        </tr>
-    </tbody>
+<thead>
+    <tr class="table-row--highlight">
+        <td class="table__head" ng-bind="'PAGE.PRINTING.MODAL.LABEL_PRINT.APPROVAL.PAPER_LAYOUT' | translate"></td>
+        <td class="table__head h-right" ng-bind="'PAGE.PRINTING.MODAL.LABEL_PRINT.APPROVAL.DOWNLOAD' | translate"></td>
+    </tr>
+</thead>
+<tbody>
+    <tr ng-repeat="(name, values) in modal.data.downloads" class="table-row--highlight">
+        <td>
+            <span class="icon-inline--left icon-inline--middle">
+                <span ng-class="'image-layout-' + (values.format || 'a4').toLowerCase()"></span>
+            </span>
+            <span ng-bind="('COMMON.LABEL.LAYOUT_' + (values.format || 'a4').toUpperCase()) | translate"></span>
+        </td>
+        <td class="table__column--numeric">
+            <a ng-href="{{ values.url }}" target="_blank" ng-bind="(('PAGE.PRINTING.MODAL.LABEL_PRINT.DOWNLOAD.' + (name ? ('_CUSTOM.' + name.toUpperCase()) : '')) | translate).replace('%%', values.count || '')"></a>
+            <span class="fa fa-file-pdf-o icon-inline-right"></span>
+        </td>
+    </tr>
+</tbody>
 </table>

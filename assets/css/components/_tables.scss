@@ -2,6 +2,9 @@
   table-layout: auto;
   page-break-inside: auto;
 
+  font-family: $_ffSans;
+  font-size: $_fsSmall;
+
   tr.row:after,
   tr.row:before {
     display: none;
@@ -29,7 +32,7 @@
   th {
     transition: background-color $_tShort;
     position: static;
-    float: none !important;
+    float: none;
   }
 
   &__head,
@@ -150,7 +153,7 @@
   }
 
   thead {
-    font-family: $_ffSansBold;
+    font-family: $_ffSansSemiBold;
     font-size: $_fsSmall;
 
     & > .table-row--highlight {
