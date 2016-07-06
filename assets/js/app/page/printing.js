@@ -123,6 +123,7 @@ module.exports = [
       if (self.postalCode && self.postalCode !== '') {
         StorageShipment.createResource(self.trackingId, self.postalCode);
         // CommonUi.modal.hide();
+        self.isPostalCodeVerified = true;
       }
     };
 
