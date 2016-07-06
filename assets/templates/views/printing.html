@@ -16,6 +16,8 @@
 
         <!-- ADDRESSES: -->
         <div ng-if="!printing.showError()" class="columns large-6">
+            <small><pre>{{ printing.addresses() | json }}</pre></small>
+
             <div class="area-panel area-panel--merge" ng-repeat="(addressType, address) in printing.addresses()" ng-click="address.is_editable ? printing.openAddressForm(address, addressType) : null" ng-class="{ 'widget-address' : address.is_editable, 'widget-address--js-editing' : (address.is_editable && printing.openAddress.address_type == addressType) }">
 
                 <h3 class="address-headline" ng-bind="('COMMON.ADDRESSES.' + addressType) | translate"></h3>

@@ -40,7 +40,9 @@ module.exports = [
 
     // self.selectedRate = null;
 
+
     self.addresses = function() {
+      console.log('StorageShipment.addresses', StorageShipment.addresses);
       return StorageShipment.addresses;
     };
 
