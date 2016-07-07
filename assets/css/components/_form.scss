@@ -1,0 +1,44 @@
+.form {
+  @include clearfix();
+
+  &__label {
+    color: $_rgbMineShaft;
+    cursor: pointer;
+    font-size: $_fsSmall;
+
+    &--required:after {
+      content: ' *';
+    }
+  }
+
+  input,
+  select {
+    margin: 0;
+    font-size: $_fsSmall;
+  }
+
+  input[type="file"],
+  input[type="checkbox"],
+  input[type="radio"],
+  select {
+    outline: 0;
+  }
+
+  &-row {
+    @include clearfix();
+    margin-bottom: $_formSpacing * 2;
+
+    &.row {
+      margin: - ($_formSpacing * 1.5);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  & .error {
+    color: $_rgbBlush;
+    font-style: italic;
+  }
+}

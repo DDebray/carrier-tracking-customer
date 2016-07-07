@@ -1,0 +1,12 @@
+@media print {
+  body {
+    overflow-y:visible;
+    overflow-x:visible;
+  }
+
+  .print {
+    &-hide {
+      display:none;
+    }
+  }
+}

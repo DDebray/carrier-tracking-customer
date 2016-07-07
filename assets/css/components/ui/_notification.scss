@@ -1,0 +1,23 @@
+.ui-notification {
+    transition: opacity $_tShort;
+    border-radius: $_borderRadiusDefault;
+    padding: ($_formSpacing / 2) $_formSpacing;
+    color: $_rgbWhite;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &-icon {
+      width: $_xSpacing;
+    }
+    &-list {
+        margin: 0;
+        padding: 0;
+        list-style: none outside;
+        li + li {
+            margin-top: $_formSpacing / 2;
+        }
+    }
+    &-warning {
+        background-color: $_rgbMineShaft;
+    }
+}

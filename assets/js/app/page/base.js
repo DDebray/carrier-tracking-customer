@@ -1,7 +1,7 @@
 module.exports = [
-  '$rootScope', '$location', '$route', '$translate', 'CommonUi', 'CommonTracking', 'CommonConfig',
+  '$rootScope', '$location', '$route', '$translate', '$filter', 'CommonUi', 'CommonConfig', 'CommonTracking',
 function(
-  $rootScope, $location, $route, $translate, CommonUi, CommonTracking, CommonConfig
+  $rootScope, $location, $route, $translate, $filter, CommonUi, CommonConfig, CommonTracking
 ) {
   'use strict';
   var self = this;
@@ -18,19 +18,21 @@ function(
     }
   });
 
-  var notFoundModalUrl = '/views/partials/no_content.html';
-  self.printReturnLabel = function () {
+  self.printReturnLabel = function (trackingId) {
     CommonTracking.addEvent('track', 'print-return-label-button was clicked.' );
-    CommonUi.modal.show(notFoundModalUrl, true, { data : 'test123' });
+    if (trackingId) {
+      $location.path('/printing/' + trackingId);
+    }
   };
 
   self.printLabel = function () {
     CommonTracking.addEvent('track', 'print-label-button was clicked.' );
-    CommonUi.modal.show(notFoundModalUrl, true, { data : 'test123' });
   };
 
-  // self.myAccountUrl = CommonConfig.endpoints.app[CommonConfig.environment()];
-  // self.coureonUrl = CommonConfig.endpoints.www[CommonConfig.environment()];
+  self.banner = {
+    title : $filter('translate')('SECTION.FOOTER.TITLE'),
+    subtitle : $filter('translate')('SECTION.FOOTER.SUBTITLE')
+  };
 
   self.env = CommonConfig.environment();
 }];

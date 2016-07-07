@@ -12,7 +12,9 @@ var config = {
       scripts         : ASSETS_DIR + 'js/main.js',
       scripts_vendor  : ASSETS_DIR + 'js/vendor/**/*.js',
       scripts_env     : ASSETS_DIR + 'js/app/environment.js',
-      images          : ASSETS_DIR + 'images/**/*.{png,jpg,jpeg,gif,svg}',
+      // images          : ASSETS_DIR + 'images/**/*.{png,jpg,jpeg,gif,svg}',
+      images          : [ASSETS_DIR + 'images/**/*', '!' + ASSETS_DIR + 'images/sprite/**/*'],
+      sprite          : ASSETS_DIR + 'images/sprite/**/*.{png,jpg,jpeg}',
       copy            : ASSETS_DIR + 'copy/**/*',
       rev             : ASSETS_DIR + 'rev/',
       root            : ASSETS_DIR
@@ -23,6 +25,10 @@ var config = {
       styles         : PUBLIC_DIR + 'css/',
       scripts        : PUBLIC_DIR + 'js/',
       images         : PUBLIC_DIR + 'images/',
+      sprite         : {
+        img          : PUBLIC_DIR + 'images/',
+        scss         : ASSETS_DIR + 'css/variables/'
+      },
       root           : PUBLIC_DIR
     }
     // hosts : {

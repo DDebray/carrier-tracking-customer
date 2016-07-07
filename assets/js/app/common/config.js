@@ -20,29 +20,25 @@ module.exports = ['$translateProvider', function ($translateProvider) {
       production : 'https://api.coureon.com/ui/'
     },
     cx : {
+      // development : 'http://localhost:8080/zooron-web/cx/',
+      // development : 'https://api-development.coureon.com/cx/',
       development : 'https://api-testing.coureon.com/cx/',
       testing : 'https://api-testing.coureon.com/cx/',
+      // testing : 'https://api-testing.coureon.com/cx/',
       staging : 'https://api-staging.coureon.com/cx/',
       production : 'https://api.coureon.com/cx/'
     },
-    // tracking/123
-    // ruediger : {
-    //   development : 'http://172.30.8.34:8081/external/',
-    //   testing : 'http://172.30.8.34:8081/external/',
-    //   staging : 'http://172.30.8.34:8081/external/',
-    //   production : 'http://172.30.8.34:8081/external/'
-    // },
+    ruediger : {
+      development : 'http://172.30.8.34:8081/external/',
+      testing : 'http://172.30.8.34:8081/external/',
+      staging : 'http://172.30.8.34:8081/external/',
+      production : 'http://172.30.8.34:8081/external/'
+    },
     www : {
       development: 'http://localhost:3000',
       testing : 'https://www-testing.coureon.com',
       staging : 'https://www-staging.coureon.com',
       production : 'https://www.coureon.com'
-    },
-    app : {
-      development: 'http://localhost:3000/login',
-      testing : 'https://app-testing.coureon.com/login',
-      staging : 'https://app-staging.coureon.com/login/',
-      production : 'https://app.coureon.com/login'
     }
   };
 

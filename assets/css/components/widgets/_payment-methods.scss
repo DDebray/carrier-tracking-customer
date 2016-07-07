@@ -1,0 +1,37 @@
+.widget-payment-methods {
+    @include resetList;
+    & li {
+        transition: background-color $_tShort,color $_tShort;
+        padding: $_defaultSpacing/2 $_defaultSpacing;
+        cursor: pointer;
+        & .icon-action {
+            background-color: transparent;
+            color: $_rgbMineShaft;
+            &:hover {
+                background-color: lighten($_rgbAlto, 10);
+            }
+        }
+        &.--active {
+            background-color: $_rgbAthensGray;
+        }
+        &:last-child {
+            border-bottom: none;
+        }
+        & .icon {
+            width: $_defaultSpacing*2;
+        }
+    }
+}
+
+.widget-payment-methods-form {
+    // background-color: lighten($_rgbAlto, 15);
+    padding: $_defaultSpacing;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    input {
+      margin-bottom: 0;
+    }
+}

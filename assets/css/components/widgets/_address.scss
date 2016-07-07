@@ -1,0 +1,18 @@
+.widget-address {
+  transition: background-color $_tShort,
+    border-left-width $_tShort,
+    border-left-color $_tShort;
+  position: relative;
+  line-height: 1.85em;
+  cursor: pointer;
+
+  &:not(&--js-editing):hover {
+    border-left-width: 6px;
+    background-color: $_rgbAthensGray;
+    border-left-color: $_rgbBlush;
+
+    .icon-action {
+      background-color: darken($_rgbBlush, 10);
+    }
+  }
+}

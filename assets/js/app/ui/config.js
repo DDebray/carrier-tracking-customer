@@ -59,14 +59,14 @@ module.exports = function CommonUiProvider() {
       }
 
       var acr = services.CommonBrowser.getAbsoluteClientRect(config.targetEl),
-        directionX = config.directionX || 'center',
+        directionX = config.directionX || 'centered',
         directionY = config.directionY || (acr.fixed.bottom > (document.body.clientHeight - 200) ? 'up' : 'down');
-      config.cssClass = 'ui-tooltip-' + directionY + ' ' + 'ui-tooltip-' + directionX + ' ' + (config.class || '');
+      config.cssClass = 'ui-tooltip--' + directionY + ' ' + 'ui-tooltip--' + directionX + ' ' + (config.class || '');
       config.css = {
         minWidth : acr.width + 'px',
         top : directionY === 'down' ? (acr.bottom + 'px') : 'auto',
         bottom : directionY === 'up' ? ((document.body.clientHeight - acr.top) + 'px') : 'auto',
-        left : directionX === 'center' ? (acr.left + (acr.width / 2)) + 'px' : (directionX === 'right' ? (acr.left + (acr.width / 2) - 25) + 'px' : 'auto'),
+        left : directionX === 'centered' ? (acr.left + (acr.width / 2)) + 'px' : (directionX === 'right' ? (acr.left + (acr.width / 2) - 25) + 'px' : 'auto'),
         right : directionX === 'left' ? (((document.body.clientWidth - acr.right) + (acr.width / 2)) - 9) + 'px' : 'auto'
       };
 
@@ -103,16 +103,6 @@ module.exports = function CommonUiProvider() {
       this.data = data;
       this.onClose = onClose;
       this.action = action;
-    },
-    showGeneric : function(headlineKey, textKey, showSpinner, isClosable) {
-      isClosable = isClosable === undefined ? true : isClosable;
-
-      this.show('/views/partials/modal_generic.html', isClosable, {
-        headline : headlineKey,
-        text : textKey,
-        showSpinner : showSpinner
-      });
     }
   };
-
 };

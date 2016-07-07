@@ -1,5 +1,13 @@
 .hero {
-  padding-bottom: 70px;
+  height: $_hBanner;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+}
+
+.hero__content {
+  align-self: center;
 }
 
 .hero__title {
@@ -8,6 +16,7 @@
   font-weight: $_fsDefault;
   line-height: ($_fsLarge + 0.3rem);
   margin-bottom: 10px;
+  color: $_rgbWhite;
   text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
 }
 
@@ -19,14 +28,14 @@
 }
 
 @media (max-width: $_wLarge) {
-  .hero {
+  .hero__content {
     text-align: center;
   }
 }
 
 .hero__form {
   @include clearfix;
-  margin-top: 58px;
+  margin-top: 25px;
 }
 
 .hero__form__elements {
@@ -53,6 +62,7 @@
 .hero__form__input--default {
   width: 100%;
   text-align: center;
+  margin: 0;
 }
 
 
@@ -103,6 +113,11 @@
     float: left;
     width: 290px;
     text-align: left;
+    overflow: hidden;
+
+    &:focus {
+      border: none;
+    }
   }
 
   .hero__form__submit {

@@ -1,3 +1,4 @@
+// REVIEW Understand what this is doing!
 module.exports = [function () {
   'use strict';
 

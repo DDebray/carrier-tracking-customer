@@ -1,7 +1,7 @@
 module.exports = [
-  '$routeParams', '$location', 'CommonRequest', 'CommonMoment', 'CommonTracking', 'StorageTracking', 'CommonUi',
+  '$routeParams', '$location', '$filter', 'CommonRequest', 'CommonMoment', 'CommonTracking', 'StorageTracking', 'CommonUi',
 function(
-  $routeParams, $location, CommonRequest, CommonMoment, CommonTracking, StorageTracking, CommonUi
+  $routeParams, $location, $filter, CommonRequest, CommonMoment, CommonTracking, StorageTracking, CommonUi
 ) {
   'use strict';
   var self = this;
@@ -121,7 +121,13 @@ function(
   self.getStatus = function () {
     if (self.trackingId) {
       CommonTracking.addEvent('track', '"Jetzt Sendung verfolgen" button was used for "' + self.trackingId + '".' );
-      $location.path('/'+ self.trackingId);
+      $location.path('/tracking/'+ self.trackingId);
     }
+  };
+
+  self.banner = {
+    title : $filter('translate')('SECTION.FOOTER.TITLE'),
+    subtitle : $filter('translate')('SECTION.FOOTER.SUBTITLE'),
+    trackingId: self.trackingId
   };
 }];

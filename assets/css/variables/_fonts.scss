@@ -1,0 +1,24 @@
+@include font-face('opensans-light');
+@include font-face('opensans-regular');
+@include font-face('opensans-semibold');
+@include font-face('opensans-bold');
+
+@include font-face('coureon-icons');
+
+$_ffSans       : 'OpenSans-Light', sans-serif;
+$_ffSansSemiBold   : 'OpenSans-SemiBold', sans-serif;
+$_ffSansBold   : 'OpenSans-Bold', sans-serif;
+$_ffCoureonIcon: 'coureon-icons';
+
+$_fsSmall      : 0.764rem; // 13px
+$_lhSmall      : 1.058rem; // 18px
+
+$_fsDefault         : 1rem;     // 17px
+$_fsDefaultFallback : 1.03rem;  // 17.5100002288818px
+$_lhDefault         : 1.588rem; // 27px
+
+$_fsMedium     : 1.588rem; // 27px
+$_lhMedium     : 2.235rem; // 38px
+
+$_fsLarge      : 2.588rem; // 44px
+$_lhLarge      : 3.529rem; // 60px

@@ -38,8 +38,11 @@ node_modules
 .editorconfig
 /public
 /assets/js/app/environment.js
-#/assets/templates/views/partials/coureon_footer.html
+/assets/css/variables/_sprite.scss
 
 #IntelliJ
 .idea
 carrier-tracking-customer.iml
+
+#Atom
+.htmlhintrc

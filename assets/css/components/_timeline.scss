@@ -19,7 +19,7 @@
       content: '';
       position: absolute;
       top: 0;
-      left: $timeline-date-width + $timeline-state-size + $_xSpacing;
+      left: $timeline-date-width + $timeline-state-size + ($_defaultSpacing * 2);
       height: calc(100% + #{$_ySpacing});
       width: $timeline-width;
       background: $_rgbDustyGray;
@@ -40,11 +40,11 @@
     }
 
     &:first-child .timeline__state,
-    &:last-child .timeline__state.--processIsCompleted {
+    &:last-child .timeline__state--process-is-completed {
       border-radius: $_borderRadiusDefault;
     }
 
-    &.--isOnlyChild:before {
+    &--is-only-child:before {
       height: 0;
       background: $_rgbWhite;
     }
@@ -60,15 +60,15 @@
     color: $_rgbWhite;
     font-weight: bold;
     background-color: $_rgbPacificBlue;
-    padding: $_defaultSpacing;
+    padding: $_defaultSpacing / 2;
     text-align: center;
     z-index: $zindex-inner;
   }
 
   &__state {
     position: absolute;
-    top: calc(50% - #{($timeline-state-size / 2)} - #{($_defaultSpacing)});
-    left: $timeline-date-width + $_xSpacing + ($_defaultSpacing / 2) - 1px;
+    top: calc(50% - #{($timeline-state-size / 2)} - #{($_defaultSpacing / 2)});
+    left: $timeline-date-width + $_xSpacing + ($_defaultSpacing / 2) + 3px;
     vertical-align:middle;
     border-radius: 50%;
     line-height: $timeline-state-size;
@@ -77,7 +77,7 @@
     background-color: $_rgbWhite;
     // color: $_rgbWhite;
     color: $_rgbBlush;
-    padding: $_defaultSpacing / 2;
+    padding: $_defaultSpacing / 4;
     box-shadow: 0px 0px 0px 4px $_rgbWhite;
     z-index: $zindex-inner;
   }
@@ -98,7 +98,7 @@
     vertical-align:middle;
     display: inline-block;
     max-width: 64px;
-    margin-left: 16px;
+    margin-left: $_defaultSpacing / 2;
     background-color: $_rgbAlto;
     padding: $_defaultSpacing / 2 $_defaultSpacing;
     border-radius: $_borderRadiusDefault;
