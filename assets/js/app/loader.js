@@ -18,6 +18,8 @@ application
   .factory('CommonBrowser', require('./common/browser'))
   .factory('CommonMoment', require('./common/moment'))
   .factory('CommonTracking', require('./common/tracking'))
+  .factory('CommonPopups', require('./common/popups'))
+
   .factory('StorageTracking', require('./storage/tracking'))
   .factory('StorageShipment', require('./storage/shipment'))
   .factory('StorageTransaction', require('./storage/transaction'))

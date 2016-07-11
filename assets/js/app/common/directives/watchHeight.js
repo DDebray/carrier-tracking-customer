@@ -14,6 +14,8 @@ module.exports = function($timeout) {
             element.css('height', target.offsetHeight + 'px');
         };
 
+      scope.$watch('getValues().condition', action);
+
       $timeout(function() {
         element.addClass(config.disableAnimationClass);
         action(scope.getValues().condition);
@@ -22,8 +24,6 @@ module.exports = function($timeout) {
       $timeout(function() {
         element.removeClass(config.disableAnimationClass);
       }, 800);
-
-      scope.$watch('getValues().condition', action);
     }
   };
 };

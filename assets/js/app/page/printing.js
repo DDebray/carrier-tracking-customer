@@ -10,6 +10,9 @@ module.exports = [
     self.trackingId = $routeParams.trackingId;
 
     self.openAddress = false;
+    self.postalCode = '';
+    self.isPostalCodeVerified = false;
+
 
     self.addressForm = {
       model: function() {
@@ -40,7 +43,9 @@ module.exports = [
 
     // self.selectedRate = null;
 
+
     self.addresses = function() {
+      console.log('StorageShipment.addresses', StorageShipment.addresses);
       return StorageShipment.addresses;
     };
 
@@ -65,17 +70,6 @@ module.exports = [
 
     self.showNotifications = function() {
       return StorageShipment.notifications;
-    };
-
-    var showVerificationModal = function() {
-      CommonUi.modal.show('/views/partials/modals/verification.html', false, null, null, {
-        submitVerification: function() {
-          if (CommonUi.modal.data.postalCode && CommonUi.modal.data.postalCode != '') {
-            StorageShipment.createResource(self.trackingId, CommonUi.modal.data.postalCode);
-            CommonUi.modal.hide();
-          }
-        }
-      });
     };
 
     var showTransactionModal = function() {
@@ -106,7 +100,6 @@ module.exports = [
           StorageTransaction.start(self.trackingId, this.finishTransaction);
         },
         finishTransaction: function(successful, downloads) {
-          $timeout(function() {
             if (successful) {
               CommonUi.modal.data.status = 'SHOW_APPROVAL';
               downloads.forEach(
@@ -116,17 +109,37 @@ module.exports = [
                   CommonUi.modal.data.downloads[file.name].format = file.format;
                   CommonUi.modal.data.downloads[file.name].count = file.count;
                 });
-              CommonUi.modal.closable = true;
             } else {
               CommonUi.modal.data.status = 'SHOW_ERROR';
             }
+            CommonUi.modal.closable = true;
             CommonUi.unlock();
-          }, 1000, true);
         }
       });
     };
 
-    showVerificationModal();
+
+    self.submitVerification = function() {
+      if (self.postalCode && self.postalCode !== '') {
+        StorageShipment.createResource(self.trackingId, self.postalCode);
+        // CommonUi.modal.hide();
+        self.isPostalCodeVerified = true;
+      }
+    };
+
+
+    var showVerificationModal = function() {
+      CommonUi.modal.show('/views/partials/modals/verification.html', false, null, null, {
+        submitVerification: function() {
+          if (CommonUi.modal.data.postalCode && CommonUi.modal.data.postalCode !== '') {
+            StorageShipment.createResource(self.trackingId, CommonUi.modal.data.postalCode);
+            CommonUi.modal.hide();
+          }
+        }
+      });
+    };
+
+    // showVerificationModal();
 
     // donwloads: {
     //   urls: [{
