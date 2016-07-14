@@ -5,7 +5,18 @@ module.exports = [
   ) {
     'use strict';
 
-    var self = this;
+    var self = this,
+
+    /**
+     * This private object holds the possible request parameters.
+     * @type {Object}
+     */
+      requestParameters = {
+        tracking_number: null,
+        postal_code: null,
+        address_from: null,
+        address_to: null
+      };
 
     /**
      * This public object holds the shipment addresses data.
@@ -32,17 +43,6 @@ module.exports = [
      * @type {Object}
      */
     self.notifications = false;
-
-    /**
-     * This private object holds the possible request parameters.
-     * @type {Object}
-     */
-    var requestParameters = {
-      tracking_number: null,
-      postal_code: null,
-      address_from: null,
-      address_to: null
-    };
 
     /**
      * This function semantically creates a new shipment resource out of a tracking number.
