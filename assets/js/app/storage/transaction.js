@@ -108,6 +108,7 @@ module.exports = [
             },
             // START TRANSACTION REQUEST WAS SUCCESSFULL
             function(response) {
+              debugger;
               (newPopupFactory ? newPopupFactory.proceed((response.content || {}).redirect_url) : $q.resolve()).then(
                 // PAYMENT PROCESS WAS SUCCESSFULL
                 function(response) {
@@ -122,6 +123,7 @@ module.exports = [
 
                 // PAYMENT PROCESS WAS NOT SUCCESSFULL
                 function(error) {
+                  debugger;
                   // Popup was closed or lost focus
                   if (newPopupFactory) {
                     newPopupFactory.proceed(false);
@@ -131,11 +133,13 @@ module.exports = [
             },
             // START TRANSACTION REQUEST WAS NOT SUCCESSFULL
             function(error) {
+              debugger;
               self.transactionCallback(true);
             });
         },
         // POPUP NOT SUCCESSFULLY OPENED
         function() {
+          debugger;
           self.transactionCallback(true);
         });
     };
