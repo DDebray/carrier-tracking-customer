@@ -62,14 +62,14 @@ module.exports = function(StorageCountries) {
             return true;
           },
           country: function() {
-            return false;
+            return true;
           },
           phone: function() {
             return false;
           },
           email: function() {
             // return scope.sender();
-            return false;
+            return true;
           }
         }, config.required)
       };

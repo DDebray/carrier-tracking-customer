@@ -29,11 +29,6 @@ module.exports = [
       }
     };
 
-    self.notificationIcons = {
-      warning: 'fa-exclamation-triangle',
-      error: 'fa-exclamation',
-    };
-
     self.methodsIcons = {
       credit_card: 'fa-credit-card',
       paypal: 'fa-paypal',

@@ -7,10 +7,10 @@ module.exports = [
 
     var self = this,
 
-    /**
-     * This private object holds the possible request parameters.
-     * @type {Object}
-     */
+      /**
+       * This private object holds the possible request parameters.
+       * @type {Object}
+       */
       requestParameters = {
         tracking_number: null,
         postal_code: null,
@@ -88,6 +88,9 @@ module.exports = [
       CommonRequest.shipment.create({
         parameters: requestParameters
       }, function(response) {
+        if (response.status === 'ERROR') {
+          self.notifications = (response.messages.length > 0) ? response.messages : false;
+        }
         if (response && response.content) {
           self.notifications = (response.messages.length > 0) ? response.messages : false;
           fillAddresses(response.content.result.address_from, response.content.result.address_to);

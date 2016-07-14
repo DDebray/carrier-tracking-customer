@@ -14,8 +14,8 @@
 
         <!-- NOTIFICATIONS: -->
         <ul ng-if="printing.showNotifications()" class="ui-notification-list">
-            <li class="ui-notification" ng-repeat="notification in printing.showNotifications()" ng-class="'ui-notification-' + notification.type.toLowerCase()">
-                <span class="fa ui-notification-icon" ng-class="printing.notificationIcons[notification.type.toLowerCase()]"></span>
+            <li class="ui-notification ui-notification-warning" ng-repeat="notification in printing.showNotifications()">
+                <span class="fa ui-notification-icon fa-exclamation-triangle"></span>
                 <span ng-bind="(notification.key) | translate"></span>
             </li>
         </ul>
@@ -44,7 +44,7 @@
         <!-- RATES: -->
         <div ng-if="!printing.showError()" class="columns large-6">
             <div class="area-panel area-panel--container area-panel--merge" ng-if="printing.rates()">
-                <div class="widget-rate" ng-repeat="rate in printing.rates()" ng-class="{ 'widget-rate-disabled' : printing.openAddress }" ng-include="'/views/partials/widgets/rate.html'" data-text-disabled="{{ 'RATE.DISABLED' | translate }}"></div>
+                <div class="widget-rate" ng-repeat="rate in printing.rates()" ng-class="{ 'widget-rate-disabled' : printing.openAddress || printing.showNotifications() }" ng-include="'/views/partials/widgets/rate.html'" data-text-disabled="{{ 'RATE.DISABLED' | translate }}"></div>
             </div>
         </div>
 
