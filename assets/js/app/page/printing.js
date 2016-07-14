@@ -5,14 +5,12 @@ module.exports = [
   ) {
     'use strict';
 
-    var self = this;
-
-    self.trackingId = $routeParams.trackingId;
+    var self = this,
+        trackingId = $routeParams.trackingId;
 
     self.openAddress = false;
     self.postalCode = '';
     self.isPostalCodeVerified = false;
-
 
     self.addressForm = {
       model: function() {
@@ -25,6 +23,7 @@ module.exports = [
         label: 'COMMON.ADDRESSES.SAVE',
         action: function() {
           StorageShipment.updateResource(self.openAddress);
+          StorageTransaction.updatedAddress = self.openAddress;
           self.openAddress = false;
         }
       }
@@ -41,11 +40,7 @@ module.exports = [
       sofort_ueberweisung: 'fa-university'
     };
 
-    // self.selectedRate = null;
-
-
     self.addresses = function() {
-      console.log('StorageShipment.addresses', StorageShipment.addresses);
       return StorageShipment.addresses;
     };
 
@@ -97,10 +92,12 @@ module.exports = [
         doTransaction: function() {
           CommonUi.modal.data.status = 'WAIT_FOR_ANSWER';
           CommonUi.lock();
-          StorageTransaction.start(self.trackingId, this.finishTransaction);
+          StorageTransaction.transactionCallback = this.finishTransaction;
+          StorageTransaction.start(trackingId);
         },
-        finishTransaction: function(successful, downloads) {
-            if (successful) {
+        finishTransaction: function(error, downloads) {
+            debugger; 
+            if (!error) {
               CommonUi.modal.data.status = 'SHOW_APPROVAL';
               downloads.forEach(
                 function(file) {
@@ -109,7 +106,8 @@ module.exports = [
                   CommonUi.modal.data.downloads[file.name].format = file.format;
                   CommonUi.modal.data.downloads[file.name].count = file.count;
                 });
-            } else {
+            }
+            else {
               CommonUi.modal.data.status = 'SHOW_ERROR';
             }
             CommonUi.modal.closable = true;
@@ -118,10 +116,9 @@ module.exports = [
       });
     };
 
-
     self.submitVerification = function() {
       if (self.postalCode && self.postalCode !== '') {
-        StorageShipment.createResource(self.trackingId, self.postalCode);
+        StorageShipment.createResource(trackingId, self.postalCode);
         // CommonUi.modal.hide();
         self.isPostalCodeVerified = true;
       }
@@ -132,7 +129,7 @@ module.exports = [
       CommonUi.modal.show('/views/partials/modals/verification.html', false, null, null, {
         submitVerification: function() {
           if (CommonUi.modal.data.postalCode && CommonUi.modal.data.postalCode !== '') {
-            StorageShipment.createResource(self.trackingId, CommonUi.modal.data.postalCode);
+            StorageShipment.createResource(trackingId, CommonUi.modal.data.postalCode);
             CommonUi.modal.hide();
           }
         }

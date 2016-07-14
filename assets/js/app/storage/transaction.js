@@ -6,7 +6,14 @@ module.exports = [
     'use strict';
 
     var self = this,
+
+      /**
+       * This private object holds the
+       * possible request parameters.
+       * @type {Object}
+       */
       requestParameters = {
+        updated_address: null,
         tracking_number: null,
         selected_rate_code: null,
         payment_method: null,
@@ -15,15 +22,31 @@ module.exports = [
       };
 
     /**
-    * This public object holds the possible
-    * error that may comes with the request.
-    * @type {Object}
-    */
-    self.error = false;
-    self.selectedMethod = null;
+     * This public object holds the
+     * updates address information.
+     * @type {[type]}
+     */
+    self.updatedAddress = null;
+
+    /**
+     * This public object holds
+     * the selected rate.
+     * @type {[type]}
+     */
     self.selectedRate = null;
-    self.successful = null;
-    self.downloads = null;
+
+    /**
+     * This public object holds
+     * the selected payment method.
+     * @type {[type]}
+     */
+    self.selectedMethod = null;
+
+    /**
+     * This public method holds the information
+     * of all possible payment method.
+     * @type {Object}
+     */
     self.methods = {
       CREDIT_CARD: {
         data: null
@@ -36,138 +59,86 @@ module.exports = [
       }
     };
 
-    self.start = function(trackingId, callback) {
-      if (!callback) {
+    /**
+     * This public object holds the callback
+     * for the comming popup events.
+     * @type {Object}
+     */
+    self.transactionCallback = null;
+
+    /**
+     * This function opens the popup for the payment process
+     * and starts the transaction.
+     * @param  {String} trackingId a string holding the tracking number.
+     */
+    self.start = function(trackingId) {
+      if (!self.transactionCallback) {
         return;
       }
 
-      var popupPromise = $q.resolve(),
-      newPopupFactory;
-
-      requestParameters.tracking_number = trackingId;
+      requestParameters.updated_address = self.updatedAddress;
       requestParameters.selected_rate_code = self.selectedRate.code;
       requestParameters.payment_method = self.selectedMethod;
+      requestParameters.tracking_number = trackingId;
 
       if (self.methods[self.selectedMethod].data) {
         requestParameters.iban = self.methods[self.selectedMethod].data.iban;
         requestParameters.bic = self.methods[self.selectedMethod].data.bic;
-
-        newPopupFactory = CommonPopups();
-        popupPromise = newPopupFactory.prepare();
       }
 
-      popupPromise.then(function() {
-
-        CommonRequest.transaction.start({
-          parameters: requestParameters
-        }, function(response) {
-
-          (newPopupFactory ? newPopupFactory.proceed((response.content || {}).redirect_url) : $q.resolve()).then(function(response) {
-
-            console.log('response', response);
-
-            if (response.data.data.content) {
-              self.successful = true;
-              self.downloads = response.data.data.content.result;
-            } else {
-              console.log('TODO: check PayPal data', response.data.data);
-              self.successful = false;
-              self.error = true;
-            }
-
-            callback(self.successful, self.downloads);
-
-          }, function (error) {
-            // Popup was closed or lost focus
-            if (newPopupFactory) {
-              newPopupFactory.proceed(false);
-            }
-            self.error = error || true;
-            callback(false);
-          });
-
-        }, function(error) {
-          self.error = error;
-          callback(false);
-        });
-
-      }, function () {
-        console.log('popup promise got rejected');
-      });
+      openPopup();
     };
 
+    /**
+     * This function handles all popup related actions.
+     */
+    var openPopup = function() {
 
+      var newPopupFactory,
+        popupPromise = $q.resolve();
 
+      newPopupFactory = CommonPopups();
+      popupPromise = newPopupFactory.prepare();
 
+      popupPromise.then(
+        // POPUP SUCCESSFULLY OPENED
+        function() {
+          CommonRequest.transaction.start({
+              parameters: requestParameters
+            },
+            // START TRANSACTION REQUEST WAS SUCCESSFULL
+            function(response) {
+              (newPopupFactory ? newPopupFactory.proceed((response.content || {}).redirect_url) : $q.resolve()).then(
+                // PAYMENT PROCESS WAS SUCCESSFULL
+                function(response) {
+                  var downloads = {};
+                  if (response.data.data.content) {
+                    downloads = response.data.data.content.result;
+                  } else {
+                    console.log('TODO: check PayPal data', response.data.data);
+                  }
+                  self.transactionCallback(false, downloads);
+                },
 
-
-
-
-
-
-    // var doRequest = function(callback) {
-    //   CommonRequest.transaction.start({
-    //     parameters: requestParameters
-    //   }, function(response) {
-    //     if (response && response.content) {
-    //       openPopup(response.content, callback);
-    //     }
-    //   }, function(error) {
-    //     self.error = error;
-    //   });
-    // };
-    //
-    // var openPopup = function(responseContent, callback) {
-    //   if (responseContent.redirect_url) {
-    //
-    //     if (self.popup) {
-    //       self.popup.moveTo(screen.availWidth * 0.1, screen.availHeight * 0.1);
-    //       self.popup.focus();
-    //       self.popup.location.href = responseContent.redirect_url;
-    //     }
-    //
-    //     var sendMessage = window.setInterval(function() {
-    //       self.popup.postMessage('COUREON', '*');
-    //     }, 100);
-    //
-    //     var receiveMessage = function(e) {
-    //       console.log('message');
-    //       if (e.data.origin !== 'COUREON') {
-    //         return;
-    //       }
-    //       if (e.data.data && e.data.data.messages && e.data.data.messages.length && e.data.data.messages[0].text) {
-    //         console.log('receiveMessage > error: ', e.data.data.messages[0]);
-    //         self.successful = false;
-    //       }
-    //       if (e.data.data && e.data.data.status === 'OK') {
-    //         console.log('success');
-    //         console.log(e);
-    //         self.successful = true;
-    //         self.downloads = e.data.data.content.result;
-    //       }
-    //       console.log(responseContent);
-    //
-    //       callback(self.successful, self.downloads);
-    //
-    //       resume();
-    //     };
-    //
-    //     var resume = function(e) {
-    //       window.clearInterval(sendMessage);
-    //       window.removeEventListener('message', receiveMessage);
-    //       window.removeEventListener('focus', resume);
-    //
-    //       if (self.popup) {
-    //         self.popup.close();
-    //       }
-    //     };
-    //
-    //     window.addEventListener('message', receiveMessage, false);
-    //     window.addEventListener('focus', resume);
-    //
-    //     self.successful = false;
-    //   }
-    // };
+                // PAYMENT PROCESS WAS NOT SUCCESSFULL
+                function(error) {
+                  // Popup was closed or lost focus
+                  if (newPopupFactory) {
+                    newPopupFactory.proceed(false);
+                  }
+                  self.transactionCallback(true);
+                });
+            },
+            // START TRANSACTION REQUEST WAS NOT SUCCESSFULL
+            function(error) {
+              self.transactionCallback(true);
+            });
+        },
+        // POPUP NOT SUCCESSFULLY OPENED
+        function() {
+          self.transactionCallback(true);
+        });
+    };
 
     return self;
   }

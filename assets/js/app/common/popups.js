@@ -1,7 +1,7 @@
 module.exports = [
-  '$q', 'CommonUi',
+  '$q',
 function (
-  $q, CommonUi
+  $q
 ) {
   'use strict';
 
@@ -15,13 +15,11 @@ function (
         _height = (screen.availHeight * 0.8);
 
       this.popup = window.open('/wait.html', '', 'width=' + _width + ',height=' + _height + ',resizable=yes');
-
       if (this.popup) {
         this.popup.moveTo(screen.availWidth * 0.5, screen.availHeight * 0.5);
         this.popup.focus();
         this.deferred.resolve();
       } else {
-        CommonUi.lock();
         this.prepare(true);
       }
 
@@ -50,7 +48,6 @@ function (
       return this.deferred.promise;
     },
     receiveMessage : function(e) {
-
       if (e.data.origin !== 'COUREON') {
         return;
       }
