@@ -96,7 +96,6 @@ module.exports = [
           StorageTransaction.start(trackingId);
         },
         finishTransaction: function(error, downloads) {
-            debugger; 
             if (!error) {
               CommonUi.modal.data.status = 'SHOW_APPROVAL';
               downloads.forEach(
