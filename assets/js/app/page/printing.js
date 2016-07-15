@@ -59,6 +59,7 @@ module.exports = [
     };
 
     self.showNotifications = function() {
+      console.log(StorageShipment.notifications);
       return StorageShipment.notifications;
     };
 

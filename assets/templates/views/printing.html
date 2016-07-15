@@ -13,10 +13,10 @@
         <p ng-if="printing.showError() && ('PAGE.PRINTING.ERROR_DESCRIPTION' | translate) !== 'PAGE.PRINTING.ERROR_DESCRIPTION'" ng-bind="'PAGE.PRINTING.ERROR_DESCRIPTION' | translate"></p>
 
         <!-- NOTIFICATIONS: -->
-        <ul ng-if="printing.showNotifications()" class="ui-notification-list">
+        <ul ng-if="printing.showNotifications()" class="ui-notification-list columns">
             <li class="ui-notification ui-notification-warning" ng-repeat="notification in printing.showNotifications()">
                 <span class="fa ui-notification-icon fa-exclamation-triangle"></span>
-                <span ng-bind="(notification.key) | translate"></span>
+                <span ng-bind="(notification.text) | translate"></span>
             </li>
         </ul>
 
