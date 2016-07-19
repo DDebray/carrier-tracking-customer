@@ -59,7 +59,6 @@ module.exports = [
     };
 
     self.showNotifications = function() {
-      console.log(StorageShipment.notifications);
       return StorageShipment.notifications;
     };
 
@@ -71,6 +70,7 @@ module.exports = [
         selectedRate: StorageTransaction.selectedRate,
         account: null,
         downloads: {},
+        transactionErrors: {},
         status: 'SELECT_METHOD' // DO_TRANSACTION, WAIT_FOR_ANSWER, SHOW_APPROVAL, SHOW_ERROR
       }, null, {
         selectMethod: function(paymentMethod) {
@@ -91,7 +91,7 @@ module.exports = [
           StorageTransaction.transactionCallback = this.finishTransaction;
           StorageTransaction.start(trackingId);
         },
-        finishTransaction: function(error, downloads) {
+        finishTransaction: function(error, transactionErrors, downloads) {
             if (!error) {
               CommonUi.modal.data.status = 'SHOW_APPROVAL';
               downloads.forEach(
@@ -104,6 +104,7 @@ module.exports = [
             }
             else {
               CommonUi.modal.data.status = 'SHOW_ERROR';
+              CommonUi.modal.data.transactionErrors = transactionErrors;
             }
             CommonUi.modal.closable = true;
             CommonUi.unlock();
@@ -130,43 +131,6 @@ module.exports = [
         }
       });
     };
-
-    // showVerificationModal();
-
-    // donwloads: {
-    //   urls: [{
-    //     url: ['http://www.coureon.com'],
-    //     format: 'a5',
-    //     count: 1
-    //   }, {
-    //     url: ['http://www.coureon.com'],
-    //     format: 'a4',
-    //     name: 'DPD_DROPOFF_RECEIPT_LABEL',
-    //     count: 1
-    //   }],
-    //   customs_urls: {
-    //     hints: []
-    //       // hints : [
-    //       //   {
-    //       //     carrier_code: 'dpd',
-    //       //     link: 'dpd'
-    //       //   }
-    //       // ]
-    //   }
-    // }
-    //
-    //
-
-
-    // ,
-    // cleanData: function(property) {
-    //   if (!CommonUi.modal.data.account || !CommonUi.modal.data.account[property]) {
-    //     return;
-    //   }
-    //   if (CommonUi.modal.data.account[property].search(/\W/) !== -1) {
-    //     CommonUi.modal.data.account[property] = CommonUi.modal.data.account[property].replace(/\W/g, '');
-    //   }
-    // }
 
   }
 ];

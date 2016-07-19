@@ -88,7 +88,7 @@ module.exports = [
       CommonRequest.shipment.create({
         parameters: requestParameters
       }, function(response) {
-        if (response.status === 'ERROR') {
+        if (response && response.status === 'ERROR') {
           self.notifications = (response.messages.length > 0) ? response.messages : false;
         }
         if (response && response.content) {

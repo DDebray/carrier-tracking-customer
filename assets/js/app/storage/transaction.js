@@ -117,17 +117,20 @@ module.exports = [
                   } else {
                     console.log('TODO: check PayPal data', response.data.data);
                   }
-                  self.transactionCallback(false, downloads);
+                  self.transactionCallback(false, null, downloads);
                 },
-
                 // PAYMENT PROCESS WAS NOT SUCCESSFULL
                 function(error) {
                   // Popup was closed or lost focus
                   if (newPopupFactory) {
                     newPopupFactory.proceed(false);
                   }
-                  self.transactionCallback(true);
-                });
+                  if (response) {
+                    self.transactionCallback(true, (response.message && (response.messages.length > 0)) ? response.messages : false);
+                  }
+                }
+              );
+
             },
             // START TRANSACTION REQUEST WAS NOT SUCCESSFULL
             function(error) {

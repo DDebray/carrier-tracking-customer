@@ -1,0 +1,6 @@
+<span ng-bind="'PAGE.PRINTING.MODAL.LABEL_PRINT.ERROR' | translate"></span>
+<ul class="list" ng-if="modal.data.transactionErrors">
+    <li ng-repeat="error in modal.data.transactionErrors">
+        <span ng-bind="(error.text) | translate"></span>
+    </li>
+</ul>
