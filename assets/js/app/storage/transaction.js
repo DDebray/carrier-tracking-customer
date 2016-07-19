@@ -126,7 +126,7 @@ module.exports = [
                     newPopupFactory.proceed(false);
                   }
                   if (response) {
-                    self.transactionCallback(true, (response.message && (response.messages.length > 0)) ? response.messages : false);
+                    self.transactionCallback(true, (response.messages.length > 0) ? response.messages : false);
                   }
                 }
               );
