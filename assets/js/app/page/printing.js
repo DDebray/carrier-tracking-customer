@@ -6,7 +6,7 @@ module.exports = [
     'use strict';
 
     var self = this,
-        trackingId = $routeParams.trackingId;
+      trackingId = $routeParams.trackingId;
 
     self.openAddress = false;
     self.postalCode = '';
@@ -92,22 +92,29 @@ module.exports = [
           StorageTransaction.start(trackingId);
         },
         finishTransaction: function(error, transactionErrors, downloads) {
-            if (!error) {
-              CommonUi.modal.data.status = 'SHOW_APPROVAL';
-              downloads.forEach(
-                function(file) {
-                  CommonUi.modal.data.downloads[file.name] = {};
-                  CommonUi.modal.data.downloads[file.name].url = file.url;
-                  CommonUi.modal.data.downloads[file.name].format = file.format;
-                  CommonUi.modal.data.downloads[file.name].count = file.count;
-                });
-            }
-            else {
-              CommonUi.modal.data.status = 'SHOW_ERROR';
-              CommonUi.modal.data.transactionErrors = transactionErrors;
-            }
-            CommonUi.modal.closable = true;
-            CommonUi.unlock();
+          if (!error) {
+            CommonUi.modal.data.status = 'SHOW_APPROVAL';
+            downloads.forEach(
+              function(file) {
+                // TODO: COUREON-2062
+                // This is a static and temporary fix. it should be removed,
+                // when the ticket COUREON-2062 has been solved.
+                if (file.format === 'A4_BY_4') {
+                  file.format = 'A5';
+                }
+                // END OF FIX. 
+
+                CommonUi.modal.data.downloads[file.name] = {};
+                CommonUi.modal.data.downloads[file.name].url = file.url;
+                CommonUi.modal.data.downloads[file.name].format = file.format;
+                CommonUi.modal.data.downloads[file.name].count = file.count;
+              });
+          } else {
+            CommonUi.modal.data.status = 'SHOW_ERROR';
+            CommonUi.modal.data.transactionErrors = transactionErrors;
+          }
+          CommonUi.modal.closable = true;
+          CommonUi.unlock();
         }
       });
     };

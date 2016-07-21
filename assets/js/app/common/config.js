@@ -22,7 +22,7 @@ module.exports = ['$translateProvider', function ($translateProvider) {
     cx : {
       // development : 'http://localhost:8080/zooron-web/cx/',
       // development : 'https://api-testing.coureon.com/cx/',
-      development : 'https://api-development.coureon.com/cx/',
+      development : 'http://localhost:8080/zooron-web/cx/',
       testing : 'https://api-development.coureon.com/cx/',
       // testing : 'https://api-testing.coureon.com/cx/',
       staging : 'https://api-staging.coureon.com/cx/',
