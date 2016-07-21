@@ -4,8 +4,8 @@ module.exports = function() {
   return {
     restrict: 'E',
     scope: {
-      title: '@title',
-      subtitle: '@subtitle',
+      bannerTitle: '@bannerTitle',
+      bannerSubtitle: '@bannerSubtitle',
       trackingId: '@trackingId'
     },
     transclude: true,
