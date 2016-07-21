@@ -102,7 +102,7 @@ module.exports = [
                 if (file.format === 'A4_BY_4') {
                   file.format = 'A5';
                 }
-                // END OF FIX. 
+                // END OF FIX.
 
                 CommonUi.modal.data.downloads[file.name] = {};
                 CommonUi.modal.data.downloads[file.name].url = file.url;
