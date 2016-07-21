@@ -3,11 +3,12 @@
   background-position: center;
   background-size: cover;
   display: flex;
-  justify-content: center;
 }
 
 .hero__content {
+  @include pageWidth;
   align-self: center;
+  width: $_maxPageWidth;
 }
 
 .hero__title {
