@@ -50,7 +50,7 @@
         </div>
         <div class="column small-6" ng-if="form.flags.enhanceFields && !form.hide.email">
             <label ng-if="!form.usePlaceholders" ng-class="{ 'form__label--required' : form.required.email(this) }" for="addresses_email" ng-bind="(form.labels.email || 'COMMON.ADDRESSES.EMAIL') | translate"></label>
-            <input id="addresses_email" type="text" ng-readonly="form.readonly.email" ng-required="form.required.email(this)" ng-model="form.data.email" ng-change="form.onChange(this)" ng-model-options="{ updateOn : form.updateOn }" placeholder="{{ form.usePlaceholders ? ((form.labels.email || 'COMMON.ADDRESSES.EMAIL') | translate) : '' }}"
+            <input id="addresses_email" type="email" ng-readonly="form.readonly.email" ng-required="form.required.email(this)" ng-model="form.data.email" ng-change="form.onChange(this)" ng-model-options="{ updateOn : form.updateOn }" placeholder="{{ form.usePlaceholders ? ((form.labels.email || 'COMMON.ADDRESSES.EMAIL') | translate) : '' }}"
             />
         </div>
     </div>
