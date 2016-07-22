@@ -4,8 +4,8 @@ module.exports = function() {
   return {
     restrict: 'E',
     scope: {
-      title: '@title',
-      image: '@image'
+      heroTitle: '@heroTitle',
+      heroImage: '@heroImage'
     },
     transclude: true,
     replace: true,
