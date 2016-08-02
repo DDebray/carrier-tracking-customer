@@ -13,7 +13,7 @@ module.exports = [
        */
       requestParameters = {
         tracking_number: null,
-        postal_code: null,
+        postal_code_for_verification: null,
         address_from: null,
         address_to: null
       };
@@ -49,11 +49,11 @@ module.exports = [
      * This will be the return shipment for the original shipment associated to that tracking number.
      * It needs the postal code so the server can check for the access permission.
      * @param  {String} trackingId a string holding the tracking number.
-     * @param  {String} postalCode a string holding the postal code for verification
+     * @param  {String} postalCodeForVerification a string holding the postal code for verification
      */
-    self.createResource = function(trackingId, postalCode) {
+    self.createResource = function(trackingId, postalCodeForVerification) {
       requestParameters.tracking_number = trackingId;
-      requestParameters.postal_code = postalCode;
+      requestParameters.postal_code_for_verification = postalCodeForVerification;
 
       doRequest();
     };
@@ -76,7 +76,7 @@ module.exports = [
      * to create a return shipment for the shipment associated to the tracking number.
      * The shipment data are saved as global fields: addresses and rates.
      * @param  {String} trackingId a string holding the tracking number.
-     * @param  {String} postalCode a string holding the postal code for verification
+     * @param  {String} postalCodeForVerification a string holding the postal code for verification
      */
 
     /**

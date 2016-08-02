@@ -15,18 +15,12 @@ module.exports = [
       requestParameters = {
         updated_address: null,
         tracking_number: null,
+        postal_code_for_verification: null,
         selected_rate_code: null,
         payment_method: null,
         iban: null,
         bic: null
       };
-
-    /**
-     * This public object holds the
-     * updates address information.
-     * @type {[type]}
-     */
-    self.updatedAddress = null;
 
     /**
      * This public object holds
@@ -71,7 +65,7 @@ module.exports = [
      * and starts the transaction.
      * @param  {String} trackingId a string holding the tracking number.
      */
-    self.start = function(trackingId) {
+    self.start = function(trackingId, postalCodeForVerification) {
       if (!self.transactionCallback) {
         return;
       }
@@ -80,6 +74,7 @@ module.exports = [
       requestParameters.selected_rate_code = self.selectedRate.code;
       requestParameters.payment_method = self.selectedMethod;
       requestParameters.tracking_number = trackingId;
+      requestParameters.postal_code_for_verification = postalCodeForVerification;
 
       if (self.methods[self.selectedMethod].data) {
         requestParameters.iban = self.methods[self.selectedMethod].data.iban;

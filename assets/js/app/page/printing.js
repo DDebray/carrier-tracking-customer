@@ -9,7 +9,7 @@ module.exports = [
       trackingId = $routeParams.trackingId;
 
     self.openAddress = false;
-    self.postalCode = '';
+    self.postalCodeForVerification = '';
     self.isPostalCodeVerified = false;
 
     self.addressForm = {
@@ -89,7 +89,7 @@ module.exports = [
           CommonUi.modal.data.status = 'WAIT_FOR_ANSWER';
           CommonUi.lock();
           StorageTransaction.transactionCallback = this.finishTransaction;
-          StorageTransaction.start(trackingId);
+          StorageTransaction.start(trackingId, self.postalCodeForVerification);
         },
         finishTransaction: function(error, transactionErrors, downloads) {
           if (!error) {
@@ -120,8 +120,8 @@ module.exports = [
     };
 
     self.submitVerification = function() {
-      if (self.postalCode && self.postalCode !== '') {
-        StorageShipment.createResource(trackingId, self.postalCode);
+      if (self.postalCodeForVerification && self.postalCodeForVerification !== '') {
+        StorageShipment.createResource(trackingId, self.postalCodeForVerification);
         // CommonUi.modal.hide();
         self.isPostalCodeVerified = true;
       }
@@ -131,8 +131,8 @@ module.exports = [
     var showVerificationModal = function() {
       CommonUi.modal.show('/views/partials/modals/verification.html', false, null, null, {
         submitVerification: function() {
-          if (CommonUi.modal.data.postalCode && CommonUi.modal.data.postalCode !== '') {
-            StorageShipment.createResource(trackingId, CommonUi.modal.data.postalCode);
+          if (CommonUi.modal.data.postalCodeForVerification && CommonUi.modal.data.postalCodeForVerification !== '') {
+            StorageShipment.createResource(trackingId, CommonUi.modal.data.postalCodeForVerification);
             CommonUi.modal.hide();
           }
         }

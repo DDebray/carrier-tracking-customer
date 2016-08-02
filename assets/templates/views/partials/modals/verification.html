@@ -6,8 +6,8 @@
 <form novalidate class="h-spacing-bottom--wide form" name="verification" id="verification" ng-submit="printing.submitVerification()">
     <div class="form-row">
         <div class="small-6 columns">
-            <!-- ng-init="printing.postalCode = (base.env === 'development') ? '10409' : printing.postalCode" -->
-            <input required autofocus type="text" name="postalcode" id="postalcode" ng-model="printing.postalCode" autocomplete="off" ng-pattern="/^[0-9]{5}$/" ng-init="printing.postalCode = (base.env === 'development') ? '10409' : printing.postalCode">
+            <!-- ng-init="printing.postalCodeForVerification = (base.env === 'development') ? '10409' : printing.postalCodeForVerification" -->
+            <input required autofocus type="text" name="postalcode" id="postalcode" ng-model="printing.postalCodeForVerification" autocomplete="off" ng-pattern="/^[0-9]{5}$/" ng-init="printing.postalCodeForVerification = (base.env === 'development') ? '10409' : printing.postalCodeForVerification">
             <small class="error" ng-show="verification.postalcode.$error.pattern" ng-bind="'PAGE.PRINTING.MODAL.POSTAL_CODE_VERIFICATION.ERROR.POSTAL_CODE.WRONG_FORMAT' | translate"></small>
             <small class="error" ng-show="verification.postalcode.$error.required" ng-bind="'PAGE.PRINTING.MODAL.POSTAL_CODE_VERIFICATION.ERROR.POSTAL_CODE.MISSING' | translate"></small>
         </div>
