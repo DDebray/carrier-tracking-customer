@@ -1,57 +1,90 @@
-<hero hero-title="'SECTION.HERO.TITLE' | translate" hero-image="url(images/hero/default.jpg)">
-    <form class="hero__form" ng-submit="tracking.getStatus()" autocomplete="off">
+<hero hero-title="'SECTION.HERO.TITLE' | translate"
+    hero-image="url(images/hero/default.jpg)">
+    <form class="hero__form"
+        ng-submit="tracking.getStatus()"
+        autocomplete="off">
         <div class="hero__form__elements">
-            <input class="hero__form__input hero__form__input--default" type="text" name="tracking_number" placeholder="{{'SECTION.HERO.PLACEHOLDER' | translate}}" required ng-model="tracking.trackingId" select-on-click autofocus>
-            <button class="hero__form__submit" type="submit" name="submit" ng-bind="'SECTION.HERO.TRACK_BUTTON' | translate"></button>
+            <input class="hero__form__input hero__form__input--default"
+                type="text"
+                name="tracking_number"
+                placeholder="{{'SECTION.HERO.PLACEHOLDER' | translate}}"
+                required
+                ng-model="tracking.trackingId"
+                select-on-click
+                autofocus>
+            <button class="hero__form__submit"
+                type="submit"
+                name="submit"
+                ng-bind="'SECTION.HERO.TRACK_BUTTON' | translate"></button>
         </div>
     </form>
 </hero>
 
 <section class="section">
-    <div class="section__inner section__inner--slim" ng-class="{ 'section__inner--centered' : tracking.showError }">
+    <div class="section__inner section__inner--slim"
+        ng-class="{ 'section__inner--centered' : tracking.showError }">
 
-        <div class="statecrumbs" ng-if="tracking.data && !tracking.showError">
-            <span class="statecrumbs__angle fa fa-{{state.angle}}" ng-repeat-start="state in tracking.packageStates" ng-if="state.angle && state.isActive" ng-class="{ 'statecrumbs__angle--is-visible' : state.isActive() }"></span>
+        <h2 ng-if="tracking.showError"
+            ng-bind="'PAGE.TRACKING.ERROR_TITLE' | translate"></h2>
+        <p ng-if="tracking.showError && ('PAGE.TRACKING.ERROR_DESCRIPTION' | translate) !== 'PAGE.TRACKING.ERROR_DESCRIPTION'"
+            ng-bind="'PAGE.TRACKING.ERROR_DESCRIPTION' | translate"></p>
 
-            <span
-                class="statecrumbs__state fa fa-{{state.icon()}} {{state.iconModifier}}"
+        <div class="statecrumbs"
+            ng-if="tracking.data && !tracking.showError">
+            <span class="statecrumbs__angle fa fa-{{state.angle}}"
+                ng-repeat-start="state in tracking.packageStates"
+                ng-if="state.angle && state.isActive"
+                ng-class="{ 'statecrumbs__angle--is-visible' : state.isActive() }"></span>
+
+            <span class="statecrumbs__state fa fa-{{state.icon()}} {{state.iconModifier}}"
                 ng-repeat-end
                 ng-class="{ 'statecrumbs__state--is-active' : state.isActive(), 'statecrumbs__state--is-error' : state.isError() }"
                 tooltip="{ on : 'enter', translation : ('PAGE.TRACKING.SUMMARY.TOOLTIP' + (state.showCross() ? '_IS_ERROR.' : (state.isActive() ? '_IS_ACTIVE.' : '.')) + state.tooltip.toUpperCase()), directionY : 'up', class : (state.isActive() ? 'ui-tooltip--centered --is-active' : 'ui-tooltip--centered') }">
-                <span class="statecrumbs__icon {{state.iconModifier}}" ng-class="{ 'statecrumbs__icon--success' : state.showCheckmark(), 'statecrumbs__icon--error' : state.showCross() }"></span>
+                <span class="statecrumbs__icon {{state.iconModifier}}"
+                    ng-class="{ 'statecrumbs__icon--success' : state.showCheckmark(), 'statecrumbs__icon--error' : state.showCross() }"></span>
             </span>
         </div>
 
-        <h2 ng-if="tracking.showError" ng-bind="'PAGE.TRACKING.ERROR_TITLE' | translate"></h2>
-        <p ng-if="tracking.showError && ('PAGE.TRACKING.ERROR_DESCRIPTION' | translate) !== 'PAGE.TRACKING.ERROR_DESCRIPTION'" ng-bind="'PAGE.TRACKING.ERROR_DESCRIPTION' | translate"></p>
 
-        <ul class="summary" ng-if="tracking.data  && !tracking.showError">
+
+        <ul class="summary"
+            ng-if="tracking.data  && !tracking.showError">
             <li>
-                <span class="summary__title" ng-bind="'PAGE.TRACKING.SUMMARY_TRACKING_NUMBER' | translate"></span>
+                <span class="summary__title"
+                    ng-bind="'PAGE.TRACKING.SUMMARY_TRACKING_NUMBER' | translate"></span>
                 <span ng-bind="tracking.data.id.toUpperCase()"></span>
             </li>
             <li>
-                <span class="summary__title" ng-bind="'PAGE.TRACKING.SUMMARY_STATE' | translate"></span>
+                <span class="summary__title"
+                    ng-bind="'PAGE.TRACKING.SUMMARY_STATE' | translate"></span>
                 <span ng-bind="('PAGE.TRACKING.SUMMARY_STATE.' + tracking.data.events[tracking.data.events.length - 1].status.toUpperCase()) | translate"></span>
             </li>
         </ul>
 
-        <div class="timeline" ng-if="tracking.data.events.length  && !tracking.showError">
-            <div class="timeline__event" ng-repeat="event in tracking.data.events" ng-class="{'timeline__event--is-only-child' : (tracking.data.events.length === 1)}">
-                <span class="timeline__date" title="{{ event.moment | moment:'long' }}">
+        <div class="timeline"
+            ng-if="tracking.data.events.length  && !tracking.showError">
+            <div class="timeline__event"
+                ng-repeat="event in tracking.data.events"
+                ng-class="{'timeline__event--is-only-child' : (tracking.data.events.length === 1)}">
+                <span class="timeline__date"
+                    title="{{ event.moment | moment:'long' }}">
                     <div ng-bind="event.moment | moment:'day'"></div>
                     <div ng-bind="event.moment | moment:'time'"></div>
                 </span>
-                <span class="timeline__state fa fa-check" ng-class="{ 'timeline__state--process-is-completed' : ($last && event.status === 'DELIVERED')}"></span>
-                <span
-                    class="timeline__description"
+                <span class="timeline__state fa fa-check"
+                    ng-class="{ 'timeline__state--process-is-completed' : ($last && event.status === 'DELIVERED')}"></span>
+                <span class="timeline__description"
                     ng-bind="('PAGE.TRACKING.TIMELINE.EVENT.' + event.description.toUpperCase() | translate)
                     .replace('%CITY%', event.location.city || '')
                     .replace('%COUNTRY%', event.location.country || '')"></span>
-                <span class="timeline__carrier" ng-if="event.carrier" ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"></span>
+                <span class="timeline__carrier"
+                    ng-if="event.carrier"
+                    ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"></span>
             </div>
         </div>
     </div>
 </section>
 
-<banner banner-title="'SECTION.FOOTER.TITLE' | translate" banner-subtitle="'SECTION.FOOTER.SUBTITLE' | translate" tracking-id="{{tracking.data.id.toUpperCase()}}"></banner>
+<banner banner-title="'SECTION.FOOTER.TITLE' | translate"
+    banner-subtitle="'SECTION.FOOTER.SUBTITLE' | translate"
+    tracking-id="{{tracking.data.id.toUpperCase()}}"></banner>
