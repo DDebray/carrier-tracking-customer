@@ -54,4 +54,13 @@
     </div>
 </section>
 
+<section class="section">
+    <div class="section__inner section__inner--slim">
+        <div class="carrier-info" ng-repeat="carrier in tracking.carrierInfo" ng-class="'image-carrier-' + carrier.code">
+            <div class="widget-config-carrier-image" ng-class="'image-carrier-' + carrier.code"></div>
+        </div>
+    </div>
+</section>
+
+
 <banner title="'SECTION.FOOTER.TITLE' | translate" subtitle="'SECTION.FOOTER.SUBTITLE' | translate" tracking-id="{{tracking.data.id.toUpperCase()}}"></banner>
