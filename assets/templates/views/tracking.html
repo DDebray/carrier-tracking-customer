@@ -47,7 +47,7 @@
 
 
 
-        <ul class="summary"
+        <!-- <ul class="summary"
             ng-if="tracking.data  && !tracking.showError">
             <li>
                 <span class="summary__title"
@@ -59,7 +59,71 @@
                     ng-bind="'PAGE.TRACKING.SUMMARY_STATE' | translate"></span>
                 <span ng-bind="('PAGE.TRACKING.SUMMARY_STATE.' + tracking.data.events[tracking.data.events.length - 1].status.toUpperCase()) | translate"></span>
             </li>
-        </ul>
+        </ul> -->
+
+        <div class="row summary" ng-if="tracking.data  && !tracking.showError">
+            <div class="column small-12 medium-6">
+                <span class="summary__title" ng-bind="'PAGE.TRACKING.SUMMARY_TRACKING_NUMBER' | translate"></span>
+                <span ng-bind="tracking.data.id.toUpperCase()"></span>
+            </div>
+            <div class="column small-12 medium-6">
+                <span class="summary__title" ng-bind="'PAGE.TRACKING.SUMMARY_STATE' | translate"></span>
+                <span ng-bind="('PAGE.TRACKING.SUMMARY_STATE.' + tracking.data.events[tracking.data.events.length - 1].status.toUpperCase()) | translate"></span>
+            </div>
+        </div>
+
+        <div class="row timeline2">
+
+            <!-- timeline -->
+            <div class="column small-12 medium-10">
+                <div class="row row-outer timeline2__event" ng-repeat="event in tracking.data.events" ng-class="{'timeline2__event--is-only-child' : (tracking.data.events.length === 1)}">
+
+                    <!-- date -->
+                    <div class="column medium-3 show-for-medium">
+                        <div class="timeline2__date" title="{{ event.moment | moment:'long' }}">
+                            <div class="timeline2__date__text" ng-bind="event.moment | moment:'day'"></div>
+                            <div class="timeline2__date__text" ng-bind="event.moment | moment:'time'"></div>
+                        </div>
+                    </div>
+
+                    <!-- state -->
+                    <div class="column small-2 medium-1 timeline2__state-container">
+                        <div class="timeline2__state timeline2__state--small fa fa-check" ng-class="{ 'timeline2__state--process-is-completed' : ($last && event.status === 'DELIVERED')}"></div>
+                        <div class="timeline2__state-line"></div>
+                    </div>
+
+                    <!-- text -->
+                    <div class="column small-10 medium-8">
+
+                        <div class="timeline2__date timeline2__date--small show-for-small-only" title="{{ event.moment | moment:'long' }}">
+                            <span class="timeline2__date__text" ng-bind="event.moment | moment:'day'"></span>,
+                            <span class="timeline2__date__text" ng-bind="event.moment | moment:'time'"></span>
+                        </div>
+
+                        <span class="timeline2__description">
+                            <div class="timeline2__description-text">
+                                <span ng-bind="('PAGE.TRACKING.TIMELINE.EVENT.' + event.description.toUpperCase() | translate)
+                                .replace('%CITY%', event.location.city || '')
+                                .replace('%COUNTRY%', event.location.country || '')"></span>
+
+                                <span class="timeline2__carrier"
+                                ng-if="event.carrier"
+                                ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"
+                                ></span>
+                            </div>
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- carrier info -->
+            <div class="column small-12 medium-2">
+                <div class="carrier-info" ng-repeat="carrier in tracking.carrierInfo" ng-class="'image-carrier-' + carrier.code">
+                    <div class="widget-config-carrier-image" ng-class="'image-carrier-' + carrier.code"></div>
+                </div>
+            </div>
+        </div>
 
         <div class="timeline"
             ng-if="tracking.data.events.length  && !tracking.showError">
@@ -73,24 +137,23 @@
                 </span>
                 <span class="timeline__state fa fa-check"
                     ng-class="{ 'timeline__state--process-is-completed' : ($last && event.status === 'DELIVERED')}"></span>
+
                 <span class="timeline__description"
                     ng-bind="('PAGE.TRACKING.TIMELINE.EVENT.' + event.description.toUpperCase() | translate)
                     .replace('%CITY%', event.location.city || '')
                     .replace('%COUNTRY%', event.location.country || '')"></span>
+
                 <span class="timeline__carrier"
                     ng-if="event.carrier"
                     ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"></span>
             </div>
         </div>
+
+
+
     </div>
 </section>
 
-<section class="section">
-    <div class="section__inner section__inner--slim">
-        <div class="carrier-info" ng-repeat="carrier in tracking.carrierInfo" ng-class="'image-carrier-' + carrier.code">
-            <div class="widget-config-carrier-image" ng-class="'image-carrier-' + carrier.code"></div>
-        </div>
-    </div>
-</section>
+
 
 <banner banner-title="'SECTION.FOOTER.TITLE' | translate" banner-subtitle="'SECTION.FOOTER.SUBTITLE' | translate" tracking-id="{{tracking.data.id.toUpperCase()}}"></banner>
