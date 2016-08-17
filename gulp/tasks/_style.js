@@ -26,16 +26,21 @@ gulp.task('styles', gulp.series('styles:clean', function stylesBuild() {
       var innerStr = file.inlinedImagesMetaData.map(function(data) {
         return '\'' + data.name + '\' : (\n\'width\' : ' + data.width + ',\n\'height\' : ' + data.height + '\n)';
       }).join(',\n');
-      var outerStr = '$_inlineDimensionsData : (\n' + innerStr + '\n);';
 
-      this.push(file);
-      fs.writeFile(path.join(process.cwd(), paths.source.root + 'css/variables/_inline-dimensions.scss'), outerStr, function(err) {
-        if (err) {
-          throw err;
-        }
+      if (innerStr.length) {
+        var outerStr = '$_inlineDimensionsData : (\n' + innerStr + '\n);';
 
+        this.push(file);
+        fs.writeFile(path.join(process.cwd(), paths.source.root + 'css/variables/_inline-dimensions.scss'), outerStr, function(err) {
+          if (err) {
+            throw err;
+          }
+
+          callback();
+        });
+      } else {
         callback();
-      });
+      }
     });
 
   return gulp.src(paths.source.styles, {base : path.join(process.cwd(), paths.source.root)})

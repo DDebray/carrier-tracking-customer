@@ -12,6 +12,7 @@ function(
   // self.errorStates = ['NOT_AVAILABLE', 'CANCELLED'];
   self.showError = false;
   self.state = -1;
+  self.carrierInfo = null;
 
 // IN_TRANSIT.FORWARD.DISTRIBUTION_CENTER
 // HANDOVER.CARRIER.LOCATION
@@ -92,6 +93,31 @@ function(
     }
   ];
 
+  var getCarrierInfoByEvents = function (events) {
+    // events.push({
+    //   carrier: {
+    //     code: 'hermes'
+    //   }
+    // });
+
+    var uniqueBy = function (a, key) {
+      var seen = {};
+      return a.filter(function(item) {
+        var k = key(item);
+        // var k = key;
+        return seen.hasOwnProperty(k) ? false : (seen[k] = true);
+      });
+    };
+
+    // create an array that only contains all the carriers from the events
+    var unfilteredCarriers = events.map(function (event) {
+      return event.carrier;
+    });
+
+    // filter dublicates
+    return uniqueBy(unfilteredCarriers, JSON.stringify);
+  };
+
   // get trackingId from URL
   if ($routeParams.trackingId) {
     self.trackingId = $routeParams.trackingId;
@@ -107,6 +133,7 @@ function(
           self.state = self.availableStates.indexOf(response.events[response.events.length - 1].status);
           // self.showError = self.errorStates.indexOf(response.events[response.events.length - 1].status) !== -1;
           self.showError = response.events[response.events.length - 1].status === 'NOT_AVAILABLE';
+          self.carrierInfo = getCarrierInfoByEvents(response.events);
         } else {
           self.showError = true;
         }
