@@ -1,4 +1,4 @@
-<div class="banner"
+<!-- <div class="banner"
     style="background-image: url(https://www.coureon.com/content/footer-cta.jpg)">
     <div class="banner__content">
         <p class="banner__title"
@@ -16,4 +16,16 @@
             </div>
         </form>
     </div>
-</div>
+</div> -->
+
+<section class="section section--blue section--center" style="background-image: url(https://www.coureon.com/content/footer-cta.jpg)">
+    <div class="section__inner">
+        <h2 class="section__title" ng-bind="{{ bannerTitle }}"></h2>
+        <p class="section__subtitle" ng-bind="{{ bannerSubtitle }}"></p>
+        <form class="footerForm">
+            <div class="footerForm__elements" ng-controller="PageBaseCtrl as base">
+                <button class="button button--blush" ng-class="{ 'button--disabled' : !trackingId }" type="button" name="button" ng-click="base.printReturnLabel(trackingId)" ng-bind="'SECTION.FOOTER.PRINT_RETURN_LABEL_BUTTON' | translate"></button>
+            </div>
+        </form>
+    </div>
+</section>
