@@ -72,41 +72,41 @@
             </div>
         </div>
 
-        <div class="row timeline2">
+        <div class="row timeline">
 
             <!-- timeline -->
             <div class="column small-12 medium-10">
-                <div class="row row-outer timeline2__event" ng-repeat="event in tracking.data.events" ng-class="{'timeline2__event--is-only-child' : (tracking.data.events.length === 1)}">
+                <div class="row row-outer timeline__event" ng-repeat="event in tracking.data.events" ng-class="{'timeline__event--is-only-child' : (tracking.data.events.length === 1)}">
 
                     <!-- date -->
                     <div class="column medium-3 show-for-medium">
-                        <div class="timeline2__date" title="{{ event.moment | moment:'long' }}">
-                            <div class="timeline2__date__text" ng-bind="event.moment | moment:'day'"></div>
-                            <div class="timeline2__date__text" ng-bind="event.moment | moment:'time'"></div>
+                        <div class="timeline__date" title="{{ event.moment | moment:'long' }}">
+                            <div class="timeline__date__text" ng-bind="event.moment | moment:'day'"></div>
+                            <div class="timeline__date__text" ng-bind="event.moment | moment:'time'"></div>
                         </div>
                     </div>
 
                     <!-- state -->
-                    <div class="column small-2 medium-1 timeline2__state-container">
-                        <div class="timeline2__state timeline2__state--small fa fa-check" ng-class="{ 'timeline2__state--process-is-completed' : ($last && event.status === 'DELIVERED')}"></div>
-                        <div class="timeline2__state-line"></div>
+                    <div class="column small-2 medium-1 timeline__state-container">
+                        <div class="timeline__state timeline__state--small fa fa-check" ng-class="{ 'timeline__state--process-is-completed' : ($last && event.status === 'DELIVERED')}"></div>
+                        <div class="timeline__state-line"></div>
                     </div>
 
                     <!-- text -->
                     <div class="column small-10 medium-8">
 
-                        <div class="timeline2__date timeline2__date--small show-for-small-only" title="{{ event.moment | moment:'long' }}">
-                            <span class="timeline2__date__text" ng-bind="event.moment | moment:'day'"></span>,
-                            <span class="timeline2__date__text" ng-bind="event.moment | moment:'time'"></span>
+                        <div class="timeline__date timeline__date--small show-for-small-only" title="{{ event.moment | moment:'long' }}">
+                            <span class="timeline__date__text" ng-bind="event.moment | moment:'day'"></span>,
+                            <span class="timeline__date__text" ng-bind="event.moment | moment:'time'"></span>
                         </div>
 
-                        <span class="timeline2__description">
-                            <div class="timeline2__description-text">
+                        <span class="timeline__description">
+                            <div class="timeline__description-text">
                                 <span ng-bind="('PAGE.TRACKING.TIMELINE.EVENT.' + event.description.toUpperCase() | translate)
                                 .replace('%CITY%', event.location.city || '')
                                 .replace('%COUNTRY%', event.location.country || '')"></span>
 
-                                <span class="timeline2__carrier"
+                                <span class="timeline__carrier"
                                 ng-if="event.carrier"
                                 ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"
                                 ></span>
@@ -125,7 +125,7 @@
             </div>
         </div>
 
-        <div class="timeline"
+        <!-- <div class="timeline"
             ng-if="tracking.data.events.length  && !tracking.showError">
             <div class="timeline__event"
                 ng-repeat="event in tracking.data.events"
@@ -147,7 +147,7 @@
                     ng-if="event.carrier"
                     ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"></span>
             </div>
-        </div>
+        </div> -->
 
 
 
