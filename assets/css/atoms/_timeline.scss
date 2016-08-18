@@ -4,10 +4,8 @@ $timeline-state-size: 16px;
 
 .timeline {
   position: relative;
-  margin: {
-    top: $_ySpacing;
-    bottom: $_ySpacing * 3;
-  }
+  margin: $_ySpacing 0;
+  margin-bottom: $_ySpacing * 3;
 
   &__event {
     @include clearfix;
@@ -65,11 +63,15 @@ $timeline-state-size: 16px;
     font-weight: bold;
     text-align: center;
     z-index: $zindex-inner;
+    font-size: $_fsSub;
 
     &--small{
       height: auto;
       text-align: left;
       margin-bottom: $_defaultSpacing / 2;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
 
     &__text {
@@ -108,14 +110,10 @@ $timeline-state-size: 16px;
       position: absolute;
       top: 0;
       left: calc(50% - #{$timeline-width / 2});
-      height: calc(100% + #{$_ySpacing});
+      height: calc(100% + #{$_ySpacing} + 6px + #{$timeline-state-size / 2});
       width: $timeline-width;
       background: $_rgbDustyGray;
       z-index: $zindex-background;
-
-      @media #{$small-only} {
-        top: calc(6px + #{$timeline-state-size / 2});
-      }
     }
   }
 
@@ -137,10 +135,9 @@ $timeline-state-size: 16px;
   &__carrier {
     position: relative;
     display: inline-block;
-
     font-size: 75%;
-    margin-left: $_defaultSpacing / 2;
-    background-color: $_rgbAlto;
+    color: $_rgbMineShaft;
+    background-color: lighten($_rgbAlto, 20%);
     padding: 0 $_defaultSpacing / 4;
     border-radius: $_borderRadiusDefault;
     z-index: $zindex-inner;

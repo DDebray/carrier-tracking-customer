@@ -9,16 +9,32 @@
 
   transition: margin $_tMed ease;
 
+  @media #{$small-only} {
+    min-width: 370px;
+    // transform: scale(0.4);
+    display: block;
+  }
+
   &__state {
+
+    // transform: scale(0.9);
     font-size: 2.5rem;
+    // font-size: 4vw;
     border:3px solid lighten($_rgbMineShaft, 60%);
     border-radius: 50%;
     padding: 20px;
+    // padding: 2vw;
     color: lighten($_rgbMineShaft, 60%);
     text-align: center;
     min-width: 90px;
+    // max-width: 9vw;
     min-height: 90px;
+    // max-height: 9vw;
     position: relative;
+
+    @media #{$small-only} {
+      transform: scale(0.4);
+    }
 
     &--is-active {
       color: $_rgbPacificBlue;
@@ -37,32 +53,50 @@
     right: -2px;
     border-radius: 50%;
     line-height: 16px;
+    // line-height: 0vw;
     background-color: #fff;
     padding: 6px;
+    // padding: 1vw;
     opacity: 0;
-    transform:rotate(45deg);
     transition: opacity $_tShort ease,
                 transform $_tMed ease;
+
+    transform:rotate(45deg);
+
+    @media #{$small-only} {
+      transform: rotate(-45deg) scale(0.6);
+    }
 
     &.fa-flip-horizontal {
       right: auto;
       left: 0;
       transform: rotate(-45deg) scaleX(-1);
+
+      @media #{$small-only} {
+        transform: rotate(-45deg) scaleX(-1) scale(0.6);
+      }
     }
 
     &--success {
       @extend .fa;
       @extend .fa-check;
-      padding-top: 6px;
-      padding-bottom: 6px;
-      padding-left: 4px;
+      // padding-top: 6px;
+      // padding-bottom: 6px;
+      // padding-left: 4px;
       color: $_rgbFeijoa;
-      font-size: 16px;
       opacity: 1;
       transform: rotate(0deg);
 
+      @media #{$small-only} {
+        transform: rotate(0deg) scale(0.6);
+      }
+
       &.fa-flip-horizontal {
         transform: rotate(0deg) scaleX(-1);
+
+        @media #{$small-only} {
+          transform: rotate(0deg) scaleX(-1) scale(0.6);
+        }
       }
     }
 
@@ -70,21 +104,31 @@
       @extend .fa;
       @extend .fa-close;
       color: $_rgbBlush;
-      font-size: 16px;
       opacity: 1;
       transform: rotate(0deg);
+    }
+
+    &--success,
+    &--error {
+      font-size: 16px;
     }
   }
 
   &__angle {
     font-size: 2.5rem;
+    // font-size: 4vw;
     margin-top: 24px;
+    // margin-top: 4vw;
     color: $_rgbWhite;
     text-align: center;
-    min-width: 60px;
+    min-width: 30px;
+    // min-width: 6vw;
     opacity: 0;
     transition: opacity $_tMed ease;
 
+    @media #{$small-only} {
+      transform: scale(0.4);
+    }
 
     &--is-visible {
       opacity: 1;
