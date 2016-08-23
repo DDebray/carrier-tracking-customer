@@ -4,8 +4,11 @@ $timeline-state-size: 16px;
 
 .timeline {
   position: relative;
-  margin: $_ySpacing 0;
-  margin-bottom: $_ySpacing * 3;
+  margin: $_ySpacing 0 $_ySpacing * 3;
+
+  @media #{$small-only} {
+    margin-bottom: $_ySpacing * 2;
+  }
 
   &__event {
     @include clearfix;
@@ -137,7 +140,7 @@ $timeline-state-size: 16px;
     display: inline-block;
     font-size: 75%;
     color: $_rgbMineShaft;
-    background-color: lighten($_rgbAlto, 20%);
+    background-color: lighten($_rgbAlto, 10%);
     padding: 0 $_defaultSpacing / 4;
     border-radius: $_borderRadiusDefault;
     z-index: $zindex-inner;

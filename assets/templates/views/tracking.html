@@ -1,51 +1,27 @@
-<hero hero-title="'SECTION.HERO.TITLE' | translate"
-    hero-image="url(images/hero/default.jpg)">
-    <form class="hero__form"
-        ng-submit="tracking.getStatus()"
-        autocomplete="off">
+<hero hero-title="'SECTION.HERO.TITLE' | translate" hero-image="url(images/hero/default.jpg)">
+    <form class="hero__form" ng-submit="tracking.getStatus()" autocomplete="off">
         <div class="hero__form__elements">
-            <input class="hero__form__input hero__form__input--default"
-                type="text"
-                name="tracking_number"
-                placeholder="{{'SECTION.HERO.PLACEHOLDER' | translate}}"
-                required
-                ng-model="tracking.trackingId"
-                select-on-click
-                autofocus>
-            <button class="hero__form__submit"
-                type="submit"
-                name="submit"
-                ng-bind="'SECTION.HERO.TRACK_BUTTON' | translate"></button>
+            <input class="hero__form__input hero__form__input--default" type="text" name="tracking_number" placeholder="{{'SECTION.HERO.PLACEHOLDER' | translate}}" required ng-model="tracking.trackingId" select-on-click autofocus>
+            <button class="hero__form__submit" type="submit" name="submit" ng-bind="'SECTION.HERO.TRACK_BUTTON' | translate"></button>
         </div>
     </form>
 </hero>
 
 <section class="section">
-    <div class="section__inner section__inner--slim"
-        ng-class="{ 'section__inner--centered' : tracking.showError }">
+    <div class="section__inner section__inner--slim" ng-class="{ 'section__inner--centered' : tracking.showError }">
 
-        <h2 ng-if="tracking.showError"
-            ng-bind="'PAGE.TRACKING.ERROR_TITLE' | translate"></h2>
-        <p ng-if="tracking.showError && ('PAGE.TRACKING.ERROR_DESCRIPTION' | translate) !== 'PAGE.TRACKING.ERROR_DESCRIPTION'"
-            ng-bind="'PAGE.TRACKING.ERROR_DESCRIPTION' | translate"></p>
+        <h2 ng-if="tracking.showError" ng-bind="'PAGE.TRACKING.ERROR_TITLE' | translate"></h2>
+        <p ng-if="tracking.showError && ('PAGE.TRACKING.ERROR_DESCRIPTION' | translate) !== 'PAGE.TRACKING.ERROR_DESCRIPTION'" ng-bind="'PAGE.TRACKING.ERROR_DESCRIPTION' | translate"></p>
 
 
         <!-- statecrumbs -->
         <div class="row row-outer-block">
             <div class="column small-12">
-                <div class="statecrumbs"
-                    ng-if="tracking.data && !tracking.showError">
-                    <span class="statecrumbs__angle fa fa-{{state.angle}}"
-                        ng-repeat-start="state in tracking.packageStates"
-                        ng-if="state.angle && state.isActive"
-                        ng-class="{ 'statecrumbs__angle--is-visible' : state.isActive() }"></span>
+                <div class="statecrumbs" ng-if="tracking.data && !tracking.showError">
+                    <span class="statecrumbs__angle fa fa-{{state.angle}}" ng-repeat-start="state in tracking.packageStates" ng-if="state.angle && state.isActive" ng-class="{ 'statecrumbs__angle--is-visible' : state.isActive() }"></span>
 
-                    <span class="statecrumbs__state fa fa-{{state.icon()}} {{state.iconModifier}}"
-                        ng-repeat-end
-                        ng-class="{ 'statecrumbs__state--is-active' : state.isActive(), 'statecrumbs__state--is-error' : state.isError() }"
-                        tooltip="{ on : 'enter', translation : ('PAGE.TRACKING.SUMMARY.TOOLTIP' + (state.showCross() ? '_IS_ERROR.' : (state.isActive() ? '_IS_ACTIVE.' : '.')) + state.tooltip.toUpperCase()), directionY : 'up', class : (state.isActive() ? 'ui-tooltip--centered --is-active' : 'ui-tooltip--centered') }">
-                        <span class="statecrumbs__icon {{state.iconModifier}}"
-                            ng-class="{ 'statecrumbs__icon--success' : state.showCheckmark(), 'statecrumbs__icon--error' : state.showCross() }"></span>
+                    <span class="statecrumbs__state fa fa-{{state.icon()}} {{state.iconModifier}}" ng-repeat-end ng-class="{ 'statecrumbs__state--is-active' : state.isActive(), 'statecrumbs__state--is-error' : state.isError() }" tooltip="{ on : 'enter', translation : ('PAGE.TRACKING.SUMMARY.TOOLTIP' + (state.showCross() ? '_IS_ERROR.' : (state.isActive() ? '_IS_ACTIVE.' : '.')) + state.tooltip.toUpperCase()), directionY : 'up', class : (state.isActive() ? 'ui-tooltip--centered --is-active' : 'ui-tooltip--centered') }">
+                        <span class="statecrumbs__icon {{state.iconModifier}}" ng-class="{ 'statecrumbs__icon--success' : state.showCheckmark(), 'statecrumbs__icon--error' : state.showCross() }"></span>
                     </span>
                 </div>
             </div>
@@ -90,10 +66,10 @@
                         <div class="timeline__description-text">
                             <span ng-bind="('PAGE.TRACKING.TIMELINE.EVENT.' + event.description.toUpperCase() | translate)
                             .replace('%CITY%', event.location.city || '')
-                            .replace('%COUNTRY%', event.location.country || '')"></span>
-<!--  && tracking.carrierInfo.length > 1 -->
+                            .replace('%COUNTRY%', event.location.country || '') + '&nbsp;'"></span>
+
                             <span class="timeline__carrier"
-                            ng-if="event.carrier"
+                            ng-if="event.carrier && tracking.carrierInfo.length > 1"
                             ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"
                             ></span>
                         </div>
@@ -108,12 +84,13 @@
             <div class="column small-12 medium-6 large-4" ng-repeat="carrier in tracking.carrierInfo">
                 <div class="carrier-info">
 
-                    <!-- <div class="carrier-info__logo" ng-class="'image-carrier-' + carrier.code"></div> -->
+                    <div class="carrier-info__logo" ng-class="'image-carrier-' + carrier.code"></div>
+
                     <a class="carrier-info__link" ng-href="{{('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL') | translate}}" target="_blank">
-                      <div class="carrier-info__logo" ng-class="'image-carrier-' + carrier.code"></div>
+                        <span ng-bind="('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL') | translate"></span>
                     </a>
+
                     <div class="carrier-info__tel">
-                        <span class="fa fa-phone"></span>
                         <span ng-bind="('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.TEL') | translate"></span>
                     </div>
                 </div>
