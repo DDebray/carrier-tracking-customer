@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="en"><head><title>app/common/directives/watchHeight</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../"><meta name="groc-document-path" content="app/common/directives/watchHeight"><meta name="groc-project-path" content="assets/js/app/common/directives/watchHeight.js"><meta name="groc-github-url" content="https://github.com/zooron/carrier-tracking-customer"><link rel="stylesheet" type="text/css" media="all" href="../../../assets/style.css"><script type="text/javascript" src="../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/zooron/carrier-tracking-customer/blob/master/assets/js/app/common/directives/watchHeight.js">assets/js/app/common/directives/watchHeight.js</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">$timeout</span>) </span>{
+<span class="hljs-pi">  'use strict'</span>;
+
+  <span class="hljs-keyword">return</span> {
+    scope: {
+      getValues: <span class="hljs-string">'&amp;watchHeight'</span>,
+    },
+    link: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">scope, element, attrs</span>) </span>{
+      <span class="hljs-keyword">var</span> config = scope.getValues(),
+        action = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">condition</span>) </span>{
+          <span class="hljs-keyword">var</span> targetOnTrue = element[<span class="hljs-number">0</span>].querySelector(<span class="hljs-string">'.'</span> + config.targetOnTrue),
+            targetOnFalse = element[<span class="hljs-number">0</span>].querySelector(<span class="hljs-string">'.'</span> + config.targetOnFalse),
+            target = condition ? targetOnTrue : targetOnFalse;
+            element.css(<span class="hljs-string">'height'</span>, target.offsetHeight + <span class="hljs-string">'px'</span>);
+        };
+
+      scope.$watch(<span class="hljs-string">'getValues().condition'</span>, action);
+
+      $timeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        element.addClass(config.disableAnimationClass);
+        action(scope.getValues().condition);
+      }, <span class="hljs-number">25</span>);
+
+      $timeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        element.removeClass(config.disableAnimationClass);
+      }, <span class="hljs-number">800</span>);
+    }
+  };
+};</div></div></div></div></body></html>

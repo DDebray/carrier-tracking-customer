@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="en"><head><title>app/common/directives/tabPanel</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../"><meta name="groc-document-path" content="app/common/directives/tabPanel"><meta name="groc-project-path" content="assets/js/app/common/directives/tabPanel.js"><meta name="groc-github-url" content="https://github.com/zooron/carrier-tracking-customer"><link rel="stylesheet" type="text/css" media="all" href="../../../assets/style.css"><script type="text/javascript" src="../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/zooron/carrier-tracking-customer/blob/master/assets/js/app/common/directives/tabPanel.js">assets/js/app/common/directives/tabPanel.js</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+<span class="hljs-pi">  'use strict'</span>;
+
+  <span class="hljs-keyword">return</span> {
+    restrict: <span class="hljs-string">'E'</span>,
+    transclude: <span class="hljs-literal">true</span>,
+    templateUrl: <span class="hljs-string">'/views/partials/tab_panel.html'</span>,
+    scope: {},
+    bindToController: <span class="hljs-literal">true</span>,
+    controllerAs: <span class="hljs-string">'tabPanel'</span>,
+    controller: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+      <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
+      self.tabs = [];
+      self.addTab = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addTab</span>(<span class="hljs-params">tab</span>) </span>{
+        self.tabs.push(tab);
+        <span class="hljs-keyword">if</span>(self.tabs.length === <span class="hljs-number">1</span>) {
+          tab.active = <span class="hljs-literal">true</span>;
+        }
+      };
+      self.select = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">selectedTab</span>) </span>{
+        angular.forEach(self.tabs, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">tab</span>) </span>{
+          <span class="hljs-keyword">if</span>(tab.active &amp;&amp; tab !== selectedTab) {
+            tab.active = <span class="hljs-literal">false</span>;
+          }
+        });
+        selectedTab.active = <span class="hljs-literal">true</span>;
+      };
+    },
+    link: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">scope, element, attr</span>) </span>{
+      scope.padding = <span class="hljs-string">'padding'</span> <span class="hljs-keyword">in</span> attr;
+    }
+  };
+};</div></div></div></div></body></html>

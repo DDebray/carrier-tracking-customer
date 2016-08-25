@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="en"><head><title>app/common/directives/tooltip</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../"><meta name="groc-document-path" content="app/common/directives/tooltip"><meta name="groc-project-path" content="assets/js/app/common/directives/tooltip.js"><meta name="groc-github-url" content="https://github.com/zooron/carrier-tracking-customer"><link rel="stylesheet" type="text/css" media="all" href="../../../assets/style.css"><script type="text/javascript" src="../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/zooron/carrier-tracking-customer/blob/master/assets/js/app/common/directives/tooltip.js">assets/js/app/common/directives/tooltip.js</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">CommonUi</span>) </span>{
+<span class="hljs-pi">  'use strict'</span>;
+
+  <span class="hljs-keyword">return</span> {
+    restrict: <span class="hljs-string">'A'</span>,
+    scope: {
+      getValues: <span class="hljs-string">'&amp;tooltip'</span>
+    },
+    link: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">scope, elements</span>) </span>{
+      <span class="hljs-keyword">var</span> config = {},
+        updateConfig = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+          config = scope.getValues();
+          (config || {}).targetEl = elements[<span class="hljs-number">0</span>];
+        };
+      updateConfig();
+
+      <span class="hljs-keyword">if</span> (!config) {
+        <span class="hljs-keyword">return</span>;
+      }
+
+      <span class="hljs-keyword">switch</span> (config.on) {
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'enter'</span>:
+          elements.on(<span class="hljs-string">'mouseenter'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            updateConfig();
+            CommonUi.tooltip.show(config);
+          });
+
+          elements.on(<span class="hljs-string">'mouseleave'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            CommonUi.tooltip.hide();
+          });
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'click'</span>:
+          elements.on(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">if</span> (!CommonUi.tooltip.config || CommonUi.tooltip.config.targetEl !== config.targetEl) {
+              updateConfig();
+              CommonUi.tooltip.show(config);
+            } <span class="hljs-keyword">else</span> {
+              CommonUi.tooltip.hide();
+            }
+          });
+          <span class="hljs-keyword">break</span>;
+      }
+
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> config.onTrue !== <span class="hljs-string">'undefined'</span>) {
+        scope.$watch(<span class="hljs-string">'getValues().onTrue'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">newVal</span>) </span>{
+          <span class="hljs-keyword">if</span> (newVal) {
+            updateConfig();
+            CommonUi.tooltip.show(config);
+          } <span class="hljs-keyword">else</span> {
+            CommonUi.tooltip.hide();
+          }
+        });
+      }
+
+      scope.$on(<span class="hljs-string">'$destroy'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">if</span> (CommonUi.tooltip.config &amp;&amp; CommonUi.tooltip.config.targetEl === config.targetEl) {
+          CommonUi.tooltip.hide();
+        }
+      });
+    }
+  };
+};</div></div></div></div></body></html>

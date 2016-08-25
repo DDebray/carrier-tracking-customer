@@ -1,0 +1,37 @@
+<!DOCTYPE html><html lang="en"><head><title>app/common/filters</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="app/common/filters"><meta name="groc-project-path" content="assets/js/app/common/filters.js"><meta name="groc-github-url" content="https://github.com/zooron/carrier-tracking-customer"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"><script type="text/javascript" src="../../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/zooron/carrier-tracking-customer/blob/master/assets/js/app/common/filters.js">assets/js/app/common/filters.js</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">application</span>) </span>{
+<span class="hljs-pi">  'use strict'</span>;
+
+  application
+    .filter(<span class="hljs-string">'raw'</span>, [<span class="hljs-string">'$sce'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">$sce</span>) </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">val</span>) </span>{
+        <span class="hljs-keyword">return</span> $sce.trustAsHtml(val);
+      };
+    }])
+    .filter(<span class="hljs-string">'moment'</span>, [<span class="hljs-string">'CommonMoment'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">CommonMoment</span>) </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">input, expression</span>) </span>{
+        <span class="hljs-keyword">if</span> (!input) {
+          <span class="hljs-keyword">return</span> <span class="hljs-string">''</span>;
+        }
+
+        <span class="hljs-keyword">if</span> (input.isValid()) {
+          <span class="hljs-keyword">switch</span> (expression) {
+            <span class="hljs-keyword">case</span> <span class="hljs-string">'long'</span> :
+              <span class="hljs-keyword">return</span> input.format(<span class="hljs-string">'dddd[, ]DD.MM.YYYY[, ]HH:mm:ss[ Uhr]'</span>);
+            <span class="hljs-keyword">case</span> <span class="hljs-string">'day'</span> :
+              <span class="hljs-keyword">return</span> input.format(<span class="hljs-string">'dddd[, ]DD.MM.'</span>);
+            <span class="hljs-keyword">case</span> <span class="hljs-string">'time'</span> :
+              <span class="hljs-keyword">return</span> input.format(<span class="hljs-string">'HH:mm [ Uhr]'</span>);
+            <span class="hljs-keyword">default</span>:
+              <span class="hljs-keyword">return</span> input.format(<span class="hljs-string">'DD.MM.YYYY'</span>);
+          }
+        }
+        <span class="hljs-keyword">return</span> input;
+      };
+    }])
+    .filter(<span class="hljs-string">'jsonParse'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">input</span>) </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">JSON</span>.parse(input);
+      };
+    })
+    ;
+};</div></div></div></div></body></html>

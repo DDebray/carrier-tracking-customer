@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="en"><head><title>app/common/tracking</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="app/common/tracking"><meta name="groc-project-path" content="assets/js/app/common/tracking.js"><meta name="groc-github-url" content="https://github.com/zooron/carrier-tracking-customer"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"><script type="text/javascript" src="../../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/zooron/carrier-tracking-customer/blob/master/assets/js/app/common/tracking.js">assets/js/app/common/tracking.js</a></div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><p>REVIEW Understand what this is doing!</p></div></div><div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.exports = [<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+<span class="hljs-pi">  'use strict'</span>;
+
+  <span class="hljs-keyword">var</span>
+    environment = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../environment'</span>),
+    writeKeys = {
+      development : <span class="hljs-string">'DLXuoEBMP7DUE1qAcxCjyMBGyzvQn2u7'</span>,
+      testing : <span class="hljs-string">'DLXuoEBMP7DUE1qAcxCjyMBGyzvQn2u7'</span>,
+      production : <span class="hljs-string">'lqgxg5Mw8orYLgoJDirIVVhw0lQRpPrA'</span>
+    },
+    loadDelay = <span class="hljs-number">4000</span>, <span class="hljs-comment">// because some heavy scripts like intercom might be loaded</span>
+    enableIn = [<span class="hljs-string">'development'</span>, <span class="hljs-string">'testing'</span>, <span class="hljs-string">'production'</span>];
+
+  <span class="hljs-keyword">var</span> config = {
+    init: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+      <span class="hljs-keyword">if</span> (enableIn.indexOf(environment) === -<span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">return</span>;
+      }
+
+      <span class="hljs-built_in">window</span>.analyticsCallback = config.load;
+      <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">var</span>
+          firstScript = <span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">'script'</span>)[<span class="hljs-number">0</span>],
+          snippet = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'script'</span>);
+        snippet.async = <span class="hljs-literal">true</span>;
+        snippet.src = <span class="hljs-string">'/js/vendor/segment-analytics.js'</span>;
+        firstScript.parentNode.insertBefore(snippet, firstScript);
+      }, loadDelay);
+    },
+    load : <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">container</span>) </span>{
+      container.load(writeKeys[environment]);
+      config.addEvent(<span class="hljs-string">'ready'</span>);
+    },
+    initialized : {},
+    addEvent : <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event, identifier, options, additional</span>) </span>{
+      <span class="hljs-keyword">if</span> (enableIn.indexOf(environment) === -<span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">return</span>;
+      }
+
+      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">window</span>.analytics || !<span class="hljs-built_in">window</span>.analytics.initialize || (event !== <span class="hljs-string">'page'</span> &amp;&amp; !config.initialized.page)) {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+          config.addEvent(event, identifier, options, additional);
+        }, <span class="hljs-number">300</span>);
+      }
+
+      config.initialized[event] = <span class="hljs-literal">true</span>;
+      <span class="hljs-built_in">window</span>.analytics[event](identifier, options, additional);
+    }
+  };
+
+  <span class="hljs-keyword">return</span> config;
+}];</div></div></div></div></body></html>

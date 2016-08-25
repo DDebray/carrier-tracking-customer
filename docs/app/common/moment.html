@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="en"><head><title>app/common/moment</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="app/common/moment"><meta name="groc-project-path" content="assets/js/app/common/moment.js"><meta name="groc-github-url" content="https://github.com/zooron/carrier-tracking-customer"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"><script type="text/javascript" src="../../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/zooron/carrier-tracking-customer/blob/master/assets/js/app/common/moment.js">assets/js/app/common/moment.js</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.exports = [<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+<span class="hljs-pi">  'use strict'</span>;
+
+  <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>,
+    moment = <span class="hljs-built_in">require</span>(<span class="hljs-string">'moment'</span>);
+
+  <span class="hljs-keyword">var</span> processRelativeTime = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">number, withoutSuffix, key, isFuture</span>) </span>{
+      <span class="hljs-keyword">var</span> format = {
+          <span class="hljs-string">'m'</span>: [<span class="hljs-string">'eine Minute'</span>, <span class="hljs-string">'einer Minute'</span>],
+          <span class="hljs-string">'h'</span>: [<span class="hljs-string">'eine Stunde'</span>, <span class="hljs-string">'einer Stunde'</span>],
+          <span class="hljs-string">'d'</span>: [<span class="hljs-string">'ein Tag'</span>, <span class="hljs-string">'einem Tag'</span>],
+          <span class="hljs-string">'dd'</span>: [number + <span class="hljs-string">' Tage'</span>, number + <span class="hljs-string">' Tagen'</span>],
+          <span class="hljs-string">'M'</span>: [<span class="hljs-string">'ein Monat'</span>, <span class="hljs-string">'einem Monat'</span>],
+          <span class="hljs-string">'MM'</span>: [number + <span class="hljs-string">' Monate'</span>, number + <span class="hljs-string">' Monaten'</span>],
+          <span class="hljs-string">'y'</span>: [<span class="hljs-string">'ein Jahr'</span>, <span class="hljs-string">'einem Jahr'</span>],
+          <span class="hljs-string">'yy'</span>: [number + <span class="hljs-string">' Jahre'</span>, number + <span class="hljs-string">' Jahren'</span>]
+      };
+      <span class="hljs-keyword">return</span> withoutSuffix ? format[key][<span class="hljs-number">0</span>] : format[key][<span class="hljs-number">1</span>];
+  };
+
+  <span class="hljs-keyword">var</span> config = {
+    init: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p>TODO: Move to translation table</p></div></div><div class="code"><div class="wrapper">      moment.locale(<span class="hljs-string">'de'</span>, {
+        months: <span class="hljs-string">'Januar_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember'</span>.split(<span class="hljs-string">'_'</span>),
+        monthsShort: <span class="hljs-string">'Jan._Febr._Mrz._Apr._Mai_Jun._Jul._Aug._Sept._Okt._Nov._Dez.'</span>.split(<span class="hljs-string">'_'</span>),
+        weekdays: <span class="hljs-string">'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'</span>.split(<span class="hljs-string">'_'</span>),
+        weekdaysShort: <span class="hljs-string">'So._Mo._Di._Mi._Do._Fr._Sa.'</span>.split(<span class="hljs-string">'_'</span>),
+        weekdaysMin: <span class="hljs-string">'So_Mo_Di_Mi_Do_Fr_Sa'</span>.split(<span class="hljs-string">'_'</span>),
+        longDateFormat: {
+          LT: <span class="hljs-string">'HH:mm'</span>,
+          LTS: <span class="hljs-string">'HH:mm:ss'</span>,
+          L: <span class="hljs-string">'DD.MM.'</span>,
+          LL: <span class="hljs-string">'D. MMMM YYYY'</span>,
+          LLL: <span class="hljs-string">'D. MMMM YYYY HH:mm'</span>,
+          LLLL: <span class="hljs-string">'dddd, D. MMMM YYYY HH:mm'</span>
+        },
+        calendar: {
+          sameDay: <span class="hljs-string">'[heute]'</span>,
+          sameElse: <span class="hljs-string">'dddd[, ]L'</span>,
+          nextDay: <span class="hljs-string">'[morgen]'</span>,</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>sameDay: &#39;[Heute, ]L&#39;,
+sameElse: &#39;dddd[, ]L&#39;,
+nextDay: &#39;[Morgen, ]L&#39;,</p></div></div><div class="code"><div class="wrapper">          nextWeek: <span class="hljs-string">'dddd[, ]L'</span>,
+          lastDay: <span class="hljs-string">'[Gestern, ]L'</span>,
+          lastWeek: <span class="hljs-string">'[letzten ]dddd[, ]L'</span>
+        },
+        relativeTime: {
+          future: <span class="hljs-string">'in %s'</span>,
+          past: <span class="hljs-string">'vor %s'</span>,
+          s: <span class="hljs-string">'ein paar Sekunden'</span>,
+          m: processRelativeTime,
+          mm: <span class="hljs-string">'%d Minuten'</span>,
+          h: processRelativeTime,
+          hh: <span class="hljs-string">'%d Stunden'</span>,
+          d: processRelativeTime,
+          dd: processRelativeTime,
+          M: processRelativeTime,
+          MM: processRelativeTime,
+          y: processRelativeTime,
+          yy: processRelativeTime
+        },
+        ordinalParse: <span class="hljs-regexp">/\d{1,2}\./</span>,
+        ordinal: <span class="hljs-string">'%d.'</span>,
+        week: {
+          dow: <span class="hljs-number">1</span>, <span class="hljs-comment">// Monday is the first day of the week.</span>
+          doy: <span class="hljs-number">4</span> <span class="hljs-comment">// The week that contains Jan 4th is the first week of the year.</span>
+        }
+      });
+
+      <span class="hljs-keyword">return</span> moment;
+    }
+  };
+
+  <span class="hljs-keyword">return</span> config.init();
+}];</div></div></div></div></body></html>

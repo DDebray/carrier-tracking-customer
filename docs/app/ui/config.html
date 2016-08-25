@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="en"><head><title>app/ui/config</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="app/ui/config"><meta name="groc-project-path" content="assets/js/app/ui/config.js"><meta name="groc-github-url" content="https://github.com/zooron/carrier-tracking-customer"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"><script type="text/javascript" src="../../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/zooron/carrier-tracking-customer/blob/master/assets/js/app/ui/config.js">assets/js/app/ui/config.js</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CommonUiProvider</span>(<span class="hljs-params"></span>) </span>{
+<span class="hljs-pi">  'use strict'</span>;
+
+  <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>,
+    services = {};
+
+  self.$get = [<span class="hljs-string">'$rootScope'</span>, <span class="hljs-string">'$filter'</span>, <span class="hljs-string">'$timeout'</span>, <span class="hljs-string">'CommonBrowser'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">$rootScope, $filter, $timeout, CommonBrowser</span>) </span>{
+    services.$scope = $rootScope;
+    services.CommonBrowser = CommonBrowser;
+    services.$filter = $filter;
+    services.$timeout = $timeout;
+    <span class="hljs-keyword">return</span> self;
+  }];
+
+  self.locked = <span class="hljs-literal">false</span>;
+
+  self.lock = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    self.locked = <span class="hljs-literal">true</span>;
+    self.busy = <span class="hljs-literal">true</span>;
+  };
+
+  self.unlock = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    self.locked = <span class="hljs-literal">false</span>;
+    self.busy = <span class="hljs-literal">false</span>;
+  };
+
+  self.busy = <span class="hljs-literal">false</span>;
+
+  self.hidden = <span class="hljs-literal">false</span>;
+
+  self.tooltip = {
+    config : <span class="hljs-literal">null</span>,
+    hide : <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+      self.tooltip.config = <span class="hljs-literal">null</span>;
+      <span class="hljs-keyword">if</span>(services.$scope &amp;&amp; !services.$scope.$$phase) {
+        services.$scope.$apply();
+      }
+
+      angular.element(<span class="hljs-built_in">window</span>).off(<span class="hljs-string">'resize'</span>, <span class="hljs-keyword">this</span>.updatePosition);
+    },
+    show : <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">config</span>) </span>{
+      <span class="hljs-keyword">if</span> (!config || !config.targetEl || !config.targetEl.offsetParent) {
+        <span class="hljs-keyword">return</span>;
+      }
+
+      self.tooltip.config = config;
+      <span class="hljs-keyword">this</span>.updatePosition();
+
+      <span class="hljs-keyword">if</span>(services.$scope &amp;&amp; !services.$scope.$$phase) {
+        services.$scope.$apply();
+      }
+
+      angular.element(<span class="hljs-built_in">window</span>).off(<span class="hljs-string">'resize'</span>, <span class="hljs-keyword">this</span>.updatePosition).on(<span class="hljs-string">'resize'</span>, <span class="hljs-keyword">this</span>.updatePosition);
+    },
+    updatePosition : <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">apply</span>) </span>{
+      <span class="hljs-keyword">var</span> config = self.tooltip.config;
+      <span class="hljs-keyword">if</span> (!config.targetEl || !config.targetEl.offsetParent) {
+        <span class="hljs-keyword">return</span> self.tooltip.hide();
+      }
+
+      <span class="hljs-keyword">var</span> acr = services.CommonBrowser.getAbsoluteClientRect(config.targetEl),
+        directionX = config.directionX || <span class="hljs-string">'centered'</span>,
+        directionY = config.directionY || (acr.fixed.bottom &gt; (<span class="hljs-built_in">document</span>.body.clientHeight - <span class="hljs-number">200</span>) ? <span class="hljs-string">'up'</span> : <span class="hljs-string">'down'</span>);
+      config.cssClass = <span class="hljs-string">'ui-tooltip--'</span> + directionY + <span class="hljs-string">' '</span> + <span class="hljs-string">'ui-tooltip--'</span> + directionX + <span class="hljs-string">' '</span> + (config.class || <span class="hljs-string">''</span>);
+      config.css = {
+        minWidth : acr.width + <span class="hljs-string">'px'</span>,
+        top : directionY === <span class="hljs-string">'down'</span> ? (acr.bottom + <span class="hljs-string">'px'</span>) : <span class="hljs-string">'auto'</span>,
+        bottom : directionY === <span class="hljs-string">'up'</span> ? ((<span class="hljs-built_in">document</span>.body.clientHeight - acr.top) + <span class="hljs-string">'px'</span>) : <span class="hljs-string">'auto'</span>,
+        left : directionX === <span class="hljs-string">'centered'</span> ? (acr.left + (acr.width / <span class="hljs-number">2</span>)) + <span class="hljs-string">'px'</span> : (directionX === <span class="hljs-string">'right'</span> ? (acr.left + (acr.width / <span class="hljs-number">2</span>) - <span class="hljs-number">25</span>) + <span class="hljs-string">'px'</span> : <span class="hljs-string">'auto'</span>),
+        right : directionX === <span class="hljs-string">'left'</span> ? (((<span class="hljs-built_in">document</span>.body.clientWidth - acr.right) + (acr.width / <span class="hljs-number">2</span>)) - <span class="hljs-number">9</span>) + <span class="hljs-string">'px'</span> : <span class="hljs-string">'auto'</span>
+      };
+
+      <span class="hljs-keyword">if</span>(apply &amp;&amp; services.$scope &amp;&amp; !services.$scope.$$phase) {
+        services.$scope.$apply();
+      }
+    }
+  };
+
+  self.modal = {
+    template : <span class="hljs-literal">null</span>,
+    data : <span class="hljs-literal">null</span>,
+    closable : <span class="hljs-literal">true</span>,
+    onClose : <span class="hljs-literal">null</span>,
+    action : <span class="hljs-literal">null</span>,
+    hide : <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span> &amp;&amp; !self.modal.closable) {</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>triggered by hotkey &amp; modal not closable</p></div></div><div class="code"><div class="wrapper">        <span class="hljs-keyword">return</span>;
+      }
+
+      (self.modal.onClose || <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{})();
+
+      self.modal.template = <span class="hljs-literal">null</span>;
+      self.modal.data = <span class="hljs-literal">null</span>;
+      self.modal.onClose = <span class="hljs-literal">null</span>;
+      self.modal.action = <span class="hljs-literal">null</span>;
+    },
+    show : <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">template, closable, data, onClose, action</span>) </span>{
+      (<span class="hljs-keyword">this</span>.onClose || <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{})();
+
+      <span class="hljs-keyword">this</span>.template = template;
+      <span class="hljs-keyword">this</span>.closable = <span class="hljs-keyword">typeof</span> closable === <span class="hljs-string">'boolean'</span> ? closable : <span class="hljs-literal">true</span>;
+      <span class="hljs-keyword">this</span>.data = data;
+      <span class="hljs-keyword">this</span>.onClose = onClose;
+      <span class="hljs-keyword">this</span>.action = action;
+    }
+  };
+};</div></div></div></div></body></html>

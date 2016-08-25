@@ -1,0 +1,35 @@
+<!DOCTYPE html><html lang="en"><head><title>app/loader</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="app/loader"><meta name="groc-project-path" content="assets/js/app/loader.js"><meta name="groc-github-url" content="https://github.com/zooron/carrier-tracking-customer"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/zooron/carrier-tracking-customer/blob/master/assets/js/app/loader.js">assets/js/app/loader.js</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-keyword">var</span> angular = <span class="hljs-built_in">require</span>(<span class="hljs-string">'angular'</span>);
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'angular-resource'</span>); <span class="hljs-comment">// $resource</span>
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'angular-route'</span>); <span class="hljs-comment">// $route</span>
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'angular-translate'</span>); <span class="hljs-comment">// $translate</span>
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'angular-hotkeys'</span>); <span class="hljs-comment">// hotkeys</span>
+
+<span class="hljs-keyword">var</span> application = angular.module(<span class="hljs-string">'application'</span>, [<span class="hljs-string">'ngResource'</span>, <span class="hljs-string">'ngRoute'</span>, <span class="hljs-string">'pascalprecht.translate'</span>, <span class="hljs-string">'cfp.hotkeys'</span>]);
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'./common/filters'</span>)(application);
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'./common/directives'</span>)(application);
+
+application
+  .provider(<span class="hljs-string">'CommonConfig'</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">'./common/config'</span>))
+
+  .config(<span class="hljs-built_in">require</span>(<span class="hljs-string">'./route'</span>))
+
+  .factory(<span class="hljs-string">'$translateUrlLoader'</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">'./translation/service'</span>))
+  .factory(<span class="hljs-string">'CommonRequest'</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">'./common/request'</span>))
+  .factory(<span class="hljs-string">'CommonBrowser'</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">'./common/browser'</span>))
+  .factory(<span class="hljs-string">'CommonMoment'</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">'./common/moment'</span>))
+  .factory(<span class="hljs-string">'CommonTracking'</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">'./common/tracking'</span>))
+  .factory(<span class="hljs-string">'CommonPopups'</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">'./common/popups'</span>))
+
+  .factory(<span class="hljs-string">'StorageTracking'</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">'./storage/tracking'</span>))
+  .factory(<span class="hljs-string">'StorageShipment'</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">'./storage/shipment'</span>))
+  .factory(<span class="hljs-string">'StorageTransaction'</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">'./storage/transaction'</span>))
+  .factory(<span class="hljs-string">'StorageCountries'</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">'./storage/countries'</span>))
+
+  .provider(<span class="hljs-string">'CommonUi'</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">'./ui/config'</span>))
+
+  .controller(<span class="hljs-string">'UiCtrl'</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">'./ui/controller'</span>))
+  .controller(<span class="hljs-string">'PageBaseCtrl'</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">'./page/base'</span>))
+  .controller(<span class="hljs-string">'PageTrackingCtrl'</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">'./page/tracking'</span>))
+  .controller(<span class="hljs-string">'PagePrintingCtrl'</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">'./page/printing'</span>));
+
+<span class="hljs-built_in">module</span>.exports = application;</div></div></div></div></body></html>
