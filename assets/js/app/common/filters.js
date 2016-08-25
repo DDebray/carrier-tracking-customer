@@ -19,6 +19,8 @@ module.exports = function (application) {
               return input.format('dddd[, ]DD.MM.YYYY[, ]HH:mm:ss[ Uhr]');
             case 'day' :
               return input.format('dddd[, ]DD.MM.');
+            case 'short-day' :
+              return input.format('dd[., ]DD.MM.');
             case 'time' :
               return input.format('HH:mm [ Uhr]');
             default:

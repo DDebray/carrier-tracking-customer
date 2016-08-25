@@ -4,10 +4,10 @@
 @import 'scss/foundation';
 
 @include foundation-global-styles;
-@include foundation-grid;
+// @include foundation-grid;
 @include foundation-visibility-classes;
 @include foundation-forms;
-// @include foundation-flex-grid;
+@include foundation-flex-grid;
 // @include foundation-typography;
 // @include foundation-button;
 // @include foundation-range-input;
@@ -43,4 +43,4 @@
 // @include foundation-tooltip;
 // @include foundation-top-bar;
 // @include foundation-float-classes;
-// @include foundation-flex-classes;
+@include foundation-flex-classes;

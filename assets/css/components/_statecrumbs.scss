@@ -1,13 +1,15 @@
 .statecrumbs {
   padding: 0;
-  margin: $_ySpacing 0;
+  margin-bottom: $_ySpacing;
   list-style: none;
-
   -ms-box-orient: horizontal;
   display: flex;
   justify-content: space-between;
-
   transition: margin $_tMed ease;
+
+  @media #{$small-only} {
+    margin-bottom: 0;
+  }
 
   &__state {
     font-size: 2.5rem;
@@ -19,6 +21,14 @@
     min-width: 90px;
     min-height: 90px;
     position: relative;
+
+    @media #{$small-only} {
+      font-size: 1.2rem;
+      padding: 12px;
+      min-width: 48px;
+      min-height: 48px;
+      border-width: 2px;
+    }
 
     &--is-active {
       color: $_rgbPacificBlue;
@@ -37,27 +47,36 @@
     right: -2px;
     border-radius: 50%;
     line-height: 16px;
+    min-width: 28px;
     background-color: #fff;
     padding: 6px;
     opacity: 0;
-    transform:rotate(45deg);
     transition: opacity $_tShort ease,
                 transform $_tMed ease;
+    transform:rotate(45deg);
+
+    @media #{$small-only} {
+      bottom: -2px;
+      right: -5px;
+      line-height: 12px;
+      padding: 3px;
+      min-width: 18px;
+    }
 
     &.fa-flip-horizontal {
       right: auto;
       left: 0;
       transform: rotate(-45deg) scaleX(-1);
+
+      @media #{$small-only} {
+        left: -5px;
+      }
     }
 
     &--success {
       @extend .fa;
       @extend .fa-check;
-      padding-top: 6px;
-      padding-bottom: 6px;
-      padding-left: 4px;
       color: $_rgbFeijoa;
-      font-size: 16px;
       opacity: 1;
       transform: rotate(0deg);
 
@@ -70,9 +89,16 @@
       @extend .fa;
       @extend .fa-close;
       color: $_rgbBlush;
-      font-size: 16px;
       opacity: 1;
       transform: rotate(0deg);
+    }
+
+    &--success,
+    &--error {
+      font-size: 16px;
+      @media #{$small-only} {
+        font-size: 12px;
+      }
     }
   }
 
@@ -81,15 +107,19 @@
     margin-top: 24px;
     color: $_rgbWhite;
     text-align: center;
-    min-width: 60px;
+    min-width: 30px;
     opacity: 0;
     transition: opacity $_tMed ease;
 
+    @media #{$small-only} {
+      font-size: 1.5rem;
+      margin-top: 12px;
+      min-width: 20px;
+    }
 
     &--is-visible {
       opacity: 1;
       color: $_rgbPacificBlue;
     }
   }
-
 }

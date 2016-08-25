@@ -1,0 +1,27 @@
+.banner {
+    height: $_hBanner;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+
+    &__content {
+      @include pageWidth;
+      align-self: center;
+      text-align: center;
+    }
+
+    &__title {
+      margin: 0;
+      font-size: $_fsLarge;
+      line-height: $_lhLarge;
+      color: $_rgbWhite;
+    }
+
+    &__subtitle {
+      margin: 0;
+      margin-bottom: 50px;
+      font-size: $_fsMedium;
+      line-height: $_lhMedium;
+      color: $_rgbWhite;
+    }
+}

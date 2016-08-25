@@ -1,0 +1,38 @@
+.carrier-info {
+  width: 100%;
+  min-height: 68px;
+  display: inline-block;
+  padding: $_defaultSpacing;
+  border-radius: $_borderRadiusDefault;
+  background-color: $_rgbWhite;
+  border: 2px solid lighten($_rgbDustyGray, 20%);
+  text-align: center;
+  font-size: $_fsSub;
+  z-index: $zindex-inner;
+  transition: background-color $_tShort ease;
+
+  @media #{$small-only} {
+    padding: $_defaultSpacing / 2;
+  }
+
+  &:hover {
+    background-color: lighten($_rgbAthensGray, 2%);
+  }
+
+  &__tel,
+  &__link {
+    display: block;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    color: lighten($_rgbMineShaft, 10%);
+    font-size: $_fsSmall;
+  }
+
+  &__logo {
+    display: block;
+    width: 100%;
+    height: 43px;
+    margin-bottom: $_defaultSpacing / 2;
+  }
+}
