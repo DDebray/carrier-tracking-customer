@@ -4,7 +4,7 @@
   left: -999px;
   background-color: $_rgbWhite;
   z-index: $zindex-help;
-  padding: $_defaultSpacing;
+  padding: $_defaultSpacing / 2 $_defaultSpacing;
   font-size: $_fsSmall;
   border-radius: $_borderRadiusDefault;
   border: 3px solid $_rgbAlto;

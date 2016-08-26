@@ -94,9 +94,15 @@ function(
   ];
 
   var getCarrierInfoByEvents = function (events) {
+    // used to test multiple carriers
     // events.push({
     //   carrier: {
     //     code: 'hermes'
+    //   }
+    // });
+    // events.push({
+    //   carrier: {
+    //     code: 'gls'
     //   }
     // });
 
@@ -104,7 +110,6 @@ function(
       var seen = {};
       return a.filter(function(item) {
         var k = key(item);
-        // var k = key;
         return seen.hasOwnProperty(k) ? false : (seen[k] = true);
       });
     };

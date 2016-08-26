@@ -51,7 +51,7 @@ $timeline-state-size: 16px;
       border-radius: $_borderRadiusDefault;
     }
 
-    &--is-only-child:before {
+    &--is-only-child .timeline__state-line {
       height: 0;
       background: $_rgbWhite;
     }

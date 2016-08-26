@@ -1,6 +1,6 @@
 .statecrumbs {
   padding: 0;
-  margin-bottom: $_ySpacing;
+  margin: $_ySpacing / 2 $_ySpacing;
   list-style: none;
   -ms-box-orient: horizontal;
   display: flex;
@@ -24,10 +24,10 @@
 
     @media #{$small-only} {
       font-size: 1.2rem;
-      padding: 12px;
+      padding: 11px;
       min-width: 48px;
       min-height: 48px;
-      border-width: 2px;
+      border-width: 3px;
     }
 
     &--is-active {
