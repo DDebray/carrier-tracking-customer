@@ -16,7 +16,7 @@ module.exports = [
       'IN_DELIVERY',
       'DELIVERED'
     ];
-    self.errorStates = [
+    self.availableErrorStates = [
       'CANCELLED',
       'NO_HANDOVER',
       'DELIVERY_FAILED',
@@ -93,7 +93,7 @@ module.exports = [
       tooltip: 'DELIVERED',
       angle: 'angle-right',
       icon: function() {
-        return self.state === 5 && true ? 'close' : 'check';
+        return self.state === 5 && false ? 'close' : 'check';
       },
       isActive: function() {
         return self.state === 5;
@@ -141,7 +141,7 @@ module.exports = [
         if ( response && response.events ) {
           if ( !!response.events.length ) {
             self.state = self.availableStates.indexOf( response.status );
-            self.errorState = self.errorState.indexOf( response.status );
+            self.errorState = self.availableErrorStates.indexOf( response.status );
 
             self.showError = response.events[ response.events.length - 1 ].status === 'NOT_AVAILABLE';
             self.carrierInfo = getCarrierInfoByEvents( response.events );
