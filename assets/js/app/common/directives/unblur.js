@@ -38,9 +38,9 @@ module.exports = function($timeout, $window) {
           var remainder = newValue % 2;
 
           if (remainder === 1) {
-            scope.style.display = 'block';
-          } else {
             scope.style.display = 'none';
+          } else {
+            scope.style.display = 'block';
           }
 
           isPlaceholderVisible = scope.style.display === 'block';

@@ -4,14 +4,14 @@
 <div class="h-spacing-bottom--wide" ng-bind="'PAGE.PRINTING.MODAL.POSTAL_CODE_VERIFICATION.TEXT2' | translate"></div>
 
 <form novalidate class="h-spacing-top--wide" name="verification" id="verification" ng-submit="printing.submitVerification()">
-    <div class="row row-outer">
-        <div class="columns small-6">
+    <div class="row row-outer align-center">
+        <div class="column small-6 medium-2">
             <!-- ng-init="printing.postalCodeForVerification = (base.env === 'development') ? '10409' : printing.postalCodeForVerification" -->
             <input required autofocus type="text" name="postalcode" id="postalcode" ng-model="printing.postalCodeForVerification" autocomplete="off" ng-pattern="/^[0-9]{5}$/" ng-init="printing.postalCodeForVerification = (base.env === 'development') ? '10409' : printing.postalCodeForVerification">
             <small class="error" ng-show="verification.postalcode.$error.pattern" ng-bind="'PAGE.PRINTING.MODAL.POSTAL_CODE_VERIFICATION.ERROR.POSTAL_CODE.WRONG_FORMAT' | translate"></small>
             <small class="error" ng-show="verification.postalcode.$error.required" ng-bind="'PAGE.PRINTING.MODAL.POSTAL_CODE_VERIFICATION.ERROR.POSTAL_CODE.MISSING' | translate"></small>
         </div>
-        <div class="columns small-3">
+        <div class="column small-3">
             <button form="verification" type="submit" class="button button--blush" ng-bind="('PAGE.PRINTING.MODAL.POSTAL_CODE_VERIFICATION.SUBMIT' ) | translate"></button>
         </div>
     </div>
