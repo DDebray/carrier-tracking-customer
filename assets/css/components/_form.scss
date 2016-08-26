@@ -6,8 +6,12 @@
     cursor: pointer;
     font-size: $_fsSmall;
 
-    &--required:after {
-      content: ' *';
+    &--required {
+      white-space: nowrap;
+
+      &:after {
+        content: ' *';
+      }
     }
   }
 
@@ -28,9 +32,9 @@
     @include clearfix();
     margin-bottom: $_formSpacing * 2;
 
-    &.row {
-      margin: - ($_formSpacing * 1.5);
-    }
+    // &.row {
+    //   margin: - ($_formSpacing * 1.5);
+    // }
 
     &:last-child {
       margin-bottom: 0;

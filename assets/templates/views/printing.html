@@ -1,9 +1,7 @@
 <hero hero-title="'PAGE.PRINTING.TITLE' | translate" hero-image="url(images/hero/printing.jpg)"></hero>
 
 <section class="section" ng-if="!printing.isPostalCodeVerified">
-    <div class="section__inner">
-        <div ng-include="'/views/partials/modals/verification.html'"></div>
-    </div>
+    <div class="section__inner section__inner--slim h-center" ng-include="'/views/partials/modals/verification.html'"></div>
 </section>
 
 <section class="section" ng-if="printing.isPostalCodeVerified">
@@ -21,32 +19,34 @@
         </ul>
 
         <!-- ADDRESSES: -->
-        <div ng-if="!printing.showError()" class="columns large-6" ng-if="printing.addresses()">
-            <div class="area-panel area-panel--merge" ng-repeat="(addressType, address) in printing.addresses()" ng-click="address.is_editable ? printing.openAddressForm(address, addressType) : null" ng-class="{ 'widget-address' : address.is_editable, 'widget-address--js-editing' : (address.is_editable && printing.openAddress.address_type == addressType) }">
+        <div class="row row-outer-block">
+            <div ng-if="!printing.showError()" class="column small-12 large-6 h-spacing-bottom--wide" ng-if="printing.addresses()">
+                <div class="area-panel area-panel--merge" ng-repeat="(addressType, address) in printing.addresses()" ng-click="address.is_editable ? printing.openAddressForm(address, addressType) : null" ng-class="{ 'widget-address' : address.is_editable, 'widget-address--js-editing' : (address.is_editable && printing.openAddress.address_type == addressType) }">
 
-                <h3 class="address-headline" ng-bind="('COMMON.ADDRESSES.' + addressType) | translate"></h3>
+                    <h3 class="address-headline" ng-bind="('COMMON.ADDRESSES.' + addressType) | translate"></h3>
 
-                <div class="address-container" watch-height="{ condition: (!printing.openAddress || (printing.openAddress && printing.openAddress.address_type !== addressType)), targetOnTrue: 'js-target-on-true', targetOnFalse: 'js-target-on-false', disableAnimationClass: 'address-container--no-animation' }">
+                    <div class="address-container" watch-height="{ condition: (!printing.openAddress || (printing.openAddress && printing.openAddress.address_type !== addressType)), targetOnTrue: 'js-target-on-true', targetOnFalse: 'js-target-on-false', disableAnimationClass: 'address-container--no-animation' }">
 
-                    <!-- <small><pre>!printing.openAddress: {{! printing.openAddress | json }}</pre></small>
-                    <small><pre>printing.openAddress: {{ printing.openAddress | json }}</pre></small>
-                    <small><pre>printing.openAddress.address_type: {{ printing.openAddress.address_type | json }}</pre></small>
-                    <small><pre>addressType: {{ addressType | json }}</pre></small> -->
+                        <!-- <small><pre>!printing.openAddress: {{! printing.openAddress | json }}</pre></small>
+                        <small><pre>printing.openAddress: {{ printing.openAddress | json }}</pre></small>
+                        <small><pre>printing.openAddress.address_type: {{ printing.openAddress.address_type | json }}</pre></small>
+                        <small><pre>addressType: {{ addressType | json }}</pre></small> -->
 
-                    <address class="address-display js-target-on-true" ng-class="{ 'address-display--is-visible' : (address && !printing.openAddress || (printing.openAddress && printing.openAddress.address_type !== addressType)) }" data="address" is-editable="address.is_editable"></address>
+                        <address class="address-display js-target-on-true" ng-class="{ 'address-display--is-visible' : (address && !printing.openAddress || (printing.openAddress && printing.openAddress.address_type !== addressType)) }" data="address" is-editable="address.is_editable"></address>
 
-                    <div class="address-form js-target-on-false" ng-class="{ 'address-form--is-visible' : (printing.openAddress && printing.openAddress.address_type === addressType) }" address-form="printing.addressForm" address-model="printing.openAddress" sender="printing.openAddress.address_type == 'SENDER_ADDRESS'"></div>
+                        <div class="address-form js-target-on-false" ng-class="{ 'address-form--is-visible' : (printing.openAddress && printing.openAddress.address_type === addressType) }" address-form="printing.addressForm" address-model="printing.openAddress" sender="printing.openAddress.address_type == 'SENDER_ADDRESS'"></div>
+                    </div>
+
                 </div>
-
             </div>
-        </div>
 
-        <!-- RATES: -->
-        <div ng-if="!printing.showError()" class="columns large-6">
-            <div class="area-panel area-panel--container area-panel--merge" ng-if="printing.rates()">
-                <div class="widget-rate" ng-repeat="rate in printing.rates()" ng-class="{ 'widget-rate-disabled' : printing.openAddress || printing.showNotifications() }" ng-include="'/views/partials/widgets/rate.html'" data-text-disabled="{{ 'RATE.DISABLED' | translate }}"></div>
+            <!-- RATES: -->
+            <div ng-if="!printing.showError()" class="column small-12 large-6">
+                <div class="area-panel area-panel--container area-panel--merge" ng-if="printing.rates()">
+                    <div class="widget-rate" ng-repeat="rate in printing.rates()" ng-class="{ 'widget-rate-disabled' : printing.openAddress || printing.showNotifications() }" ng-include="'/views/partials/widgets/rate.html'" data-text-disabled="{{ 'RATE.DISABLED' | translate }}"></div>
+                </div>
             </div>
-        </div>
 
+        </div>
     </div>
 </section>
