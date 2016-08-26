@@ -1,23 +1,19 @@
-<!DOCTYPE html><html lang="en"><head><title>app/storage/shipment</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="app/storage/shipment"><meta name="groc-project-path" content="assets/js/app/storage/shipment.js"><meta name="groc-github-url" content="https://github.com/zooron/carrier-tracking-customer"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"><script type="text/javascript" src="../../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/zooron/carrier-tracking-customer/blob/master/assets/js/app/storage/shipment.js">assets/js/app/storage/shipment.js</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.exports = [
-  <span class="hljs-string">'CommonRequest'</span>,
+<!DOCTYPE html><html lang="en"><head><title>app/storage/shipment</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="app/storage/shipment"><meta name="groc-project-path" content="assets/js/app/storage/shipment.js"><meta name="groc-github-url" content="https://github.com/zooron/carrier-tracking-customer"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"><script type="text/javascript" src="../../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/zooron/carrier-tracking-customer/blob/master/assets/js/app/storage/shipment.js">assets/js/app/storage/shipment.js</a></div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="storageshipment">StorageShipment</h1>
+<p>This module describes a shipment object.
+The values match the shiphment resource values.
+To get the resource from the API the CommonRequest module is used here.</p></div></div><div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.exports = [</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="dependencies">Dependencies</h2>
+<ul>
+<li>CommonRequest</li>
+</ul></div></div><div class="code"><div class="wrapper">  <span class="hljs-string">'CommonRequest'</span>,
   <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">
     CommonRequest
   </span>) </span>{
-<span class="hljs-pi">    'use strict'</span>;
-
-    <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>,</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'> of type <em>Object</em></span></p>
-<p>This private object holds the possible request parameters.</p></div></div><div class="code"><div class="wrapper">      requestParameters = {
+<span class="hljs-pi">    'use strict'</span>;</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="properties">Properties</h2></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>This <strong>private</strong> object holds the reference to this object.</p></div></div><div class="code"><div class="wrapper">    <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>,</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>This <strong>private</strong> object holds the possible request parameters.</p></div></div><div class="code"><div class="wrapper">      requestParameters = {
         tracking_number: <span class="hljs-literal">null</span>,
         postal_code_for_verification: <span class="hljs-literal">null</span>,
         address_from: <span class="hljs-literal">null</span>,
         address_to: <span class="hljs-literal">null</span>
-      };</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'> of type <em>Object</em></span></p>
-<p>This public object holds the shipment addresses data.</p></div></div><div class="code"><div class="wrapper">    self.addresses = {};</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'> of type <em>Object</em></span></p>
-<p>This public object holds the shipment rates.</p></div></div><div class="code"><div class="wrapper">    self.rates = <span class="hljs-literal">null</span>;</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'> of type <em>Object</em></span></p>
-<p>This public object holds the possible
-error that may comes with the request.</p></div></div><div class="code"><div class="wrapper">    self.error = <span class="hljs-literal">false</span>;</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'> of type <em>Object</em></span></p>
-<p>This public object holds the possible
-notification that may come with the request.</p></div></div><div class="code"><div class="wrapper">    self.notifications = <span class="hljs-literal">false</span>;</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p>This function semantically creates a new shipment resource out of a tracking number.
+      };</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>This <strong>public</strong> object holds the shipment addresses data.</p></div></div><div class="code"><div class="wrapper">    self.addresses = {};</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>This <strong>public</strong> object holds the shipment rates.</p></div></div><div class="code"><div class="wrapper">    self.rates = <span class="hljs-literal">null</span>;</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>This <strong>public</strong> object holds the possible error that may comes with the request.</p></div></div><div class="code"><div class="wrapper">    self.error = <span class="hljs-literal">false</span>;</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>This <strong>public</strong> object holds the possible notification that may come with the request.</p></div></div><div class="code"><div class="wrapper">    self.notifications = <span class="hljs-literal">false</span>;</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="functions">Functions</h2></div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p>This <strong>public</strong> function semantically creates a new shipment resource out of a tracking number.
 This will be the return shipment for the original shipment associated to that tracking number.
 It needs the postal code so the server can check for the access permission.</p>
 <p>Parameters:</p>
@@ -26,49 +22,39 @@ It needs the postal code so the server can check for the access permission.</p>
 </li>
 <li><p><strong>postalCodeForVerification must be a String.</strong><br/>(a string holding the postal code for verification)</p>
 </li>
-</ul></div></div><div class="code"><div class="wrapper">    self.createResource = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">trackingId, postalCodeForVerification</span>) </span>{
+</ul></div></div><div class="code"><div class="wrapper">    self.createResource = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> trackingId, postalCodeForVerification </span>) </span>{
       requestParameters.tracking_number = trackingId;
       requestParameters.postal_code_for_verification = postalCodeForVerification;
 
       doRequest();
-    };</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p>This function semantically updates the shipment resource.
+    };</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p>This <strong>public</strong> function semantically updates the shipment resource.
 It gets the new sender address and asks the server for a new shipment
 because some rates prices also depend on the addresses.</p>
 <p>Parameters:</p>
 <ul>
 <li><strong>sender must be an Object.</strong><br/>(an address object for the sender)</li>
-</ul></div></div><div class="code"><div class="wrapper">    self.updateResource = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">sender</span>) </span>{
+</ul></div></div><div class="code"><div class="wrapper">    self.updateResource = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> sender </span>) </span>{
       requestParameters.address_from = sender;
 
       doRequest();
-    };</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p>This function creates a new customer shipment.
-It may use the tracking number in combination with the postal code
-to create a return shipment for the shipment associated to the tracking number.
-The shipment data are saved as global fields: addresses and rates.</p>
-<p>Parameters:</p>
-<ul>
-<li><p><strong>trackingId must be a String.</strong><br/>(a string holding the tracking number.)</p>
-</li>
-<li><p><strong>postalCodeForVerification must be a String.</strong><br/>(a string holding the postal code for verification)</p>
-</li>
-</ul></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>This function does the resource request.
+    };</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>This <strong>private</strong> function does the resource request.
 It uses the request parameters saved in requestParameters.
 This method can only be used in the storage shipment module.</p></div></div><div class="code"><div class="wrapper">    <span class="hljs-keyword">var</span> doRequest = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-      CommonRequest.shipment.create({
+      CommonRequest.shipment.create( {
         parameters: requestParameters
-      }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">response</span>) </span>{
-        <span class="hljs-keyword">if</span> (response &amp;&amp; response.status === <span class="hljs-string">'ERROR'</span>) {
-          self.notifications = (response.messages.length &gt; <span class="hljs-number">0</span>) ? response.messages : <span class="hljs-literal">false</span>;
+      }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> response </span>) </span>{
+        <span class="hljs-keyword">if</span> ( response &amp;&amp; response.status === <span class="hljs-string">'ERROR'</span> ) {
+          self.notifications = ( response.messages.length &gt; <span class="hljs-number">0</span> ) ? response.messages : <span class="hljs-literal">false</span>;
         }
-        <span class="hljs-keyword">if</span> (response &amp;&amp; response.content) {
-          self.notifications = (response.messages.length &gt; <span class="hljs-number">0</span>) ? response.messages : <span class="hljs-literal">false</span>;
-          fillAddresses(response.content.result.address_from, response.content.result.address_to);
-          fillRates(response.content.result.rates);
+        <span class="hljs-keyword">if</span> ( response &amp;&amp; response.content ) {
+          self.notifications = ( response.messages.length &gt; <span class="hljs-number">0</span> ) ? response.messages : <span class="hljs-literal">false</span>;
+          fillAddresses( response.content.result.address_from, response.content.result.address_to );
+          fillRates( response.content.result.rates );
         }
-      }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error</span>) </span>{
+      }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> error </span>) </span>{
         self.error = error;
-      });
-    };</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p>This function fills the global addresses object with the sender and receiver address information.
+      } );
+    };</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p>This <strong>private</strong> function fills the global addresses object with the sender and receiver address information.
 It adds some extra configuration to the addresses.
 This method can only be used in the storage shipment module.</p>
 <p>Parameters:</p>
@@ -77,7 +63,7 @@ This method can only be used in the storage shipment module.</p>
 </li>
 <li><p><strong>receiver must be an Object.</strong><br/>(an address object for the receiver)</p>
 </li>
-</ul></div></div><div class="code"><div class="wrapper">    <span class="hljs-keyword">var</span> fillAddresses = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">sender, receiver</span>) </span>{
+</ul></div></div><div class="code"><div class="wrapper">    <span class="hljs-keyword">var</span> fillAddresses = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> sender, receiver </span>) </span>{
       self.addresses.RECEIVER_ADDRESS = receiver;
       self.addresses.RECEIVER_ADDRESS.is_editable = <span class="hljs-literal">false</span>;
       self.addresses.RECEIVER_ADDRESS.address_type = <span class="hljs-string">'RECEIVER_ADDRESS'</span>;
@@ -85,12 +71,12 @@ This method can only be used in the storage shipment module.</p>
       self.addresses.SENDER_ADDRESS = sender;
       self.addresses.SENDER_ADDRESS.is_editable = <span class="hljs-literal">true</span>;
       self.addresses.SENDER_ADDRESS.address_type = <span class="hljs-string">'SENDER_ADDRESS'</span>;
-    };</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p>This function fills the global rates object with the rates information.
+    };</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p>This <strong>private</strong> function fills the global rates object with the rates information.
 This method can only be used in the storage shipment module.</p>
 <p>Parameters:</p>
 <ul>
 <li><strong>rates must be an Object.</strong><br/>(an object holding the rates information)</li>
-</ul></div></div><div class="code"><div class="wrapper">    <span class="hljs-keyword">var</span> fillRates = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">rates</span>) </span>{
+</ul></div></div><div class="code"><div class="wrapper">    <span class="hljs-keyword">var</span> fillRates = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> rates </span>) </span>{
       self.rates = rates;
     };
 
