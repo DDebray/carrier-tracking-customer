@@ -42,7 +42,7 @@
 
                     <span class="statecrumbs__state fa fa-{{state.icon()}} {{state.iconModifier}}"
                         ng-repeat-end
-                        ng-class="{ 'statecrumbs__state--is-active' : state.isActive(), 'statecrumbs__state--is-error' : state.showCross() }"
+                        ng-class="{ 'statecrumbs__state--is-active' : state.isActive(), 'statecrumbs__state--is-error' : state.showError() }"
                         tooltip="{ on : 'enter', translation : ('PAGE.TRACKING.SUMMARY.TOOLTIP' + (state.showCross() ? '_IS_ERROR.' : (state.isActive() ? '_IS_ACTIVE.' : '.')) + state.tooltip.toUpperCase()), directionY : 'up', class : (state.isActive() ? 'ui-tooltip--centered --is-active' : 'ui-tooltip--centered') }">
 
                         <span class="statecrumbs__icon {{state.iconModifier}}"
