@@ -32,91 +32,98 @@ module.exports = [
     // WAREHOUSE
     // NOT_AVAILABLE.RECEIVER.NEW_DELIVERY_ATTEMPT
 
-    self.packageStates = [ {
-      tooltip: 'LABEL_PRINTED',
-      icon: function() {
-        return 'cube';
-      },
-      isActive: function() {
-        return self.state >= 0 || self.errorState > 0;
-      },
-      showCheckmark: function() {
-        return self.state >= 0;
-      },
-      showCross: function() {
-        return self.errorState === 0;
+    self.packageStates = [
+      {
+        tooltip: 'LABEL_PRINTED',
+        icon: function() {
+          return 'cube';
+        },
+        isActive: function() {
+          return self.state >= 0 || self.errorState > 0;
+        },
+        showCheckmark: function() {
+          return self.state >= 0;
+        },
+        showCross: function() {
+          return self.errorState === 0;
+        }
+      }, {
+        tooltip: 'IN_TRANSIT',
+        angle: 'angle-right',
+        iconModifier: 'fa-flip-horizontal',
+        icon: function() {
+          return 'truck';
+        },
+        isActive: function() {
+          return self.state > 0 || self.errorState > 0;
+        },
+        showCheckmark: function() {
+          return self.state > 0;
+        }
+      }, {
+        tooltip: 'HANDOVER_WAREHOUSE',
+        angle: 'angle-right',
+        icon: function() {
+          return 'arrows-alt';
+        },
+        isActive: function() {
+          return self.state > 1 || self.errorState > 1;
+        },
+        showCheckmark: function() {
+          return self.state > 1;
+        },
+        showCross: function() {
+          return self.errorState === 1;
+        }
+      }, {
+        tooltip: 'IN_DELIVERY',
+        angle: 'angle-right',
+        icon: function() {
+          return 'home';
+        },
+        isActive: function() {
+          return self.state > 3;
+        },
+        showCheckmark: function() {
+          return self.state > 3;
+        },
+        showCross: function() {
+          return self.errorState > 1;
+        }
+      }, {
+        tooltip: 'DELIVERED',
+        angle: 'angle-right',
+        icon: function() {
+          return self.state === 5 && false ? 'close' : 'check';
+        },
+        isActive: function() {
+          return self.state === 5;
+        },
+        showCheckmark: function() {
+          return false;
+        }
       }
-    }, {
-      tooltip: 'IN_TRANSIT',
-      angle: 'angle-right',
-      iconModifier: 'fa-flip-horizontal',
-      icon: function() {
-        return 'truck';
-      },
-      isActive: function() {
-        return self.state > 0 || self.errorState > 0;
-      },
-      showCheckmark: function() {
-        return self.state > 0;
-      }
-    }, {
-      tooltip: 'HANDOVER_WAREHOUSE',
-      angle: 'angle-right',
-      icon: function() {
-        return 'arrows-alt';
-      },
-      isActive: function() {
-        return self.state > 1 || self.errorState > 1;
-      },
-      showCheckmark: function() {
-        return self.state > 1;
-      },
-      showCross: function() {
-        return self.errorState === 1;
-      }
-    }, {
-      tooltip: 'IN_DELIVERY',
-      angle: 'angle-right',
-      icon: function() {
-        return 'home';
-      },
-      isActive: function() {
-        return self.state > 3;
-      },
-      showCheckmark: function() {
-        return self.state > 3;
-      },
-      showCross: function() {
-        return self.errorState > 1;
-      }
-    }, {
-      tooltip: 'DELIVERED',
-      angle: 'angle-right',
-      icon: function() {
-        return self.state === 5 && false ? 'close' : 'check';
-      },
-      isActive: function() {
-        return self.state === 5;
-      },
-      showCheckmark: function() {
-        return false;
-      }
-    } ];
+    ];
 
-    var getCarrierInfoByEvents = function( events ) {
+    var getCarrierInfoByEvents = function (events) {
+      // used to test multiple carriers
       // events.push({
       //   carrier: {
       //     code: 'hermes'
       //   }
       // });
+      // events.push({
+      //   carrier: {
+      //     code: 'gls'
+      //   }
+      // });
 
-      var uniqueBy = function( a, key ) {
+      var uniqueBy = function (a, key) {
         var seen = {};
-        return a.filter( function( item ) {
-          var k = key( item );
-          // var k = key;
-          return seen.hasOwnProperty( k ) ? false : ( seen[ k ] = true );
-        } );
+        return a.filter(function(item) {
+          var k = key(item);
+          return seen.hasOwnProperty(k) ? false : (seen[k] = true);
+        });
       };
 
       // create an array that only contains all the carriers from the events

@@ -1,6 +1,7 @@
 .carrier-info {
   width: 100%;
-  min-height: 68px;
+  // min-height: 68px;
+  min-height: 184px;
   display: inline-block;
   padding: $_defaultSpacing;
   border-radius: $_borderRadiusDefault;
@@ -10,6 +11,7 @@
   font-size: $_fsSub;
   z-index: $zindex-inner;
   transition: background-color $_tShort ease;
+  margin-bottom: $_defaultSpacing;
 
   @media #{$small-only} {
     padding: $_defaultSpacing / 2;
@@ -20,18 +22,31 @@
   }
 
   &__tel,
-  &__link {
+  &__link,
+  &__mail,
+  &__additional-info {
     display: block;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
     color: lighten($_rgbMineShaft, 10%);
     font-size: $_fsSmall;
   }
 
+  &__additional-info {
+    font-size: $_fsTiny;
+    line-height: $_lhTiny;
+  }
+
+  &__tel,
+  &__link,
+  &__mail {
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
   &__logo {
     display: block;
-    width: 100%;
+    max-width: 134px;
+    margin: auto;
     height: 43px;
     margin-bottom: $_defaultSpacing / 2;
   }
