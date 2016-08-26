@@ -141,28 +141,10 @@ module.exports = [
         if ( response && response.events ) {
           if ( !!response.events.length ) {
             self.state = self.availableStates.indexOf( response.status );
+            self.errorState = self.errorState.indexOf( response.status );
 
             self.showError = response.events[ response.events.length - 1 ].status === 'NOT_AVAILABLE';
             self.carrierInfo = getCarrierInfoByEvents( response.events );
-
-            // 'LABEL_PRINTED',
-            // 'IN_TRANSIT',
-            // 'HANDOVER',
-            // 'WAREHOUSE',
-            // 'IN_DELIVERY',
-            // 'DELIVERED'
-            //
-            // 'CANCELLED',
-            // 'NO_HANDOVER',
-            // 'DELIVERY_FAILED',
-            // 'RECEIVER_MOVED'
-
-            self.state = self.availableStates.indexOf( 'IN_TRANSIT' );
-            self.errorState = self.errorStates.indexOf( 'IN_TRANSIT' );
-
-            console.log( self.state );
-            console.log( self.errorState );
-
           } else {
             self.showError = true;
           }
