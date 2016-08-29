@@ -561,7 +561,8 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "pageTitle": "app/page/printing",
                 "title": "printing"
               },
-              "depth": 3
+              "depth": 3,
+              "outline": []
             }, {
               "type": "file",
               "data": {
@@ -645,73 +646,9 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "projectPath": "assets/js/app/storage/shipment.js",
                 "targetPath": "app/storage/shipment",
                 "pageTitle": "app/storage/shipment",
-                "firstHeader": {
-                  "type": "heading",
-                  "data": {
-                    "level": 1,
-                    "title": "StorageShipment",
-                    "slug": "storageshipment",
-                    "isFileHeader": true
-                  },
-                  "depth": 1,
-                  "children": [
-                    {
-                      "type": "heading",
-                      "data": {
-                        "level": 2,
-                        "title": "Dependencies",
-                        "slug": "dependencies"
-                      },
-                      "depth": 2
-                    }, {
-                      "type": "heading",
-                      "data": {
-                        "level": 2,
-                        "title": "Properties",
-                        "slug": "properties"
-                      },
-                      "depth": 2
-                    }, {
-                      "type": "heading",
-                      "data": {
-                        "level": 2,
-                        "title": "Functions",
-                        "slug": "functions"
-                      },
-                      "depth": 2
-                    }
-                  ]
-                },
-                "title": "StorageShipment"
+                "title": "shipment"
               },
-              "depth": 3,
-              "outline": [
-                {
-                  "type": "heading",
-                  "data": {
-                    "level": 2,
-                    "title": "Dependencies",
-                    "slug": "dependencies"
-                  },
-                  "depth": 2
-                }, {
-                  "type": "heading",
-                  "data": {
-                    "level": 2,
-                    "title": "Properties",
-                    "slug": "properties"
-                  },
-                  "depth": 2
-                }, {
-                  "type": "heading",
-                  "data": {
-                    "level": 2,
-                    "title": "Functions",
-                    "slug": "functions"
-                  },
-                  "depth": 2
-                }
-              ]
+              "depth": 3
             }, {
               "type": "file",
               "data": {

@@ -10,7 +10,6 @@
 
     self.openAddress = <span class="hljs-literal">false</span>;
     self.postalCodeForVerification = <span class="hljs-string">''</span>;
-    self.isPostalCodeVerified = <span class="hljs-literal">false</span>;
 
     self.addressForm = {
       model: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
@@ -22,7 +21,7 @@
       submit: {
         label: <span class="hljs-string">'COMMON.ADDRESSES.SAVE'</span>,
         action: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-          StorageShipment.updateResource(self.openAddress);
+          StorageShipment.updateResource( self.openAddress );
           StorageTransaction.updatedAddress = self.openAddress;
           self.openAddress = <span class="hljs-literal">false</span>;
         }
@@ -43,12 +42,12 @@
       <span class="hljs-keyword">return</span> StorageShipment.rates;
     };
 
-    self.openAddressForm = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">address, addressType</span>) </span>{
+    self.openAddressForm = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> address, addressType </span>) </span>{
       self.openAddress = address;
     };
 
-    self.selectRate = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">rate</span>) </span>{
-      <span class="hljs-keyword">if</span> (!self.openAddress) {
+    self.selectRate = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> rate </span>) </span>{
+      <span class="hljs-keyword">if</span> ( !self.openAddress ) {
         StorageTransaction.selectedRate = rate;
         showTransactionModal();
       }
@@ -63,8 +62,8 @@
     };
 
     <span class="hljs-keyword">var</span> showTransactionModal = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-      CommonUi.modal.show(<span class="hljs-string">'views/partials/modals/transaction.html'</span>, <span class="hljs-literal">false</span>, {
-        methods: <span class="hljs-built_in">Object</span>.keys(StorageTransaction.methods),
+      CommonUi.modal.show( <span class="hljs-string">'views/partials/modals/transaction.html'</span>, <span class="hljs-literal">false</span>, {
+        methods: <span class="hljs-built_in">Object</span>.keys( StorageTransaction.methods ),
         methodsIcons: self.methodsIcons,
         selectedMethod: <span class="hljs-string">'SOFORT_UEBERWEISUNG'</span>,
         selectedRate: StorageTransaction.selectedRate,
@@ -73,15 +72,15 @@
         transactionErrors: {},
         status: <span class="hljs-string">'SELECT_METHOD'</span> <span class="hljs-comment">// DO_TRANSACTION, WAIT_FOR_ANSWER, SHOW_APPROVAL, SHOW_ERROR</span>
       }, <span class="hljs-literal">null</span>, {
-        selectMethod: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">paymentMethod</span>) </span>{
-          CommonUi.modal.data.selectedMethod = (paymentMethod === <span class="hljs-string">'CREDIT_CARD'</span>) ? CommonUi.modal.data.selectedMethod : paymentMethod;
+        selectMethod: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> paymentMethod </span>) </span>{
+          CommonUi.modal.data.selectedMethod = ( paymentMethod === <span class="hljs-string">'CREDIT_CARD'</span> ) ? CommonUi.modal.data.selectedMethod : paymentMethod;
         },
         submitMethod: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
           StorageTransaction.selectedMethod = CommonUi.modal.data.selectedMethod;
-          <span class="hljs-keyword">if</span> (CommonUi.modal.data.account !== <span class="hljs-literal">null</span>) {
-            StorageTransaction.methods[StorageTransaction.selectedMethod].data = {};
-            StorageTransaction.methods[StorageTransaction.selectedMethod].data.iban = CommonUi.modal.data.account.iban;
-            StorageTransaction.methods[StorageTransaction.selectedMethod].data.bic = CommonUi.modal.data.account.bic;
+          <span class="hljs-keyword">if</span> ( CommonUi.modal.data.account !== <span class="hljs-literal">null</span> ) {
+            StorageTransaction.methods[ StorageTransaction.selectedMethod ].data = {};
+            StorageTransaction.methods[ StorageTransaction.selectedMethod ].data.iban = CommonUi.modal.data.account.iban;
+            StorageTransaction.methods[ StorageTransaction.selectedMethod ].data.bic = CommonUi.modal.data.account.bic;
           }
           CommonUi.modal.data.status = <span class="hljs-string">'DO_TRANSACTION'</span>;
         },
@@ -89,21 +88,21 @@
           CommonUi.modal.data.status = <span class="hljs-string">'WAIT_FOR_ANSWER'</span>;
           CommonUi.lock();
           StorageTransaction.transactionCallback = <span class="hljs-keyword">this</span>.finishTransaction;
-          StorageTransaction.start(trackingId, self.postalCodeForVerification);
+          StorageTransaction.start( trackingId, self.postalCodeForVerification );
         },
-        finishTransaction: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error, transactionErrors, downloads</span>) </span>{
-          <span class="hljs-keyword">if</span> (!error) {
+        finishTransaction: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> error, transactionErrors, downloads </span>) </span>{
+          <span class="hljs-keyword">if</span> ( !error ) {
             CommonUi.modal.data.status = <span class="hljs-string">'SHOW_APPROVAL'</span>;
             downloads.forEach(
-              <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">file</span>) </span>{</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>TODO: COUREON-2062
+              <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> file </span>) </span>{</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>TODO: COUREON-2062
 This is a static and temporary fix. it should be removed,
-when the ticket COUREON-2062 has been solved.</p></div></div><div class="code"><div class="wrapper">                <span class="hljs-keyword">if</span> (file.format === <span class="hljs-string">'A4_BY_4'</span>) {
+when the ticket COUREON-2062 has been solved.</p></div></div><div class="code"><div class="wrapper">                <span class="hljs-keyword">if</span> ( file.format === <span class="hljs-string">'A4_BY_4'</span> ) {
                   file.format = <span class="hljs-string">'A5'</span>;
-                }</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>END OF FIX.</p></div></div><div class="code"><div class="wrapper">                CommonUi.modal.data.downloads[file.name] = {};
-                CommonUi.modal.data.downloads[file.name].url = file.url;
-                CommonUi.modal.data.downloads[file.name].format = file.format;
-                CommonUi.modal.data.downloads[file.name].count = file.count;
-              });
+                }</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>END OF FIX.</p></div></div><div class="code"><div class="wrapper">                CommonUi.modal.data.downloads[ file.name ] = {};
+                CommonUi.modal.data.downloads[ file.name ].url = file.url;
+                CommonUi.modal.data.downloads[ file.name ].format = file.format;
+                CommonUi.modal.data.downloads[ file.name ].count = file.count;
+              } );
           } <span class="hljs-keyword">else</span> {
             CommonUi.modal.data.status = <span class="hljs-string">'SHOW_ERROR'</span>;
             CommonUi.modal.data.transactionErrors = transactionErrors;
@@ -111,26 +110,21 @@ when the ticket COUREON-2062 has been solved.</p></div></div><div class="code"><
           CommonUi.modal.closable = <span class="hljs-literal">true</span>;
           CommonUi.unlock();
         }
-      });
+      } );
     };
-
-    self.submitVerification = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">if</span> (self.postalCodeForVerification &amp;&amp; self.postalCodeForVerification !== <span class="hljs-string">''</span>) {
-        StorageShipment.createResource(trackingId, self.postalCodeForVerification);</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>CommonUi.modal.hide();</p></div></div><div class="code"><div class="wrapper">        self.isPostalCodeVerified = <span class="hljs-literal">true</span>;
-      }
-    };
-
 
     <span class="hljs-keyword">var</span> showVerificationModal = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-      CommonUi.modal.show(<span class="hljs-string">'/views/partials/modals/verification.html'</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">null</span>, <span class="hljs-literal">null</span>, {
+      CommonUi.modal.show( <span class="hljs-string">'/views/partials/modals/verification.html'</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">null</span>, <span class="hljs-literal">null</span>, {
         submitVerification: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-          <span class="hljs-keyword">if</span> (CommonUi.modal.data.postalCodeForVerification &amp;&amp; CommonUi.modal.data.postalCodeForVerification !== <span class="hljs-string">''</span>) {
-            StorageShipment.createResource(trackingId, CommonUi.modal.data.postalCodeForVerification);
+          <span class="hljs-keyword">if</span> ( CommonUi.modal.data.postalCodeForVerification &amp;&amp; CommonUi.modal.data.postalCodeForVerification !== <span class="hljs-string">''</span> ) {
+            self.postalCodeForVerification = CommonUi.modal.data.postalCodeForVerification;
+            StorageShipment.createResource( trackingId, self.postalCodeForVerification );
             CommonUi.modal.hide();
           }
         }
-      });
+      } );
     };
 
+    showVerificationModal();
   }
 ];</div></div></div></div></body></html>

@@ -17,5 +17,9 @@
     color: $_rgbPacificBlue;
     cursor: pointer;
     height: 100%;
+
+    &:hover {
+      color: #0099cb;
+    }
   }
 }

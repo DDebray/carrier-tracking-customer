@@ -1,18 +1,20 @@
-<hero hero-title="'PAGE.PRINTING.TITLE' | translate" hero-image="url(images/hero/printing.jpg)"></hero>
+<hero hero-title="'PAGE.PRINTING.TITLE' | translate"
+    hero-image="url(images/hero/printing.jpg)"></hero>
 
-<section class="section" ng-if="!printing.isPostalCodeVerified">
-    <div class="section__inner section__inner--slim h-center" ng-include="'/views/partials/modals/verification.html'"></div>
-</section>
+<section class="section">
+    <div class="section__inner"
+        ng-class="{ 'section__inner--centered' : printing.showError() }">
 
-<section class="section" ng-if="printing.isPostalCodeVerified">
-    <div class="section__inner" ng-class="{ 'section__inner--centered' : printing.showError() }">
-
-        <h2 ng-if="printing.showError()" ng-bind="'PAGE.PRINTING.ERROR_TITLE' | translate"></h2>
-        <p ng-if="printing.showError() && ('PAGE.PRINTING.ERROR_DESCRIPTION' | translate) !== 'PAGE.PRINTING.ERROR_DESCRIPTION'" ng-bind="'PAGE.PRINTING.ERROR_DESCRIPTION' | translate"></p>
+        <h2 ng-if="printing.showError()"
+            ng-bind="'PAGE.PRINTING.ERROR_TITLE' | translate"></h2>
+        <p ng-if="printing.showError() && ('PAGE.PRINTING.ERROR_DESCRIPTION' | translate) !== 'PAGE.PRINTING.ERROR_DESCRIPTION'"
+            ng-bind="'PAGE.PRINTING.ERROR_DESCRIPTION' | translate"></p>
 
         <!-- NOTIFICATIONS: -->
-        <ul ng-if="printing.showNotifications()" class="ui-notification-list columns">
-            <li class="ui-notification ui-notification-warning" ng-repeat="notification in printing.showNotifications()">
+        <ul ng-if="printing.showNotifications()"
+            class="ui-notification-list columns">
+            <li class="ui-notification ui-notification-warning"
+                ng-repeat="notification in printing.showNotifications()">
                 <span class="fa ui-notification-icon fa-exclamation-triangle"></span>
                 <span ng-bind="(notification.text) | translate"></span>
             </li>
@@ -20,33 +22,57 @@
 
         <!-- ADDRESSES: -->
         <div class="row row-outer-block">
-            <div ng-if="!printing.showError()" class="column small-12 large-6 h-spacing-bottom--wide" ng-if="printing.addresses()">
-                <div class="area-panel area-panel--merge" ng-repeat="(addressType, address) in printing.addresses()" ng-click="address.is_editable ? printing.openAddressForm(address, addressType) : null" ng-class="{ 'widget-address' : address.is_editable, 'widget-address--js-editing' : (address.is_editable && printing.openAddress.address_type == addressType) }">
+            <div ng-if="!printing.showError()"
+                class="column small-12 large-6 h-spacing-bottom--wide"
+                ng-if="printing.addresses()">
+                <div class="area-panel area-panel--merge"
+                    ng-repeat="(addressType, address) in printing.addresses()"
+                    ng-click="address.is_editable ? printing.openAddressForm(address, addressType) : null"
+                    ng-class="{ 'widget-address' : address.is_editable, 'widget-address--js-editing' : (address.is_editable && printing.openAddress.address_type == addressType) }">
 
-                    <h3 class="address-headline" ng-bind="('COMMON.ADDRESSES.' + addressType) | translate"></h3>
+                    <h3 class="address-headline"
+                        ng-bind="('COMMON.ADDRESSES.' + addressType) | translate"></h3>
 
-                    <div class="address-container" watch-height="{ condition: (!printing.openAddress || (printing.openAddress && printing.openAddress.address_type !== addressType)), targetOnTrue: 'js-target-on-true', targetOnFalse: 'js-target-on-false', disableAnimationClass: 'address-container--no-animation' }">
+                    <div class="address-container"
+                        watch-height="{ condition: (!printing.openAddress || (printing.openAddress && printing.openAddress.address_type !== addressType)), targetOnTrue: 'js-target-on-true', targetOnFalse: 'js-target-on-false', disableAnimationClass: 'address-container--no-animation' }">
 
                         <!-- <small><pre>!printing.openAddress: {{! printing.openAddress | json }}</pre></small>
                         <small><pre>printing.openAddress: {{ printing.openAddress | json }}</pre></small>
                         <small><pre>printing.openAddress.address_type: {{ printing.openAddress.address_type | json }}</pre></small>
                         <small><pre>addressType: {{ addressType | json }}</pre></small> -->
 
-                        <address class="address-display js-target-on-true" ng-class="{ 'address-display--is-visible' : (address && !printing.openAddress || (printing.openAddress && printing.openAddress.address_type !== addressType)) }" data="address" is-editable="address.is_editable"></address>
+                        <address class="address-display js-target-on-true"
+                            ng-class="{ 'address-display--is-visible' : (address && !printing.openAddress || (printing.openAddress && printing.openAddress.address_type !== addressType)) }"
+                            data="address"
+                            is-editable="address.is_editable"></address>
 
-                        <div class="address-form js-target-on-false" ng-class="{ 'address-form--is-visible' : (printing.openAddress && printing.openAddress.address_type === addressType) }" address-form="printing.addressForm" address-model="printing.openAddress" sender="printing.openAddress.address_type == 'SENDER_ADDRESS'"></div>
+                        <div class="address-form js-target-on-false"
+                            ng-class="{ 'address-form--is-visible' : (printing.openAddress && printing.openAddress.address_type === addressType) }"
+                            address-form="printing.addressForm"
+                            address-model="printing.openAddress"
+                            sender="printing.openAddress.address_type == 'SENDER_ADDRESS'"></div>
                     </div>
 
                 </div>
             </div>
 
             <!-- RATES: -->
-            <div ng-if="!printing.showError()" class="column small-12 large-6">
-                <div class="area-panel area-panel--container area-panel--merge" ng-if="printing.rates()">
-                    <div class="widget-rate" ng-repeat="rate in printing.rates()" ng-class="{ 'widget-rate-disabled' : printing.openAddress || printing.showNotifications() }" ng-include="'/views/partials/widgets/rate.html'" data-text-disabled="{{ 'RATE.DISABLED' | translate }}"></div>
+            <div ng-if="!printing.showError()"
+                class="column small-12 large-6">
+                <div class="area-panel area-panel--container area-panel--merge"
+                    ng-if="printing.rates()">
+                    <div class="widget-rate"
+                        ng-repeat="rate in printing.rates()"
+                        ng-class="{ 'widget-rate-disabled' : printing.openAddress || printing.showNotifications() }"
+                        ng-include="'/views/partials/widgets/rate.html'"
+                        data-text-disabled="{{ 'RATE.DISABLED' | translate }}"></div>
                 </div>
             </div>
 
         </div>
     </div>
 </section>
+
+<banner banner-title="'SECTION.FOOTER.TITLE' | translate"
+    banner-subtitle="'SECTION.FOOTER.SUBTITLE' | translate"
+    tracking-id="{{tracking.data.id.toUpperCase()}}"></banner>
