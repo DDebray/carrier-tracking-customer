@@ -8,6 +8,9 @@ module.exports = function($timeout) {
     link: function(scope, element, attrs) {
       var config = scope.getValues(),
         action = function(condition) {
+
+          console.log('watchHeight', condition);
+
           var targetOnTrue = element[0].querySelector('.' + config.targetOnTrue),
             targetOnFalse = element[0].querySelector('.' + config.targetOnFalse),
             target = condition ? targetOnTrue : targetOnFalse;
