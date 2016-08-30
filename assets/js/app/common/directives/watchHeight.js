@@ -16,7 +16,7 @@ module.exports = function($timeout) {
             if (target.offsetHeight === 0) {
               $timeout(function() {
                   action(condition);
-              }, 500);
+              }, 250);
             }
         };
 
