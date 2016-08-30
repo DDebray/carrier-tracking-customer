@@ -123,13 +123,13 @@
 
                     <div class="carrier-info__logo" ng-class="'image-carrier-' + carrier.code"></div>
 
-                    <a class="link carrier-info__link" ng-if="(('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL') | translate) !== ('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL')" ng-href="{{('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL') | translate}}" target="_blank">
-                        <span ng-bind="('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL') | translate"></span>
+                    <a class="link carrier-info__link" ng-if="(('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL') | translate) !== ('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL')" href="{{('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL') | translate}}" target="_blank">
+                        <span ng-bind="('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL_NAME') | translate"></span>
                     </a>
 
-                    <a class="link carrier-info__mail" ng-if="(('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.MAIL') | translate) !== ('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.MAIL')" ng-href="mailto:{{('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.MAIL') | translate}}" target="_blank" ng-bind="('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.MAIL') | translate"></a>
+                    <a class="link carrier-info__mail" ng-if="(('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.MAIL') | translate) !== ('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.MAIL')" href="mailto:{{('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.MAIL') | translate}}" ng-bind="('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.MAIL') | translate"></a>
 
-                    <a class="link carrier-info__tel" ng-if="(('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.TEL') | translate) !== ('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.TEL')" ng-href="tel:{{('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.TEL') | translate}}" target="_blank" ng-bind="('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.TEL') | translate"></a>
+                    <a class="link carrier-info__tel" ng-if="(('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.TEL') | translate) !== ('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.TEL')" href="tel:{{('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.TEL') | translate}}" ng-bind="('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.TEL') | translate"></a>
 
                     <span class="carrier-info__additional-info" ng-if="(('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.ADDITIONAL_INFO') | translate) !== ('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.ADDITIONAL_INFO')" ng-bind="('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.ADDITIONAL_INFO') | translate"></span>
 
