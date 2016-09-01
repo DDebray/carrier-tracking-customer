@@ -33,7 +33,8 @@
   }
 
   &__subtitle {
-    margin-bottom: 72px;
+    // enable this to revert COUREON-2198
+    // margin-bottom: 72px;
     font-size: $_fsMedium;
     line-height: $_lhMedium;
     color: $_rgbWhite;
