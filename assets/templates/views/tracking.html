@@ -123,6 +123,11 @@
 
                     <div class="carrier-info__logo" ng-class="'image-carrier-' + carrier.code"></div>
 
+                    <div class="carrier-info__tracking-number" ng-if="tracking.carrierInfo.length === 1">
+                        <span ng-bind="('COMMON.CARRIER.ALL.TRACKING_NUMBER') | translate"></span>
+                        <span ng-bind="carrier.tracking_number"></span>
+                    </div>
+
                     <a class="link carrier-info__link" ng-if="(('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL') | translate) !== ('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL')" href="{{('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL') | translate}}" target="_blank">
                         <span ng-bind="('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL_NAME') | translate"></span>
                     </a>

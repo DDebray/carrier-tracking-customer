@@ -24,7 +24,8 @@
   &__tel,
   &__link,
   &__mail,
-  &__additional-info {
+  &__additional-info,
+  &__tracking-number {
     display: block;
     color: lighten($_rgbMineShaft, 10%);
     font-size: $_fsSmall;
@@ -37,7 +38,8 @@
 
   &__tel,
   &__link,
-  &__mail {
+  &__mail,
+  &__tracking-number {
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
