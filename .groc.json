@@ -1,5 +1,5 @@
 {
-  "glob": ["assets/js/**/*.js", "README.md"],
+  "glob": ["assets/js/**/*.js", "assets/js/app/**/README.md", "README.md"],
   "repository-url": "https://github.com/zooron/carrier-tracking-customer",
   "out": "docs"
 }

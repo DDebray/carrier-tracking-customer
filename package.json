@@ -5,6 +5,7 @@
   "scripts": {
     "start": "npm run gulp --",
     "gulp": "gulp",
+    "doc": "rimraf 'docs' && groc",
     "test": "echo \"ERR: No test specified!\" && exit 1"
   },
   "repository": "https://github.com/zooron/carrier-tracking-customer.git",
@@ -29,6 +30,7 @@
     "browserify": "^13.0.0",
     "connect-modrewrite": "^0.9.0",
     "del": "^2.2.0",
+    "groc": "^0.8.0",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-base64-inline": "github:jonathan-reisdorf/gulp-base64-inline",
@@ -53,6 +55,7 @@
     "jshint-stylish": "^2.1.0",
     "path": "^0.12.7",
     "require-dir": "^0.3.0",
+    "rimraf": "^2.5.4",
     "through2": "^2.0.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
