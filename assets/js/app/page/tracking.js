@@ -143,23 +143,41 @@ module.exports = [
       StorageTracking.track( self.trackingId, function( response ) {
         self.data = response;
 
-        if ( response && response.events ) {
-          if ( !!response.events.length ) {
+        if ( response && response.events && response.route_information ) {
+          if ( !!response.events.length && response.route_information.length > 1 ) {
             self.state = self.availableStates.indexOf( response.status );
             self.errorState = self.availableErrorStates.indexOf( response.status );
 
             self.showError = response.events[ response.events.length - 1 ].status === 'NOT_AVAILABLE';
             self.carrierInfo = getCarrierInfoByEvents( response.events );
+
+            if ( response.route_information[ 0 ].status === 'DELIVERED' ) {
+              if ( response.route_information[ 1 ].service_code === 'gls_fr_dpd_pickup' ) {
+                self.data.events.unshift( {
+                  carrier: {
+                    code: 'gls'
+                  },
+                  carrier_tracking_link: 'https://gls-group.eu/FR/fr/suivi-colis?match=' + response.route_information[ 1 ].carrier_tracking_number,
+                  description: 'HANDOVER_TO_GLS_FR',
+                  timestamp: 'Keine Zeitangaben',
+                  status: 'IN_DELIVERY'
+                } );
+              }
+              if ( response.route_information[ 1 ].service_code === 'gls_es_dpd_pickup' ) {
+                self.data.events.unshift( {
+                  carrier: {
+                    code: 'gls'
+                  },
+                  carrier_tracking_link: 'https://gls-group.eu/ES/es/seguimiento-de-envios?match=' + response.route_information[ 1 ].carrier_tracking_number,
+                  description: 'HANDOVER_TO_GLS_ES',
+                  timestamp: 'Keine Zeitangaben',
+                  status: 'IN_DELIVERY'
+                } );
+              }
+            }
           } else {
             self.showError = true;
           }
-
-          // COUREON-2199
-          // if ( response.route_information && response.route_information.length > 1 ) {
-          //   if ( response.route_information[ 0 ].status === 'DELIVERED' && response.route_information[ 1 ].carrier_service ) {
-          //
-          //   }
-          // }
         }
       }, function( error ) {
         self.data = null;

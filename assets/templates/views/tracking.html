@@ -76,11 +76,23 @@
                 <div class="column medium-3 show-for-medium">
                     <div class="timeline__date"
                         title="{{ event.moment | moment:'long' }}">
+
+                        <!-- date: short and long -->
                         <div class="timeline__date__text show-for-medium-only"
+                            ng-if="event.moment"
                             ng-bind="event.moment | moment:'short-day'"></div>
                         <div class="timeline__date__text show-for-large"
+                            ng-if="event.moment"
                             ng-bind="event.moment | moment:'day'"></div>
+
+                        <!-- no time -->
                         <div class="timeline__date__text"
+                            ng-if="!event.moment"
+                            ng-bind="event.timestamp"></div>
+
+                        <!-- time -->
+                        <div class="timeline__date__text"
+                            ng-if="event.moment"
                             ng-bind="event.moment | moment:'time'"></div>
                     </div>
                 </div>
@@ -96,8 +108,14 @@
                 <div class="column small-10 medium-8">
 
                     <div class="timeline__date timeline__date--small show-for-small-only"
+                        ng-if="event.moment"
                         title="{{ event.moment | moment:'long' }}"
                         ng-bind="(event.moment | moment:'day') + ', ' + (event.moment | moment:'time')"></div>
+
+                    <div class="timeline__date timeline__date--small show-for-small-only"
+                        ng-if="!event.moment"
+                        title="{{ event.timestamp }}"
+                        ng-bind="event.timestamp"></div>
 
                     <span class="timeline__description">
                         <div class="timeline__description-text">
@@ -106,13 +124,19 @@
                             .replace('%COUNTRY%', event.location.country || '') + '&nbsp;'"></span>
 
                             <span class="timeline__carrier"
-                                ng-if="event.carrier && tracking.carrierInfo.length > 1"
+                                ng-if="!event.carrier_tracking_link && event.carrier && tracking.carrierInfo.length > 1"
                                 ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"></span>
+
+                            <a class="timeline__carrier"
+                                ng-href="{{event.carrier_tracking_link}}"
+                                ng-if="event.carrier_tracking_link && event.carrier && tracking.carrierInfo.length > 1"
+                                ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"
+                                target="_blank"></a>
                         </div>
                     </span>
-
                 </div>
             </div>
+
         </div>
 
         <!-- carrier info -->
