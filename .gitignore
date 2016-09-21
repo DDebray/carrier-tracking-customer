@@ -40,6 +40,7 @@ node_modules
 /assets/js/app/environment.js
 /assets/css/variables/_sprite.scss
 /assets/css/variables/_inline-dimensions.scss
+docs/*
 
 #IntelliJ
 .idea

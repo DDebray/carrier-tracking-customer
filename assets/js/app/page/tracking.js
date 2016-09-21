@@ -32,80 +32,78 @@ module.exports = [
     // WAREHOUSE
     // NOT_AVAILABLE.RECEIVER.NEW_DELIVERY_ATTEMPT
 
-    self.packageStates = [
-      {
-        tooltip: 'LABEL_PRINTED',
-        icon: function() {
-          return 'cube';
-        },
-        isActive: function() {
-          return self.state >= 0 || self.errorState > 0;
-        },
-        showCheckmark: function() {
-          return self.state >= 0;
-        },
-        showCross: function() {
-          return self.errorState === 0;
-        }
-      }, {
-        tooltip: 'IN_TRANSIT',
-        angle: 'angle-right',
-        iconModifier: 'fa-flip-horizontal',
-        icon: function() {
-          return 'truck';
-        },
-        isActive: function() {
-          return self.state > 0 || self.errorState > 0;
-        },
-        showCheckmark: function() {
-          return self.state > 0;
-        }
-      }, {
-        tooltip: 'HANDOVER_WAREHOUSE',
-        angle: 'angle-right',
-        icon: function() {
-          return 'arrows-alt';
-        },
-        isActive: function() {
-          return self.state > 1 || self.errorState > 1;
-        },
-        showCheckmark: function() {
-          return self.state > 1;
-        },
-        showCross: function() {
-          return self.errorState === 1;
-        }
-      }, {
-        tooltip: 'IN_DELIVERY',
-        angle: 'angle-right',
-        icon: function() {
-          return 'home';
-        },
-        isActive: function() {
-          return self.state > 3;
-        },
-        showCheckmark: function() {
-          return self.state > 3;
-        },
-        showCross: function() {
-          return self.errorState > 1;
-        }
-      }, {
-        tooltip: 'DELIVERED',
-        angle: 'angle-right',
-        icon: function() {
-          return self.state === 5 && false ? 'close' : 'check';
-        },
-        isActive: function() {
-          return self.state === 5;
-        },
-        showCheckmark: function() {
-          return false;
-        }
+    self.packageStates = [ {
+      tooltip: 'LABEL_PRINTED',
+      icon: function() {
+        return 'cube';
+      },
+      isActive: function() {
+        return self.state >= 0 || self.errorState > 0;
+      },
+      showCheckmark: function() {
+        return self.state >= 0;
+      },
+      showCross: function() {
+        return self.errorState === 0;
       }
-    ];
+    }, {
+      tooltip: 'IN_TRANSIT',
+      angle: 'angle-right',
+      iconModifier: 'fa-flip-horizontal',
+      icon: function() {
+        return 'truck';
+      },
+      isActive: function() {
+        return self.state > 0 || self.errorState > 0;
+      },
+      showCheckmark: function() {
+        return self.state > 0;
+      }
+    }, {
+      tooltip: 'HANDOVER_WAREHOUSE',
+      angle: 'angle-right',
+      icon: function() {
+        return 'arrows-alt';
+      },
+      isActive: function() {
+        return self.state > 1 || self.errorState > 1;
+      },
+      showCheckmark: function() {
+        return self.state > 1;
+      },
+      showCross: function() {
+        return self.errorState === 1;
+      }
+    }, {
+      tooltip: 'IN_DELIVERY',
+      angle: 'angle-right',
+      icon: function() {
+        return 'home';
+      },
+      isActive: function() {
+        return self.state > 3;
+      },
+      showCheckmark: function() {
+        return self.state > 3;
+      },
+      showCross: function() {
+        return self.errorState > 1;
+      }
+    }, {
+      tooltip: 'DELIVERED',
+      angle: 'angle-right',
+      icon: function() {
+        return self.state === 5 && false ? 'close' : 'check';
+      },
+      isActive: function() {
+        return self.state === 5;
+      },
+      showCheckmark: function() {
+        return false;
+      }
+    } ];
 
-    var getCarrierInfoByEvents = function (events) {
+    var getCarrierInfoByEvents = function( events ) {
       // used to test multiple carriers
       // events.push({
       //   carrier: {
@@ -118,12 +116,12 @@ module.exports = [
       //   }
       // });
 
-      var uniqueBy = function (a, key) {
+      var uniqueBy = function( a, key ) {
         var seen = {};
-        return a.filter(function(item) {
-          var k = key(item);
-          return seen.hasOwnProperty(k) ? false : (seen[k] = true);
-        });
+        return a.filter( function( item ) {
+          var k = key( item );
+          return seen.hasOwnProperty( k ) ? false : ( seen[ k ] = true );
+        } );
       };
 
       // create an array that only contains all the carriers from the events
@@ -145,13 +143,38 @@ module.exports = [
       StorageTracking.track( self.trackingId, function( response ) {
         self.data = response;
 
-        if ( response && response.events ) {
-          if ( !!response.events.length ) {
+        if ( response && response.events && response.route_information ) {
+          if ( !!response.events.length && response.route_information.length > 1 ) {
             self.state = self.availableStates.indexOf( response.status );
             self.errorState = self.availableErrorStates.indexOf( response.status );
 
             self.showError = response.events[ response.events.length - 1 ].status === 'NOT_AVAILABLE';
             self.carrierInfo = getCarrierInfoByEvents( response.events );
+
+            if ( response.route_information[ 0 ].status === 'DELIVERED' ) {
+              if ( response.route_information[ 1 ].service_code === 'gls_fr_dpd_pickup' ) {
+                self.data.events.unshift( {
+                  carrier: {
+                    code: 'gls'
+                  },
+                  carrier_tracking_link: 'https://gls-group.eu/FR/fr/suivi-colis?match=' + response.route_information[ 1 ].carrier_tracking_number,
+                  description: 'HANDOVER_TO_GLS_FR',
+                  timestamp: 'Keine Zeitangaben',
+                  status: 'IN_DELIVERY'
+                } );
+              }
+              if ( response.route_information[ 1 ].service_code === 'gls_es_dpd_pickup' ) {
+                self.data.events.unshift( {
+                  carrier: {
+                    code: 'gls'
+                  },
+                  carrier_tracking_link: 'https://gls-group.eu/ES/es/seguimiento-de-envios?match=' + response.route_information[ 1 ].carrier_tracking_number,
+                  description: 'HANDOVER_TO_GLS_ES',
+                  timestamp: 'Keine Zeitangaben',
+                  status: 'IN_DELIVERY'
+                } );
+              }
+            }
           } else {
             self.showError = true;
           }

@@ -4,20 +4,23 @@ module.exports = [ '$translateProvider', function( $translateProvider ) {
   var self = this,
     environment = require( '../environment' );
 
-  self.$get = function() {
+  self.selectedLanguage = 'de';
+  self.$get = ['StorageService', '$translate', function(StorageService, $translate) {
+    self.selectedLanguage = StorageService.get('selectedLanguage') || self.selectedLanguage;
+    $translate.use(self.selectedLanguage);
     return self;
-  };
+  }];
 
   self.environment = function() {
     return environment;
   };
 
   self.endpoints = {
-    ui: {
-      development: 'https://api-testing.coureon.com/ui/',
-      testing: 'https://api-testing.coureon.com/ui/',
-      staging: 'https://api-staging.coureon.com/ui/',
-      production: 'https://api.coureon.com/ui/'
+    ui : {
+      development : 'https://api-testing.coureon.com/ui/',
+      testing : 'https://api-testing.coureon.com/ui/',
+      staging : 'https://api-staging.coureon.com/ui/',
+      production : 'https://api.coureon.com/ui/'
     },
     cx : {
       // development : 'http://localhost:8080/zooron-web/cx/',
@@ -27,21 +30,21 @@ module.exports = [ '$translateProvider', function( $translateProvider ) {
       production : 'https://api.coureon.com/cx/'
     },
     www : {
-      development: 'http://localhost:3000',
-      testing: 'https://www-testing.coureon.com',
-      staging: 'https://www-staging.coureon.com',
-      production: 'https://www.coureon.com'
+      development : 'http://localhost:3000',
+      testing : 'https://www-testing.coureon.com',
+      staging : 'https://www-staging.coureon.com',
+      production : 'https://www.coureon.com'
     }
   };
 
   self.endpoints.cms = {
-    development: self.endpoints.www.development + '/',
-    testing: self.endpoints.www.testing + '/',
-    staging: self.endpoints.www.staging + '/',
-    production: self.endpoints.www.production + '/'
+    development : self.endpoints.www.development + '/',
+    testing : self.endpoints.www.testing + '/',
+    staging : self.endpoints.www.staging + '/',
+    production : self.endpoints.www.production + '/'
   };
 
-  $translateProvider.useUrlLoader( self.endpoints.cx[ environment ] + 'translations/tracking/' );
-  $translateProvider.useSanitizeValueStrategy( 'escapeParameters' );
-  $translateProvider.preferredLanguage( 'de' );
+  $translateProvider.useUrlLoader(self.endpoints.cx[environment] + 'translations/tracking/');
+  $translateProvider.useSanitizeValueStrategy('escapeParameters');
+  $translateProvider.preferredLanguage(self.selectedLanguage);
 } ];

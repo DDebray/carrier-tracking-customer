@@ -20,6 +20,7 @@ application
   .factory('CommonTracking', require('./common/tracking'))
   .factory('CommonPopups', require('./common/popups'))
 
+  .factory('StorageService', require('./storage/service'))
   .factory('StorageTracking', require('./storage/tracking'))
   .factory('StorageShipment', require('./storage/shipment'))
   .factory('StorageTransaction', require('./storage/transaction'))
