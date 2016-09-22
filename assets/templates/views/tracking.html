@@ -124,12 +124,12 @@
                             .replace('%COUNTRY%', event.location.country || '') + '&nbsp;'"></span>
 
                             <span class="timeline__carrier"
-                                ng-if="!event.carrier_tracking_link && event.carrier && tracking.carrierInfo.length > 1"
+                                ng-if="!event.carrier_tracking_link && event.carrier && tracking.carrierInfo.length == 1"
                                 ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"></span>
 
-                            <a class="timeline__carrier"
+                            <a class="timeline__carrier link"
                                 ng-href="{{event.carrier_tracking_link}}"
-                                ng-if="event.carrier_tracking_link && event.carrier && tracking.carrierInfo.length > 1"
+                                ng-if="event.carrier_tracking_link && event.carrier && tracking.carrierInfo.length == 1"
                                 ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"
                                 target="_blank"></a>
                         </div>
