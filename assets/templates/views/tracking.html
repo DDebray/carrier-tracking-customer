@@ -60,9 +60,8 @@
                 <span ng-bind="tracking.data.id.toUpperCase()"></span>
             </div>
             <div class="column small-12 medium-6">
-                <span class="summary__title"
-                    ng-bind="'PAGE.TRACKING.SUMMARY_STATE' | translate"></span>
-                <span ng-bind="('PAGE.TRACKING.SUMMARY_STATE.' + tracking.data.events[tracking.data.events.length - 1].status.toUpperCase()) | translate"></span>
+                <span class="summary__title" ng-bind="'PAGE.TRACKING.SUMMARY_STATE' | translate"></span>
+                <span ng-if="tracking.data.events.length > 0" ng-bind="('PAGE.TRACKING.SUMMARY_STATE.' + tracking.data.events[tracking.data.events.length - 1].status.toUpperCase()) | translate"></span>
             </div>
         </div>
 

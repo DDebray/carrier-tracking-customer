@@ -142,13 +142,14 @@ module.exports = [
     if ( self.trackingId ) {
       StorageTracking.track( self.trackingId, function( response ) {
         self.data = response;
-
+        
+        self.showError = response.status === 'NOT_AVAILABLE';
+        
         if ( response && response.events && response.route_information ) {
           if ( !!response.events.length && response.route_information.length > 1 ) {
             self.state = self.availableStates.indexOf( response.status );
             self.errorState = self.availableErrorStates.indexOf( response.status );
 
-            self.showError = response.events[ response.events.length - 1 ].status === 'NOT_AVAILABLE';
             self.carrierInfo = getCarrierInfoByEvents( response.events );
 
             if ( response.route_information[ 0 ].status === 'DELIVERED' ) {
