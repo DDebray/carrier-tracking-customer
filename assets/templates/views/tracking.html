@@ -61,7 +61,7 @@
             </div>
             <div class="column small-12 medium-6">
                 <span class="summary__title" ng-bind="'PAGE.TRACKING.SUMMARY_STATE' | translate"></span>
-                <span ng-if="tracking.data.events.length > 0" ng-bind="('PAGE.TRACKING.SUMMARY_STATE.' + tracking.data.events[0].status.toUpperCase()) | translate"></span>
+                <span ng-if="tracking.data.events.length > 0" ng-bind="('PAGE.TRACKING.SUMMARY_STATE.' + tracking.data.events[tracking.data.events.length - 1].status.toUpperCase()) | translate"></span>
             </div>
         </div>
 
@@ -123,12 +123,12 @@
                             .replace('%COUNTRY%', event.location.country || '') + '&nbsp;'"></span>
 
                             <span class="timeline__carrier"
-                                ng-if="!event.carrier_tracking_link && event.carrier && tracking.carrierInfo.length == 1"
+                                ng-if="!event.carrier_tracking_link && event.carrier && tracking.carrierInfo.length > 1"
                                 ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"></span>
 
                             <a class="timeline__carrier link"
                                 ng-href="{{event.carrier_tracking_link}}"
-                                ng-if="event.carrier_tracking_link && event.carrier && tracking.carrierInfo.length == 1"
+                                ng-if="event.carrier_tracking_link"
                                 ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"
                                 target="_blank"></a>
                         </div>
