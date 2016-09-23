@@ -5,6 +5,8 @@ module.exports = function (application) {
     .filter('reverse', function() {
 	  return function(items) {
 		  if (items) {
+        // TODO this slice creates a copy of the original array.
+        // That should not be necessary here. 
 			  return items.slice().reverse();
 		  } else {
 			  return items;
