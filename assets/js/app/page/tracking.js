@@ -154,7 +154,7 @@ module.exports = [
 
             if ( response.route_information[ 0 ].status === 'DELIVERED' ) {
               if ( response.route_information[ 1 ].service_code === 'gls_fr_dpd_pickup' || response.route_information[ 1 ].service_code === 'gls_fr_dhl_dropoff' || response.route_information[ 1 ].service_code === 'gls_fr_hermes_pickup' || response.route_information[ 1 ].service_code === 'gls_fr_national' || response.route_information[ 1 ].service_code === 'gls_fr_ups_express_pickup') {
-                self.data.events.unshift( {
+                self.data.events.push( {
                   carrier: {
                     code: 'gls'
                   },
@@ -165,7 +165,7 @@ module.exports = [
                 } );
               }
               if ( response.route_information[ 1 ].service_code === 'gls_es_dpd_pickup' || response.route_information[ 1 ].service_code === 'gls_es_national' || response.route_information[ 1 ].service_code === 'gls_es_dhl_dropoff' || response.route_information[ 1 ].service_code === 'gls_es_hermes_pickup') {
-                self.data.events.unshift( {
+                self.data.events.push( {
                   carrier: {
                     code: 'gls'
                   },

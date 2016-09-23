@@ -68,7 +68,7 @@
         <div class="timeline">
             <!-- timeline -->
             <div class="row row-outer-block timeline__event"
-                ng-repeat="event in tracking.data.events"
+                ng-repeat="event in tracking.data.events | reverse"
                 ng-class="{'timeline__event--is-only-child' : (tracking.data.events.length === 1)}">
 
                 <!-- date -->
