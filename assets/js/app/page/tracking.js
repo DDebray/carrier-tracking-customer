@@ -146,14 +146,14 @@ module.exports = [
         self.showError = response.status === 'NOT_AVAILABLE';
         
         if ( response && response.events && response.route_information ) {
-          if ( !!response.events.length && response.route_information.length > 1 ) {
+          if ( !!response.events.length && !!response.route_information.length ) {
             self.state = self.availableStates.indexOf( response.status );
             self.errorState = self.availableErrorStates.indexOf( response.status );
 
             self.carrierInfo = getCarrierInfoByEvents( response.events );
 
             if ( response.route_information[ 0 ].status === 'DELIVERED' ) {
-              if ( response.route_information[ 1 ].service_code === 'gls_fr_dpd_pickup' || response.route_information[ 1 ].service_code === 'gls_fr_dhl_dropoff' || response.route_information[ 1 ].service_code === 'gls_fr_hermes_pickup' || response.route_information[ 1 ].service_code === 'gls_fr_national' || response.route_information[ 1 ].service_code === 'gls_fr_ups_express_pickup') {
+              if ( response.route_information.length > 1 && response.route_information[ 1 ].service_code === 'gls_fr_dpd_pickup' || response.route_information[ 1 ].service_code === 'gls_fr_dhl_dropoff' || response.route_information[ 1 ].service_code === 'gls_fr_hermes_pickup' || response.route_information[ 1 ].service_code === 'gls_fr_national' || response.route_information[ 1 ].service_code === 'gls_fr_ups_express_pickup' ) {
                 self.data.events.push( {
                   carrier: {
                     code: 'gls'
@@ -164,7 +164,7 @@ module.exports = [
                   status: 'IN_DELIVERY'
                 } );
               }
-              if ( response.route_information[ 1 ].service_code === 'gls_es_dpd_pickup' || response.route_information[ 1 ].service_code === 'gls_es_national' || response.route_information[ 1 ].service_code === 'gls_es_dhl_dropoff' || response.route_information[ 1 ].service_code === 'gls_es_hermes_pickup') {
+              if ( response.route_information.length > 1 && response.route_information[ 1 ].service_code === 'gls_es_dpd_pickup' || response.route_information[ 1 ].service_code === 'gls_es_national' || response.route_information[ 1 ].service_code === 'gls_es_dhl_dropoff' || response.route_information[ 1 ].service_code === 'gls_es_hermes_pickup' ) {
                 self.data.events.push( {
                   carrier: {
                     code: 'gls'
