@@ -163,6 +163,10 @@ module.exports = [
                   timestamp: 'Keine Zeitangaben',
                   status: 'IN_DELIVERY'
                 } );
+                self.carrierInfo.push( {
+                  code: 'gls',
+                  tracking_number: response.route_information[ 1 ].carrier_tracking_number
+                } );
               }
               if ( response.route_information.length > 1 && response.route_information[ 1 ].service_code === 'gls_es_dpd_pickup' || response.route_information[ 1 ].service_code === 'gls_es_national' || response.route_information[ 1 ].service_code === 'gls_es_dhl_dropoff' || response.route_information[ 1 ].service_code === 'gls_es_hermes_pickup' ) {
                 self.data.events.push( {
@@ -173,6 +177,10 @@ module.exports = [
                   description: 'HANDOVER_TO_GLS_ES',
                   timestamp: 'Keine Zeitangaben',
                   status: 'IN_DELIVERY'
+                } );
+                self.carrierInfo.push( {
+                  code: 'gls',
+                  tracking_number: response.route_information[ 1 ].carrier_tracking_number
                 } );
               }
             }
