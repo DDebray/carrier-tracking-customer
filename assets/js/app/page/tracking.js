@@ -142,9 +142,9 @@ module.exports = [
     if ( self.trackingId ) {
       StorageTracking.track( self.trackingId, function( response ) {
         self.data = response;
-        
+
         self.showError = response.status === 'NOT_AVAILABLE';
-        
+
         if ( response && response.events && response.route_information ) {
           if ( !!response.events.length && !!response.route_information.length ) {
             self.state = self.availableStates.indexOf( response.status );
