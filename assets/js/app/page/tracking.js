@@ -141,58 +141,23 @@ module.exports = [
 
     if ( self.trackingId ) {
       StorageTracking.track( self.trackingId, function( response ) {
-        self.data = response;
+          self.data = response;
 
-        self.showError = response.status === 'NOT_AVAILABLE';
+          self.showError = response.status === 'NOT_AVAILABLE';
 
-        if ( response && response.events && response.route_information ) {
-          if ( !!response.events.length && !!response.route_information.length ) {
+          if ( response && response.events && !!response.events.length ) {
             self.state = self.availableStates.indexOf( response.status );
             self.errorState = self.availableErrorStates.indexOf( response.status );
-
             self.carrierInfo = getCarrierInfoByEvents( response.events );
-
-            if ( response.route_information[ 0 ].status === 'DELIVERED' ) {
-              if ( response.route_information.length > 1 && response.route_information[ 1 ].service_code === 'gls_fr_dpd_pickup' || response.route_information[ 1 ].service_code === 'gls_fr_dhl_dropoff' || response.route_information[ 1 ].service_code === 'gls_fr_hermes_pickup' || response.route_information[ 1 ].service_code === 'gls_fr_national' || response.route_information[ 1 ].service_code === 'gls_fr_ups_express_pickup' ) {
-                self.data.events.push( {
-                  carrier: {
-                    code: 'gls'
-                  },
-                  carrier_tracking_link: 'https://gls-group.eu/FR/fr/suivi-colis?match=' + response.route_information[ 1 ].carrier_tracking_number,
-                  description: 'HANDOVER_TO_GLS_FR',
-                  timestamp: 'Keine Zeitangaben',
-                  status: 'IN_DELIVERY'
-                } );
-                self.carrierInfo.push( {
-                  code: 'gls',
-                  tracking_number: response.route_information[ 1 ].carrier_tracking_number
-                } );
-              }
-              if ( response.route_information.length > 1 && response.route_information[ 1 ].service_code === 'gls_es_dpd_pickup' || response.route_information[ 1 ].service_code === 'gls_es_national' || response.route_information[ 1 ].service_code === 'gls_es_dhl_dropoff' || response.route_information[ 1 ].service_code === 'gls_es_hermes_pickup' ) {
-                self.data.events.push( {
-                  carrier: {
-                    code: 'gls'
-                  },
-                  carrier_tracking_link: 'https://gls-group.eu/ES/es/seguimiento-de-envios?match=' + response.route_information[ 1 ].carrier_tracking_number,
-                  description: 'HANDOVER_TO_GLS_ES',
-                  timestamp: 'Keine Zeitangaben',
-                  status: 'IN_DELIVERY'
-                } );
-                self.carrierInfo.push( {
-                  code: 'gls',
-                  tracking_number: response.route_information[ 1 ].carrier_tracking_number
-                } );
-              }
-            }
           } else {
             self.showError = true;
           }
-        }
-      }, function( error ) {
-        self.data = null;
-        self.showError = true;
-        self.state = -1;
-      } );
+        },
+        function( error ) {
+          self.data = null;
+          self.showError = true;
+          self.state = -1;
+        } );
     }
 
     self.getStatus = function() {
