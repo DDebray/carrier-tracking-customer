@@ -80,7 +80,7 @@ module.exports = [
       var carrierCaseApplies = specialCarrierCases[ carrierKey ].service_codes.indexOf( self.data.route_information[ route_number - 1 ].service_code ) > -1,
         precedingCarrierDelivered = ( route_number > 1 ) ? self.data.route_information[ route_number - 2 ].status === 'DELIVERED' : true;
 
-      return carrierCaseApplies;
+      return carrierCaseApplies && precedingCarrierDelivered;
     };
 
     /**
