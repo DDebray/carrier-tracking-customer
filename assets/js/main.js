@@ -1,7 +1,7 @@
 // import ... from './...';
 
 
-(function(){
+( function () {
   'use strict';
-  require('./app/loader');
-}());
+  require( './app/loader' );
+}() );
