@@ -82,6 +82,13 @@ module.exports = function CommonUiProvider() {
     closable: true,
     onClose: null,
     action: null,
+    clickHideButton: function () {
+      // monkeypatch hide function from outside
+      if ( self.modal.action.onHide && typeof self.modal.action.onHide === 'function' ) {
+        self.modal.action.onHide();
+      }
+      self.modal.hide();
+    },
     hide: function () {
       if ( !this && !self.modal.closable ) {
         // triggered by hotkey & modal not closable

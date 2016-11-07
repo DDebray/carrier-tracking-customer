@@ -1,4 +1,4 @@
-module.exports = function() {
+module.exports = function () {
   'use strict';
 
   return {
@@ -10,9 +10,9 @@ module.exports = function() {
     scope: {
       name: '@name'
     },
-    link: function(scope, element, attr, tabPanelCtrl) {
+    link: function ( scope, element, attr, tabPanelCtrl ) {
       scope.active = false;
-      tabPanelCtrl.addTab(scope);
+      tabPanelCtrl.addTab( scope );
     }
   };
 };

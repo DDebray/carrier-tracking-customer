@@ -1,4 +1,4 @@
-module.exports = function($timeout, $window) {
+module.exports = function ( $timeout, $window ) {
   'use strict';
 
   return {
@@ -6,38 +6,38 @@ module.exports = function($timeout, $window) {
     scope: {
       el: '=unblur',
     },
-    template: function(element) {
-      var tag = element[0].nodeName;
+    template: function ( element ) {
+      var tag = element[ 0 ].nodeName;
       return '<' + tag + ' data-ng-style="style"></' + tag + '>';
     },
     transclude: true,
     replace: true,
-    controller: ['$scope', function ($scope) {
+    controller: [ '$scope', function ( $scope ) {
       $scope.style = {
-        position : 'relative',
-        display : 'none',
-        height : '1px'
+        position: 'relative',
+        display: 'none',
+        height: '1px'
       };
-    }],
-    link: function(scope, element, attrs) {
+    } ],
+    link: function ( scope, element, attrs ) {
 
-      var targetElem = document.getElementById(scope.el),
+      var targetElem = document.getElementById( scope.el ),
         isPlaceholderVisible = false;
 
       scope.contentHeight = function () {
         return targetElem.offsetHeight;
       };
 
-      scope.$watch(scope.contentHeight, function(newValue, oldValue) {
-        if (isPlaceholderVisible) {
+      scope.$watch( scope.contentHeight, function ( newValue, oldValue ) {
+        if ( isPlaceholderVisible ) {
           oldValue = oldValue - 1;
           newValue = newValue - 1;
         }
 
-        if (newValue !== oldValue) {
+        if ( newValue !== oldValue ) {
           var remainder = newValue % 2;
 
-          if (remainder === 1) {
+          if ( remainder === 1 ) {
             scope.style.display = 'none';
           } else {
             scope.style.display = 'block';
@@ -46,11 +46,11 @@ module.exports = function($timeout, $window) {
           isPlaceholderVisible = scope.style.display === 'block';
         }
 
-        angular.element($window).bind('resize', function() {
+        angular.element( $window ).bind( 'resize', function () {
           scope.$apply();
-        });
+        } );
 
-      }, false);
+      }, false );
     }
   };
 };
