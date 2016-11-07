@@ -1,6 +1,6 @@
 module.exports = [
   '$routeParams', '$location', '$filter', 'CommonRequest', 'CommonMoment', 'CommonTracking', 'StorageTracking', 'CommonUi',
-  function(
+  function (
     $routeParams, $location, $filter, CommonRequest, CommonMoment, CommonTracking, StorageTracking, CommonUi
   ) {
     'use strict';
@@ -34,76 +34,76 @@ module.exports = [
 
     self.packageStates = [ {
       tooltip: 'LABEL_PRINTED',
-      icon: function() {
+      icon: function () {
         return 'cube';
       },
-      isActive: function() {
+      isActive: function () {
         return self.state >= 0 || self.errorState > 0;
       },
-      showCheckmark: function() {
+      showCheckmark: function () {
         return self.state >= 0;
       },
-      showCross: function() {
+      showCross: function () {
         return self.errorState === 0;
       }
     }, {
       tooltip: 'IN_TRANSIT',
       angle: 'angle-right',
       iconModifier: 'fa-flip-horizontal',
-      icon: function() {
+      icon: function () {
         return 'truck';
       },
-      isActive: function() {
+      isActive: function () {
         return self.state > 0 || self.errorState > 0;
       },
-      showCheckmark: function() {
+      showCheckmark: function () {
         return self.state > 0;
       }
     }, {
       tooltip: 'HANDOVER_WAREHOUSE',
       angle: 'angle-right',
-      icon: function() {
+      icon: function () {
         return 'arrows-alt';
       },
-      isActive: function() {
+      isActive: function () {
         return self.state > 1 || self.errorState > 1;
       },
-      showCheckmark: function() {
+      showCheckmark: function () {
         return self.state > 1;
       },
-      showCross: function() {
+      showCross: function () {
         return self.errorState === 1;
       }
     }, {
       tooltip: 'IN_DELIVERY',
       angle: 'angle-right',
-      icon: function() {
+      icon: function () {
         return 'home';
       },
-      isActive: function() {
+      isActive: function () {
         return self.state > 3;
       },
-      showCheckmark: function() {
+      showCheckmark: function () {
         return self.state > 3;
       },
-      showCross: function() {
+      showCross: function () {
         return self.errorState > 1;
       }
     }, {
       tooltip: 'DELIVERED',
       angle: 'angle-right',
-      icon: function() {
+      icon: function () {
         return self.state === 5 && false ? 'close' : 'check';
       },
-      isActive: function() {
+      isActive: function () {
         return self.state === 5;
       },
-      showCheckmark: function() {
+      showCheckmark: function () {
         return false;
       }
     } ];
 
-    var getCarrierInfoByEvents = function( events ) {
+    var getCarrierInfoByEvents = function ( events ) {
       // used to test multiple carriers
       // events.push({
       //   carrier: {
@@ -116,16 +116,16 @@ module.exports = [
       //   }
       // });
 
-      var uniqueBy = function( a, key ) {
+      var uniqueBy = function ( a, key ) {
         var seen = {};
-        return a.filter( function( item ) {
+        return a.filter( function ( item ) {
           var k = key( item );
           return seen.hasOwnProperty( k ) ? false : ( seen[ k ] = true );
         } );
       };
 
       // create an array that only contains all the carriers from the events
-      var unfilteredCarriers = events.map( function( event ) {
+      var unfilteredCarriers = events.map( function ( event ) {
         return event.carrier;
       } );
 
@@ -140,7 +140,7 @@ module.exports = [
     }
 
     if ( self.trackingId ) {
-      StorageTracking.track( self.trackingId, function( response ) {
+      StorageTracking.track( self.trackingId, function ( response ) {
           self.data = response;
 
           self.showError = response.status === 'NOT_AVAILABLE';
@@ -153,14 +153,14 @@ module.exports = [
             self.showError = true;
           }
         },
-        function( error ) {
+        function ( error ) {
           self.data = null;
           self.showError = true;
           self.state = -1;
         } );
     }
 
-    self.getStatus = function() {
+    self.getStatus = function () {
       if ( self.trackingId ) {
         CommonTracking.addEvent( 'track', '"Jetzt Sendung verfolgen" button was used for "' + self.trackingId + '".' );
         $location.path( '/tracking/' + self.trackingId );
