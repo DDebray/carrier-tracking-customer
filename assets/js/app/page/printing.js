@@ -1,7 +1,7 @@
 module.exports = [
-  '$routeParams', '$timeout', 'CommonUi', 'StorageShipment', 'StorageTransaction',
-  function(
-    $routeParams, $timeout, CommonUi, StorageShipment, StorageTransaction
+  '$routeParams', '$timeout', 'CommonUi', 'StorageShipment', 'StorageTransaction', '$location',
+  function (
+    $routeParams, $timeout, CommonUi, StorageShipment, StorageTransaction, $location
   ) {
     'use strict';
 
@@ -12,7 +12,7 @@ module.exports = [
     self.postalCodeForVerification = '';
 
     self.addressForm = {
-      model: function() {
+      model: function () {
         return self.openAddress;
       },
       flags: {
@@ -20,7 +20,7 @@ module.exports = [
       },
       submit: {
         label: 'COMMON.ADDRESSES.SAVE',
-        action: function() {
+        action: function () {
           StorageShipment.updateResource( self.openAddress );
           StorageTransaction.updatedAddress = self.openAddress;
           self.openAddress = false;
@@ -34,34 +34,34 @@ module.exports = [
       sofort_ueberweisung: 'fa-university'
     };
 
-    self.addresses = function() {
+    self.addresses = function () {
       return StorageShipment.addresses;
     };
 
-    self.rates = function() {
+    self.rates = function () {
       return StorageShipment.rates;
     };
 
-    self.openAddressForm = function( address, addressType ) {
+    self.openAddressForm = function ( address, addressType ) {
       self.openAddress = address;
     };
 
-    self.selectRate = function( rate ) {
+    self.selectRate = function ( rate ) {
       if ( !self.openAddress ) {
         StorageTransaction.selectedRate = rate;
         showTransactionModal();
       }
     };
 
-    self.showError = function() {
+    self.showError = function () {
       return StorageShipment.error;
     };
 
-    self.showNotifications = function() {
+    self.showNotifications = function () {
       return StorageShipment.notifications;
     };
 
-    var showTransactionModal = function() {
+    var showTransactionModal = function () {
       CommonUi.modal.show( 'views/partials/modals/transaction.html', false, {
         methods: Object.keys( StorageTransaction.methods ),
         methodsIcons: self.methodsIcons,
@@ -72,10 +72,10 @@ module.exports = [
         transactionErrors: {},
         status: 'SELECT_METHOD' // DO_TRANSACTION, WAIT_FOR_ANSWER, SHOW_APPROVAL, SHOW_ERROR
       }, null, {
-        selectMethod: function( paymentMethod ) {
+        selectMethod: function ( paymentMethod ) {
           CommonUi.modal.data.selectedMethod = ( paymentMethod === 'CREDIT_CARD' ) ? CommonUi.modal.data.selectedMethod : paymentMethod;
         },
-        submitMethod: function() {
+        submitMethod: function () {
           StorageTransaction.selectedMethod = CommonUi.modal.data.selectedMethod;
           if ( CommonUi.modal.data.account !== null ) {
             StorageTransaction.methods[ StorageTransaction.selectedMethod ].data = {};
@@ -84,17 +84,17 @@ module.exports = [
           }
           CommonUi.modal.data.status = 'DO_TRANSACTION';
         },
-        doTransaction: function() {
+        doTransaction: function () {
           CommonUi.modal.data.status = 'WAIT_FOR_ANSWER';
           CommonUi.lock();
           StorageTransaction.transactionCallback = this.finishTransaction;
           StorageTransaction.start( trackingId, self.postalCodeForVerification );
         },
-        finishTransaction: function( error, transactionErrors, downloads ) {
+        finishTransaction: function ( error, transactionErrors, downloads ) {
           if ( !error ) {
             CommonUi.modal.data.status = 'SHOW_APPROVAL';
             downloads.forEach(
-              function( file ) {
+              function ( file ) {
                 // TODO: COUREON-2062
                 // This is a static and temporary fix. it should be removed,
                 // when the ticket COUREON-2062 has been solved.
@@ -118,14 +118,17 @@ module.exports = [
       } );
     };
 
-    var showVerificationModal = function() {
-      CommonUi.modal.show( '/views/partials/modals/verification.html', false, null, null, {
-        submitVerification: function() {
+    var showVerificationModal = function () {
+      CommonUi.modal.show( '/views/partials/modals/verification.html', true, null, null, {
+        submitVerification: function () {
           if ( CommonUi.modal.data.postalCodeForVerification && CommonUi.modal.data.postalCodeForVerification !== '' ) {
             self.postalCodeForVerification = CommonUi.modal.data.postalCodeForVerification;
             StorageShipment.createResource( trackingId, self.postalCodeForVerification );
             CommonUi.modal.hide();
           }
+        },
+        onHide: function () {
+          $location.path( '/tracking/' + trackingId );
         }
       } );
     };
