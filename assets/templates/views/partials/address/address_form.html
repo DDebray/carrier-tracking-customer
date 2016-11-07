@@ -1,60 +1,162 @@
-<form class="form" ng-submit="form.submit.action()" autocomplete="{{ form.autoComplete ? 'on' : 'off' }}">
-    <div class="form-row" ng-if="!form.hide.name">
-        <label ng-if="!form.usePlaceholders" ng-class="{ 'form__label--required' : form.required.name(this) }" for="addresses_name" ng-bind="(form.labels.name || 'COMMON.ADDRESSES.NAME') | translate"></label>
-        <input id="addresses_name" type="text" ng-readonly="form.readonly.name" ng-required="form.required.name(this)" ng-model="form.data.name" ng-change="form.onChange(this)" ng-model-options="{ updateOn : form.updateOn }" placeholder="{{ form.usePlaceholders ? ((form.labels.name || 'COMMON.ADDRESSES.NAME') | translate) : '' }}"
-        />
+<form class="form"
+    ng-submit="form.submit.action()"
+    autocomplete="{{ form.autoComplete ? 'on' : 'off' }}">
+    <div class="form-row"
+        ng-if="!form.hide.name">
+        <label ng-if="!form.usePlaceholders"
+            ng-class="{ 'form__label--required' : form.required.name(this) }"
+            for="addresses_name"
+            ng-bind="(form.labels.name || 'COMMON.ADDRESSES.NAME') | translate"></label>
+        <input id="addresses_name"
+            type="text"
+            ng-readonly="form.readonly.name"
+            ng-required="form.required.name(this)"
+            ng-model="form.data.name"
+            ng-change="form.onChange(this)"
+            ng-model-options="{ updateOn : form.updateOn }"
+            placeholder="{{ form.usePlaceholders ? ((form.labels.name || 'COMMON.ADDRESSES.NAME') | translate) : '' }}" />
     </div>
-    <div class="form-row" ng-if="!form.hide.company">
-        <label ng-if="!form.usePlaceholders" ng-class="{ 'form__label--required' : form.required.company(this) }" for="addresses_company" ng-bind="(form.labels.company || 'COMMON.ADDRESSES.COMPANY') | translate"></label>
-        <input id="addresses_company" type="text" ng-readonly="form.readonly.company" ng-required="form.required.company(this)" ng-model="form.data.company" ng-change="form.onChange(this)" ng-model-options="{ updateOn : form.updateOn }" placeholder="{{ form.usePlaceholders ? ((form.labels.company || 'COMMON.ADDRESSES.COMPANY') | translate) : '' }}"
-        />
+    <div class="form-row"
+        ng-if="!form.hide.company">
+        <label ng-if="!form.usePlaceholders"
+            ng-class="{ 'form__label--required' : form.required.company(this) }"
+            for="addresses_company"
+            ng-bind="(form.labels.company || 'COMMON.ADDRESSES.COMPANY') | translate"></label>
+        <input id="addresses_company"
+            type="text"
+            ng-readonly="form.readonly.company"
+            ng-required="form.required.company(this)"
+            ng-model="form.data.company"
+            ng-change="form.onChange(this)"
+            ng-model-options="{ updateOn : form.updateOn }"
+            placeholder="{{ form.usePlaceholders ? ((form.labels.company || 'COMMON.ADDRESSES.COMPANY') | translate) : '' }}" />
     </div>
     <div class="form-row row">
-        <div class="column small-8 medium-9" ng-if="!form.hide.street1">
-            <label ng-if="!form.usePlaceholders" ng-class="{ 'form__label--required' : form.required.street1(this) }" for="addresses_street1" ng-bind="(form.labels.street1 || 'COMMON.ADDRESSES.STREET1') | translate"></label>
-            <input id="addresses_street1" type="text" maxlength="30" ng-readonly="form.readonly.street1" ng-required="form.required.street1(this)" ng-model="form.data.street1" ng-change="form.onChange(this)" ng-model-options="{ updateOn : form.updateOn }" placeholder="{{ form.usePlaceholders ? ((form.labels.street1 || 'COMMON.ADDRESSES.STREET1') | translate) : '' }}"
-            />
+        <div class="column small-8 medium-9"
+            ng-if="!form.hide.street1">
+            <label ng-if="!form.usePlaceholders"
+                ng-class="{ 'form__label--required' : form.required.street1(this) }"
+                for="addresses_street1"
+                ng-bind="(form.labels.street1 || 'COMMON.ADDRESSES.STREET1') | translate"></label>
+            <input id="addresses_street1"
+                type="text"
+                maxlength="30"
+                ng-readonly="form.readonly.street1"
+                ng-required="form.required.street1(this)"
+                ng-model="form.data.street1"
+                ng-change="form.onChange(this)"
+                ng-model-options="{ updateOn : form.updateOn }"
+                placeholder="{{ form.usePlaceholders ? ((form.labels.street1 || 'COMMON.ADDRESSES.STREET1') | translate) : '' }}" />
         </div>
-        <div class="column small-4 medium-3" ng-if="!form.hide.street_no">
-            <label ng-if="!form.usePlaceholders" ng-class="{ 'form__label--required' : form.required.street_no(this) }" for="addresses_street_no" ng-bind="(form.labels.street_no || 'COMMON.ADDRESSES.STREET_NO') | translate"></label>
-            <input id="addresses_street_no" type="text" ng-readonly="form.readonly.street_no" ng-required="form.required.street_no(this)" ng-model="form.data.street_no" ng-change="form.onChange(this)" ng-model-options="{ updateOn : form.updateOn }" placeholder="{{ form.usePlaceholders ? ((form.labels.street_no || 'COMMON.ADDRESSES.STREET_NO') | translate) : '' }}"
+        <div class="column small-4 medium-3"
+            ng-if="!form.hide.street_no">
+            <label ng-if="!form.usePlaceholders"
+                ng-class="{ 'form__label--required' : form.required.street_no(this) }"
+                for="addresses_street_no"
+                ng-bind="(form.labels.street_no || 'COMMON.ADDRESSES.STREET_NO') | translate"></label>
+            <input id="addresses_street_no"
+                type="text"
+                ng-readonly="form.readonly.street_no"
+                ng-required="form.required.street_no(this)"
+                ng-model="form.data.street_no"
+                ng-change="form.onChange(this)"
+                ng-model-options="{ updateOn : form.updateOn }"
+                placeholder="{{ form.usePlaceholders ? ((form.labels.street_no || 'COMMON.ADDRESSES.STREET_NO') | translate) : '' }}"
                 maxlength="5" />
         </div>
     </div>
-    <div class="form-row" ng-if="!form.hide.street2">
-        <label ng-if="!form.usePlaceholders" ng-class="{ 'form__label--required' : form.required.street2(this) }" for="addresses_address2" ng-bind="(form.labels.street2 || 'COMMON.ADDRESSES.STREET2') | translate"></label>
-        <input id="addresses_address2" type="text" ng-readonly="form.readonly.street2" ng-required="form.required.street2(this)" ng-model="form.data.street2" ng-change="form.onChange(this)" ng-model-options="{ updateOn : form.updateOn }" placeholder="{{ form.usePlaceholders ? ((form.labels.street2 || 'COMMON.ADDRESSES.STREET2') | translate) : '' }}"
-        />
+    <div class="form-row"
+        ng-if="!form.hide.street2">
+        <label ng-if="!form.usePlaceholders"
+            ng-class="{ 'form__label--required' : form.required.street2(this) }"
+            for="addresses_address2"
+            ng-bind="(form.labels.street2 || 'COMMON.ADDRESSES.STREET2') | translate"></label>
+        <input id="addresses_address2"
+            type="text"
+            ng-readonly="form.readonly.street2"
+            ng-required="form.required.street2(this)"
+            ng-model="form.data.street2"
+            ng-change="form.onChange(this)"
+            ng-model-options="{ updateOn : form.updateOn }"
+            placeholder="{{ form.usePlaceholders ? ((form.labels.street2 || 'COMMON.ADDRESSES.STREET2') | translate) : '' }}" />
     </div>
     <div class="form-row row">
-        <div class="column small-4 medium-3" ng-if="!form.hide.postal_code">
-            <label ng-if="!form.usePlaceholders" ng-class="{ 'form__label--required' : form.required.postal_code(this) }" for="addresses_postal_code" ng-bind="(form.labels.postal_code || 'COMMON.ADDRESSES.POSTAL_CODE') | translate"></label>
-            <input id="addresses_postal_code" type="text" ng-readonly="form.readonly.postal_code" ng-required="form.required.postal_code(this)" ng-model="form.data.postal_code" ng-change="form.onChange(this)" ng-model-options="{ updateOn : form.updateOn }" placeholder="{{ form.usePlaceholders ? ((form.labels.postal_code || 'COMMON.ADDRESSES.POSTAL_CODE') | translate) : '' }}"
+        <div class="column small-4 medium-3"
+            ng-if="!form.hide.postal_code">
+            <label ng-if="!form.usePlaceholders"
+                ng-class="{ 'form__label--required' : form.required.postal_code(this) }"
+                for="addresses_postal_code"
+                ng-bind="(form.labels.postal_code || 'COMMON.ADDRESSES.POSTAL_CODE') | translate"></label>
+            <input id="addresses_postal_code"
+                type="text"
+                ng-readonly="form.readonly.postal_code"
+                ng-required="form.required.postal_code(this)"
+                ng-model="form.data.postal_code"
+                ng-change="form.onChange(this)"
+                ng-model-options="{ updateOn : form.updateOn }"
+                placeholder="{{ form.usePlaceholders ? ((form.labels.postal_code || 'COMMON.ADDRESSES.POSTAL_CODE') | translate) : '' }}"
                 pattern="^[0-9]{5}$" />
         </div>
-        <div class="column small-8 medium-9" ng-if="!form.hide.city">
-            <label ng-if="!form.usePlaceholders" ng-class="{ 'form__label--required' : form.required.city(this) }" for="addresses_city" ng-bind="(form.labels.city || 'COMMON.ADDRESSES.CITY') | translate"></label>
-            <input id="addresses_city" type="text" ng-readonly="form.readonly.city" ng-required="form.required.city(this)" ng-model="form.data.city" ng-change="form.onChange(this)" ng-model-options="{ updateOn : form.updateOn }" placeholder="{{ form.usePlaceholders ? ((form.labels.city || 'COMMON.ADDRESSES.CITY') | translate) : '' }}"
-            />
+        <div class="column small-8 medium-9"
+            ng-if="!form.hide.city">
+            <label ng-if="!form.usePlaceholders"
+                ng-class="{ 'form__label--required' : form.required.city(this) }"
+                for="addresses_city"
+                ng-bind="(form.labels.city || 'COMMON.ADDRESSES.CITY') | translate"></label>
+            <input id="addresses_city"
+                type="text"
+                ng-readonly="form.readonly.city"
+                ng-required="form.required.city(this)"
+                ng-model="form.data.city"
+                ng-change="form.onChange(this)"
+                ng-model-options="{ updateOn : form.updateOn }"
+                placeholder="{{ form.usePlaceholders ? ((form.labels.city || 'COMMON.ADDRESSES.CITY') | translate) : '' }}" />
         </div>
     </div>
-    <div class="form-row" ng-if="!form.hide.country && form.countryList">
-        <label ng-if="!form.usePlaceholders" ng-class="{ 'form__label--required' : form.required.country(this) }" ng-bind="(form.labels.country || 'COMMON.ADDRESSES.COUNTRY') | translate"></label>
+    <div class="form-row"
+        ng-if="!form.hide.country && form.countryList">
+        <label ng-if="!form.usePlaceholders"
+            ng-class="{ 'form__label--required' : form.required.country(this) }"
+            ng-bind="(form.labels.country || 'COMMON.ADDRESSES.COUNTRY') | translate"></label>
         <div ng-include="'/views/partials/address/address_country.html'"></div>
     </div>
     <div class="form-row row">
-        <div class="column" ng-class="form.flags.enhanceFields ? 'small-6' : 'small-12'" ng-if="!form.hide.phone">
-            <label ng-if="!form.usePlaceholders" ng-class="{ 'form__label--required' : form.required.phone(this) }" for="addresses_phone" ng-bind="(form.labels.phone || 'COMMON.ADDRESSES.PHONE') | translate"></label>
-            <input id="addresses_phone" type="text" pattern="[0-9-+\s()]{1,}" ng-readonly="form.readonly.phone" ng-required="form.required.phone(this)" ng-model="form.data.phone" ng-change="form.onChange(this)" ng-model-options="{ updateOn : form.updateOn }" placeholder="{{ form.usePlaceholders ? ((form.labels.phone || 'COMMON.ADDRESSES.PHONE') | translate) : '' }}"
-            />
+        <div class="column"
+            ng-class="form.flags.enhanceFields ? 'small-6' : 'small-12'"
+            ng-if="!form.hide.phone">
+            <label ng-if="!form.usePlaceholders"
+                ng-class="{ 'form__label--required' : form.required.phone(this) }"
+                for="addresses_phone"
+                ng-bind="(form.labels.phone || 'COMMON.ADDRESSES.PHONE') | translate"></label>
+            <input id="addresses_phone"
+                type="text"
+                pattern="[0-9-+\s()]{1,}"
+                ng-readonly="form.readonly.phone"
+                ng-required="form.required.phone(this)"
+                ng-model="form.data.phone"
+                ng-change="form.onChange(this)"
+                ng-model-options="{ updateOn : form.updateOn }"
+                placeholder="{{ form.usePlaceholders ? ((form.labels.phone || 'COMMON.ADDRESSES.PHONE') | translate) : '' }}" />
         </div>
-        <div class="column small-6" ng-if="form.flags.enhanceFields && !form.hide.email">
-            <label ng-if="!form.usePlaceholders" ng-class="{ 'form__label--required' : form.required.email(this) }" for="addresses_email" ng-bind="(form.labels.email || 'COMMON.ADDRESSES.EMAIL') | translate"></label>
-            <input id="addresses_email" type="email" ng-readonly="form.readonly.email" ng-required="form.required.email(this)" ng-model="form.data.email" ng-change="form.onChange(this)" ng-model-options="{ updateOn : form.updateOn }" placeholder="{{ form.usePlaceholders ? ((form.labels.email || 'COMMON.ADDRESSES.EMAIL') | translate) : '' }}"
-            />
+        <div class="column small-6"
+            ng-if="form.flags.enhanceFields && !form.hide.email">
+            <label ng-if="!form.usePlaceholders"
+                ng-class="{ 'form__label--required' : form.required.email(this) }"
+                for="addresses_email"
+                ng-bind="(form.labels.email || 'COMMON.ADDRESSES.EMAIL') | translate"></label>
+            <input id="addresses_email"
+                type="email"
+                ng-readonly="form.readonly.email"
+                ng-required="form.required.email(this)"
+                ng-model="form.data.email"
+                ng-change="form.onChange(this)"
+                ng-model-options="{ updateOn : form.updateOn }"
+                placeholder="{{ form.usePlaceholders ? ((form.labels.email || 'COMMON.ADDRESSES.EMAIL') | translate) : '' }}" />
         </div>
     </div>
-    <div class="form-row" ng-if="!form.hide.submit">
-        <button class="button button--blush button--filling" ng-bind="form.submit.label | translate"></button>
+    <div class="form-row"
+        ng-if="!form.hide.submit">
+        <button class="button button--blush button--filling"
+            ng-bind="form.submit.label | translate"></button>
     </div>
 </form>

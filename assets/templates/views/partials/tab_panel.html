@@ -1,15 +1,14 @@
-<ul
-  class="panel__tabList">
-    <li
-      class="panel__tabList__element"
-      ng-repeat="element in tabPanel.tabs"
-      ng-class="{'panel__tabList__element--active': element.active}"
-      ng-click="tabPanel.select(element)">
-        <span
-          class="panel__tabList__element__name">
+<ul class="panel__tabList">
+    <li class="panel__tabList__element"
+        ng-repeat="element in tabPanel.tabs"
+        ng-class="{'panel__tabList__element--active': element.active}"
+        ng-click="tabPanel.select(element)">
+        <span class="panel__tabList__element__name">
             {{ element.name }}
         </span>
     </li>
 </ul>
 
-<div class="panel__tabList__element__content" ng-class="{'panel__tabList__element__content--nopadding' : padding == false }" ng-transclude></div>
+<div class="panel__tabList__element__content"
+    ng-class="{'panel__tabList__element__content--nopadding' : padding == false }"
+    ng-transclude></div>
