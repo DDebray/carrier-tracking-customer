@@ -1,13 +1,7 @@
 module.exports = [
-<<<<<<< HEAD
-  '$routeParams', '$timeout', 'CommonUi', 'StorageShipment', 'StorageTransaction',
-  function (
-    $routeParams, $timeout, CommonUi, StorageShipment, StorageTransaction
-=======
   '$routeParams', '$timeout', 'CommonUi', 'StorageShipment', 'StorageTransaction', '$location',
   function (
     $routeParams, $timeout, CommonUi, StorageShipment, StorageTransaction, $location
->>>>>>> master
   ) {
     'use strict';
 
@@ -125,11 +119,7 @@ module.exports = [
     };
 
     var showVerificationModal = function () {
-<<<<<<< HEAD
-      CommonUi.modal.show( '/views/partials/modals/verification.html', false, null, null, {
-=======
       CommonUi.modal.show( '/views/partials/modals/verification.html', true, null, null, {
->>>>>>> master
         submitVerification: function () {
           if ( CommonUi.modal.data.postalCodeForVerification && CommonUi.modal.data.postalCodeForVerification !== '' ) {
             self.postalCodeForVerification = CommonUi.modal.data.postalCodeForVerification;
