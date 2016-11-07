@@ -6,75 +6,86 @@
 @import 'components/index';
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 html {
-  font-size:$_fsDefault;
-  font-family:$_ffSans;
-  background:$_rgbWhite;
-  color:$_rgbMineShaft;
+    font-size: $_fsDefault;
+    font-family: $_ffSans;
+    background: $_rgbWhite;
+    color: $_rgbMineShaft;
 }
 
-html, body {
-  font-family: $_ffSans;
-  font-size: $_fsDefault;
-  line-height: $_lhDefault;
-  color: $_rgbMineShaft;
-  -webkit-tap-highlight-color: transparent;
-  margin: 0;
-  padding:0;
-  height:100%;
-  width:100%;
+body,
+html {
+    font-family: $_ffSans;
+    font-size: $_fsDefault;
+    line-height: $_lhDefault;
+    color: $_rgbMineShaft;
+    -webkit-tap-highlight-color: transparent;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
 }
-
 @for $index from 1 through 6 {
-  h#{$index}{
-    margin-top: 0;
-    font-weight: normal;
-  }
+    h#{$index} {
+        margin-top: 0;
+        font-weight: normal;
+    }
 }
 
-a,
-.link {
-  text-decoration: none;
-  color: $_rgbBlush;
-  cursor: pointer;
-  padding: 0 ($_formSpacing / 2);
-  transition: text-shadow $_tShort ease-out;
+.link,
+a {
+    text-decoration: none;
+    color: $_rgbBlush;
+    cursor: pointer;
+    padding: 0 ($_formSpacing / 2);
+    transition: text-shadow $_tShort ease-out;
 
-  &:hover {
-    // text-shadow: 0px 0px 1px transparentize($_rgbBlush,0.5);
-    color: darken($_rgbBlush, 10);
-  }
+    &:hover {
+        // text-shadow: 0px 0px 1px transparentize($_rgbBlush,0.5);
+        color: darken($_rgbBlush, 10);
+    }
 }
 
 input {
-  font-family: inherit;
-  color: $_rgbMineShaft;
+    font-family: inherit;
+    color: $_rgbMineShaft;
 }
 
 button {
-  margin: 0;
+    margin: 0;
 }
 
 ul {
-  margin: ($_ySpacing / 2) 0 $_ySpacing;
-  padding-left: $_xSpacing;
+    margin: ($_ySpacing / 2) 0 $_ySpacing;
+    padding-left: $_xSpacing;
 }
 
-article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section,video {
-  display: block;
+article,
+aside,
+dialog,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+video {
+    display: block;
 }
 
 address {
-  display:block;
-  font-style:normal;
+    display: block;
+    font-style: normal;
 }
 
 strong {
-  font-family: $_ffSansSemiBold;
+    font-family: $_ffSansSemiBold;
 }
