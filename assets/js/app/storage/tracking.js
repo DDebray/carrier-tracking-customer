@@ -1,6 +1,6 @@
 module.exports = [
   '$routeParams', '$location', 'CommonRequest', 'CommonMoment',
-  function(
+  function (
     $routeParams, $location, CommonRequest, CommonMoment
   ) {
 
@@ -10,16 +10,16 @@ module.exports = [
     self.trackingId = null;
     self.data = null;
 
-    self.track = function( trackingId, cb, cbErr ) {
+    self.track = function ( trackingId, cb, cbErr ) {
       // if (trackingId.indexOf('CO-') > -1 || trackingId.indexOf('CA-') > -1) {
 
       CommonRequest.tracking.getStatus( {
         trackingId: trackingId
-      }, function( response ) {
+      }, function ( response ) {
         if ( response && response.content && response.content.result ) {
           self.data = response.content.result;
 
-          self.data.events.map( function( event ) {
+          self.data.events.map( function ( event ) {
             event.moment = CommonMoment( event.timestamp );
           } );
 
@@ -34,7 +34,7 @@ module.exports = [
             cbErr( response );
           }
         }
-      }, function( response ) {
+      }, function ( response ) {
         self.data = null;
         if ( cbErr ) {
           cbErr( response );
@@ -47,7 +47,7 @@ module.exports = [
      * @function addCustomEvents
      * @description This method checks all cases that require custom events and than adds those events.
      */
-    var addCustomEvents = function() {
+    var addCustomEvents = function () {
       if ( self.data === null || self.data.events === null || self.data.route_information === null ) {
         return;
       }
@@ -58,7 +58,6 @@ module.exports = [
       if ( checkCase( 'GLS_FR', 2 ) ) {
         self.data.events.push( customEventForCarrierOnRoute( 'GLS_FR', 2 ) );
       }
-
       if ( checkCase( 'GLS_ES', 2 ) ) {
         self.data.events.push( customEventForCarrierOnRoute( 'GLS_ES', 2 ) );
       }
@@ -73,7 +72,7 @@ module.exports = [
      * @param {String} carrierKey A key used to reference carrier information in the specialCarrierCases object.
      * @param {Number} route_number A number referencing a route in the route information stack.
      */
-    var checkCase = function( carrierKey, route_number ) {
+    var checkCase = function ( carrierKey, route_number ) {
       if ( route_number > self.data.route_information.length ) {
         return false;
       }
@@ -91,7 +90,7 @@ module.exports = [
      * @param {String} carrierKey A key used to reference carrier information in the specialCarrierCases object.
      * @param {Number} route_number A number referencing a route in the route information stack.
      */
-    var customEventForCarrierOnRoute = function( carrierKey, route_number ) {
+    var customEventForCarrierOnRoute = function ( carrierKey, route_number ) {
       return {
         carrier: {
           code: specialCarrierCases[ carrierKey ].carrier_code,
