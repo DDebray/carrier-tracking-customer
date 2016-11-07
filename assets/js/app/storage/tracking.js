@@ -55,6 +55,12 @@ module.exports = [
       if ( checkCase( 'GLS_DE', 1 ) ) {
         self.data.events.push( customEventForCarrierOnRoute( 'GLS_DE', 1 ) );
       }
+      if ( checkCase( 'GLS_FR', 1 ) ) {
+        self.data.events.push( customEventForCarrierOnRoute( 'GLS_FR', 1 ) );
+      }
+      if ( checkCase( 'GLS_ES', 1 ) ) {
+        self.data.events.push( customEventForCarrierOnRoute( 'GLS_ES', 1 ) );
+      }
       if ( checkCase( 'GLS_FR', 2 ) ) {
         self.data.events.push( customEventForCarrierOnRoute( 'GLS_FR', 2 ) );
       }
