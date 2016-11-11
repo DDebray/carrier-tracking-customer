@@ -1,4 +1,4 @@
-module.exports = function(StorageCountries) {
+module.exports = function ( StorageCountries ) {
   'use strict';
 
   return {
@@ -9,29 +9,29 @@ module.exports = function(StorageCountries) {
       reference: '&reference',
       sender: '&sender'
     },
-    templateUrl: function(element, attrs) {
-      return '/views/partials/address/' + (attrs.template || 'address_form.html');
+    templateUrl: function ( element, attrs ) {
+      return '/views/partials/address/' + ( attrs.template || 'address_form.html' );
     },
-    link: function(scope) {
+    link: function ( scope ) {
       var config = scope.config();
 
       scope.countryList = null;
 
-      StorageCountries.load(function(countries) {
+      StorageCountries.load( function ( countries ) {
         scope.countryList = countries;
-      });
+      } );
 
       scope.form = {
-        data: config.model ? config.model() : (config.data || {}),
+        data: config.model ? config.model() : ( config.data || {} ),
         model: scope.model ? scope.model() : null,
         updateOn: config.updateOn || 'change blur',
-        submit: angular.extend({
+        submit: angular.extend( {
           label: '[please provide a label]',
-          action: function() {
-            alert('[please provide an action]');
+          action: function () {
+            alert( '[please provide an action]' );
           }
-        }, config.submit),
-        onChange: config.onChange || function() {},
+        }, config.submit ),
+        onChange: config.onChange || function () {},
         usePlaceholders: config.usePlaceholders || false,
         labels: config.labels || {},
         hide: config.hide || {},
@@ -39,58 +39,58 @@ module.exports = function(StorageCountries) {
         flags: config.flags || {},
         countryList: scope.countryList,
         autoComplete: config.autoComplete,
-        required: angular.extend({
-          name: function() {
+        required: angular.extend( {
+          name: function () {
             return true;
           },
-          company: function() {
+          company: function () {
             return false;
           },
-          street1: function() {
+          street1: function () {
             return true;
           },
-          street_no: function() {
+          street_no: function () {
             return true;
           },
-          street2: function() {
+          street2: function () {
             return false;
           },
-          postal_code: function() {
+          postal_code: function () {
             return true;
           },
-          city: function() {
+          city: function () {
             return true;
           },
-          country: function() {
+          country: function () {
             return true;
           },
-          phone: function() {
+          phone: function () {
             return false;
           },
-          email: function() {
+          email: function () {
             // return scope.sender();
             return true;
           }
-        }, config.required)
+        }, config.required )
       };
 
-      if (scope.reference()) {
-        scope.reference()(scope.form);
+      if ( scope.reference() ) {
+        scope.reference()( scope.form );
       }
 
-      if (scope.model()) {
+      if ( scope.model() ) {
         scope.form.data = scope.model();
       }
 
-      scope.$watch('countryList', function(newCountryList) {
+      scope.$watch( 'countryList', function ( newCountryList ) {
         scope.form.countryList = newCountryList;
-      });
+      } );
 
-      scope.$watch('model()', function(model) {
-        if (model) {
+      scope.$watch( 'model()', function ( model ) {
+        if ( model ) {
           scope.form.data = model;
         }
-      });
+      } );
     }
   };
 };

@@ -1,5 +1,9 @@
-<div id="js-modal-container" class="modal modal--centered column small-11 medium-8 large-7 xlarge-6" stop-propagation="click">
+<div id="js-modal-container"
+    class="modal modal--centered column small-11 medium-8 large-7 xlarge-6"
+    stop-propagation="click">
     <div unblur="'js-modal-container'"></div>
-    <span ng-if="modal.closable" class="fa fa-times behavior-cursor-no-select modal__close" ng-click="modal.hide()"></span>
+    <span ng-if="modal.closable"
+        class="fa fa-times behavior-cursor-no-select modal__close"
+        ng-click="modal.clickHideButton()"></span>
     <div ng-include="modal.template"></div>
 </div>

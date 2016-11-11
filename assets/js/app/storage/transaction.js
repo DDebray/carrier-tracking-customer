@@ -1,6 +1,6 @@
 module.exports = [
   '$q', 'CommonUi', 'CommonRequest', 'CommonPopups',
-  function(
+  function (
     $q, CommonUi, CommonRequest, CommonPopups
   ) {
     'use strict';
@@ -65,8 +65,8 @@ module.exports = [
      * and starts the transaction.
      * @param  {String} trackingId a string holding the tracking number.
      */
-    self.start = function(trackingId, postalCodeForVerification) {
-      if (!self.transactionCallback) {
+    self.start = function ( trackingId, postalCodeForVerification ) {
+      if ( !self.transactionCallback ) {
         return;
       }
 
@@ -76,9 +76,9 @@ module.exports = [
       requestParameters.tracking_number = trackingId;
       requestParameters.postal_code_for_verification = postalCodeForVerification;
 
-      if (self.methods[self.selectedMethod].data) {
-        requestParameters.iban = self.methods[self.selectedMethod].data.iban;
-        requestParameters.bic = self.methods[self.selectedMethod].data.bic;
+      if ( self.methods[ self.selectedMethod ].data ) {
+        requestParameters.iban = self.methods[ self.selectedMethod ].data.iban;
+        requestParameters.bic = self.methods[ self.selectedMethod ].data.bic;
       }
 
       openPopup();
@@ -87,7 +87,7 @@ module.exports = [
     /**
      * This function handles all popup related actions.
      */
-    var openPopup = function() {
+    var openPopup = function () {
 
       var newPopupFactory,
         popupPromise = $q.resolve();
@@ -97,45 +97,45 @@ module.exports = [
 
       popupPromise.then(
         // POPUP SUCCESSFULLY OPENED
-        function() {
-          CommonRequest.transaction.start({
+        function () {
+          CommonRequest.transaction.start( {
               parameters: requestParameters
             },
             // START TRANSACTION REQUEST WAS SUCCESSFULL
-            function(response) {
-              (newPopupFactory ? newPopupFactory.proceed((response.content || {}).redirect_url) : $q.resolve()).then(
+            function ( response ) {
+              ( newPopupFactory ? newPopupFactory.proceed( ( response.content || {} ).redirect_url ) : $q.resolve() ).then(
                 // PAYMENT PROCESS WAS SUCCESSFULL
-                function(response) {
+                function ( response ) {
                   var downloads = {};
-                  if (response.data.data.content) {
+                  if ( response.data.data.content ) {
                     downloads = response.data.data.content.result;
                   } else {
-                    console.log('TODO: check PayPal data', response.data.data);
+                    console.log( 'TODO: check PayPal data', response.data.data );
                   }
-                  self.transactionCallback(false, null, downloads);
+                  self.transactionCallback( false, null, downloads );
                 },
                 // PAYMENT PROCESS WAS NOT SUCCESSFULL
-                function(error) {
+                function ( error ) {
                   // Popup was closed or lost focus
-                  if (newPopupFactory) {
-                    newPopupFactory.proceed(false);
+                  if ( newPopupFactory ) {
+                    newPopupFactory.proceed( false );
                   }
-                  if (response) {
-                    self.transactionCallback(true, (response.messages.length > 0) ? response.messages : false);
+                  if ( response ) {
+                    self.transactionCallback( true, ( response.messages.length > 0 ) ? response.messages : false );
                   }
                 }
               );
 
             },
             // START TRANSACTION REQUEST WAS NOT SUCCESSFULL
-            function(error) {
-              self.transactionCallback(true);
-            });
+            function ( error ) {
+              self.transactionCallback( true );
+            } );
         },
         // POPUP NOT SUCCESSFULLY OPENED
-        function() {
-          self.transactionCallback(true);
-        });
+        function () {
+          self.transactionCallback( true );
+        } );
     };
 
     return self;

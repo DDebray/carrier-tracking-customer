@@ -1,17 +1,22 @@
 .carrier-info {
+  z-index: $zindex-inner;
+
+  display: inline-block;
+
   width: 100%;
   // min-height: 68px;
   min-height: 184px;
-  display: inline-block;
+  margin-bottom: $_defaultSpacing;
   padding: $_defaultSpacing;
+
+  transition: background-color $_tShort ease;
+  text-align: center;
+
+  border: 2px solid lighten($_rgbDustyGray, 20%);
   border-radius: $_borderRadiusDefault;
   background-color: $_rgbWhite;
-  border: 2px solid lighten($_rgbDustyGray, 20%);
-  text-align: center;
+
   font-size: $_fsSub;
-  z-index: $zindex-inner;
-  transition: background-color $_tShort ease;
-  margin-bottom: $_defaultSpacing;
 
   @media #{$small-only} {
     padding: $_defaultSpacing / 2;
@@ -21,13 +26,15 @@
     background-color: lighten($_rgbAthensGray, 2%);
   }
 
-  &__tel,
+  &__additional-info,
   &__link,
   &__mail,
-  &__additional-info,
+  &__tel,
   &__tracking-number {
     display: block;
+
     color: lighten($_rgbMineShaft, 10%);
+
     font-size: $_fsSmall;
   }
 
@@ -36,20 +43,22 @@
     line-height: $_lhTiny;
   }
 
-  &__tel,
   &__link,
   &__mail,
+  &__tel,
   &__tracking-number {
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+    overflow: hidden;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   &__logo {
     display: block;
+
     max-width: 134px;
-    margin: auto;
     height: 43px;
+    margin: auto;
     margin-bottom: $_defaultSpacing / 2;
   }
 }

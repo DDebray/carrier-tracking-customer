@@ -1,6 +1,6 @@
 module.exports = [
   'CommonRequest', 'CommonUi',
-  function(
+  function (
     CommonRequest, CommonUi
   ) {
     'use strict';
@@ -11,42 +11,42 @@ module.exports = [
     var running = false,
       cbQueue = [];
 
-    self.load = function(cb) {
-      if (cb && self.items) {
-        return cb(self.items);
+    self.load = function ( cb ) {
+      if ( cb && self.items ) {
+        return cb( self.items );
       }
 
-      if (cb) {
-        cbQueue.push(cb);
+      if ( cb ) {
+        cbQueue.push( cb );
       }
 
-      if (running) {
+      if ( running ) {
         return;
       }
 
       running = true;
 
-      CommonRequest.countries.get({}, function(response) {
-        if (response && response.content) {
+      CommonRequest.countries.get( {}, function ( response ) {
+        if ( response && response.content ) {
           self.items = response.content.countries;
 
-          cbQueue.forEach(function(cb) {
-            cb(self.items);
-          });
+          cbQueue.forEach( function ( cb ) {
+            cb( self.items );
+          } );
         } else {
           CommonUi.notifications.throwError();
           running = false;
         }
-      }, function() {
+      }, function () {
         CommonUi.notifications.throwError();
         running = false;
-      });
+      } );
     };
 
-    self.isZipcodeNecessary = function(countryCode) {
-      return ((self.items || []).filter(function(country) {
+    self.isZipcodeNecessary = function ( countryCode ) {
+      return ( ( self.items || [] ).filter( function ( country ) {
         return country.code === countryCode;
-      })[0] || {}).needsZipCode;
+      } )[ 0 ] || {} ).needsZipCode;
     };
 
     return self;

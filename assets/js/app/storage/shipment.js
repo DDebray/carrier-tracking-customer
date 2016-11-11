@@ -10,7 +10,7 @@ module.exports = [
    * - CommonRequest
    */
   'CommonRequest',
-  function(
+  function (
     CommonRequest
   ) {
     'use strict';
@@ -65,7 +65,7 @@ module.exports = [
      * @param  {String} trackingId a string holding the tracking number.
      * @param  {String} postalCodeForVerification a string holding the postal code for verification
      */
-    self.createResource = function( trackingId, postalCodeForVerification ) {
+    self.createResource = function ( trackingId, postalCodeForVerification ) {
       requestParameters.tracking_number = trackingId;
       requestParameters.postal_code_for_verification = postalCodeForVerification;
 
@@ -78,7 +78,7 @@ module.exports = [
      * because some rates prices also depend on the addresses.
      * @param  {Object} sender an address object for the sender
      */
-    self.updateResource = function( sender ) {
+    self.updateResource = function ( sender ) {
       requestParameters.address_from = sender;
 
       doRequest();
@@ -89,10 +89,10 @@ module.exports = [
      * It uses the request parameters saved in requestParameters.
      * This method can only be used in the storage shipment module.
      */
-    var doRequest = function() {
+    var doRequest = function () {
       CommonRequest.shipment.create( {
         parameters: requestParameters
-      }, function( response ) {
+      }, function ( response ) {
         if ( response && response.status === 'ERROR' ) {
           self.notifications = ( response.messages.length > 0 ) ? response.messages : false;
         }
@@ -101,7 +101,7 @@ module.exports = [
           fillAddresses( response.content.result.address_from, response.content.result.address_to );
           fillRates( response.content.result.rates );
         }
-      }, function( error ) {
+      }, function ( error ) {
         self.error = error;
       } );
     };
@@ -113,7 +113,7 @@ module.exports = [
      * @param  {Object} sender   an address object for the sender
      * @param  {Object} receiver an address object for the receiver
      */
-    var fillAddresses = function( sender, receiver ) {
+    var fillAddresses = function ( sender, receiver ) {
       self.addresses.RECEIVER_ADDRESS = receiver;
       self.addresses.RECEIVER_ADDRESS.is_editable = false;
       self.addresses.RECEIVER_ADDRESS.address_type = 'RECEIVER_ADDRESS';
@@ -128,7 +128,7 @@ module.exports = [
      * This method can only be used in the storage shipment module.
      * @param  {Object} rates an object holding the rates information
      */
-    var fillRates = function( rates ) {
+    var fillRates = function ( rates ) {
       self.rates = rates;
     };
 

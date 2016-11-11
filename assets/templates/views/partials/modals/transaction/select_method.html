@@ -1,24 +1,39 @@
-<h3 class="h-center" ng-bind="'PAGE.PRINTING.MODAL.PAYMENT_METHOD.TITLE' | translate"></h3>
+<h3 class="h-center"
+    ng-bind="'PAGE.PRINTING.MODAL.PAYMENT_METHOD.TITLE' | translate"></h3>
 
 <div class="area-panel area-panel--container">
     <ul class="widget-payment-methods">
-        <li ng-repeat-start="method in modal.data.methods" ng-click="modal.action.selectMethod(method)" ng-class="{'--active' : (method === modal.data.selectedMethod)}">
+        <li ng-repeat-start="method in modal.data.methods"
+            ng-click="modal.action.selectMethod(method)"
+            ng-class="{'--active' : (method === modal.data.selectedMethod)}">
             <span class="icon-action">
-                <span ng-if="method === modal.data.selectedMethod" class="fa fa-check"></span>
+                <span ng-if="method === modal.data.selectedMethod"
+                    class="fa fa-check"></span>
             </span>
-            <span class="icon fa fa-fixed fa-centered" ng-class="modal.data.methodsIcons[method.toLowerCase()]"></span>
+            <span class="icon fa fa-fixed fa-centered"
+                ng-class="modal.data.methodsIcons[method.toLowerCase()]"></span>
             <span ng-bind="('PAGE.PRINTING.MODAL.PAYMENT_METHOD.' + method) | translate"></span>
         </li>
-        <form id="submit" ng-class="{ 'widget-payment-methods-form' : method == 'SOFORT_UEBERWEISUNG' }" ng-repeat-end ng-if="method === modal.data.selectedMethod" ng-submit=" modal.action.submitMethod()">
-            <div ng-if="method == 'SOFORT_UEBERWEISUNG'" ng-include="'/views/partials/modals/transaction/methods/' + method.toLowerCase() + '.html'"></div>
+        <form id="submit"
+            ng-class="{ 'widget-payment-methods-form' : method == 'SOFORT_UEBERWEISUNG' }"
+            ng-repeat-end
+            ng-if="method === modal.data.selectedMethod"
+            ng-submit=" modal.action.submitMethod()">
+            <div ng-if="method == 'SOFORT_UEBERWEISUNG'"
+                ng-include="'/views/partials/modals/transaction/methods/' + method.toLowerCase() + '.html'"></div>
         </form>
     </ul>
 </div>
 
 <div class="h-spacing-top--wide">
-  <button form="submit" type="submit" class="button button--blush button--filling" ng-bind="('PAGE.PRINTING.MODAL.PAYMENT_METHOD.CHOOSE' ) | translate"></button>
+    <button form="submit"
+        type="submit"
+        class="button button--blush button--filling"
+        ng-bind="('PAGE.PRINTING.MODAL.PAYMENT_METHOD.CHOOSE' ) | translate"></button>
 </div>
 
 <div class="h-center h-spacing-top--wide">
-    <span class="link" ng-click="modal.hide()" ng-bind="'PAGE.PRINTING.MODAL.LABEL_PRINT.CANCEL' | translate"></span>
+    <span class="link"
+        ng-click="modal.hide()"
+        ng-bind="'PAGE.PRINTING.MODAL.LABEL_PRINT.CANCEL' | translate"></span>
 </div>

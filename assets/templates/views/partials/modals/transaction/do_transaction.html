@@ -1,9 +1,11 @@
-<h3 class="h-center" ng-bind="'PAGE.PRINTING.MODAL.LABEL_PRINT.TITLE' | translate"></h3>
+<h3 class="h-center"
+    ng-bind="'PAGE.PRINTING.MODAL.LABEL_PRINT.TITLE' | translate"></h3>
 
 <div class="h-right h-spacing-bottom--wide">
     <span ng-bind="'PAGE.PRINTING.MODAL.PAYMENT_METHOD.CHANGE' | translate"></span>
     <span class="icon-action icon-action-outlined icon-inline--right">
-        <span class="fa fa-pencil" ng-click="modal.data.status = 'SELECT_METHOD'"></span>
+        <span class="fa fa-pencil"
+            ng-click="modal.data.status = 'SELECT_METHOD'"></span>
     </span>
 </div>
 
@@ -23,7 +25,8 @@
                 </span>
                 <span ng-bind="'COMMON.PRINT_FORMAT' | translate"></span>
             </td>
-            <td class="table__column--slim table__column--numeric" ng-bind="modal.data.selectedRate.net_amount ? (modal.data.selectedRate.net_amount.toFixed(2) + ' ' + modal.data.selectedRate.currency) : ('COMMON.CARRIER.PRICE_CUSTOM' | translate)"></td>
+            <td class="table__column--slim table__column--numeric"
+                ng-bind="modal.data.selectedRate.net_amount ? (modal.data.selectedRate.net_amount.toFixed(2) + ' ' + modal.data.selectedRate.currency) : ('COMMON.CARRIER.PRICE_CUSTOM' | translate)"></td>
         </tr>
         <tr>
             <td></td>
@@ -31,12 +34,14 @@
             <td>
                 <span ng-bind="('PAGE.PRINTING.MODAL.LABEL_PRINT.VAT_CHARGES' | translate) + modal.data.selectedRate.tax_rate + ',00 %'"></span>
             </td>
-            <td class="table__column--slim table__column--numeric" ng-bind="modal.data.selectedRate.vat_amount ? (modal.data.selectedRate.vat_amount.toFixed(2) + ' ' + modal.data.selectedRate.currency) : ('COMMON.CARRIER.PRICE_CUSTOM' | translate)"></td>
+            <td class="table__column--slim table__column--numeric"
+                ng-bind="modal.data.selectedRate.vat_amount ? (modal.data.selectedRate.vat_amount.toFixed(2) + ' ' + modal.data.selectedRate.currency) : ('COMMON.CARRIER.PRICE_CUSTOM' | translate)"></td>
         </tr>
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="3" class="table__column--highlight">
+            <td colspan="3"
+                class="table__column--highlight">
                 <strong ng-bind="('PAGE.PRINTING.MODAL.LABEL_PRINT.TOTAL' | translate)"></strong>
             </td>
             <td class="table__column--highlight table__column--slim table__column--numeric h-right">
@@ -47,9 +52,13 @@
 </table>
 
 <div class="h-center h-spacing-top--wide">
-    <button class="button button--blush button--filling" ng-click="modal.action.doTransaction()" ng-bind="('PAGE.PRINTING.MODAL.LABEL_PRINT.BUY' | translate)"></button>
+    <button class="button button--blush button--filling"
+        ng-click="modal.action.doTransaction()"
+        ng-bind="('PAGE.PRINTING.MODAL.LABEL_PRINT.BUY' | translate)"></button>
 </div>
 
 <div class="h-center h-spacing-top--wide">
-    <span class="link" ng-click="modal.hide()" ng-bind="'PAGE.PRINTING.MODAL.LABEL_PRINT.CANCEL' | translate"></span>
+    <span class="link"
+        ng-click="modal.hide()"
+        ng-bind="'PAGE.PRINTING.MODAL.LABEL_PRINT.CANCEL' | translate"></span>
 </div>

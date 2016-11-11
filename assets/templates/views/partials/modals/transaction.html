@@ -1,12 +1,19 @@
-<div ng-if="modal.data.status === 'SELECT_METHOD'" ng-include="'/views/partials/modals/transaction/select_method.html'"></div>
+<div ng-if="modal.data.status === 'SELECT_METHOD'"
+    ng-include="'/views/partials/modals/transaction/select_method.html'"></div>
 
-<div ng-if="modal.data.status === 'DO_TRANSACTION'" ng-include="'/views/partials/modals/transaction/do_transaction.html'"></div>
+<div ng-if="modal.data.status === 'DO_TRANSACTION'"
+    ng-include="'/views/partials/modals/transaction/do_transaction.html'"></div>
 
-<div ng-if="modal.data.status === 'SHOW_APPROVAL'" ng-include="'/views/partials/modals/transaction/show_approval.html'"></div>
+<div ng-if="modal.data.status === 'SHOW_APPROVAL'"
+    ng-include="'/views/partials/modals/transaction/show_approval.html'"></div>
 
-<div ng-if="modal.data.status === 'SHOW_ERROR'" ng-include="'/views/partials/modals/transaction/show_error.html'" class="h-center"></div>
+<div ng-if="modal.data.status === 'SHOW_ERROR'"
+    ng-include="'/views/partials/modals/transaction/show_error.html'"
+    class="h-center"></div>
 
-<div ng-if="modal.data.status === 'WAIT_FOR_ANSWER'" class="h-center">
+<div ng-if="modal.data.status === 'WAIT_FOR_ANSWER'"
+    class="h-center">
     <span class="fa fa-circle-o-notch fa-spin modal__icon-busy"></span>
-    <div class="legend h-spacing-top" ng-bind="'PAGE.PRINTING.MODAL.LABEL_PRINT.PENDING_MESSAGE' | translate"></div>
+    <div class="legend h-spacing-top"
+        ng-bind="'PAGE.PRINTING.MODAL.LABEL_PRINT.PENDING_MESSAGE' | translate"></div>
 </div>
