@@ -30,8 +30,10 @@
           <div class="medium-3 medium-offset-3 small-12 small-offset-0">
             <div class="row">
               <div class="medium-12 small-12">
-                <button class="button button--blush hero__form__label-back">
-                  Rücksende Ticket erstellen
+                <button class="button button--blush hero__form__label-back"
+                  ng-bind="'SECTION.FOOTER.PRINT_RETURN_LABEL_BUTTON' | translate"
+                  ng-click="tracking.printReturnLabel(trackingId)"
+                  ng-class="{ 'button--disabled' : !tracking.trackingId }">
                 </button>
               </div>
             </div>
@@ -54,6 +56,129 @@
     </form>
 </hero>
 <section class="section">
+    <div class="section__inner section__inner--centered"
+      ng-if="tracking.showError">
+      <h2 ng-bind="'PAGE.TRACKING.ERROR_TITLE' | translate"></h2>
+      <p ng-if="('PAGE.TRACKING.ERROR_DESCRIPTION' | translate) !== 'PAGE.TRACKING.ERROR_DESCRIPTION'"
+          ng-bind="'PAGE.TRACKING.ERROR_DESCRIPTION' | translate"></p>
+    </div>
+    <div class="section__inner"
+      ng-if="!tracking.showError">
+      <div class="row">
+        <div class="small-12 medium-6 column">
+          <h1 class="timeline__title">Timeline</h1>
+          <div class="timeline">
+              <!-- timeline -->
+              <div class="row row-outer-block timeline__event"
+                  ng-repeat="event in tracking.data.events | reverse"
+                  ng-class="{
+                    'timeline__event--is-only-child' : tracking.data.events.length === 1
+                  }">
+                  <!-- date -->
+                  <div class="column medium-3 show-for-medium">
+                      <div class="timeline__date"
+                          title="{{ event.moment | moment:'long' }}">
+                          <!-- date: short and long -->
+                          <div class="timeline__date__text show-for-medium-only"
+                              ng-if="event.moment"
+                              ng-bind="event.moment | moment:'short-day'"></div>
+                          <div class="timeline__date__text show-for-large"
+                              ng-if="event.moment"
+                              ng-bind="event.moment | moment:'day'"></div>
+                          <!-- no time -->
+                          <div class="timeline__date__text"
+                              ng-if="!event.moment"
+                              ng-bind="event.timestamp"></div>
+                          <!-- time -->
+                          <div class="timeline__date__text"
+                              ng-if="event.moment"
+                              ng-bind="event.moment | moment:'time'"></div>
+                      </div>
+                  </div>
+                  <!-- state -->
+                  <div class="column small-2 medium-1 timeline__state-container">
+                      <div class="timeline__state timeline__state--small fa fa-check"
+                          ng-class="{ 'timeline__state--process-is-completed' : ($last && event.status === 'DELIVERED')}"></div>
+                      <div class="timeline__state-line"></div>
+                  </div>
+                  <!-- text -->
+                  <div class="column small-8 medium-8">
+                      <div class="timeline__date timeline__date--small show-for-small-only"
+                          ng-if="event.moment"
+                          title="{{ event.moment | moment:'long' }}"
+                          ng-bind="(event.moment | moment:'day') + ', ' + (event.moment | moment:'time')"></div>
+                      <div class="timeline__date timeline__date--small show-for-small-only"
+                          ng-if="!event.moment"
+                          title="{{ event.timestamp }}"
+                          ng-bind="event.timestamp"></div>
+                      <span class="timeline__description">
+                          <div class="timeline__description-text">
+                              <span ng-bind="('PAGE.TRACKING.TIMELINE.EVENT.' + event.description.toUpperCase() | translate)
+                              .replace('%CITY%', event.location.city || '')
+                              .replace('%COUNTRY%', event.location.country || '') + '&nbsp;'"></span>
+                              <span class="timeline__carrier"
+                                  ng-if="!event.carrier_tracking_link && event.carrier && tracking.carrierInfo.length > 1"
+                                  ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"></span>
+                              <a class="timeline__carrier link"
+                                  ng-href="{{event.carrier_tracking_link}}"
+                                  ng-if="event.carrier_tracking_link"
+                                  ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"
+                                  target="_blank"></a>
+                          </div>
+                      </span>
+                  </div>
+                  <!-- <div class="small-2 medium-2">
+                    <div class="timline_carrier">
+                      <a class="timeline__carrier link"
+                          ng-href="{{event.carrier_tracking_link}}"
+                          ng-if="event.carrier_tracking_link"
+                          ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"
+                          target="_blank"></a>
+                      <span ng-if="!event.carrier_tracking_link"
+                        ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"></span>
+                    </div>
+                  </div> -->
+              </div>
+          </div>
+        </div>
+        <div class="small-12 medium-6 column tracking_column">
+          <h1 class="carrier-info__title">Carrier Information</h1>
+          <div class="row">
+            <div class="column small-12 medium-12 large-12" ng-repeat="carrier in tracking.carrierInfo">
+                <div class="carrier-info">
+                    <p>Your parcel is currently operated by</p>
+                    <div class="carrier-info__logo"
+                        ng-class="'image-carrier-' + carrier.code"></div>
+                    <div class="carrier-info__tracking-number"
+                        ng-if="tracking.carrierInfo.length === 1">
+                        <span ng-bind="('COMMON.CARRIER.ALL.TRACKING_NUMBER') | translate"></span>
+                        <span ng-bind="carrier.tracking_number"></span>
+                    </div>
+                    Please visit <a class="link carrier-info__link"
+                        ng-if="(('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL') | translate) !== ('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL')"
+                        href="{{('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL') | translate}}"
+                        target="_blank">
+                        <span ng-bind="('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL_NAME') | translate"></span>
+                    </a>for detailed information about your parcel.
+                    <a class="link carrier-info__mail"
+                        ng-if="(('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.MAIL') | translate) !== ('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.MAIL')"
+                        href="mailto:{{('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.MAIL') | translate}}"
+                        ng-bind="('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.MAIL') | translate"></a>
+                    <a class="link carrier-info__tel"
+                        ng-if="(('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.TEL') | translate) !== ('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.TEL')"
+                        href="tel:{{('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.TEL') | translate}}"
+                        ng-bind="('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.TEL') | translate"></a>
+                    <span class="carrier-info__additional-info"
+                        ng-if="(('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.ADDITIONAL_INFO') | translate) !== ('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.ADDITIONAL_INFO')"
+                        ng-bind="('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.ADDITIONAL_INFO') | translate"></span>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <div class="section__inner section__inner--slim"
         ng-class="{ 'section__inner--centered' : tracking.showError }">
         <h2 ng-if="tracking.showError"

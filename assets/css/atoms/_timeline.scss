@@ -4,9 +4,12 @@ $timeline-state-size: 16px;
 
 .timeline {
     position: relative;
-    margin: $_ySpacing 0 $_ySpacing * 3;
     @media #{$small-only} {
         margin-bottom: $_ySpacing * 2;
+    }
+
+    &__title {
+        margin-bottom: $_ySpacing;
     }
 
     &__event {
@@ -15,6 +18,19 @@ $timeline-state-size: 16px;
         margin: $_ySpacing 0;
         @media #{$small-only} {
             margin: $_ySpacing 0 $_ySpacing * 1.5;
+        }
+
+        &:not(:first-child) {
+            opacity: .5;
+
+            & .timeline__date {
+                background-color: $_rgbPacificBlue * .3;
+                opacity: .5;
+            }
+
+            & .timeline__state {
+                color: $_rgbAlto * .3;
+            }
         }
 
         &:first-child {
@@ -54,7 +70,6 @@ $timeline-state-size: 16px;
     }
 
     &__date {
-        height: 68px;
         padding: $_defaultSpacing / 2;
         border-radius: $_borderRadiusDefault;
         color: $_rgbWhite;

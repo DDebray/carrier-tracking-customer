@@ -1,54 +1,54 @@
 .section {
-  padding: $_yGutter 0;
+    padding: $_yGutter 0;
 
-  &--center {
-    text-align: center;
-  }
-
-  &--blue {
-    background: $_rgbPacificBlue;
-    color: $_rgbWhite;
-  }
-
-  &__inner {
-    @include pageWidth;
-    max-width: $_maxPageWidth;
-    margin: 0 auto;
-    padding: 0 ($_xGutter / 2);
-
-    &--slim {
-      max-width: $_maxSlimPageWidth;
+    &--center {
+        text-align: center;
     }
 
-    &--centered {
-      text-align: center;
+    &--blue {
+        background: $_rgbPacificBlue;
+        color: $_rgbWhite;
     }
-  }
 
-  &__title {
-    margin-bottom: 72px;
-    font-size: $_fsLarge;
-    line-height: $_lhLarge;
-    color: $_rgbWhite;
-  }
+    &__inner {
+        @include pageWidth;
+        max-width: $_maxPageWidth;
+        margin: 0 auto;
+        padding: 0 ($_xGutter / 2);
 
-  &__subtitle {
-    // enable this to revert COUREON-2198
-    // margin-bottom: 72px;
-    font-size: $_fsMedium;
-    line-height: $_lhMedium;
-    color: $_rgbWhite;
-  }
+        &--slim {
+            max-width: $_maxSlimPageWidth;
+        }
 
-  .section__title + .section__subtitle {
-    margin-top: -65px;
-  }
+        &--centered {
+            text-align: center;
+        }
+    }
 
-  a:not(.button) {
-    color: $_rgbBlush;
-  }
+    &__title {
+        margin-bottom: 72px;
+        font-size: $_fsLarge;
+        line-height: $_lhLarge;
+        color: $_rgbWhite;
+    }
 
-  a:not(.button).--nocolor {
-    color: none;
-  }
+    &__subtitle {
+        // enable this to revert COUREON-2198
+        // margin-bottom: 72px;
+        font-size: $_fsMedium;
+        line-height: $_lhMedium;
+        color: $_rgbWhite;
+    }
+
+    .section__title + .section__subtitle {
+        margin-top: -65px;
+    }
+
+    a:not(.button) {
+        color: $_rgbBlush;
+    }
+
+    a:not(.button).--nocolor {
+        color: none;
+    }
 }

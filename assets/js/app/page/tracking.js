@@ -143,6 +143,14 @@ module.exports = [
       StorageTracking.track( self.trackingId, function ( response ) {
           self.data = response;
 
+          self.data.events.push( Object.create( self.data.events[ 0 ] ) );
+          self.data.events.push( Object.create( self.data.events[ 0 ] ) );
+          self.data.events.push( Object.create( self.data.events[ 0 ] ) );
+          self.data.events.push( Object.create( self.data.events[ 0 ] ) );
+          self.data.events.push( Object.create( self.data.events[ 0 ] ) );
+
+          console.log( self.data.events );
+
           self.showError = response.status === 'NOT_AVAILABLE';
 
           if ( response && response.events && !!response.events.length ) {
@@ -166,6 +174,11 @@ module.exports = [
         $location.path( '/tracking/' + self.trackingId );
       }
     };
+
+    self.isCurrentActiveEvent = function ( event ) {
+      var lastEvent = self.data.events[ self.data.events.length - 1 ];
+      return lastEvent === event;
+    }
 
     self.banner = {
       title: $filter( 'translate' )( 'SECTION.FOOTER.TITLE' ),
