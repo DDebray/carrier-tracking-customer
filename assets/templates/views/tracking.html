@@ -142,40 +142,101 @@
 
         <!-- carrier info -->
         <div class="row row-outer-block align-center">
-            <div class="column small-12 medium-6 large-4"
-                ng-repeat="carrier in tracking.carrierInfo">
+            <div class="column small-12 medium-6 large-4">
                 <div class="carrier-info">
 
                     <div class="carrier-info__logo"
-                        ng-class="'image-carrier-' + carrier.code"></div>
+                        ng-class="'image-carrier-' + tracking.carrierInfo.code"></div>
 
-                    <div class="carrier-info__tracking-number"
-                        ng-if="tracking.carrierInfo.length === 1">
+                    <div class="carrier-info__tracking-number">
                         <span ng-bind="('COMMON.CARRIER.ALL.TRACKING_NUMBER') | translate"></span>
-                        <span ng-bind="carrier.tracking_number"></span>
+                        <span ng-bind="tracking.carrierInfo.tracking_number"></span>
                     </div>
 
                     <a class="link carrier-info__link"
-                        ng-if="(('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL') | translate) !== ('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL')"
-                        href="{{('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL') | translate}}"
+                        ng-if="(('COMMON.CARRIER.'  + tracking.carrierInfo.code.toUpperCase()
+                                                    + ((tracking.carrierInfo.country)
+                                                      ? '_' + tracking.carrierInfo.country
+                                                      : '')
+                                                    + '.URL') | translate)
+                                !== ('COMMON.CARRIER.'  + tracking.carrierInfo.code.toUpperCase()
+                                                        + ((tracking.carrierInfo.country)
+                                                          ? '_' + tracking.carrierInfo.country
+                                                          : '')
+                                                        + '.URL')"
+                        href="{{('COMMON.CARRIER.'  + tracking.carrierInfo.code.toUpperCase()
+                                                    + ((tracking.carrierInfo.country)
+                                                      ? '_' + tracking.carrierInfo.country
+                                                      : '')
+                                                    + '.URL') | translate}}"
                         target="_blank">
-                        <span ng-bind="('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL_NAME') | translate"></span>
+                        <span ng-bind="('COMMON.CARRIER.' + tracking.carrierInfo.code.toUpperCase()
+                                                          + ((tracking.carrierInfo.country)
+                                                            ? '_' + tracking.carrierInfo.country
+                                                            : '')
+                                                          + '.URL_NAME') | translate"></span>
                     </a>
 
                     <a class="link carrier-info__mail"
-                        ng-if="(('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.MAIL') | translate) !== ('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.MAIL')"
-                        href="mailto:{{('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.MAIL') | translate}}"
-                        ng-bind="('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.MAIL') | translate"></a>
+                        ng-if="(('COMMON.CARRIER.'  + tracking.carrierInfo.code.toUpperCase()
+                                                    + ((tracking.carrierInfo.country)
+                                                      ? '_' + tracking.carrierInfo.country
+                                                      : '')
+                                                    + '.MAIL') | translate)
+                                !== ('COMMON.CARRIER.'  + tracking.carrierInfo.code.toUpperCase()
+                                                        + ((tracking.carrierInfo.country)
+                                                          ? '_' + tracking.carrierInfo.country
+                                                          : '')
+                                                        + '.MAIL')"
+                        href="mailto:{{('COMMON.CARRIER.' + tracking.carrierInfo.code.toUpperCase()
+                                                          + ((tracking.carrierInfo.country)
+                                                            ? '_' + tracking.carrierInfo.country
+                                                            : '')
+                                                          + '.MAIL') | translate}}"
+                        ng-bind="('COMMON.CARRIER.' + tracking.carrierInfo.code.toUpperCase()
+                                                    + ((tracking.carrierInfo.country)
+                                                      ? '_' + tracking.carrierInfo.country
+                                                      : '')
+                                                    + '.MAIL') | translate"></a>
 
                     <a class="link carrier-info__tel"
-                        ng-if="(('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.TEL') | translate) !== ('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.TEL')"
-                        href="tel:{{('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.TEL') | translate}}"
-                        ng-bind="('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.TEL') | translate"></a>
+                        ng-if="(('COMMON.CARRIER.'  + tracking.carrierInfo.code.toUpperCase()
+                                                    + ((tracking.carrierInfo.country)
+                                                      ? '_' + tracking.carrierInfo.country
+                                                      : '')
+                                                    + '.TEL') | translate)
+                                !== ('COMMON.CARRIER.'  + tracking.carrierInfo.code.toUpperCase()
+                                                        + ((tracking.carrierInfo.country)
+                                                          ? '_' + tracking.carrierInfo.country
+                                                          : '')
+                                                        + '.TEL')"
+                        href="tel:{{('COMMON.CARRIER.'  + tracking.carrierInfo.code.toUpperCase()
+                                                        + ((tracking.carrierInfo.country)
+                                                          ? '_' + tracking.carrierInfo.country
+                                                          : '')
+                                                        + '.TEL') | translate}}"
+                        ng-bind="('COMMON.CARRIER.' + tracking.carrierInfo.code.toUpperCase()
+                                                    + ((tracking.carrierInfo.country)
+                                                      ? '_' + tracking.carrierInfo.country
+                                                      : '')
+                                                    + '.TEL') | translate"></a>
 
                     <span class="carrier-info__additional-info"
-                        ng-if="(('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.ADDITIONAL_INFO') | translate) !== ('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.ADDITIONAL_INFO')"
-                        ng-bind="('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.ADDITIONAL_INFO') | translate"></span>
-
+                        ng-if="(('COMMON.CARRIER.'  + tracking.carrierInfo.code.toUpperCase()
+                                                    + ((tracking.carrierInfo.country)
+                                                      ? '_' + tracking.carrierInfo.country
+                                                      : '')
+                                                    + '.ADDITIONAL_INFO') | translate)
+                                !== ('COMMON.CARRIER.'  + tracking.carrierInfo.code.toUpperCase()
+                                                        + ((tracking.carrierInfo.country)
+                                                          ? '_' + tracking.carrierInfo.country
+                                                          : '')
+                                                        + '.ADDITIONAL_INFO')"
+                        ng-bind="('COMMON.CARRIER.' + tracking.carrierInfo.code.toUpperCase()
+                                                    + ((tracking.carrierInfo.country)
+                                                      ? '_' + tracking.carrierInfo.country
+                                                      : '')
+                                                    + '.ADDITIONAL_INFO') | translate"></span>
                 </div>
             </div>
         </div>

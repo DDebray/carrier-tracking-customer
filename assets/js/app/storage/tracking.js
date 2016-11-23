@@ -105,7 +105,8 @@ module.exports = [
         carrier_tracking_link: specialCarrierCases[ carrierKey ].tracking_link + self.data.route_information[ route_number - 1 ].carrier_tracking_number,
         description: 'HANDOVER_TO_' + carrierKey,
         timestamp: 'Keine Zeitangaben',
-        status: 'IN_DELIVERY'
+        status: 'IN_DELIVERY',
+        route_number: route_number
       };
     };
 
