@@ -16,6 +16,10 @@
     padding-bottom: 6%;
 }
 
+.hero--tracking {
+    padding: 85px 70px;
+}
+
 .hero__content {
     @include pageWidth;
     align-self: center;
@@ -99,10 +103,6 @@
     &:hover {
         background: darken($_rgbBlush, 10);
     }
-}
-
-.hero__form_submit--muted {
-    background-color: $_rgbDustyGray;
 }
 // ================
 //  MEDIA QUERIES

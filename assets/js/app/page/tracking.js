@@ -116,21 +116,22 @@ module.exports = [
       //   }
       // });
 
-      var uniqueBy = function ( a, key ) {
-        var seen = {};
-        return a.filter( function ( item ) {
-          var k = key( item );
-          return seen.hasOwnProperty( k ) ? false : ( seen[ k ] = true );
-        } );
-      };
+      // var uniqueBy = function ( a, key ) {
+      //   var seen = {};
+      //   return a.filter( function ( item ) {
+      //     var k = key( item );
+      //     return seen.hasOwnProperty( k ) ? false : ( seen[ k ] = true );
+      //   } );
+      // };
 
       // create an array that only contains all the carriers from the events
-      var unfilteredCarriers = events.map( function ( event ) {
-        return event.carrier;
-      } );
+      // var unfilteredCarriers = events.map( function ( event ) {
+      //   return event.carrier;
+      // } );
 
       // filter dublicates
-      return uniqueBy( unfilteredCarriers, JSON.stringify );
+      //return uniqueBy( unfilteredCarriers, JSON.stringify );
+      return [ events[ events.length - 1 ].carrier ];
     };
 
     // get trackingId from URL
@@ -141,15 +142,8 @@ module.exports = [
 
     if ( self.trackingId ) {
       StorageTracking.track( self.trackingId, function ( response ) {
+
           self.data = response;
-
-          self.data.events.push( Object.create( self.data.events[ 0 ] ) );
-          self.data.events.push( Object.create( self.data.events[ 0 ] ) );
-          self.data.events.push( Object.create( self.data.events[ 0 ] ) );
-          self.data.events.push( Object.create( self.data.events[ 0 ] ) );
-          self.data.events.push( Object.create( self.data.events[ 0 ] ) );
-
-          console.log( self.data.events );
 
           self.showError = response.status === 'NOT_AVAILABLE';
 

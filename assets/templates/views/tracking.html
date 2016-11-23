@@ -1,6 +1,6 @@
 <hero hero-position="tracking"
   hero-title="'SECTION.HERO.TITLE' | translate"
-    hero-image="url(https://www.coureon.com/content/footer-cta.jpg)">
+    hero-image="url(images/hero/default_rev_2.jpg)">
     <form class="hero__form"
         ng-submit="tracking.getStatus()"
         autocomplete="off"
@@ -142,11 +142,10 @@
           </div>
         </div>
         <div class="small-12 medium-6 column tracking_column">
-          <h1 class="carrier-info__title">Carrier Information</h1>
+          <h1 class="carrier-info__title">Current Carrier</h1>
           <div class="row">
             <div class="column small-12 medium-12 large-12" ng-repeat="carrier in tracking.carrierInfo">
                 <div class="carrier-info">
-                    <p>Your parcel is currently operated by</p>
                     <div class="carrier-info__logo"
                         ng-class="'image-carrier-' + carrier.code"></div>
                     <div class="carrier-info__tracking-number"
