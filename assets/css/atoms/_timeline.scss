@@ -1,6 +1,6 @@
 $timeline-date-width: 164px;
 $timeline-width: 2px;
-$timeline-state-size: 16px;
+$timeline-state-size: 30px;
 
 .timeline {
     position: relative;
@@ -112,7 +112,6 @@ $timeline-state-size: 16px;
         border-radius: 50%;
         line-height: $timeline-state-size;
         font-size: $timeline-state-size;
-        border: $timeline-width solid $_rgbDustyGray;
         background-color: $_rgbWhite;
         color: $_rgbBlush;
         padding: $_defaultSpacing / 4;
