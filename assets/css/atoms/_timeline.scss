@@ -9,22 +9,31 @@ $timeline-state-size: 16px;
     }
 
     &__title {
-        margin-bottom: $_ySpacing;
+        margin-bottom: $_ySpacing * 2;
     }
 
     &__event {
         @include clearfix;
         position: relative;
-        margin: $_ySpacing 0;
+        margin: $_ySpacing*2 0;
+        transition: 1s linear all;
+        -webkit-transition: 1s linear all;
         @media #{$small-only} {
             margin: $_ySpacing 0 $_ySpacing * 1.5;
+        }
+
+        &.ng-enter {
+            opacity: 0;
+        }
+
+        &.ng-enter.ng-enter-active {
+            opacity: 1;
         }
 
         &:not(:first-child) {
             opacity: .5;
 
             & .timeline__date {
-                background-color: $_rgbPacificBlue * .3;
                 opacity: .5;
             }
 
@@ -38,7 +47,7 @@ $timeline-state-size: 16px;
 
             .timeline__state-line {
                 top: 50%;
-                height: calc(50% + #{$_ySpacing});
+                height: calc(50% + #{$_ySpacing * 2});
                 @media #{$small-only} {
                     top: calc(6px + #{$timeline-state-size / 2});
                     height: calc(100% + #{$_ySpacing * 1.5} - 6px - #{$timeline-state-size / 2});
@@ -123,7 +132,7 @@ $timeline-state-size: 16px;
             position: absolute;
             top: 0;
             left: calc(50% - #{$timeline-width / 2});
-            height: calc(100% + #{$_ySpacing} + 6px + #{$timeline-state-size / 2});
+            height: calc(100% + #{$_ySpacing} + #{$timeline-state-size / 2} + 17px);
             width: $timeline-width;
             background: $_rgbDustyGray;
             z-index: $zindex-background;

@@ -8,6 +8,7 @@
     background-size: cover;
     display: flex;
     padding: $_xGutter $_yGutter;
+    background-color: $_rgbPacificBlue;
 }
 
 .hero--landingpage .hero__content {
@@ -98,6 +99,10 @@
     &:hover {
         background: darken($_rgbBlush, 10);
     }
+}
+
+.hero__form_submit--muted {
+    background-color: $_rgbDustyGray;
 }
 // ================
 //  MEDIA QUERIES
