@@ -15,6 +15,7 @@ $timeline-state-size: 30px;
     &__event {
         @include clearfix;
         position: relative;
+        padding-right: $_ySpacing;
         margin: $_ySpacing*2 0;
         transition: 1s linear all;
         -webkit-transition: 1s linear all;
@@ -144,11 +145,7 @@ $timeline-state-size: 30px;
             @media #{$small-only} {
                 padding: $_defaultSpacing / 2;
             }
-            @media #{$medium-up} {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-            }
+            @media #{$medium-up} {}
         }
     }
 
@@ -156,6 +153,8 @@ $timeline-state-size: 30px;
         position: relative;
         display: inline-block;
         font-size: 75%;
+        margin-top: 10px;
+        float: right;
         color: $_rgbMineShaft;
         background-color: lighten($_rgbAlto, 10%);
         padding: 0 $_defaultSpacing / 4;

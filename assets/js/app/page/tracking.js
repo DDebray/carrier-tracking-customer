@@ -145,13 +145,6 @@ module.exports = [
 
           self.data = response;
 
-          self.data.events.push( Object.create( self.data.events[ 0 ] ) );
-          self.data.events.push( Object.create( self.data.events[ 0 ] ) );
-          // self.data.events.push( Object.create( self.data.events[ 0 ] ) );
-          // self.data.events.push( Object.create( self.data.events[ 0 ] ) );
-          // self.data.events.push( Object.create( self.data.events[ 0 ] ) );
-          // self.data.events.push( Object.create( self.data.events[ 0 ] ) );
-
           self.showError = response.status === 'NOT_AVAILABLE';
 
           if ( response && response.events && !!response.events.length ) {
