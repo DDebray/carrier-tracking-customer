@@ -110,7 +110,6 @@ module.exports = [
       if ( carrier.code === 'gls' ) {
         carrier.country = routes[ lastEvent.route_number - 1 ].country;
       }
-
       return carrier;
     };
 
@@ -122,6 +121,7 @@ module.exports = [
 
     if ( self.trackingId ) {
       StorageTracking.track( self.trackingId, function ( response ) {
+
           self.data = response;
 
           self.showError = response.status === 'NOT_AVAILABLE';
@@ -147,6 +147,11 @@ module.exports = [
         $location.path( '/tracking/' + self.trackingId );
       }
     };
+
+    self.isCurrentActiveEvent = function ( event ) {
+      var lastEvent = self.data.events[ self.data.events.length - 1 ];
+      return lastEvent === event;
+    }
 
     self.banner = {
       title: $filter( 'translate' )( 'SECTION.FOOTER.TITLE' ),

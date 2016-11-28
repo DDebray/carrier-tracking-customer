@@ -1,10 +1,11 @@
-<hero hero-title="'SECTION.HERO.TITLE' | translate"
-    hero-image="url(images/hero/default.jpg)">
+<hero hero-position="landingpage" hero-title="'SECTION.HERO.TITLE' | translate"
+    hero-image="url(images/hero/default_rev_2.jpg)">
     <form class="hero__form"
         ng-submit="tracking.getStatus()"
         autocomplete="off"
         ng-controller="PageTrackingCtrl as tracking">
-        <div class="hero__form__elements">
+        <div class="row">
+          <div class="medium-3 small-12">
             <input class="hero__form__input hero__form__input--default"
                 type="text"
                 name="tracking_number"
@@ -13,10 +14,13 @@
                 ng-model="tracking.trackingId"
                 select-on-click
                 autofocus>
+          </div>
+          <div class="medium-4 small-12">
             <button class="hero__form__submit"
                 type="submit"
                 name="submit"
                 ng-bind="'SECTION.HERO.TRACK_BUTTON' | translate"></button>
+          </div>
         </div>
     </form>
 </hero>

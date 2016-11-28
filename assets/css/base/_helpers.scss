@@ -1,39 +1,49 @@
 .h {
-  &-left {
-    text-align: left;
-  }
-  &-center {
-    text-align: center;
-  }
-  &-right {
-    text-align: right;
-  }
-  &-no {
-    &-marge {
-      margin: 0;
+    &-left {
+        text-align: left;
     }
-  }
 
-  &-spacing {
-    &-top {
-      margin-top: $_defaultSpacing / 2;
-
-      &--wide {
-        margin-top: $_defaultSpacing;
-      }
-      &--half {
-        margin-top: $_defaultSpacing / 4;
-      }
+    &-center {
+        text-align: center;
     }
-    &-bottom {
-      margin-bottom: $_defaultSpacing / 2;
 
-      &--wide {
-        margin-bottom: $_defaultSpacing;
-      }
-      &--half {
-        margin-bottom: $_defaultSpacing / 4;
-      }
+    &-right {
+        text-align: right;
     }
-  }
+
+    &-no {
+        &-marge {
+            margin: 0;
+        }
+    }
+
+    &-spacing {
+        &-top {
+            margin-top: $_defaultSpacing / 2;
+
+            &--wide {
+                margin-top: $_defaultSpacing;
+            }
+
+            &--half {
+                margin-top: $_defaultSpacing / 4;
+            }
+        }
+
+        &-bottom {
+            margin-bottom: $_defaultSpacing / 2;
+
+            &--wide {
+                margin-bottom: $_defaultSpacing;
+            }
+
+            &--half {
+                margin-bottom: $_defaultSpacing / 4;
+            }
+        }
+    }
+}
+
+.fade-in {
+    @include fade-in($_tShort);
 }

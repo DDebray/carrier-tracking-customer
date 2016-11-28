@@ -1,20 +1,45 @@
 $timeline-date-width: 164px;
 $timeline-width: 2px;
-$timeline-state-size: 16px;
+$timeline-state-size: 30px;
 
 .timeline {
     position: relative;
-    margin: $_ySpacing 0 $_ySpacing * 3;
     @media #{$small-only} {
+        margin-bottom: $_ySpacing * 2;
+    }
+
+    &__title {
         margin-bottom: $_ySpacing * 2;
     }
 
     &__event {
         @include clearfix;
         position: relative;
-        margin: $_ySpacing 0;
+        padding-right: $_ySpacing;
+        margin: $_ySpacing*2 0;
+        transition: 1s linear all;
+        -webkit-transition: 1s linear all;
         @media #{$small-only} {
             margin: $_ySpacing 0 $_ySpacing * 1.5;
+        }
+
+        &.ng-enter {
+            opacity: 0;
+        }
+
+        &.ng-enter.ng-enter-active {
+            opacity: 1;
+        }
+
+        &:not(:first-child) {
+            & .timeline__date,
+            & .timeline__description-text {
+                opacity: .5;
+            }
+
+            & .timeline__state {
+                color: $_rgbAlto * .6;
+            }
         }
 
         &:first-child {
@@ -22,7 +47,7 @@ $timeline-state-size: 16px;
 
             .timeline__state-line {
                 top: 50%;
-                height: calc(50% + #{$_ySpacing});
+                height: calc(50% + #{$_ySpacing * 2});
                 @media #{$small-only} {
                     top: calc(6px + #{$timeline-state-size / 2});
                     height: calc(100% + #{$_ySpacing * 1.5} - 6px - #{$timeline-state-size / 2});
@@ -54,7 +79,6 @@ $timeline-state-size: 16px;
     }
 
     &__date {
-        height: 68px;
         padding: $_defaultSpacing / 2;
         border-radius: $_borderRadiusDefault;
         color: $_rgbWhite;
@@ -88,7 +112,6 @@ $timeline-state-size: 16px;
         border-radius: 50%;
         line-height: $timeline-state-size;
         font-size: $timeline-state-size;
-        border: $timeline-width solid $_rgbDustyGray;
         background-color: $_rgbWhite;
         color: $_rgbBlush;
         padding: $_defaultSpacing / 4;
@@ -108,7 +131,7 @@ $timeline-state-size: 16px;
             position: absolute;
             top: 0;
             left: calc(50% - #{$timeline-width / 2});
-            height: calc(100% + #{$_ySpacing} + 6px + #{$timeline-state-size / 2});
+            height: calc(100% + #{$_ySpacing} + #{$timeline-state-size / 2} + 10px);
             width: $timeline-width;
             background: $_rgbDustyGray;
             z-index: $zindex-background;
@@ -122,11 +145,7 @@ $timeline-state-size: 16px;
             @media #{$small-only} {
                 padding: $_defaultSpacing / 2;
             }
-            @media #{$medium-up} {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-            }
+            @media #{$medium-up} {}
         }
     }
 
@@ -134,6 +153,8 @@ $timeline-state-size: 16px;
         position: relative;
         display: inline-block;
         font-size: 75%;
+        margin-top: 10px;
+        float: right;
         color: $_rgbMineShaft;
         background-color: lighten($_rgbAlto, 10%);
         padding: 0 $_defaultSpacing / 4;

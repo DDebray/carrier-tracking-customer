@@ -6,7 +6,8 @@ module.exports = function () {
     scope: {
       bannerTitle: '@bannerTitle',
       bannerSubtitle: '@bannerSubtitle',
-      trackingId: '@trackingId'
+      trackingId: '@trackingId',
+      showPrintButton: '@showPrintButton'
     },
     transclude: true,
     replace: true,
