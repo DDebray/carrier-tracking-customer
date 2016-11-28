@@ -16,6 +16,11 @@
     padding-bottom: 6%;
 }
 
+.hero--printing .hero__content {
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
 .hero--tracking {
     padding: 85px 70px;
 }
@@ -106,7 +111,7 @@
 }
 
 .hero__form_submit--muted {
-    background: $_rgbBlush * .7;
+    background: darken($_rgbBlush, 10);
 }
 // ================
 //  MEDIA QUERIES

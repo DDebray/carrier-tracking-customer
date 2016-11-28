@@ -6,7 +6,7 @@
         <p class="section__subtitle"
             ng-bind="{{ bannerSubtitle }}"></p>
         <!-- enable this to revert COUREON-2198 -->
-        <form class="footerForm">
+        <form class="footerForm" ng-if="!showPrintButton">
             <div class="footerForm__elements"
                 ng-controller="PageBaseCtrl as base">
                 <button class="button button--blush"
