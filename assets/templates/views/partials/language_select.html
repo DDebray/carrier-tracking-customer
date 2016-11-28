@@ -1,0 +1,10 @@
+<div class="language-select">
+  <ul class="language-select__list">
+    <li class="language-select__list-item"
+      ng-repeat="language in languages"
+      ng-click="changeLanguage(language)">
+      <span ng-bind="language.translation | translate"></span>
+      <span class="sprite-flags-small-de"></span>
+    </li>
+  </ul>
+</div>

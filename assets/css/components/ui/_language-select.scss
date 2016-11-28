@@ -1,0 +1,29 @@
+.language-select {
+    margin-left: auto;
+
+    &__list {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    &__list-item {
+        cursor: pointer;
+        background-color: $_rgbWhite;
+        border-bottom: none;
+        padding: 12px 25px;
+        visibility: hidden;
+
+        &:hover {
+            color: $_rgbPacificBlue;
+        }
+    }
+
+    &:hover &__list-item {
+        visibility: visible;
+    }
+
+    &__list-item:first-child {
+        visibility: visible;
+        border: none;
+    }
+}
