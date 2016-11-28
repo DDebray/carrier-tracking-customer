@@ -110,6 +110,9 @@ module.exports = [
       if ( carrier.code === 'gls' ) {
         carrier.country = routes[ lastEvent.route_number - 1 ].country;
       }
+
+      carrier.country_code = routes[ lastEvent.route_number - 1 ].country;
+
       return carrier;
     };
 

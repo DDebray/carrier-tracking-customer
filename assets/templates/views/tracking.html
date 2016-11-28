@@ -30,6 +30,7 @@
         </div>
         <div class="medium-3 medium-offset-3 small-12 small-offset-0">
           <form class="hero__form"
+            ng-if="tracking.carrierInfo.country_code === 'DE'"
             ng-controller="PageBaseCtrl as base"
             ng-submit="base.printReturnLabel(tracking.trackingId)">
             <div class="row">
@@ -37,7 +38,9 @@
                 <button class="button button--blush hero__form__label-back"
                   type="submit"
                   ng-bind="'SECTION.FOOTER.PRINT_RETURN_LABEL_BUTTON' | translate"
-                  ng-class="{ 'button--disabled' : !tracking.trackingId }">
+                  ng-class="{
+                    'button--disabled' : !tracking.trackingId
+                  }">
                 </button>
               </div>
             </div>
