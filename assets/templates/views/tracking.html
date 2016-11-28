@@ -1,59 +1,63 @@
 <hero hero-position="tracking"
   hero-title="'SECTION.HERO.TITLE' | translate"
     hero-image="url(images/hero/default_rev_2.jpg)">
-    <form class="hero__form"
-        ng-submit="tracking.getStatus()"
-        autocomplete="off"
-        ng-controller="PageTrackingCtrl as tracking">
-        <div class="row">
-          <div class="medium-6 small-12">
-            <div class="row">
-              <div class="medium-7 small-12">
-                <input class="hero__form__input hero__form__input--default"
-                    type="text"
-                    name="tracking_number"
-                    placeholder="{{'SECTION.HERO.PLACEHOLDER' | translate}}"
-                    required
-                    ng-model="tracking.trackingId"
-                    select-on-click
-                    autofocus>
+      <div class="row">
+        <div class="medium-6 small-12">
+          <form class="hero__form"
+              ng-submit="tracking.getStatus()"
+              autocomplete="off"
+              ng-controller="PageTrackingCtrl as tracking">
+              <div class="row">
+                <div class="medium-7 small-12">
+                  <input class="hero__form__input hero__form__input--default"
+                      type="text"
+                      name="tracking_number"
+                      placeholder="{{'SECTION.HERO.PLACEHOLDER' | translate}}"
+                      required
+                      ng-model="tracking.trackingId"
+                      select-on-click
+                      autofocus>
+                </div>
+                <div class="medium-5 small-12">
+                  <button class="hero__form__submit hero__form_submit--muted"
+                      type="submit"
+                      name="submit"
+                      ng-bind="'SECTION.HERO.TRACK_BUTTON' | translate">
+                  </button>
+                </div>
               </div>
-              <div class="medium-5 small-12">
-                <button class="hero__form__submit hero__form_submit--muted"
-                    type="submit"
-                    name="submit"
-                    ng-bind="'SECTION.HERO.TRACK_BUTTON' | translate">
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="medium-3 medium-offset-3 small-12 small-offset-0">
+          </form>
+        </div>
+        <div class="medium-3 medium-offset-3 small-12 small-offset-0">
+          <form class="hero__form"
+            ng-controller="PageBaseCtrl as base"
+            ng-submit="base.printReturnLabel(tracking.trackingId)">
             <div class="row">
               <div class="medium-12 small-12">
                 <button class="button button--blush hero__form__label-back"
+                  type="submit"
                   ng-bind="'SECTION.FOOTER.PRINT_RETURN_LABEL_BUTTON' | translate"
-                  ng-click="tracking.printReturnLabel(trackingId)"
                   ng-class="{ 'button--disabled' : !tracking.trackingId }">
                 </button>
               </div>
             </div>
-          </div>
+          </form>
         </div>
-        <!-- <div class="hero__form__elements">
-            <input class="hero__form__input hero__form__input--default"
-                type="text"
-                name="tracking_number"
-                placeholder="{{'SECTION.HERO.PLACEHOLDER' | translate}}"
-                required
-                ng-model="tracking.trackingId"
-                select-on-click
-                autofocus>
-            <button class="hero__form__submit"
-                type="submit"
-                name="submit"
-                ng-bind="'SECTION.HERO.TRACK_BUTTON' | translate"></button>
-        </div> -->
-    </form>
+      </div>
+      <!-- <div class="hero__form__elements">
+          <input class="hero__form__input hero__form__input--default"
+              type="text"
+              name="tracking_number"
+              placeholder="{{'SECTION.HERO.PLACEHOLDER' | translate}}"
+              required
+              ng-model="tracking.trackingId"
+              select-on-click
+              autofocus>
+          <button class="hero__form__submit"
+              type="submit"
+              name="submit"
+              ng-bind="'SECTION.HERO.TRACK_BUTTON' | translate"></button>
+      </div> -->
 </hero>
 <section class="section">
     <div class="section__inner section__inner--centered"
@@ -66,7 +70,9 @@
       ng-if="!tracking.showError">
       <div class="row">
         <div class="small-12 medium-6 column">
-          <h1 class="timeline__title">Timeline</h1>
+          <h1 class="timeline__title">
+            <span ng-bind="'PAGE.CARRIER.TIMELINE.TITLE' | translate"></span>
+          </h1>
           <div class="timeline">
               <!-- timeline -->
               <div class="row row-outer-block timeline__event"
@@ -75,6 +81,12 @@
                     'timeline__event--is-only-child' : tracking.data.events.length === 1
                   }">
                   <!-- date -->
+                  <!-- state -->
+                  <div class="column small-2 medium-1 timeline__state-container">
+                      <div class="timeline__state timeline__state--small fa fa-check-circle"
+                          ng-class="{ 'timeline__state--process-is-completed' : ($last && event.status === 'DELIVERED')}"></div>
+                      <div class="timeline__state-line"></div>
+                  </div>
                   <div class="column medium-3 show-for-medium">
                       <div class="timeline__date"
                           title="{{ event.moment | moment:'long' }}">
@@ -94,12 +106,6 @@
                               ng-if="event.moment"
                               ng-bind="event.moment | moment:'time'"></div>
                       </div>
-                  </div>
-                  <!-- state -->
-                  <div class="column small-2 medium-1 timeline__state-container">
-                      <div class="timeline__state timeline__state--small fa fa-check-circle"
-                          ng-class="{ 'timeline__state--process-is-completed' : ($last && event.status === 'DELIVERED')}"></div>
-                      <div class="timeline__state-line"></div>
                   </div>
                   <!-- text -->
                   <div class="column small-8 medium-8">
@@ -142,7 +148,9 @@
           </div>
         </div>
         <div class="small-12 medium-6 column tracking_column">
-          <h1 class="carrier-info__title">Current Carrier</h1>
+          <h1 class="carrier-info__title">
+            <span ng-bind="'PAGE.CARRIER.CURRENT_CARRIER.TITLE' | translate"></span>
+          </h1>
           <div class="row">
             <div class="column small-12 medium-12 large-12" ng-repeat="carrier in tracking.carrierInfo">
                 <div class="carrier-info">
@@ -153,12 +161,12 @@
                         <span ng-bind="('COMMON.CARRIER.ALL.TRACKING_NUMBER') | translate"></span>
                         <span ng-bind="carrier.tracking_number"></span>
                     </div>
-                    Please visit <a class="link carrier-info__link"
+                    <a class="link carrier-info__link"
                         ng-if="(('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL') | translate) !== ('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL')"
                         href="{{('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL') | translate}}"
                         target="_blank">
                         <span ng-bind="('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.URL_NAME') | translate"></span>
-                    </a>for detailed information about your parcel.
+                    </a>
                     <a class="link carrier-info__mail"
                         ng-if="(('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.MAIL') | translate) !== ('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.MAIL')"
                         href="mailto:{{('COMMON.CARRIER.' + carrier.code.toUpperCase() + '.MAIL') | translate}}"

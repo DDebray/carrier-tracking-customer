@@ -104,6 +104,10 @@
         background: darken($_rgbBlush, 10);
     }
 }
+
+.hero__form_submit--muted {
+    background: $_rgbBlush * .7;
+}
 // ================
 //  MEDIA QUERIES
 // ================

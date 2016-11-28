@@ -31,14 +31,13 @@ $timeline-state-size: 30px;
         }
 
         &:not(:first-child) {
-            opacity: .5;
-
-            & .timeline__date {
+            & .timeline__date,
+            & .timeline__description-text {
                 opacity: .5;
             }
 
             & .timeline__state {
-                color: $_rgbAlto * .3;
+                color: $_rgbAlto * .6;
             }
         }
 
@@ -131,7 +130,7 @@ $timeline-state-size: 30px;
             position: absolute;
             top: 0;
             left: calc(50% - #{$timeline-width / 2});
-            height: calc(100% + #{$_ySpacing} + #{$timeline-state-size / 2} + 17px);
+            height: calc(100% + #{$_ySpacing} + #{$timeline-state-size / 2} + 10px);
             width: $timeline-width;
             background: $_rgbDustyGray;
             z-index: $zindex-background;
