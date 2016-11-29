@@ -10,11 +10,5 @@
                 ng-href="{{('COMMON.TERMS_LINK' | translate)}}"
                 ng-bind="'COMMON.TERMS' | translate"></a>
         </li>
-        <li ng-repeat="language in base.supportedLanguages track by $index">
-            <a class="footer__link"
-                ng-if="base.selectedLanguage !== language"
-                ng-click="base.changeLanguage(language)"
-                ng-bind="('COMMON.LANGUAGE.' + language.toUpperCase()) | translate"></a>
-        </li>
     </ul>
 </div>
