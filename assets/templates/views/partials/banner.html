@@ -5,17 +5,5 @@
             ng-bind="{{ bannerTitle }}"></h2>
         <p class="section__subtitle"
             ng-bind="{{ bannerSubtitle }}"></p>
-        <!-- enable this to revert COUREON-2198 -->
-        <form class="footerForm" ng-if="!showPrintButton">
-            <div class="footerForm__elements"
-                ng-controller="PageBaseCtrl as base">
-                <button class="button button--blush"
-                    ng-class="{ 'button--disabled' : !trackingId }"
-                    type="button"
-                    name="button"
-                    ng-click="base.printReturnLabel(trackingId)"
-                    ng-bind="'SECTION.FOOTER.PRINT_RETURN_LABEL_BUTTON' | translate"></button>
-            </div>
-        </form>
     </div>
 </section>

@@ -103,35 +103,17 @@ module.exports = [
       }
     } ];
 
-    var getCarrierInfoByEvents = function ( events ) {
-      // used to test multiple carriers
-      // events.push({
-      //   carrier: {
-      //     code: 'hermes'
-      //   }
-      // });
-      // events.push({
-      //   carrier: {
-      //     code: 'gls'
-      //   }
-      // });
+    var getCarrierInfo = function ( events, routes ) {
+      var lastEvent = events[ events.length - 1 ];
+      var carrier = lastEvent.carrier;
 
-      // var uniqueBy = function ( a, key ) {
-      //   var seen = {};
-      //   return a.filter( function ( item ) {
-      //     var k = key( item );
-      //     return seen.hasOwnProperty( k ) ? false : ( seen[ k ] = true );
-      //   } );
-      // };
+      if ( carrier.code === 'gls' ) {
+        carrier.country = routes[ lastEvent.route_number - 1 ].country;
+      }
 
-      // create an array that only contains all the carriers from the events
-      // var unfilteredCarriers = events.map( function ( event ) {
-      //   return event.carrier;
-      // } );
+      carrier.country_code = routes[ lastEvent.route_number - 1 ].country;
 
-      // filter dublicates
-      //return uniqueBy( unfilteredCarriers, JSON.stringify );
-      return [ events[ events.length - 1 ].carrier ];
+      return carrier;
     };
 
     // get trackingId from URL
@@ -147,10 +129,10 @@ module.exports = [
 
           self.showError = response.status === 'NOT_AVAILABLE';
 
-          if ( response && response.events && !!response.events.length ) {
+          if ( response && response.events && !!response.events.length && response.route_information && !!response.route_information.length ) {
             self.state = self.availableStates.indexOf( response.status );
             self.errorState = self.availableErrorStates.indexOf( response.status );
-            self.carrierInfo = getCarrierInfoByEvents( response.events );
+            self.carrierInfo = getCarrierInfo( response.events, response.route_information );
           } else {
             self.showError = true;
           }
