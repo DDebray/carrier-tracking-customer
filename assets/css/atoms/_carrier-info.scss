@@ -5,12 +5,11 @@
     // min-height: 68px;
     min-height: 184px;
     margin-bottom: $_defaultSpacing;
-    padding: $_defaultSpacing;
+    padding: $_ySpacing;
     transition: background-color $_tShort ease;
     text-align: center;
-    border: 2px solid lighten($_rgbDustyGray, 20%);
-    border-radius: $_borderRadiusDefault;
-    background-color: $_rgbWhite;
+    border: 2px solid $_rgbAthensGray;
+    border-radius: 5px;
     font-size: $_fsSub;
     @media #{$small-only} {
         padding: $_defaultSpacing / 2;
@@ -21,7 +20,7 @@
     }
 
     &__title {
-        margin-bottom: $_ySpacing * 2;
+        margin-bottom: $_ySpacing;
     }
 
     &__additional-info,
@@ -30,8 +29,8 @@
     &__tel,
     &__tracking-number {
         display: block;
-        color: lighten($_rgbMineShaft, 10%);
-        font-size: $_fsSmall;
+        color: $_rgbBlack;
+        font-size: $_fsSub;
     }
 
     &__link {
@@ -39,8 +38,8 @@
     }
 
     &__additional-info {
-        font-size: $_fsTiny;
-        line-height: $_lhTiny;
+        font-size: $_fsSub;
+        line-height: $_fsSub;
     }
 
     &__link,
@@ -54,8 +53,8 @@
 
     &__logo {
         display: block;
-        max-width: 134px;
-        height: 43px;
+        max-width: 200px;
+        height: 80px;
         margin: auto auto $_defaultSpacing / 2;
     }
 }
