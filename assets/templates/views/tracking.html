@@ -73,7 +73,7 @@
       <div class="row">
         <div class="small-12 medium-6 column">
           <h1 class="timeline__title">
-            <span ng-bind="'PAGE.CARRIER.TIMELINE.TITLE' | translate"></span>
+            <span ng-bind="'PAGE.TRACKING.TIMELINE.TITLE' | translate"></span>
           </h1>
           <div class="timeline">
               <!-- timeline -->
@@ -84,12 +84,7 @@
                   }">
                   <!-- date -->
                   <!-- state -->
-                  <div class="column small-2 medium-1 timeline__state-container">
-                      <div class="timeline__state timeline__state--small fa fa-check-circle"
-                          ng-class="{ 'timeline__state--process-is-completed' : ($last && event.status === 'DELIVERED')}"></div>
-                      <div class="timeline__state-line"></div>
-                  </div>
-                  <div class="column medium-3 show-for-medium">
+                  <div class="column medium-3 show-for-medium timeline__date-column">
                       <div class="timeline__date"
                           title="{{ event.moment | moment:'long' }}">
                           <!-- date: short and long -->
@@ -110,7 +105,7 @@
                       </div>
                   </div>
                   <!-- text -->
-                  <div class="column small-8 medium-8">
+                  <div class="column small-12 medium-8 timeline__description-column">
                       <div class="timeline__date timeline__date--small show-for-small-only"
                           ng-if="event.moment"
                           title="{{ event.moment | moment:'long' }}"
@@ -155,7 +150,7 @@
         </div>
         <div class="small-12 medium-6 column tracking_column">
           <h1 class="carrier-info__title">
-            <span ng-bind="'PAGE.CARRIER.CURRENT_CARRIER.TITLE' | translate"></span>
+            <span ng-bind="'PAGE.TRACKING.CURRENT_CARRIER.TITLE' | translate"></span>
           </h1>
           <div class="row">
             <div class="column small-12 medium-12 large-12">
@@ -166,6 +161,7 @@
                         <span ng-bind="('COMMON.CARRIER.ALL.TRACKING_NUMBER') | translate"></span>
                         <span ng-bind="tracking.carrierInfo.tracking_number"></span>
                     </div>
+                    <span ng-bind="'COMMON.CARRIER.ALL.URL.PREFIX' | translate"></span>
                     <a class="link carrier-info__link"
                         ng-if="(('COMMON.CARRIER.'  + tracking.carrierInfo.code.toUpperCase()
                                                     + ((tracking.carrierInfo.country)
@@ -188,7 +184,7 @@
                                                             ? '_' + tracking.carrierInfo.country
                                                             : '')
                                                           + '.URL_NAME') | translate"></span>
-                    </a>
+                    </a><span ng-bind="'COMMON.CARRIER.ALL.URL.SUFFIX' | translate"></span>
                     <a class="link carrier-info__mail"
                         ng-if="(('COMMON.CARRIER.'  + tracking.carrierInfo.code.toUpperCase()
                                                     + ((tracking.carrierInfo.country)
@@ -232,7 +228,6 @@
                                                       ? '_' + tracking.carrierInfo.country
                                                       : '')
                                                     + '.TEL') | translate"></a>
-
                     <span class="carrier-info__additional-info"
                         ng-if="(('COMMON.CARRIER.'  + tracking.carrierInfo.code.toUpperCase()
                                                     + ((tracking.carrierInfo.country)
