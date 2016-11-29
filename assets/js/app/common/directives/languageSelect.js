@@ -22,7 +22,7 @@ module.exports = function () {
        */
       var getTranslation = function ( lang ) {
         return 'COMMON.LANGUAGE.' + lang;
-      }
+      };
 
       /**
        * Default module configuration
@@ -40,7 +40,7 @@ module.exports = function () {
           translation: getTranslation( 'DE' )
         } ],
         changed: function ( language ) {
-          console.log( "Please specify a change event" )
+          console.log( 'Please specify a change event' );
         }
       };
 
