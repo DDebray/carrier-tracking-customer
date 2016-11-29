@@ -1,0 +1,37 @@
+.language-select {
+    margin-left: auto;
+
+    &__flag {
+        margin-right: 5px;
+    }
+
+    &__list {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    &__list-item {
+        cursor: pointer;
+        background-color: $_rgbWhite;
+        border-bottom: none;
+        padding: 12px 25px;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity .5s ease-in-out;
+
+        &:hover {
+            color: $_rgbPacificBlue;
+        }
+    }
+
+    &:hover &__list-item {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    &__list-item:first-child {
+        visibility: visible;
+        opacity: 1;
+        border: none;
+    }
+}

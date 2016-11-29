@@ -1,5 +1,4 @@
 <hero hero-position="tracking"
-  hero-title="'SECTION.HERO.TITLE' | translate"
     hero-image="url(images/hero/default_rev_2.jpg)">
       <div class="row">
         <div class="medium-6 small-12">
@@ -39,7 +38,7 @@
                   type="submit"
                   ng-bind="'SECTION.FOOTER.PRINT_RETURN_LABEL_BUTTON' | translate"
                   ng-class="{
-                    'button--disabled' : !tracking.trackingId
+                    'button--disabled' : tracking.disablePrintBackButton
                   }">
                 </button>
               </div>

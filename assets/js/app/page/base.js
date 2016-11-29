@@ -55,6 +55,13 @@ module.exports = [
       subtitle: $filter( 'translate' )( 'SECTION.FOOTER.SUBTITLE' )
     };
 
+    self.languageSelectConfiguration = {
+      default: self.selectedLanguage,
+      changed: function ( language ) {
+        self.changeLanguage( language.code );
+      }
+    };
+
     self.env = CommonConfig.environment();
   }
 ];
