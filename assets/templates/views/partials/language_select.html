@@ -3,8 +3,14 @@
     <li class="language-select__list-item"
       ng-repeat="language in languages"
       ng-click="changeLanguage(language)">
-      <span ng-bind="language.translation | translate"></span>
-      <span class="sprite-flags-small-de"></span>
+      <div class="row">
+          <div class="medium-5 small-5">
+            <span class="language-select__flag image-flags-small-{{ language.cssIdentifier }}" title="DE"></span>
+          </div>
+          <div class="medium-7 small-7">
+            <span ng-bind="language.translation | translate"></span>
+          </div>
+      </div>
     </li>
   </ul>
 </div>

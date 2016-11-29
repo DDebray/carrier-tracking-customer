@@ -32,9 +32,11 @@ module.exports = function () {
         default: 'EN',
         languages: [ {
           code: 'EN',
+          cssIdentifier: 'GB',
           translation: getTranslation( 'EN' )
         }, {
           code: 'DE',
+          cssIdentifier: 'DE',
           translation: getTranslation( 'DE' )
         } ],
         changed: function ( language ) {
