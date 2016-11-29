@@ -127,10 +127,6 @@ module.exports = [
 
           self.data = response;
 
-          self.data.events.push( Object.create( self.data.events[ 0 ] ) );
-          self.data.events.push( Object.create( self.data.events[ 0 ] ) );
-          self.data.events.push( Object.create( self.data.events[ 0 ] ) );
-
           self.showError = response.status === 'NOT_AVAILABLE';
 
           if ( response && response.events && !!response.events.length && response.route_information && !!response.route_information.length ) {
@@ -162,7 +158,7 @@ module.exports = [
 
     self.getCurrentActiveEvent = function () {
       return self.data.events[ self.data.events.length - 1 ];
-    }
+    };
 
     self.banner = {
       title: $filter( 'translate' )( 'SECTION.FOOTER.TITLE' ),
