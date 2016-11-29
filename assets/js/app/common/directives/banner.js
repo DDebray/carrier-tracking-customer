@@ -7,7 +7,8 @@ module.exports = function () {
       bannerTitle: '@bannerTitle',
       bannerSubtitle: '@bannerSubtitle',
       trackingId: '@trackingId',
-      showPrintButton: '@showPrintButton'
+      bannerLink: '@bannerLink',
+      hideBannerLink: '@hideBannerLink'
     },
     transclude: true,
     replace: true,
