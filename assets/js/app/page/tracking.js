@@ -6,6 +6,7 @@ module.exports = [
     'use strict';
     var self = this;
 
+    self.disablePrintBackButton = false;
     self.data = StorageTracking.data;
     self.trackingId = StorageTracking.trackingId || '';
     self.availableStates = [
@@ -113,6 +114,10 @@ module.exports = [
 
       carrier.country_code = routes[ lastEvent.route_number - 1 ].country;
 
+      if ( carrier.country_code !== 'DE' ) {
+        self.disablePrintBackButton = true;
+      }
+
       return carrier;
     };
 
@@ -127,7 +132,10 @@ module.exports = [
 
           self.data = response;
 
-          self.showError = response.status === 'NOT_AVAILABLE';
+          if ( response.status === 'NOT_AVAILABLE' ) {
+            self.showError = true;
+            self.disablePrintBackButton = true;
+          }
 
           if ( response && response.events && !!response.events.length && response.route_information && !!response.route_information.length ) {
             self.state = self.availableStates.indexOf( response.status );
@@ -135,6 +143,7 @@ module.exports = [
             self.carrierInfo = getCarrierInfo( response.events, response.route_information );
           } else {
             self.showError = true;
+            self.disablePrintBackButton = true;
           }
         },
         function ( error ) {
@@ -142,6 +151,8 @@ module.exports = [
           self.showError = true;
           self.state = -1;
         } );
+    } else {
+      self.disablePrintBackButton = true;
     }
 
     self.getStatus = function () {

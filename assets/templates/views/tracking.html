@@ -38,7 +38,7 @@
                   type="submit"
                   ng-bind="'SECTION.FOOTER.PRINT_RETURN_LABEL_BUTTON' | translate"
                   ng-class="{
-                    'button--disabled' : !tracking.trackingId
+                    'button--disabled' : tracking.disablePrintBackButton
                   }">
                 </button>
               </div>

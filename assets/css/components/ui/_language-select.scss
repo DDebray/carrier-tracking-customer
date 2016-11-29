@@ -16,6 +16,8 @@
         border-bottom: none;
         padding: 12px 25px;
         visibility: hidden;
+        opacity: 0;
+        transition: opacity .5s ease-in-out;
 
         &:hover {
             color: $_rgbPacificBlue;
@@ -24,10 +26,12 @@
 
     &:hover &__list-item {
         visibility: visible;
+        opacity: 1;
     }
 
     &__list-item:first-child {
         visibility: visible;
+        opacity: 1;
         border: none;
     }
 }
