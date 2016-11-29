@@ -13,6 +13,7 @@
     &__list-item {
         cursor: pointer;
         background-color: $_rgbWhite;
+        position: relative;
         border-bottom: none;
         padding: 12px 25px;
         visibility: hidden;
