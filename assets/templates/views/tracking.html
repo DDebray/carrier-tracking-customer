@@ -161,7 +161,6 @@
                         <span ng-bind="('COMMON.CARRIER.ALL.TRACKING_NUMBER') | translate"></span>
                         <span ng-bind="tracking.carrierInfo.tracking_number"></span>
                     </div>
-                    <span ng-bind="'COMMON.CARRIER.ALL.URL.PREFIX' | translate"></span>
                     <a class="link carrier-info__link"
                         ng-if="(('COMMON.CARRIER.'  + tracking.carrierInfo.code.toUpperCase()
                                                     + ((tracking.carrierInfo.country)
@@ -184,7 +183,7 @@
                                                             ? '_' + tracking.carrierInfo.country
                                                             : '')
                                                           + '.URL_NAME') | translate"></span>
-                    </a><span ng-bind="'COMMON.CARRIER.ALL.URL.SUFFIX' | translate"></span>
+                    </a>
                     <a class="link carrier-info__mail"
                         ng-if="(('COMMON.CARRIER.'  + tracking.carrierInfo.code.toUpperCase()
                                                     + ((tracking.carrierInfo.country)
