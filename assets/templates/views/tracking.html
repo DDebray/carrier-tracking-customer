@@ -127,10 +127,6 @@
                                   ng-if="event.carrier_tracking_link"
                                   ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"
                                   target="_blank"></a>
-                              <span class="timeline__carrier"
-                                ng-if="!event.carrier_tracking_link"
-                                ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"
-                              </span>
                           </div>
                       </span>
                   </div>
