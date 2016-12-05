@@ -126,13 +126,21 @@ module.exports = [
       StorageTracking.track( self.trackingId, function ( response ) {
 
           self.data = response;
-
           self.showError = response.status === 'NOT_AVAILABLE';
+          self.showPrintLabelButton = false;
 
           if ( response && response.events && !!response.events.length && response.route_information && !!response.route_information.length ) {
             self.state = self.availableStates.indexOf( response.status );
             self.errorState = self.availableErrorStates.indexOf( response.status );
             self.carrierInfo = getCarrierInfo( response.events, response.route_information );
+
+            // Only show label print back button when the route Information only contains national routes
+            self.showPrintLabelButton = response.route_information.map( function ( ri ) {
+              return ri.country === 'DE';
+            } ).reduce( function ( a, b ) {
+              return a && b;
+            }, true );
+
           } else {
             self.showError = true;
           }

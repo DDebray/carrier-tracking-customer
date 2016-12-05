@@ -35,11 +35,9 @@
             <div class="row">
               <div class="medium-12 small-12">
                 <button class="button button--blush hero__form__label-back"
+                  ng-if="tracking.showPrintLabelButton"
                   type="submit"
-                  ng-bind="'SECTION.FOOTER.PRINT_RETURN_LABEL_BUTTON' | translate"
-                  ng-class="{
-                    'button--disabled' : tracking.disablePrintBackButton
-                  }">
+                  ng-bind="'SECTION.FOOTER.PRINT_RETURN_LABEL_BUTTON' | translate">
                 </button>
               </div>
             </div>
