@@ -178,7 +178,7 @@ module.exports = [
           'des_dhl_hermes_pickup',
           'des_dhl_national'
         ],
-        tracking_link: 'no'
+        tracking_link: 'https://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=en&idc='
       }
     };
 
