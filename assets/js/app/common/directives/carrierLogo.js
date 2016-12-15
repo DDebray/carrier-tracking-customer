@@ -31,7 +31,8 @@ module.exports = function () {
           'borderguru',
           'atpost',
           'gls',
-          'yodel'
+          'yodel',
+          'usps'
         ];
 
       var rateCode = ( scope.rate() || {} ).code || '';

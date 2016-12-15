@@ -52,6 +52,7 @@ module.exports = [
         return;
       }
 
+      /* GLS */
       if ( checkCase( 'GLS_DE', 1 ) ) {
         self.data.events.push( customEventForCarrierOnRoute( 'GLS_DE', 1 ) );
       }
@@ -66,6 +67,22 @@ module.exports = [
       }
       if ( checkCase( 'GLS_ES', 2 ) ) {
         self.data.events.push( customEventForCarrierOnRoute( 'GLS_ES', 2 ) );
+      }
+
+      /* USPS */
+      if ( checkCase( 'USPS', 1 ) ) {
+        self.data.events.push( customEventForCarrierOnRoute( 'USPS', 1 ) );
+      }
+      if ( checkCase( 'USPS', 2 ) ) {
+        self.data.events.push( customEventForCarrierOnRoute( 'USPS', 2 ) );
+      }
+
+      /* DHL */
+      if ( checkCase( 'DHL', 1 ) ) {
+        self.data.events.push( customEventForCarrierOnRoute( 'DHL', 1 ) );
+      }
+      if ( checkCase( 'DHL', 2 ) ) {
+        self.data.events.push( customEventForCarrierOnRoute( 'DHL', 2 ) );
       }
     };
 
@@ -144,6 +161,24 @@ module.exports = [
           'gls_es_hermes_pickup'
         ],
         tracking_link: 'https://gls-group.eu/ES/es/seguimiento-de-envios?match='
+      },
+      USPS: {
+        carrier_code: 'usps',
+        service_codes: [ 'des_usps_dhl_dropoff',
+          'des_usps_dpd_pickup',
+          'des_usps_hermes_pickup',
+          'des_usps_national'
+        ],
+        tracking_link: 'https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1='
+      },
+      DHL: {
+        carrier_code: 'dhl',
+        service_codes: [ 'des_dhl_dhl_dropoff',
+          'des_dhl_dpd_pickup',
+          'des_dhl_hermes_pickup',
+          'des_dhl_national'
+        ],
+        tracking_link: 'no'
       }
     };
 
