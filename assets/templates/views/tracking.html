@@ -44,20 +44,6 @@
           </form>
         </div>
       </div>
-      <!-- <div class="hero__form__elements">
-          <input class="hero__form__input hero__form__input--default"
-              type="text"
-              name="tracking_number"
-              placeholder="{{'SECTION.HERO.PLACEHOLDER' | translate}}"
-              required
-              ng-model="tracking.trackingId"
-              select-on-click
-              autofocus>
-          <button class="hero__form__submit"
-              type="submit"
-              name="submit"
-              ng-bind="'SECTION.HERO.TRACK_BUTTON' | translate"></button>
-      </div> -->
 </hero>
 <section class="section">
     <div class="section__inner section__inner--centered"
@@ -122,23 +108,15 @@
                                   ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"></span>
                               <a class="link timeline__carrier"
                                   ng-href="{{event.carrier_tracking_link}}"
-                                  ng-if="event.carrier_tracking_link"
+                                  ng-if="event.carrier_tracking_link && event.carrier.tracking_number"
                                   ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"
                                   target="_blank"></a>
+                              <span class="timeline__carrier"
+                                  ng-if="!event.carrier.tracking_number"
+                                  ng-bind="('COMMON.CARRIER.TRACKING.COMMING_SOON') | translate"></span>
                           </div>
                       </span>
                   </div>
-                  <!-- <div class="small-2 medium-2">
-                    <div class="timline_carrier">
-                      <a class="timeline__carrier link"
-                          ng-href="{{event.carrier_tracking_link}}"
-                          ng-if="event.carrier_tracking_link"
-                          ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"
-                          target="_blank"></a>
-                      <span ng-if="!event.carrier_tracking_link"
-                        ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"></span>
-                    </div>
-                  </div> -->
               </div>
           </div>
         </div>
@@ -151,7 +129,8 @@
                 <div class="carrier-info">
                     <div class="carrier-info__logo"
                         ng-class="'image-carrier-' + tracking.carrierInfo.code"></div>
-                    <div class="carrier-info__tracking-number">
+                    <div ng-if="tracking.carrierInfo.tracking_number"
+                         class="carrier-info__tracking-number">
                         <span ng-bind="('COMMON.CARRIER.ALL.TRACKING_NUMBER') | translate"></span>
                         <span ng-bind="tracking.carrierInfo.tracking_number"></span>
                     </div>
