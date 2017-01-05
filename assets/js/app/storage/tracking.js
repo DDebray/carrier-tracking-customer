@@ -176,7 +176,7 @@ module.exports = [
         service_codes: [ 'des_dhl_dhl_dropoff',
           'des_dhl_dpd_pickup',
           'des_dhl_hermes_pickup',
-          'des_dhl_national'
+          'dhl_express_international_worldwide'
         ],
         tracking_link: 'https://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=en&idc='
       }

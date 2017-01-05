@@ -129,7 +129,7 @@ module.exports = [
           self.showError = false;
           self.showPrintLabelButton = false;
 
-          if ( response && response.route_information && !!response.route_information.length ) {
+          if ( response && response.events && response.events.length && response.route_information && !!response.route_information.length ) {
             self.state = self.availableStates.indexOf( response.status );
             self.errorState = self.availableErrorStates.indexOf( response.status );
             self.carrierInfo = getCarrierInfo( response.events, response.route_information );
