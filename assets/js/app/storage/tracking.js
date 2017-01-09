@@ -73,16 +73,16 @@ module.exports = [
       if ( checkCase( 'USPS', 1 ) ) {
         self.data.events.push( customEventForCarrierOnRoute( 'USPS', 1 ) );
       }
-      if ( checkCase( 'USPS', 2 ) ) {
-        self.data.events.push( customEventForCarrierOnRoute( 'USPS', 2 ) );
+      if ( checkCase( 'USPS', 3 ) ) {
+        self.data.events.push( customEventForCarrierOnRoute( 'USPS', 1 ) );
       }
 
-      /* DHL */
+      /* DHL (AMERIKA) */
       if ( checkCase( 'DHL', 1 ) ) {
         self.data.events.push( customEventForCarrierOnRoute( 'DHL', 1 ) );
       }
-      if ( checkCase( 'DHL', 2 ) ) {
-        self.data.events.push( customEventForCarrierOnRoute( 'DHL', 2 ) );
+      if ( checkCase( 'DHL', 3 ) ) {
+        self.data.events.push( customEventForCarrierOnRoute( 'DHL', 1 ) );
       }
     };
 
@@ -164,20 +164,12 @@ module.exports = [
       },
       USPS: {
         carrier_code: 'usps',
-        service_codes: [ 'des_usps_dhl_dropoff',
-          'des_usps_dpd_pickup',
-          'des_usps_hermes_pickup',
-          'des_usps_national'
-        ],
+        service_codes: [ 'usps_national' ],
         tracking_link: 'https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1='
       },
       DHL: {
         carrier_code: 'dhl',
-        service_codes: [ 'des_dhl_dhl_dropoff',
-          'des_dhl_dpd_pickup',
-          'des_dhl_hermes_pickup',
-          'dhl_express_international_worldwide'
-        ],
+        service_codes: [ 'dhl_express_international_worldwide' ],
         tracking_link: 'https://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=en&idc='
       }
     };

@@ -27,11 +27,6 @@ module.exports = [
     self.errorState = -1;
     self.carrierInfo = null;
 
-    // IN_TRANSIT.FORWARD.DISTRIBUTION_CENTER
-    // HANDOVER.CARRIER.LOCATION
-    // WAREHOUSE
-    // NOT_AVAILABLE.RECEIVER.NEW_DELIVERY_ATTEMPT
-
     self.packageStates = [ {
       tooltip: 'LABEL_PRINTED',
       icon: function () {
