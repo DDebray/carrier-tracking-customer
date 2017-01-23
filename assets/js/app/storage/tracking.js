@@ -74,7 +74,7 @@ module.exports = [
         self.data.events.push( customEventForCarrierOnRoute( 'USPS', 1 ) );
       }
       if ( checkCase( 'USPS', 3 ) ) {
-        self.data.events.push( customEventForCarrierOnRoute( 'USPS', 1 ) );
+        self.data.events.push( customEventForCarrierOnRoute( 'USPS', 3 ) );
       }
 
       /* DHL (AMERIKA) */
@@ -82,7 +82,7 @@ module.exports = [
         self.data.events.push( customEventForCarrierOnRoute( 'DHL', 1 ) );
       }
       if ( checkCase( 'DHL', 3 ) ) {
-        self.data.events.push( customEventForCarrierOnRoute( 'DHL', 1 ) );
+        self.data.events.push( customEventForCarrierOnRoute( 'DHL', 3 ) );
       }
     };
 
