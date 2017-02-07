@@ -18,7 +18,7 @@ module.exports = [ '$translateProvider', function ( $translateProvider ) {
   self.endpoints = {
     ui: {
       development: 'https://api-development.coureon.com/ui/',
-      testing: 'https://api-testing.coureon.com/ui/',
+      testing: 'https://api-development.coureon.com/ui/',
       staging: 'https://api-staging.coureon.com/ui/',
       production: 'https://api.coureon.com/ui/'
     },
