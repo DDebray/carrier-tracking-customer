@@ -17,15 +17,15 @@ module.exports = [ '$translateProvider', function ( $translateProvider ) {
 
   self.endpoints = {
     ui: {
-      development: 'https://api-development.coureon.com/ui/',
-      testing: 'https://api-development.coureon.com/ui/',
+      development: 'https://api-testing.coureon.com/ui/',
+      testing: 'https://api-testing.coureon.com/ui/',
       staging: 'https://api-staging.coureon.com/ui/',
       production: 'https://api.coureon.com/ui/'
     },
     cx: {
       local: 'http://localhost:8080/zooron-web/cx/',
       development: 'https://api-testing.coureon.com/cx/',
-      testing: 'https://api-testing.coureon.com/cx/',
+      testing: 'https://api-development.coureon.com/cx/',
       staging: 'https://api-staging.coureon.com/cx/',
       production: 'https://api.coureon.com/cx/'
     },
