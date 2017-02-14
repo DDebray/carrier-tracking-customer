@@ -32,7 +32,8 @@ module.exports = function () {
           'atpost',
           'gls',
           'yodel',
-          'usps'
+          'usps',
+          'bpost'
         ];
 
       var rateCode = ( scope.rate() || {} ).code || '';
