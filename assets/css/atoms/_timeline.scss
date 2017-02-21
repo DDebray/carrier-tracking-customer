@@ -1,32 +1,78 @@
 $timeline-date-width: 164px;
 $timeline-width: 2px;
-$timeline-state-size: 16px;
+$timeline-state-size: 30px;
 
 .timeline {
     position: relative;
-    margin: $_ySpacing 0 $_ySpacing * 3;
+    padding: $_ySpacing;
+    border: 2px solid $_rgbAthensGray;
+    border-radius: 5px;
     @media #{$small-only} {
         margin-bottom: $_ySpacing * 2;
+    }
+
+    &__title {
+        margin-bottom: $_ySpacing;
+    }
+
+    &__date-column {
+        max-width: 100%;
+    }
+
+    &__description-column {
+        max-width: 100%;
     }
 
     &__event {
         @include clearfix;
         position: relative;
-        margin: $_ySpacing 0;
+        padding-right: $_ySpacing*1.5 $_xSpacing*1.5;
+        margin: $_ySpacing*2 0;
+        transition: 1s linear all;
+        -webkit-transition: 1s linear all;
         @media #{$small-only} {
             margin: $_ySpacing 0 $_ySpacing * 1.5;
         }
 
+        &:not(:first-child) {
+            & .timeline__date,
+            & .timeline__description-text {
+                opacity: .5;
+                font-weight: lighter;
+            }
+
+            & .timeline__description-text {
+                border: 1px solid $_rgbAlto * .6;
+            }
+
+            & .timeline__state {
+                color: $_rgbAlto * .6;
+            }
+        }
+
         &:first-child {
+            flex-direction: column;
             margin-top: 0;
 
-            .timeline__state-line {
-                top: 50%;
-                height: calc(50% + #{$_ySpacing});
-                @media #{$small-only} {
-                    top: calc(6px + #{$timeline-state-size / 2});
-                    height: calc(100% + #{$_ySpacing * 1.5} - 6px - #{$timeline-state-size / 2});
-                }
+            & .timeline__date__text {
+                float: left;
+                font-weight: bold;
+            }
+
+            & .timeline__date {
+                padding-left: 0;
+                margin-bottom: 30px;
+                padding-top: 0;
+            }
+
+            & .timeline__description-text {
+                padding: 30px;
+                font-weight: bold;
+            }
+
+            & .timeline__carrier {
+                font-weight: bold;
+                border-width: 2px;
             }
         }
 
@@ -54,11 +100,9 @@ $timeline-state-size: 16px;
     }
 
     &__date {
-        height: 68px;
         padding: $_defaultSpacing / 2;
         border-radius: $_borderRadiusDefault;
-        color: $_rgbWhite;
-        background-color: $_rgbPacificBlue;
+        color: $_rgbBlack;
         font-weight: bold;
         text-align: center;
         z-index: $zindex-inner;
@@ -88,7 +132,6 @@ $timeline-state-size: 16px;
         border-radius: 50%;
         line-height: $timeline-state-size;
         font-size: $timeline-state-size;
-        border: $timeline-width solid $_rgbDustyGray;
         background-color: $_rgbWhite;
         color: $_rgbBlush;
         padding: $_defaultSpacing / 4;
@@ -108,7 +151,7 @@ $timeline-state-size: 16px;
             position: absolute;
             top: 0;
             left: calc(50% - #{$timeline-width / 2});
-            height: calc(100% + #{$_ySpacing} + 6px + #{$timeline-state-size / 2});
+            height: calc(100% + #{$_ySpacing} + #{$timeline-state-size / 2} + 10px);
             width: $timeline-width;
             background: $_rgbDustyGray;
             z-index: $zindex-background;
@@ -119,14 +162,13 @@ $timeline-state-size: 16px;
         z-index: $zindex-inner;
 
         &-text {
+            border-radius: 10px;
+            border: 3px solid $_rgbPacificBlue;
+            padding: $_ySpacing $_xSpacing;
             @media #{$small-only} {
                 padding: $_defaultSpacing / 2;
             }
-            @media #{$medium-up} {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-            }
+            @media #{$medium-up} {}
         }
     }
 
@@ -135,7 +177,7 @@ $timeline-state-size: 16px;
         display: inline-block;
         font-size: 75%;
         color: $_rgbMineShaft;
-        background-color: lighten($_rgbAlto, 10%);
+        border: 1px solid $_rgbDustyGray;
         padding: 0 $_defaultSpacing / 4;
         border-radius: $_borderRadiusDefault;
         z-index: $zindex-inner;

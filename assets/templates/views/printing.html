@@ -1,5 +1,9 @@
 <hero hero-title="'PAGE.PRINTING.TITLE' | translate"
-    hero-image="url(images/hero/printing.jpg)"></hero>
+    hero-image="url(images/hero/default_rev_2.jpg)"
+    hero-position="printing"
+    >
+  <h1 class="hero__title" ng-bind="'PAGE.PRINTING.TITLE' | translate"></h1>
+</hero>
 
 <section class="section">
     <div class="section__inner"
@@ -75,4 +79,6 @@
 
 <banner banner-title="'SECTION.FOOTER.TITLE' | translate"
     banner-subtitle="'SECTION.FOOTER.SUBTITLE' | translate"
-    tracking-id="{{tracking.data.id.toUpperCase()}}"></banner>
+    tracking-id="{{tracking.data.id.toUpperCase()}}"
+    show-print-button="false"
+    ></banner>

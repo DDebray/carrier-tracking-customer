@@ -5,7 +5,8 @@ module.exports = function () {
     restrict: 'E',
     scope: {
       heroTitle: '@heroTitle',
-      heroImage: '@heroImage'
+      heroImage: '@heroImage',
+      heroPosition: '@heroPosition'
     },
     transclude: true,
     replace: true,

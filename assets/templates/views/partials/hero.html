@@ -1,8 +1,26 @@
-<div class="hero"
+<!-- <div class="hero"
     ng-style="{ 'background-image' : '{{ heroImage }}' }">
     <div class="hero__content">
         <h1 class="hero__title"
             ng-bind="{{ heroTitle }}"></h1>
         <div ng-transclude></div>
     </div>
+</div> -->
+<div class=" hero" ng-class="{
+  'hero--landingpage' : heroPosition === 'landingpage',
+  'hero--tracking' : heroPosition === 'tracking',
+  'hero--printing' : heroPosition === 'printing'
+}" ng-style="{
+  'background-image' : heroImage
+}">
+  <div class="fade-in hero__content">
+    <div class="row">
+      <div class="small-12 medium-12">
+        <h1 class="hero__title"
+          ng-if="heroPosition === 'landingpage'"
+          ng-bind="{{ heroTitle }}"></h1>
+      </div>
+    </div>
+    <div ng-transclude></div>
+  </div>
 </div>

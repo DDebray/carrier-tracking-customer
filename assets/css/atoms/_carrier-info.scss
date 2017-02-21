@@ -1,64 +1,60 @@
 .carrier-info {
-  z-index: $zindex-inner;
+    z-index: $zindex-inner;
+    display: inline-block;
+    width: 100%;
+    // min-height: 68px;
+    min-height: 184px;
+    margin-bottom: $_defaultSpacing;
+    padding: $_ySpacing;
+    transition: background-color $_tShort ease;
+    text-align: center;
+    border: 2px solid $_rgbAthensGray;
+    border-radius: 5px;
+    font-size: $_fsSub;
+    @media #{$small-only} {
+        padding: $_defaultSpacing / 2;
+    }
 
-  display: inline-block;
+    &:hover {
+        background-color: lighten($_rgbAthensGray, 2%);
+    }
 
-  width: 100%;
-  // min-height: 68px;
-  min-height: 184px;
-  margin-bottom: $_defaultSpacing;
-  padding: $_defaultSpacing;
+    &__title {
+        margin-bottom: $_ySpacing;
+    }
 
-  transition: background-color $_tShort ease;
-  text-align: center;
+    &__additional-info,
+    &__link,
+    &__mail,
+    &__tel,
+    &__tracking-number {
+        display: block;
+        color: $_rgbBlack;
+        font-size: $_fsSub;
+    }
 
-  border: 2px solid lighten($_rgbDustyGray, 20%);
-  border-radius: $_borderRadiusDefault;
-  background-color: $_rgbWhite;
+    &__link {
+        display: inline;
+    }
 
-  font-size: $_fsSub;
+    &__additional-info {
+        font-size: $_fsSub;
+        line-height: $_fsSub;
+    }
 
-  @media #{$small-only} {
-    padding: $_defaultSpacing / 2;
-  }
+    &__link,
+    &__mail,
+    &__tel,
+    &__tracking-number {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
 
-  &:hover {
-    background-color: lighten($_rgbAthensGray, 2%);
-  }
-
-  &__additional-info,
-  &__link,
-  &__mail,
-  &__tel,
-  &__tracking-number {
-    display: block;
-
-    color: lighten($_rgbMineShaft, 10%);
-
-    font-size: $_fsSmall;
-  }
-
-  &__additional-info {
-    font-size: $_fsTiny;
-    line-height: $_lhTiny;
-  }
-
-  &__link,
-  &__mail,
-  &__tel,
-  &__tracking-number {
-    overflow: hidden;
-
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  &__logo {
-    display: block;
-
-    max-width: 134px;
-    height: 43px;
-    margin: auto;
-    margin-bottom: $_defaultSpacing / 2;
-  }
+    &__logo {
+        display: block;
+        max-width: 200px;
+        height: 80px;
+        margin: auto auto $_defaultSpacing / 2;
+    }
 }

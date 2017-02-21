@@ -1,101 +1,100 @@
 .button {
-  display: inline-block;
-  text-decoration: none;
-  padding: 0 17px;
-  font-family: $_ffSansBold;
-  font-size: $_fsDefaultFallback;
-  line-height: 2.588rem;
-  height: 2.588rem;
-  white-space: nowrap;
-  cursor: pointer;
-  border: none;
+    display: inline-block;
+    text-decoration: none;
+    padding: 0 17px;
+    font-family: $_ffSansBold;
+    font-size: $_fsDefaultFallback;
+    line-height: 2.588rem;
+    height: 2.588rem;
+    white-space: nowrap;
+    cursor: pointer;
+    border: none;
 
-  &:focus {
-    outline: 0;
-  }
-
-  & + & {
-    margin-left: $_xSpacing;
-  }
-
-  &--ghost {
-    background: none;
-    border: 1px solid;
-    border-radius: $_borderRadiusDefault;
-
-    transition: background $_tShort ease-in-out, color $_tShort ease-in-out, border-color $_tShort ease-in-out;
-  }
-
-  &--ghostWhite {
-    @extend .button;
-    @extend .button--ghost;
-
-    color: $_rgbWhite;
-    border-color: $_rgbWhite;
-
-    &:hover {
-      background: transparentize($_rgbWhite, 0.8);
+    &:focus {
+        outline: 0;
     }
-  }
 
-  &--ghostBlush {
-    @extend .button;
-    @extend .button--ghost;
-
-    color: $_rgbBlush;
-    border-color: $_rgbBlush;
-    background: $_rgbWhite;
-
-    &:hover {
-      color: darken($_rgbBlush, 10);
-      border-color: darken($_rgbBlush, 10);
-      background: rgba($_rgbBlush, .06);
+    & + & {
+        margin-left: $_xSpacing;
     }
-  }
 
-  &--blush {
-    // @include resetButton;
-    @extend .button;
+    &--ghost {
+        background: none;
+        border: 1px solid;
+        border-radius: $_borderRadiusDefault;
+        transition: background $_tShort ease-in-out, color $_tShort ease-in-out, border-color $_tShort ease-in-out;
+    }
 
-    border-radius: $_borderRadiusDefault;
+    &--ghostWhite {
+        @extend .button;
+        @extend .button--ghost;
+        color: $_rgbWhite;
+        border-color: $_rgbWhite;
+
+        &:hover {
+            background: transparentize($_rgbWhite, 0.8);
+        }
+    }
+
+    &--ghostBlush {
+        @extend .button;
+        @extend .button--ghost;
+        color: $_rgbBlush;
+        border-color: $_rgbBlush;
+        background: $_rgbWhite;
+
+        &:hover {
+            color: darken($_rgbBlush, 10);
+            border-color: darken($_rgbBlush, 10);
+            background: rgba($_rgbBlush, .06);
+        }
+    }
+
+    &--blush {
+        // @include resetButton;
+        @extend .button;
+        border-radius: $_borderRadiusDefault;
+        text-align: center;
+        background: $_rgbBlush;
+        color: $_rgbWhite;
+        transition: background $_tShort ease-in-out;
+
+        &:hover {
+            background: darken($_rgbBlush, 10);
+            color: $_rgbWhite;
+        }
+    }
+
+    &--filling {
+        width: 100%;
+        text-align: center;
+    }
+
+    &--right {
+        float: right;
+    }
+
+    &--disabled {
+        cursor: not-allowed;
+        background: lighten($_rgbBlush, 10);
+
+        &:hover {
+            background: lighten($_rgbBlush, 10);
+        }
+    }
+}
+
+.cta {
     text-align: center;
     background: $_rgbBlush;
     color: $_rgbWhite;
     transition: background $_tShort ease-in-out;
+
     &:hover {
-      background: darken($_rgbBlush, 10);
+        background: darken($_rgbBlush, 10);
     }
-  }
-
-  &--filling {
-    width:100%;
-    text-align:center;
-  }
-
-  &--right {
-    float: right;
-  }
-
-  &--disabled {
-    cursor: not-allowed;
-    background: lighten($_rgbBlush, 10);
-    &:hover {
-      background: lighten($_rgbBlush, 10);
-    }
-  }
 }
-
-.cta {
-  text-align: center;
-  background: $_rgbBlush;
-  color: $_rgbWhite;
-  transition: background $_tShort ease-in-out;
-  &:hover {
-    background: darken($_rgbBlush, 10);
-  }
-}
-
 // button,
 input[type=submit] {
-  @extend .button;
+    @extend .button;
 }

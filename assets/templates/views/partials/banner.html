@@ -1,21 +1,15 @@
-<section class="section section--blue section--center"
+<section class="section section--blue section--center banner__section"
     style="background-image: url(https://www.coureon.com/content/footer-cta.jpg)">
     <div class="section__inner">
         <h2 class="section__title"
             ng-bind="{{ bannerTitle }}"></h2>
         <p class="section__subtitle"
             ng-bind="{{ bannerSubtitle }}"></p>
-        <!-- enable this to revert COUREON-2198 -->
-        <form class="footerForm">
-            <div class="footerForm__elements"
-                ng-controller="PageBaseCtrl as base">
-                <button class="button button--blush"
-                    ng-class="{ 'button--disabled' : !trackingId }"
-                    type="button"
-                    name="button"
-                    ng-click="base.printReturnLabel(trackingId)"
-                    ng-bind="'SECTION.FOOTER.PRINT_RETURN_LABEL_BUTTON' | translate"></button>
-            </div>
-        </form>
+        <a class="button button--blush"
+          href="{{ bannerLink }}"
+          target="_blank"
+          ng-if="!hideBannerLink">
+          <span ng-bind="'COMMON.SECTION.BANNER.LINK' | translate"></span>
+        </a>
     </div>
 </section>

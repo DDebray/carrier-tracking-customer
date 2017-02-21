@@ -1,43 +1,34 @@
 /* SPACINGS */
-$_xGutter  : 35px;
-$_yGutter  : 70px;
-
-$_xSpacing : 25px;
-$_ySpacing : 25px;
-
-// $_defaultSpacing : 1.5rem;
-$_defaultSpacing : 16px;
-$_formSpacing : 8px;
-
+$_xGutter: 35px;
+$_yGutter: 70px;
+$_xSpacing: 25px;
+$_ySpacing: 25px; // $_defaultSpacing : 1.5rem;
+$_defaultSpacing: 16px;
+$_formSpacing: 8px;
 /* BORDERS */
-$_borderWidthSmall : 1px;
-$_borderWidthMedium : 2px;
-$_borderWidthLarge : 4px;
-$_borderRadiusDefault : 6px;
-
+$_borderWidthSmall: 1px;
+$_borderWidthMedium: 2px;
+$_borderWidthLarge: 4px;
+$_borderRadiusDefault: 6px;
 /* TIMINGS */
-$_tShort : 300ms;
-$_tMed   : 500ms;
-$_tLong  : 1000ms;
-
+$_tShort: 300ms;
+$_tMed: 500ms;
+$_tLong: 1000ms;
 /* HEIGHTS */
-$_hHeader   : 80px;
-$_hBanner   : 350px;
-$_hInput    : 35px;
-
+$_hHeader: 80px;
+$_hBanner: auto;
+$_hInput: 35px;
 /* WIDTHS */
-$surface-min-width : 320px;
-$icon-width-big : 32px;
-$icon-width-default : 24px;
-$icon-width-smaller : 16px;
-$icon-width-smallest : 13px;
-
-$_wSmall     : 0;
-$_wMedium    : 481px;
-$_wLarge     : 768px;
-$_wXLarge    : 1000px;
-
-$_wSidebar       : 300px;
-$_maxPageWidth   : 1140px;
-$_maxSlimPageWidth   : 900px;
-$_maxNarrowWidth : 700px;
+$surface-min-width: 320px;
+$icon-width-big: 32px;
+$icon-width-default: 24px;
+$icon-width-smaller: 16px;
+$icon-width-smallest: 13px;
+$_wSmall: 0;
+$_wMedium: 481px;
+$_wLarge: 640px;
+$_wXLarge: 1000px;
+$_wSidebar: 300px;
+$_maxPageWidth: 1140px;
+$_maxSlimPageWidth: 900px;
+$_maxNarrowWidth: 700px;

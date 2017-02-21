@@ -52,6 +52,7 @@ module.exports = [
         return;
       }
 
+      /* GLS */
       if ( checkCase( 'GLS_DE', 1 ) ) {
         self.data.events.push( customEventForCarrierOnRoute( 'GLS_DE', 1 ) );
       }
@@ -66,6 +67,22 @@ module.exports = [
       }
       if ( checkCase( 'GLS_ES', 2 ) ) {
         self.data.events.push( customEventForCarrierOnRoute( 'GLS_ES', 2 ) );
+      }
+
+      /* USPS */
+      if ( checkCase( 'USPS', 1 ) ) {
+        self.data.events.push( customEventForCarrierOnRoute( 'USPS', 1 ) );
+      }
+      if ( checkCase( 'USPS', 3 ) ) {
+        self.data.events.push( customEventForCarrierOnRoute( 'USPS', 3 ) );
+      }
+
+      /* DHL (AMERIKA) */
+      if ( checkCase( 'DHL', 1 ) ) {
+        self.data.events.push( customEventForCarrierOnRoute( 'DHL', 1 ) );
+      }
+      if ( checkCase( 'DHL', 3 ) ) {
+        self.data.events.push( customEventForCarrierOnRoute( 'DHL', 3 ) );
       }
     };
 
@@ -105,7 +122,8 @@ module.exports = [
         carrier_tracking_link: specialCarrierCases[ carrierKey ].tracking_link + self.data.route_information[ route_number - 1 ].carrier_tracking_number,
         description: 'HANDOVER_TO_' + carrierKey,
         timestamp: 'Keine Zeitangaben',
-        status: 'IN_DELIVERY'
+        status: 'IN_DELIVERY',
+        route_number: route_number
       };
     };
 
@@ -143,6 +161,16 @@ module.exports = [
           'gls_es_hermes_pickup'
         ],
         tracking_link: 'https://gls-group.eu/ES/es/seguimiento-de-envios?match='
+      },
+      USPS: {
+        carrier_code: 'usps',
+        service_codes: [ 'usps_national' ],
+        tracking_link: 'https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1='
+      },
+      DHL: {
+        carrier_code: 'dhl',
+        service_codes: [ 'dhl_express_international_worldwide' ],
+        tracking_link: 'https://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=en&idc='
       }
     };
 
