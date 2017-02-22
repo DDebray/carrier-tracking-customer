@@ -118,8 +118,12 @@ module.exports = [
     }
 
     if ( self.trackingId ) {
+
+      self.loadingIndicator = true;
+
       StorageTracking.track( self.trackingId, function ( response ) {
 
+          self.loadingIndicator = false;
           self.data = response;
           self.showError = false;
           self.showPrintLabelButton = false;
