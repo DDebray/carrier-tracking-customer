@@ -99,6 +99,7 @@ module.exports = [
     } ];
 
     var getCarrierInfo = function ( events, routes ) {
+      debugger;
       var lastEvent = events[ events.length - 1 ];
       var carrier = lastEvent.carrier;
 
