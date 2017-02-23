@@ -99,15 +99,16 @@ module.exports = [
     } ];
 
     var getCarrierInfo = function ( events, routes ) {
-      debugger;
       var lastEvent = events[ events.length - 1 ];
       var carrier = lastEvent.carrier;
+      var currentRoute = routes.filter( function ( route ) {
+        return route.route_number === lastEvent.route_number;
+      } );
 
       if ( carrier.code === 'gls' ) {
-        carrier.country = routes[ lastEvent.route_number - 1 ].country;
+        carrier.country = currentRoute.country;
       }
-
-      carrier.country_code = routes[ lastEvent.route_number - 1 ].country;
+      carrier.country_code = currentRoute.country;
 
       return carrier;
     };
