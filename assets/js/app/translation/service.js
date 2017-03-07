@@ -4,10 +4,11 @@ module.exports = [ '$q', '$http', function ( $q, $http ) {
   return function ( options ) {
     var deferred = $q.defer();
 
-    $http.get( options.url + options.key, {} )
-      .success( function ( data ) {
-        deferred.resolve( data && data.content && data.content.translations ? data.content.translations : {} );
-      } ).error( function () {
+    $http.get( options.url + options.key, {} ).then(
+      function ( success ) {
+        deferred.resolve( success.data && success.data.content && success.data.content.translations ? success.data.content.translations : {} );
+      },
+      function ( error ) {
         var essentials = require( './essentials' );
         if ( essentials[ options.key ] ) {
           deferred.resolve( essentials[ options.key ] );

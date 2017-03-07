@@ -28,7 +28,7 @@
     "babelify": "^7.2.0",
     "browser-sync": "^2.11.0",
     "browserify": "^13.0.0",
-    "connect-modrewrite": "^0.9.0",
+    "connect-modrewrite": "^0.10.1",
     "del": "^2.2.0",
     "groc": "^0.8.0",
     "gulp": "github:gulpjs/gulp#4.0",
