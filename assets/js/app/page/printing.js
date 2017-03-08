@@ -34,6 +34,8 @@ module.exports = [
       sofort_ueberweisung: 'fa-university'
     };
 
+    self.invoiceAddress = 'SENDER_ADDRESS';
+
     self.addresses = function () {
       return StorageShipment.addresses;
     };
@@ -88,7 +90,7 @@ module.exports = [
           CommonUi.modal.data.status = 'WAIT_FOR_ANSWER';
           CommonUi.lock();
           StorageTransaction.transactionCallback = this.finishTransaction;
-          StorageTransaction.start( trackingId, self.postalCodeForVerification );
+          StorageTransaction.start( trackingId, self.postalCodeForVerification, self.invoiceAddress );
         },
         finishTransaction: function ( error, transactionErrors, downloads ) {
           if ( !error ) {

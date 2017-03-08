@@ -110,9 +110,9 @@ module.exports = [
       }
 
       if ( carrier.code === 'gls' ) {
-        carrier.country = currentRoute.country;
+        carrier.country = currentRoute[ 0 ].country;
       }
-      carrier.country_code = currentRoute.country;
+      carrier.country_code = currentRoute[ 0 ].country;
 
       return carrier;
     };

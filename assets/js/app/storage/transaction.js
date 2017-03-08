@@ -65,7 +65,7 @@ module.exports = [
      * and starts the transaction.
      * @param  {String} trackingId a string holding the tracking number.
      */
-    self.start = function ( trackingId, postalCodeForVerification ) {
+    self.start = function ( trackingId, postalCodeForVerification, invoiceAddress ) {
       if ( !self.transactionCallback ) {
         return;
       }
@@ -75,6 +75,7 @@ module.exports = [
       requestParameters.payment_method = self.selectedMethod;
       requestParameters.tracking_number = trackingId;
       requestParameters.postal_code_for_verification = postalCodeForVerification;
+      requestParameters.invoice_address = invoiceAddress;
 
       if ( self.methods[ self.selectedMethod ].data ) {
         requestParameters.iban = self.methods[ self.selectedMethod ].data.iban;
