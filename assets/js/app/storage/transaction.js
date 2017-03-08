@@ -19,7 +19,8 @@ module.exports = [
         selected_rate_code: null,
         payment_method: null,
         iban: null,
-        bic: null
+        bic: null,
+        invoice_address: null
       };
 
     /**
