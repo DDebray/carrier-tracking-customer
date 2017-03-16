@@ -133,7 +133,10 @@
                     <div ng-if="tracking.carrierInfo.tracking_number"
                          class="carrier-info__tracking-number">
                         <span ng-bind="('COMMON.CARRIER.ALL.TRACKING_NUMBER') | translate"></span>
-                        <span ng-bind="tracking.carrierInfo.tracking_number"></span>
+                        <a target="_blank" ng-if="tracking.carrierInfo.tracking_url" href="{{tracking.carrierInfo.tracking_url}}">
+                          <span ng-bind="tracking.carrierInfo.tracking_number"></span>
+                        </a>
+                        <span ng-if="!tracking.carrierInfo.tracking_url" ng-bind="tracking.carrierInfo.tracking_number"></span>
                     </div>
                 </div>
             </div>

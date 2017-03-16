@@ -105,6 +105,10 @@ module.exports = [
         return route.route_number === lastEvent.route_number;
       } );
 
+      if ( currentRoute[ 0 ] && currentRoute[ 0 ].tracking_url ) {
+        carrier.tracking_url = currentRoute[ 0 ].tracking_url;
+      }
+
       if ( carrier.code === 'bpost' ) {
         carrier.tracking_number = null;
       }
