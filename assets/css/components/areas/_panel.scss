@@ -3,9 +3,18 @@
   position: relative;
   padding: $_ySpacing $_xSpacing;
 
-  border: 1px solid $_rgbAlto;
+  border: 2px solid $_rgbAthensGray;
   border-radius: $_borderRadiusDefault;
   margin-bottom: $_formSpacing;
+
+  &-select {
+    float: right;
+    margin-top: 5px;
+
+    &-label {
+      float: right;
+    }
+  }
 
   &--merge {
     margin-bottom: 0;

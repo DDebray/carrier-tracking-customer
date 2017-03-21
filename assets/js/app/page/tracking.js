@@ -104,15 +104,19 @@ module.exports = [
       var currentRoute = routes.filter( function ( route ) {
         return route.route_number === lastEvent.route_number;
       } );
+      
+      if ( currentRoute[ 0 ] && currentRoute[ 0 ].tracking_url ) {
+        carrier.tracking_url = currentRoute[ 0 ].tracking_url;
+      }
 
       if ( carrier.code === 'bpost' ) {
         carrier.tracking_number = null;
       }
 
       if ( carrier.code === 'gls' ) {
-        carrier.country = currentRoute.country;
+        carrier.country = currentRoute[ 0 ].country;
       }
-      carrier.country_code = currentRoute.country;
+      carrier.country_code = currentRoute[ 0 ].country;
 
       return carrier;
     };
@@ -124,8 +128,12 @@ module.exports = [
     }
 
     if ( self.trackingId ) {
+
+      self.loadingIndicator = true;
+
       StorageTracking.track( self.trackingId, function ( response ) {
 
+          self.loadingIndicator = false;
           self.data = response;
           self.showError = false;
           self.showPrintLabelButton = false;

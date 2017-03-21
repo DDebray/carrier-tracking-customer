@@ -34,6 +34,8 @@ module.exports = [
       sofort_ueberweisung: 'fa-university'
     };
 
+    self.selectedAddress = 'SENDER_ADDRESS';
+
     self.addresses = function () {
       return StorageShipment.addresses;
     };
@@ -88,7 +90,8 @@ module.exports = [
           CommonUi.modal.data.status = 'WAIT_FOR_ANSWER';
           CommonUi.lock();
           StorageTransaction.transactionCallback = this.finishTransaction;
-          StorageTransaction.start( trackingId, self.postalCodeForVerification );
+          var invoiceAddress = getInvoiceAddress();
+          StorageTransaction.start( trackingId, self.postalCodeForVerification, invoiceAddress );
         },
         finishTransaction: function ( error, transactionErrors, downloads ) {
           if ( !error ) {
@@ -131,6 +134,12 @@ module.exports = [
           $location.path( '/tracking/' + trackingId );
         }
       } );
+    };
+
+    var getInvoiceAddress = function () {
+      var invoiceAddress = Object.assign( {}, self.addresses()[ self.selectedAddress ] );
+      invoiceAddress.address_type = 'INVOICE_ADDRESS';
+      return invoiceAddress;
     };
 
     showVerificationModal();

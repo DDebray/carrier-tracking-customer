@@ -1,5 +1,13 @@
 .address {
 
+  &-headline {
+    border-radius: $_borderRadiusDefault;
+    color: $_rgbBlack;
+    font-weight: bold;
+    z-index: $zindex-inner;
+    font-size: $_fsSub;
+  }
+
   &-container {
     position: relative;
     overflow: hidden;

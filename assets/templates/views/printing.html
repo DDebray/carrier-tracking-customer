@@ -29,21 +29,21 @@
             <div ng-if="!printing.showError()"
                 class="column small-12 large-6 h-spacing-bottom--wide"
                 ng-if="printing.addresses()">
+
+                <h1><span translate="PAGE.PRINTING.ADDRESSES.TITLE"></span></h1>
                 <div class="area-panel area-panel--merge"
                     ng-repeat="(addressType, address) in printing.addresses()"
                     ng-click="address.is_editable ? printing.openAddressForm(address, addressType) : null"
                     ng-class="{ 'widget-address' : address.is_editable, 'widget-address--js-editing' : (address.is_editable && printing.openAddress.address_type == addressType) }">
+
+                    <input class="area-panel-select" type="radio" name="invoice_address" ng-model="printing.selectedAddress" ng-value="addressType">
+                    <label class="area-panel-select-label" for="invoice_address"><span translate="COMMON.ADDRESSES.INVOICE_ADDRESS"></span></label>
 
                     <h3 class="address-headline"
                         ng-bind="('COMMON.ADDRESSES.' + addressType) | translate"></h3>
 
                     <div class="address-container"
                         watch-height="{ condition: (!printing.openAddress || (printing.openAddress && printing.openAddress.address_type !== addressType)), targetOnTrue: 'js-target-on-true', targetOnFalse: 'js-target-on-false', disableAnimationClass: 'address-container--no-animation' }">
-
-                        <!-- <small><pre>!printing.openAddress: {{! printing.openAddress | json }}</pre></small>
-                        <small><pre>printing.openAddress: {{ printing.openAddress | json }}</pre></small>
-                        <small><pre>printing.openAddress.address_type: {{ printing.openAddress.address_type | json }}</pre></small>
-                        <small><pre>addressType: {{ addressType | json }}</pre></small> -->
 
                         <address class="address-display js-target-on-true"
                             ng-class="{ 'address-display--is-visible' : (address && !printing.openAddress || (printing.openAddress && printing.openAddress.address_type !== addressType)) }"
@@ -63,6 +63,8 @@
             <!-- RATES: -->
             <div ng-if="!printing.showError()"
                 class="column small-12 large-6">
+
+                <h1><span translate="PAGE.PRINTING.RATES.TITLE"></span></h1>
                 <div class="area-panel area-panel--container area-panel--merge"
                     ng-if="printing.rates()">
                     <div class="widget-rate"
