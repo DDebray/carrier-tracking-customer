@@ -133,7 +133,11 @@
                         </a>
                         <span ng-if="!tracking.carrierInfo.tracking_url" ng-bind="tracking.carrierInfo.tracking_number"></span>
                     </div>
-
+                    <div ng-if="('COMMON.CARRIER.' + tracking.carrierInfo.code.toUpperCase() + '.ADDITIONAL_INFO' | translate)
+                                !== 'COMMON.CARRIER.' + tracking.carrierInfo.code.toUpperCase() + '.ADDITIONAL_INFO'"
+                         class="carrier-info__additional-info">
+                      <span class="" translate="COMMON.CARRIER.{{tracking.carrierInfo.code.toUpperCase()}}.ADDITIONAL_INFO"></span>
+                    </div>
                     <div ng-if="tracking.carrierInfo.tracking_url"
                          class="carrier-info__link">
                       <span translate="COMMON.CARRIER.ALL.URL.PREFIX"></span>

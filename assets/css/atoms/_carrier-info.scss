@@ -16,7 +16,7 @@
     }
 
     & > div {
-      margin: auto auto $_defaultSpacing / 2;
+      margin: auto auto $_defaultSpacing;
     }
 
     &:hover {
@@ -42,8 +42,7 @@
     }
 
     &__additional-info {
-        font-size: $_fsSub;
-        line-height: $_fsSub;
+        font-weight: bold;
     }
 
     &__mail,
