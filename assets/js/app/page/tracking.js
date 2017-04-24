@@ -109,10 +109,6 @@ module.exports = [
         carrier.tracking_url = currentRoute[ 0 ].tracking_url;
       }
 
-      if ( carrier.code === 'bpost' ) {
-        carrier.tracking_number = null;
-      }
-
       if ( carrier.code === 'gls' ) {
         carrier.country = currentRoute[ 0 ].country;
       }
