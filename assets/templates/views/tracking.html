@@ -104,12 +104,6 @@
                               <span ng-bind="('PAGE.TRACKING.TIMELINE.EVENT.' + event.description.toUpperCase() | translate)
                               .replace('%CITY%', event.location.city || '')
                               .replace('%COUNTRY%', event.location.country || '') + '&nbsp;'"></span>
-                              <span class="timeline__carrier"
-                                  ng-if="!event.carrier_tracking_link && event.carrier && tracking.carrierInfo.length > 1"
-                                  ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"></span>
-                              <span class="timeline__carrier"
-                                  ng-if="!event.carrier.tracking_number"
-                                  ng-bind="('COMMON.CARRIER.TRACKING.COMMING_SOON') | translate"></span>
                           </div>
                       </span>
                   </div>
