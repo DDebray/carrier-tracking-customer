@@ -15,6 +15,10 @@
         padding: $_defaultSpacing / 2;
     }
 
+    & > div {
+      margin: auto auto $_defaultSpacing;
+    }
+
     &:hover {
         background-color: lighten($_rgbAthensGray, 2%);
     }
@@ -38,11 +42,9 @@
     }
 
     &__additional-info {
-        font-size: $_fsSub;
-        line-height: $_fsSub;
+        font-weight: bold;
     }
 
-    &__link,
     &__mail,
     &__tel,
     &__tracking-number {
@@ -55,6 +57,5 @@
         display: block;
         max-width: 200px;
         height: 80px;
-        margin: auto auto $_defaultSpacing / 2;
     }
 }

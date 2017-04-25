@@ -104,17 +104,6 @@
                               <span ng-bind="('PAGE.TRACKING.TIMELINE.EVENT.' + event.description.toUpperCase() | translate)
                               .replace('%CITY%', event.location.city || '')
                               .replace('%COUNTRY%', event.location.country || '') + '&nbsp;'"></span>
-                              <span class="timeline__carrier"
-                                  ng-if="!event.carrier_tracking_link && event.carrier && tracking.carrierInfo.length > 1"
-                                  ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"></span>
-                              <a class="link timeline__carrier"
-                                  ng-href="{{event.carrier_tracking_link}}"
-                                  ng-if="event.carrier_tracking_link && event.carrier.tracking_number"
-                                  ng-bind="('COMMON.CARRIER.' + event.carrier.code.toUpperCase()) | translate"
-                                  target="_blank"></a>
-                              <span class="timeline__carrier"
-                                  ng-if="!event.carrier.tracking_number"
-                                  ng-bind="('COMMON.CARRIER.TRACKING.COMMING_SOON') | translate"></span>
                           </div>
                       </span>
                   </div>
@@ -130,13 +119,28 @@
                 <div class="carrier-info">
                     <div class="carrier-info__logo"
                         ng-class="'image-carrier-' + tracking.carrierInfo.code"></div>
-                    <div ng-if="tracking.carrierInfo.tracking_number"
+                    <div ng-if="tracking.carrierInfo.tracking_number && tracking.carrierInfo.code !== 'bpost'"
                          class="carrier-info__tracking-number">
                         <span ng-bind="('COMMON.CARRIER.ALL.TRACKING_NUMBER') | translate"></span>
-                        <a target="_blank" ng-if="tracking.carrierInfo.tracking_url" href="{{tracking.carrierInfo.tracking_url}}">
+                        <a target="_blank" ng-if="tracking.carrierInfo.tracking_url" href="{{ tracking.carrierInfo.tracking_url }}">
                           <span ng-bind="tracking.carrierInfo.tracking_number"></span>
                         </a>
                         <span ng-if="!tracking.carrierInfo.tracking_url" ng-bind="tracking.carrierInfo.tracking_number"></span>
+                    </div>
+                    <div ng-if="!tracking.carrierInfo.tracking_number"
+                         class="carrier-info__tracking-number">
+                        <span ng-bind="('COMMON.CARRIER.ALL.TRACKING_NUMBER.NONE') | translate"></span>
+                    </div>
+                    <div ng-if="('COMMON.CARRIER.' + tracking.carrierInfo.code.toUpperCase() + '.ADDITIONAL_INFO' | translate)
+                                !== 'COMMON.CARRIER.' + tracking.carrierInfo.code.toUpperCase() + '.ADDITIONAL_INFO'"
+                         class="carrier-info__additional-info">
+                      <span translate="COMMON.CARRIER.{{tracking.carrierInfo.code.toUpperCase()}}.ADDITIONAL_INFO"></span>
+                    </div>
+                    <div ng-if="tracking.carrierInfo.tracking_url && tracking.carrierInfo.code !== 'bpost'"
+                         class="carrier-info__link">
+                      <span translate="COMMON.CARRIER.ALL.URL.PREFIX"></span>
+                        <a target="_blank" href="{{tracking.carrierInfo.tracking_url}}" translate="COMMON.CARRIER.ALL.URL.LINK_NAME"></a>
+                      <span translate="COMMON.CARRIER.ALL.URL.SUFFIX"></span>
                     </div>
                 </div>
             </div>

@@ -11,8 +11,6 @@ module.exports = [
     self.data = null;
 
     self.track = function ( trackingId, cb, cbErr ) {
-      // if (trackingId.indexOf('CO-') > -1 || trackingId.indexOf('CA-') > -1) {
-
       CommonRequest.tracking.getStatus( {
         trackingId: trackingId
       }, function ( response ) {
@@ -24,6 +22,7 @@ module.exports = [
           } );
 
           addCustomEvents();
+          filterDuplicates();
 
           if ( cb ) {
             cb( self.data );
@@ -172,6 +171,18 @@ module.exports = [
         service_codes: [ 'dhl_express_international_worldwide' ],
         tracking_link: 'https://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=en&idc='
       }
+    };
+
+    var filterDuplicates = function () {
+      var filteredEvents = self.data.events.filter( function ( event, index, list ) {
+        var lastIndex = list.length - 1;
+        if ( index < lastIndex ) {
+          return event.status !== list[ index + 1 ].status;
+        }
+        return true;
+      } );
+
+      self.data.events = filteredEvents;
     };
 
     return self;
