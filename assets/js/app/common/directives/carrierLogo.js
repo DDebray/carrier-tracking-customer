@@ -15,6 +15,7 @@ module.exports = function () {
           ccl: 'cclogistics'
         },
         validCarriers = [
+          'coureon',
           'amazon',
           'dhl',
           'dpag',
