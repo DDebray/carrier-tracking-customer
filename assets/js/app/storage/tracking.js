@@ -109,7 +109,7 @@ module.exports = [
      */
     var lastEventCompletesFirstRoute = function () {
       var lastEvent = self.data.events[ 0 ];
-      return lastEvent.route_number === 1 && lastEvent.status === 'SHIPPING_GENERATED';
+      return lastEvent && lastEvent.route_number === 1 && lastEvent.status === 'SHIPPING_GENERATED';
     };
 
     /**
@@ -120,8 +120,12 @@ module.exports = [
      */
     var lastEventIs24HoursOld = function () {
       var lastEvent = self.data.events[ 0 ];
-      var pastHours = CommonMoment().diff( lastEvent.moment, 'hours' );
-      return pastHours >= 24;
+      if ( lastEvent ) {
+        var pastHours = CommonMoment().diff( lastEvent.moment, 'hours' );
+        return pastHours >= 24;
+      } else {
+        return -1;
+      }
     };
 
     /**
