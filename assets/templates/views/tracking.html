@@ -119,7 +119,7 @@
                 <div class="carrier-info">
                     <div class="carrier-info__logo"
                         ng-class="'image-carrier-' + tracking.carrierInfo.code"></div>
-                    <div ng-if="tracking.carrierInfo.tracking_number"
+                    <div ng-if="tracking.carrierInfo.tracking_number && tracking.carrierInfo.code !== 'bpost'"
                          class="carrier-info__tracking-number">
                         <span ng-bind="('COMMON.CARRIER.ALL.TRACKING_NUMBER') | translate"></span>
                         <a target="_blank" ng-if="tracking.carrierInfo.tracking_url" href="{{ tracking.carrierInfo.tracking_url }}">
