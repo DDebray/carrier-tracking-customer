@@ -109,7 +109,7 @@ module.exports = [
      */
     var lastEventCompletesFirstRoute = function () {
       var lastEvent = self.data.events[ 0 ];
-      return lastEvent && lastEvent.route_number === 1 && lastEvent.status === 'SHIPPING_GENERATED';
+      return lastEvent && lastEvent.route_number === 1 && lastEvent.status === 'DELIVERED';
     };
 
     /**
