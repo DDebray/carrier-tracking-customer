@@ -51,13 +51,13 @@ module.exports = [
         return;
       }
 
-      // Placebo events:
-      addWarehouseEvent();
-
       // Custom event:
       addGLSCustomEvents();
       addUSPSCustomEvents();
       addDHLCustomEvents();
+
+      // Placebo events:
+      addWarehouseEvent();
     };
 
     /**
@@ -123,9 +123,8 @@ module.exports = [
       if ( lastEvent ) {
         var pastHours = CommonMoment().diff( lastEvent.moment, 'hours' );
         return pastHours >= 24;
-      } else {
-        return -1;
       }
+      return false;
     };
 
     /**
