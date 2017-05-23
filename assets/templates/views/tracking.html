@@ -136,7 +136,7 @@
                          class="carrier-info__additional-info">
                       <span translate="COMMON.CARRIER.{{tracking.carrierInfo.code.toUpperCase()}}.ADDITIONAL_INFO"></span>
                     </div>
-                    <div ng-if="tracking.carrierInfo.tracking_url && tracking.carrierInfo.code !== 'bpost'"
+                    <div ng-if="tracking.carrierInfo.tracking_url"
                          class="carrier-info__link">
                       <span translate="COMMON.CARRIER.ALL.URL.PREFIX"></span>
                         <a target="_blank" href="{{tracking.carrierInfo.tracking_url}}" translate="COMMON.CARRIER.ALL.URL.LINK_NAME"></a>
