@@ -108,7 +108,8 @@ module.exports = [
      * @returns {Boolean} if event's related route is the first route and if it's status is DELIVERED.
      */
     var lastEventCompletesFirstRoute = function () {
-      var lastEvent = self.data.events[ 0 ];
+      var numberOfEvents = ( self.data.events ) ? self.data.events.length : 0;
+      var lastEvent = self.data.events[ numberOfEvents - 1 ];
       return lastEvent && lastEvent.route_number === 1 && lastEvent.status === 'DELIVERED';
     };
 
@@ -119,7 +120,8 @@ module.exports = [
      * @returns {Boolean} if the past time is 24 hours or more.
      */
     var lastEventIs24HoursOld = function () {
-      var lastEvent = self.data.events[ 0 ];
+      var numberOfEvents = ( self.data.events ) ? self.data.events.length : 0;
+      var lastEvent = self.data.events[ numberOfEvents - 1 ];
       if ( lastEvent ) {
         var pastHours = CommonMoment().diff( lastEvent.moment, 'hours' );
         return pastHours >= 24;
