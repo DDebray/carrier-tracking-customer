@@ -97,7 +97,7 @@ module.exports = [
      * @returns {Boolean} if number of routes is higher than one.
      */
     var hasManyRoutes = function () {
-      return self.data.route_information || self.data.route_information.length > 1;
+      return self.data.route_information && self.data.route_information.length > 1;
     };
 
     /**
