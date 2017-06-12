@@ -240,6 +240,7 @@ module.exports = [
       GLS_FR: {
         carrier_code: 'gls',
         service_codes: [ 'gls_fr_dpd_pickup',
+          'gls_fr_dpd_dropoff',
           'gls_fr_dhl_dropoff',
           'gls_fr_hermes_pickup',
           'gls_fr_national',
