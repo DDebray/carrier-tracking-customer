@@ -1,10 +1,19 @@
 module.exports = [
-  '$routeParams', '$location', '$filter', 'CommonRequest', 'CommonMoment', 'CommonTracking', 'StorageTracking', 'CommonUi',
+  '$rootScope', '$timeout', '$routeParams', '$location', '$filter', 'CommonRequest', 'CommonMoment', 'CommonTracking', 'StorageTracking', 'CommonUi',
   function (
-    $routeParams, $location, $filter, CommonRequest, CommonMoment, CommonTracking, StorageTracking, CommonUi
+    $rootScope, $timeout, $routeParams, $location, $filter, CommonRequest, CommonMoment, CommonTracking, StorageTracking, CommonUi
   ) {
     'use strict';
     var self = this;
+
+    $rootScope.$on('$languageChangeSuccess', function (event, language) {
+      $timeout(function () {
+        self.data.events.map(function (event) {
+          event.moment.locale('en');
+          event.moment = CommonMoment(event.timestamp, null, language);
+        });
+      });
+    });
 
     self.data = StorageTracking.data;
     self.trackingId = StorageTracking.trackingId || '';
@@ -27,7 +36,7 @@ module.exports = [
     self.errorState = -1;
     self.carrierInfo = null;
 
-    self.packageStates = [ {
+    self.packageStates = [{
       tooltip: 'LABEL_PRINTED',
       icon: function () {
         return 'cube';
@@ -96,26 +105,26 @@ module.exports = [
       showCheckmark: function () {
         return false;
       }
-    } ];
+    }];
 
-    var getCarrierInfo = function ( events, routes ) {
-      var lastEvent = events[ events.length - 1 ];
+    var getCarrierInfo = function (events, routes) {
+      var lastEvent = events[events.length - 1];
       var carrier = lastEvent.carrier;
-      var currentRoute = routes.filter( function ( route ) {
+      var currentRoute = routes.filter(function (route) {
         return route.route_number === lastEvent.route_number;
-      } );
+      });
 
-      if ( currentRoute[ 0 ] && currentRoute[ 0 ].tracking_url ) {
-        carrier.tracking_url = currentRoute[ 0 ].tracking_url;
+      if (currentRoute[0] && currentRoute[0].tracking_url) {
+        carrier.tracking_url = currentRoute[0].tracking_url;
       }
 
-      if ( carrier.code === 'gls' ) {
-        carrier.country = currentRoute[ 0 ].country;
+      if (carrier.code === 'gls') {
+        carrier.country = currentRoute[0].country;
       }
-      carrier.country_code = currentRoute[ 0 ].country;
+      carrier.country_code = currentRoute[0].country;
 
 
-      if ( carrier.code === 'coureon' || carrier.code === 'bpost' ) {
+      if (carrier.code === 'coureon' || carrier.code === 'bpost') {
         carrier.tracking_url = null;
       }
 
@@ -123,64 +132,64 @@ module.exports = [
     };
 
     // get trackingId from URL
-    if ( $routeParams.trackingId ) {
+    if ($routeParams.trackingId) {
       self.trackingId = $routeParams.trackingId;
       StorageTracking.trackingId = self.trackingId;
     }
 
-    if ( self.trackingId ) {
+    if (self.trackingId) {
 
       self.loadingIndicator = true;
 
-      StorageTracking.track( self.trackingId, function ( response ) {
+      StorageTracking.track(self.trackingId, function (response) {
 
-          self.loadingIndicator = false;
-          self.data = response;
-          self.showError = false;
-          self.showPrintLabelButton = false;
+        self.loadingIndicator = false;
+        self.data = response;
+        self.showError = false;
+        self.showPrintLabelButton = false;
 
-          if ( response && response.events && response.events.length && response.route_information && !!response.route_information.length ) {
-            self.state = self.availableStates.indexOf( response.status );
-            self.errorState = self.availableErrorStates.indexOf( response.status );
-            self.carrierInfo = getCarrierInfo( response.events, response.route_information );
+        if (response && response.events && response.events.length && response.route_information && !!response.route_information.length) {
+          self.state = self.availableStates.indexOf(response.status);
+          self.errorState = self.availableErrorStates.indexOf(response.status);
+          self.carrierInfo = getCarrierInfo(response.events, response.route_information);
 
-            // Only show label print back button when the route Information only contains national routes
-            self.showPrintLabelButton = response.route_information.map( function ( ri ) {
-              return ri.country === 'DE';
-            } ).reduce( function ( a, b ) {
-              return a && b;
-            }, true );
+          // Only show label print back button when the route Information only contains national routes
+          self.showPrintLabelButton = response.route_information.map(function (ri) {
+            return ri.country === 'DE';
+          }).reduce(function (a, b) {
+            return a && b;
+          }, true);
 
-          } else {
-            self.showError = true;
-          }
-        },
-        function ( error ) {
+        } else {
+          self.showError = true;
+        }
+      },
+        function (error) {
           self.data = null;
           self.showError = true;
           self.state = -1;
-        } );
+        });
     }
 
     self.getStatus = function () {
-      if ( self.trackingId ) {
-        CommonTracking.addEvent( 'track', '"Jetzt Sendung verfolgen" button was used for "' + self.trackingId + '".' );
-        $location.path( '/tracking/' + self.trackingId );
+      if (self.trackingId) {
+        CommonTracking.addEvent('track', '"Jetzt Sendung verfolgen" button was used for "' + self.trackingId + '".');
+        $location.path('/tracking/' + self.trackingId);
       }
     };
 
-    self.isCurrentActiveEvent = function ( event ) {
-      var lastEvent = self.data.events[ self.data.events.length - 1 ];
+    self.isCurrentActiveEvent = function (event) {
+      var lastEvent = self.data.events[self.data.events.length - 1];
       return lastEvent === event;
     };
 
     self.getCurrentActiveEvent = function () {
-      return self.data.events[ self.data.events.length - 1 ];
+      return self.data.events[self.data.events.length - 1];
     };
 
     self.banner = {
-      title: $filter( 'translate' )( 'SECTION.FOOTER.TITLE' ),
-      subtitle: $filter( 'translate' )( 'SECTION.FOOTER.SUBTITLE' ),
+      title: $filter('translate')('SECTION.FOOTER.TITLE'),
+      subtitle: $filter('translate')('SECTION.FOOTER.SUBTITLE'),
       trackingId: self.trackingId
     };
   }

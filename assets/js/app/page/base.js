@@ -1,5 +1,5 @@
 module.exports = [
-  '$rootScope', '$location', '$route', '$translate', '$filter', 'CommonUi', 'CommonConfig', 'CommonTracking', 'StorageService',
+    '$rootScope', '$location', '$route', '$translate', '$filter', 'CommonUi', 'CommonConfig', 'CommonTracking', 'StorageService',
   function (
     $rootScope, $location, $route, $translate, $filter, CommonUi, CommonConfig, CommonTracking, StorageService
   ) {
@@ -28,6 +28,8 @@ module.exports = [
 
         CommonConfig.selectedLanguage = self.selectedLanguage;
         StorageService.set( 'selectedLanguage', self.selectedLanguage );
+
+        $rootScope.$emit('$languageChangeSuccess', self.selectedLanguage);
       } );
     };
 
