@@ -71,14 +71,14 @@
                   <!-- state -->
                   <div class="column medium-3 show-for-medium timeline__date-column">
                       <div class="timeline__date"
-                          title="{{ event.moment | moment:'long' }}">
+                          title="{{ event.moment.format( 'dddd[, ]DD.MM.YYYY[, ]HH:mm:ss[ Uhr]' )}}">
                           <!-- date: short and long -->
                           <div class="timeline__date__text show-for-medium-only"
                               ng-if="event.moment"
-                              ng-bind="event.moment | moment:'short-day'"></div>
+                              ng-bind="event.moment.format( 'dd[, ]DD.MM.' )"></div>
                           <div class="timeline__date__text show-for-large"
                               ng-if="event.moment"
-                              ng-bind="event.moment | moment:'day'"></div>
+                              ng-bind="event.moment.format( 'dddd[., ]DD.MM.' )"></div>
                           <!-- no time -->
                           <div class="timeline__date__text"
                               ng-if="!event.moment"
@@ -86,7 +86,7 @@
                           <!-- time -->
                           <div class="timeline__date__text"
                               ng-if="event.moment"
-                              ng-bind="event.moment | moment:'time'"></div>
+                              ng-bind="event.moment.format( 'HH:mm [ Uhr]' )"></div>
                       </div>
                   </div>
                   <!-- text -->
