@@ -1,7 +1,7 @@
 module.exports = [
-  '$routeParams', '$location', 'CommonRequest', 'CommonMoment',
+  '$routeParams', '$location', 'CommonRequest', 'CommonConfig', 'CommonMoment',
   function (
-    $routeParams, $location, CommonRequest, CommonMoment
+    $routeParams, $location, CommonRequest, CommonConfig, CommonMoment
   ) {
 
     'use strict';
@@ -10,35 +10,36 @@ module.exports = [
     self.trackingId = null;
     self.data = null;
 
-    self.track = function ( trackingId, cb, cbErr ) {
-      CommonRequest.tracking.getStatus( {
+    self.track = function (trackingId, cb, cbErr) {
+      CommonRequest.tracking.getStatus({
         trackingId: trackingId
-      }, function ( response ) {
-        if ( response && response.content && response.content.result ) {
+      }, function (response) {
+        if (response && response.content && response.content.result) {
           self.data = response.content.result;
 
-          self.data.events.map( function ( event ) {
-            event.moment = CommonMoment( event.timestamp );
-          } );
+          var language = CommonConfig.selectedLanguage;
+          self.data.events.map(function (event) {
+            event.moment = CommonMoment(event.timestamp, null, language);
+          });
 
           addEvents();
           filterDuplicates();
 
-          if ( cb ) {
-            cb( self.data );
+          if (cb) {
+            cb(self.data);
           }
         } else {
           self.data = null;
-          if ( cbErr ) {
-            cbErr( response );
+          if (cbErr) {
+            cbErr(response);
           }
         }
-      }, function ( response ) {
+      }, function (response) {
         self.data = null;
-        if ( cbErr ) {
-          cbErr( response );
+        if (cbErr) {
+          cbErr(response);
         }
-      } );
+      });
     };
 
     /**
@@ -47,7 +48,7 @@ module.exports = [
      * @description This method adds Events to the event list.
      */
     var addEvents = function () {
-      if ( self.data === null || self.data.events === null || self.data.route_information === null ) {
+      if (self.data === null || self.data.events === null || self.data.route_information === null) {
         return;
       }
 
@@ -67,8 +68,8 @@ module.exports = [
      *              This event is temporary: 24 hours after first route completed and before next route starts.
      */
     var addWarehouseEvent = function () {
-      if ( hasManyRoutes() && lastEventCompletesFirstRoute() && lastEventIs24HoursOld() ) {
-        self.data.events.push( placeboWarehouseEvent() );
+      if (hasManyRoutes() && lastEventCompletesFirstRoute() && lastEventIs24HoursOld()) {
+        self.data.events.push(placeboWarehouseEvent());
       }
     };
 
@@ -108,8 +109,8 @@ module.exports = [
      * @returns {Boolean} if event's related route is the first route and if it's status is DELIVERED.
      */
     var lastEventCompletesFirstRoute = function () {
-      var numberOfEvents = ( self.data.events ) ? self.data.events.length : 0;
-      var lastEvent = self.data.events[ numberOfEvents - 1 ];
+      var numberOfEvents = (self.data.events) ? self.data.events.length : 0;
+      var lastEvent = self.data.events[numberOfEvents - 1];
       return lastEvent && lastEvent.route_number === 1 && lastEvent.status === 'DELIVERED';
     };
 
@@ -120,10 +121,10 @@ module.exports = [
      * @returns {Boolean} if the past time is 24 hours or more.
      */
     var lastEventIs24HoursOld = function () {
-      var numberOfEvents = ( self.data.events ) ? self.data.events.length : 0;
-      var lastEvent = self.data.events[ numberOfEvents - 1 ];
-      if ( lastEvent ) {
-        var pastHours = CommonMoment().diff( lastEvent.moment, 'hours' );
+      var numberOfEvents = (self.data.events) ? self.data.events.length : 0;
+      var lastEvent = self.data.events[numberOfEvents - 1];
+      if (lastEvent) {
+        var pastHours = CommonMoment().diff(lastEvent.moment, 'hours');
         return pastHours >= 24;
       }
       return false;
@@ -135,20 +136,20 @@ module.exports = [
      * @description This adds custom events for the the carrier "GLS".
      */
     var addGLSCustomEvents = function () {
-      if ( checkCase( 'GLS_DE', 1 ) ) {
-        self.data.events.push( customEventForCarrierOnRoute( 'GLS_DE', 1 ) );
+      if (checkCase('GLS_DE', 1)) {
+        self.data.events.push(customEventForCarrierOnRoute('GLS_DE', 1));
       }
-      if ( checkCase( 'GLS_FR', 1 ) ) {
-        self.data.events.push( customEventForCarrierOnRoute( 'GLS_FR', 1 ) );
+      if (checkCase('GLS_FR', 1)) {
+        self.data.events.push(customEventForCarrierOnRoute('GLS_FR', 1));
       }
-      if ( checkCase( 'GLS_ES', 1 ) ) {
-        self.data.events.push( customEventForCarrierOnRoute( 'GLS_ES', 1 ) );
+      if (checkCase('GLS_ES', 1)) {
+        self.data.events.push(customEventForCarrierOnRoute('GLS_ES', 1));
       }
-      if ( checkCase( 'GLS_FR', 2 ) ) {
-        self.data.events.push( customEventForCarrierOnRoute( 'GLS_FR', 2 ) );
+      if (checkCase('GLS_FR', 2)) {
+        self.data.events.push(customEventForCarrierOnRoute('GLS_FR', 2));
       }
-      if ( checkCase( 'GLS_ES', 2 ) ) {
-        self.data.events.push( customEventForCarrierOnRoute( 'GLS_ES', 2 ) );
+      if (checkCase('GLS_ES', 2)) {
+        self.data.events.push(customEventForCarrierOnRoute('GLS_ES', 2));
       }
     };
 
@@ -158,11 +159,11 @@ module.exports = [
      * @description This adds custom events for the the carrier "USPS".
      */
     var addUSPSCustomEvents = function () {
-      if ( checkCase( 'USPS', 1 ) ) {
-        self.data.events.push( customEventForCarrierOnRoute( 'USPS', 1 ) );
+      if (checkCase('USPS', 1)) {
+        self.data.events.push(customEventForCarrierOnRoute('USPS', 1));
       }
-      if ( checkCase( 'USPS', 3 ) ) {
-        self.data.events.push( customEventForCarrierOnRoute( 'USPS', 3 ) );
+      if (checkCase('USPS', 3)) {
+        self.data.events.push(customEventForCarrierOnRoute('USPS', 3));
       }
     };
 
@@ -172,11 +173,11 @@ module.exports = [
      * @description This adds custom events for the the carrier "DHL" (USA).
      */
     var addDHLCustomEvents = function () {
-      if ( checkCase( 'DHL', 1 ) ) {
-        self.data.events.push( customEventForCarrierOnRoute( 'DHL', 1 ) );
+      if (checkCase('DHL', 1)) {
+        self.data.events.push(customEventForCarrierOnRoute('DHL', 1));
       }
-      if ( checkCase( 'DHL', 3 ) ) {
-        self.data.events.push( customEventForCarrierOnRoute( 'DHL', 3 ) );
+      if (checkCase('DHL', 3)) {
+        self.data.events.push(customEventForCarrierOnRoute('DHL', 3));
       }
     };
 
@@ -189,12 +190,12 @@ module.exports = [
      * @param {String} carrierKey A key used to reference carrier information in the specialCarrierCases object.
      * @param {Number} route_number A number referencing a route in the route information stack.
      */
-    var checkCase = function ( carrierKey, route_number ) {
-      if ( route_number > self.data.route_information.length ) {
+    var checkCase = function (carrierKey, route_number) {
+      if (route_number > self.data.route_information.length) {
         return false;
       }
-      var carrierCaseApplies = specialCarrierCases[ carrierKey ].service_codes.indexOf( self.data.route_information[ route_number - 1 ].service_code ) > -1,
-        precedingCarrierDelivered = ( route_number > 1 ) ? self.data.route_information[ route_number - 2 ].status === 'DELIVERED' : true;
+      var carrierCaseApplies = specialCarrierCases[carrierKey].service_codes.indexOf(self.data.route_information[route_number - 1].service_code) > -1,
+        precedingCarrierDelivered = (route_number > 1) ? self.data.route_information[route_number - 2].status === 'DELIVERED' : true;
 
       return carrierCaseApplies && precedingCarrierDelivered;
     };
@@ -207,15 +208,14 @@ module.exports = [
      * @param {String} carrierKey A key used to reference carrier information in the specialCarrierCases object.
      * @param {Number} route_number A number referencing a route in the route information stack.
      */
-    var customEventForCarrierOnRoute = function ( carrierKey, route_number ) {
+    var customEventForCarrierOnRoute = function (carrierKey, route_number) {
       return {
         carrier: {
-          code: specialCarrierCases[ carrierKey ].carrier_code,
-          tracking_number: self.data.route_information[ route_number - 1 ].carrier_tracking_number
+          code: specialCarrierCases[carrierKey].carrier_code,
+          tracking_number: self.data.route_information[route_number - 1].carrier_tracking_number
         },
-        carrier_tracking_link: specialCarrierCases[ carrierKey ].tracking_link + self.data.route_information[ route_number - 1 ].carrier_tracking_number,
+        carrier_tracking_link: specialCarrierCases[carrierKey].tracking_link + self.data.route_information[route_number - 1].carrier_tracking_number,
         description: 'HANDOVER_TO_' + carrierKey,
-        timestamp: 'Keine Zeitangaben',
         status: 'IN_DELIVERY',
         route_number: route_number
       };
@@ -232,14 +232,14 @@ module.exports = [
     var specialCarrierCases = {
       GLS_DE: {
         carrier_code: 'gls',
-        service_codes: [ 'gls_de_pickup',
+        service_codes: ['gls_de_pickup',
           'gls_de_dropoff'
         ],
         tracking_link: 'https://gls-group.eu/DE/de/paketverfolgung?match='
       },
       GLS_FR: {
         carrier_code: 'gls',
-        service_codes: [ 'gls_fr_dpd_pickup',
+        service_codes: ['gls_fr_dpd_pickup',
           'gls_fr_dpd_dropoff',
           'gls_fr_dhl_dropoff',
           'gls_fr_hermes_pickup',
@@ -250,7 +250,7 @@ module.exports = [
       },
       GLS_ES: {
         carrier_code: 'gls',
-        service_codes: [ 'gls_es_dpd_pickup',
+        service_codes: ['gls_es_dpd_pickup',
           'gls_es_dpd_dropoff',
           'gls_es_national',
           'gls_es_dhl_dropoff',
@@ -260,12 +260,12 @@ module.exports = [
       },
       USPS: {
         carrier_code: 'usps',
-        service_codes: [ 'usps_national' ],
+        service_codes: ['usps_national'],
         tracking_link: 'https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1='
       },
       DHL: {
         carrier_code: 'dhl',
-        service_codes: [ 'dhl_express_international_worldwide' ],
+        service_codes: ['dhl_express_international_worldwide'],
         tracking_link: 'https://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=en&idc='
       }
     };
@@ -278,13 +278,13 @@ module.exports = [
      * @returns {Array} the filtered list.
      */
     var filterDuplicates = function () {
-      var filteredEvents = self.data.events.filter( function ( event, index, list ) {
+      var filteredEvents = self.data.events.filter(function (event, index, list) {
         var lastIndex = list.length - 1;
-        if ( index < lastIndex ) {
-          return event.status !== list[ index + 1 ].status;
+        if (index < lastIndex) {
+          return event.status !== list[index + 1].status;
         }
         return true;
-      } );
+      });
 
       self.data.events = filteredEvents;
     };
