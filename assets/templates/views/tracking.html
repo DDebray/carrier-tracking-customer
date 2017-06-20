@@ -71,14 +71,14 @@
                   <!-- state -->
                   <div class="column medium-3 show-for-medium timeline__date-column">
                       <div class="timeline__date"
-                          title="{{ event.moment.format( 'dddd[, ]DD.MM.YYYY[, ]HH:mm:ss[ Uhr]' )}}">
+                          title="{{ event.moment.format( 'dddd[, ]DD.MM.YYYY[, ]HH:mm:ss' )}}">
                           <!-- date: short and long -->
                           <div class="timeline__date__text show-for-medium-only"
                               ng-if="event.moment"
-                              ng-bind="event.moment.format( 'dd[, ]DD.MM.' )"></div>
+                              ng-bind="event.moment.format( 'dd[., ]DD.MM.' )"></div>
                           <div class="timeline__date__text show-for-large"
                               ng-if="event.moment"
-                              ng-bind="event.moment.format( 'dddd[., ]DD.MM.' )"></div>
+                              ng-bind="event.moment.format( 'dddd[, ]DD.MM.' )"></div>
                           <!-- no time -->
                           <div class="timeline__date__text"
                               ng-if="!event.moment"
@@ -86,15 +86,15 @@
                           <!-- time -->
                           <div class="timeline__date__text"
                               ng-if="event.moment"
-                              ng-bind="event.moment.format( 'HH:mm [ Uhr]' )"></div>
+                              ng-bind="event.moment.format( 'HH:mm' )"></div>
                       </div>
                   </div>
                   <!-- text -->
                   <div class="column small-12 medium-8 timeline__description-column">
                       <div class="timeline__date timeline__date--small show-for-small-only"
                           ng-if="event.moment"
-                          title="{{ event.moment | moment:'long' }}"
-                          ng-bind="(event.moment | moment:'day') + ', ' + (event.moment | moment:'time')"></div>
+                          title="{{ event.moment.format( 'dddd[, ]DD.MM.YYYY[, ]HH:mm:ss' ) }}"
+                          ng-bind="event.moment.format( 'dddd[, ]DD.MM.' ) + ', ' + event.moment.format( 'HH:mm' )"></div>
                       <div class="timeline__date timeline__date--small show-for-small-only"
                           ng-if="!event.moment"
                           title="{{ event.timestamp }}"

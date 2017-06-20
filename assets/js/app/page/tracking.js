@@ -7,11 +7,8 @@ module.exports = [
     var self = this;
 
     $rootScope.$on('$languageChangeSuccess', function (event, language) {
-      $timeout(function () {
-        self.data.events.map(function (event) {
-          event.moment.locale('en');
-          event.moment = CommonMoment(event.timestamp, null, language);
-        });
+      self.data.events.map(function (event) {
+        event.moment = CommonMoment(event.timestamp, null, language);
       });
     });
 
