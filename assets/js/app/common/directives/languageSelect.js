@@ -38,6 +38,10 @@ module.exports = function () {
           code: 'DE',
           cssIdentifier: 'DE',
           translation: getTranslation( 'DE' )
+        }, {
+          code: 'IT',
+          cssIdentifier: 'IT',
+          translation: getTranslation( 'IT' )
         } ],
         changed: function ( language ) {
           console.log( 'Please specify a change event' );
