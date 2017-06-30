@@ -12,7 +12,7 @@ module.exports = function () {
       config: '=config'
     },
     templateUrl: '/views/partials/language_select.html',
-    link: function ( scope, element, attr ) {
+    link: function (scope, element, attr) {
 
       /**
        * Adapt language to translation key convention for languages
@@ -20,7 +20,7 @@ module.exports = function () {
        * @param  {[type]}       lang [description]
        * @return {[type]}            [description]
        */
-      var getTranslation = function ( lang ) {
+      var getTranslation = function (lang) {
         return 'COMMON.LANGUAGE.' + lang;
       };
 
@@ -30,21 +30,29 @@ module.exports = function () {
        */
       var config = {
         default: 'EN',
-        languages: [ {
+        languages: [{
           code: 'EN',
           cssIdentifier: 'GB',
-          translation: getTranslation( 'EN' )
+          translation: getTranslation('EN')
         }, {
           code: 'DE',
           cssIdentifier: 'DE',
-          translation: getTranslation( 'DE' )
+          translation: getTranslation('DE')
         }, {
           code: 'IT',
           cssIdentifier: 'IT',
-          translation: getTranslation( 'IT' )
-        } ],
-        changed: function ( language ) {
-          console.log( 'Please specify a change event' );
+          translation: getTranslation('IT')
+        }, {
+          code: 'FR',
+          cssIdentifier: 'FR',
+          translation: getTranslation('FR')
+        }, {
+          code: 'ES',
+          cssIdentifier: 'ES',
+          translation: getTranslation('ES')
+        }],
+        changed: function (language) {
+          console.log('Please specify a change event');
         }
       };
 
@@ -53,12 +61,12 @@ module.exports = function () {
        * @method setDefault
        */
       var setDefault = function () {
-        var defaultObj = config.languages.filter( function ( l ) {
+        var defaultObj = config.languages.filter(function (l) {
           return l.code === config.default.toUpperCase();
-        } )[ 0 ];
-        var index = config.languages.indexOf( defaultObj );
-        config.languages.splice( index, 1 );
-        config.languages.unshift( defaultObj );
+        })[0];
+        var index = config.languages.indexOf(defaultObj);
+        config.languages.splice(index, 1);
+        config.languages.unshift(defaultObj);
       };
 
       /**
@@ -67,11 +75,11 @@ module.exports = function () {
        * @param  {[type]}       language [description]
        * @return {[type]}                [description]
        */
-      scope.changeLanguage = function ( language ) {
-        var index = config.languages.indexOf( language );
-        config.languages.splice( index, 1 );
-        config.languages.unshift( language );
-        config.changed( language );
+      scope.changeLanguage = function (language) {
+        var index = config.languages.indexOf(language);
+        config.languages.splice(index, 1);
+        config.languages.unshift(language);
+        config.changed(language);
       };
 
       /**
@@ -80,7 +88,7 @@ module.exports = function () {
        * @return {[type]} [description]
        */
       var init = function () {
-        window.angular.extend( config, scope.config );
+        window.angular.extend(config, scope.config);
         setDefault();
         scope.languages = config.languages;
       };
