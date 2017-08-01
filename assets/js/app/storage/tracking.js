@@ -22,7 +22,7 @@ module.exports = [
             event.moment = CommonMoment(event.timestamp, null, language);
           });
 
-          addEvents();
+          addEvents(language);
           filterDuplicates();
 
           if (cb) {
@@ -47,7 +47,7 @@ module.exports = [
      * @function addEvents
      * @description This method adds Events to the event list.
      */
-    var addEvents = function () {
+    var addEvents = function (language) {
       if (self.data === null || self.data.events === null || self.data.route_information === null) {
         return;
       }
@@ -58,8 +58,8 @@ module.exports = [
       addDHLCustomEvents();
 
       // Placebo events:
-      addWarehouseEvent();
-      addExportboxPartEvent();
+      addWarehouseEvent(language);
+      addExportboxPartEvent(language);
     };
 
     /**
@@ -68,9 +68,9 @@ module.exports = [
      * @description This methods adds a placebo warehouse event.
      *              This event is temporary: 24 hours after first route completed and before next route starts.
      */
-    var addWarehouseEvent = function () {
+    var addWarehouseEvent = function (language) {
       if (hasManyRoutes() && lastEventCompletesFirstRoute() && isLastEventOlderThan(24)) {
-        self.data.events.push(placeboWarehouseEvent());
+        self.data.events.push(placeboWarehouseEvent(language));
       }
     };
 
@@ -80,10 +80,10 @@ module.exports = [
      * @description This method adds a placebo "in transit" event for export box part shipments. 
      *              This event is temporary: 24 hours after label was printed and when no new event was added. 
      */
-    var addExportboxPartEvent = function () {
+    var addExportboxPartEvent = function (language) {
       // Has many routes and last mile route would mean exportbox part. 
       if (!hasManyRoutes() && hasLastMileRoute() && lastEventIsLabelPrinted() && isLastEventOlderThan(12)) {
-        self.data.events.push(placeboExportboxPartInTransitEvent());
+        self.data.events.push(placeboExportboxPartInTransitEvent(language));
       }
     }
 
@@ -92,13 +92,13 @@ module.exports = [
      * @function placeboWarehouseEvent
      * @description This returns the event details for a warehouse event.
      */
-    var placeboWarehouseEvent = function () {
+    var placeboWarehouseEvent = function (language) {
       return {
         carrier: {
           code: 'coureon',
           tracking_number: self.data.id
         },
-        moment: CommonMoment(),
+        moment: CommonMoment().locale(language),
         description: 'IN_TRANSIT.TO_DESTINATION_COUNTRY',
         route_number: 2
       };
@@ -109,13 +109,13 @@ module.exports = [
      * @function placeboExportboxPartInTransitEvent
      * @description This returns the event details for a exportbox part in transit event.
      */
-    var placeboExportboxPartInTransitEvent = function () {
+    var placeboExportboxPartInTransitEvent = function (language) {
       return {
         carrier: {
           code: self.data.events[0].carrier.code,
           tracking_number: self.data.id
         },
-        moment: CommonMoment(),
+        moment: CommonMoment().locale(language),
         description: 'IN_TRANSIT',
         route_number: 2
       };
