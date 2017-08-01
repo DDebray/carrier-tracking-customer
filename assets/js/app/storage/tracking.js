@@ -69,7 +69,7 @@ module.exports = [
      *              This event is temporary: 24 hours after first route completed and before next route starts.
      */
     var addWarehouseEvent = function (language) {
-      if (hasManyRoutes() && lastEventCompletesFirstRoute() && isLastEventOlderThan(24)) {
+      if (hasManyRoutes() && lastEventCompletesFirstRoute() && isLastEventOlderThan(24, 6)) {
         self.data.events.push(placeboWarehouseEvent(language));
       }
     };
@@ -82,7 +82,7 @@ module.exports = [
      */
     var addExportboxPartEvent = function (language) {
       // Has many routes and last mile route would mean exportbox part. 
-      if (!hasManyRoutes() && hasLastMileRoute() && lastEventIsLabelPrinted() && isLastEventOlderThan(12)) {
+      if (!hasManyRoutes() && hasLastMileRoute() && lastEventIsLabelPrinted() && isLastEventOlderThan(12, 6)) {
         self.data.events.push(placeboExportboxPartInTransitEvent(language));
       }
     }
@@ -177,12 +177,13 @@ module.exports = [
      * @description This checks if the last event is as old or older than incoming time.
      * @returns {Boolean} if the past time since last event is as long or longer than incoming hours.
      */
-    var isLastEventOlderThan = function (hours) {
+    var isLastEventOlderThan = function (hours, minutes) {
       var numberOfEvents = (self.data.events) ? self.data.events.length : 0;
       var lastEvent = self.data.events[numberOfEvents - 1];
       if (lastEvent) {
-        var pastHours = CommonMoment().diff(lastEvent.moment, 'hours');
-        return pastHours >= hours;
+        var pastHours = CommonMoment().diff(lastEvent.moment, 'hours', true);
+        var pastMinutes = (pastHours - Math.floor(pastHours)) * 60;
+        return pastHours >= hours && pastMinutes >= minutes;
       }
       return false;
     };
