@@ -277,7 +277,7 @@ module.exports = ['$routeParams', '$location', 'CommonRequest', 'CommonConfig', 
   const addExportboxPartPlaceboEvent = function (language, moment) {
     const firstRouteNumber = self.data.route_information[0].route_number;
 
-    if (isExportboxPartShipment() && lastEventOnRouteHasStatus(firstRouteNumber, 'LABEL_PRINTED') && lastEventIsOlderThan(12, 6)) {
+    if (isExportboxPartShipment() && lastEventOnRouteHasStatus(firstRouteNumber, 'LABEL_PRINTED') && lastEventIsOlderThan(23, 59)) {
       const time = StorageService.get(`${self.data.id}:hasExportboxPartPlaceboEvent`);
 
       if (!time) {
