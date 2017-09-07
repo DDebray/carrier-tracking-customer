@@ -1,352 +1,368 @@
-module.exports = [
-  '$routeParams', '$location', 'CommonRequest', 'CommonConfig', 'CommonMoment',
-  function (
-    $routeParams, $location, CommonRequest, CommonConfig, CommonMoment
-  ) {
+module.exports = ['$routeParams', '$location', 'CommonRequest', 'CommonConfig', 'CommonMoment', 'StorageService', function ($routeParams, $location, CommonRequest, CommonConfig, CommonMoment, StorageService) {
+  const self = this;
 
-    'use strict';
-    var self = this;
+  /**
+   * @private
+   * @constant carrierDefinitions
+   * @type {Object}
+   *
+   * @description This object holds carrier information, needed for custom events.
+   */
+  const carrierDefinitions = {
+    GLS_DE: {
+      carrier_code: 'gls',
+      service_codes: ['gls_de_pickup',
+        'gls_de_dropoff',
+      ],
+      tracking_link: 'https://gls-group.eu/DE/de/paketverfolgung?match=',
+    },
+    GLS_FR: {
+      carrier_code: 'gls',
+      service_codes: ['gls_fr_dpd_pickup',
+        'gls_fr_dpd_dropoff',
+        'gls_fr_dhl_dropoff',
+        'gls_fr_hermes_pickup',
+        'gls_fr_national',
+        'gls_fr_ups_express_pickup',
+      ],
+      tracking_link: 'https://gls-group.eu/FR/fr/suivi-colis?match=',
+    },
+    GLS_ES: {
+      carrier_code: 'gls',
+      service_codes: ['gls_es_dpd_pickup',
+        'gls_es_dpd_dropoff',
+        'gls_es_national',
+        'gls_es_dhl_dropoff',
+        'gls_es_hermes_pickup',
+      ],
+      tracking_link: 'https://gls-group.eu/ES/es/seguimiento-de-envios?match=',
+    },
+    USPS: {
+      carrier_code: 'usps',
+      service_codes: ['usps_national'],
+      tracking_link: 'https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=',
+    },
+    DHL: {
+      carrier_code: 'dhl',
+      service_codes: ['dhl_express_international_worldwide'],
+      tracking_link: 'https://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=en&idc=',
+    },
+  };
 
-    self.trackingId = null;
-    self.data = null;
+  /**
+   * @member
+   * @type {Object}
+   * @description This objects holds all tracking data.
+   */
+  self.data = null;
 
-    self.track = function (trackingId, cb, cbErr) {
-      CommonRequest.tracking.getStatus({
-        trackingId: trackingId
-      }, function (response) {
-        if (response && response.content && response.content.result) {
-          self.data = response.content.result;
+  const addMomentToEvents = function (selectedLanguage) {
+    self.data.events.map((event) => {
+      const e = event;
+      e.moment = CommonMoment(event.timestamp, null, selectedLanguage);
+      return e;
+    });
+  };
 
-          var language = CommonConfig.selectedLanguage;
-          self.data.events.map(function (event) {
-            event.moment = CommonMoment(event.timestamp, null, language);
-          });
+  /**
+   * @private
+   * @function isCarrierDeliveringOnRoute
+   * @param {String} carrierKey A key referencing a carrier.
+   * @param {Number} routeNumber A number referencing a route in the route information stack.
+   * @returns {Boolean} if carrier is currently delivering on the route.
+   *
+   * @description This function checks a given carrier delivers on the route number,
+   *              that is referenced by the route number.
+   */
+  const isCarrierDeliveringOnRoute = function (carrierKey, routeNumber) {
+    if (routeNumber > self.data.route_information.length) {
+      return false;
+    }
 
-          addEvents(language);
-          filterDuplicates();
+    const carrierServices = carrierDefinitions[carrierKey].service_codes;
+    const serviceForRoute = self.data.route_information[routeNumber - 1].service_code;
 
-          if (cb) {
-            cb(self.data);
-          }
-        } else {
-          self.data = null;
-          if (cbErr) {
-            cbErr(response);
-          }
+    const carrierIsResponsibleForRoute = carrierServices.indexOf(serviceForRoute) > -1;
+    const precedingCarrierDelivered = (routeNumber > 1)
+      ? self.data.route_information[routeNumber - 2].status === 'DELIVERED'
+      : true;
+
+    return carrierIsResponsibleForRoute && precedingCarrierDelivered;
+  };
+
+  /**
+   * @private
+   * @function isBundleShipment
+   * @returns {Boolean} if product type is BUNDLE.
+   *
+   * @description This checks if the shipment to track is a Bundle shipment.
+   */
+  const isBundleShipment = function () {
+    return self.data.product_type === 'BUNDLE';
+  };
+
+  /**
+   * @private
+   * @function isExportboxPartShipment
+   * @returns {Boolean} if product type is EXPORTBOX_PART.
+   *
+   * @description This checks if the shipment to track is a Exportbox Part shipment.
+   */
+  const isExportboxPartShipment = function () {
+    return self.data.product_type === 'EXPORTBOX_PART';
+  };
+
+  /**
+   * @private
+   * @function lastEventOnRouteHasStatus
+   * @param {Number} routeNumber A number referencing a route in the route information stack.
+   * @param {String} status The expected event status.
+   * @returns {Boolean} if last event is for the first route and if it's status is DELIVERED.
+   *
+   * @description This checks if the last event is a "DELIVERED" event for the first mile.
+   *              (This event would complete the first mile.)
+   */
+  const lastEventOnRouteHasStatus = function (routeNumber, status) {
+    const numberOfEvents = (self.data.events) ? self.data.events.length : 0;
+    const lastEvent = self.data.events[numberOfEvents - 1];
+
+    return lastEvent && lastEvent.route_number === routeNumber && lastEvent.status === status;
+  };
+
+  /**
+   * @private
+   * @function lastEventIsOlderThan
+   * @param {Number} hours the minimum past hours since the last event
+   * @param {Number} minutes the minimum past minutes since the last event
+   * @returns {Boolean} if the past time since last event is as long or longer than incoming hours.
+   *
+   * @description This checks if the last event is as old or older than incoming time.
+   */
+  const lastEventIsOlderThan = function (hours, minutes) {
+    const numberOfEvents = (self.data.events) ? self.data.events.length : 0;
+    const lastEvent = self.data.events[numberOfEvents - 1];
+
+    const pastHours = CommonMoment().diff(lastEvent.moment, 'hours', true);
+    const pastMinutes = (pastHours - Math.floor(pastHours)) * 60;
+
+    return (lastEvent) ? (pastHours >= hours && pastMinutes >= minutes) : false;
+  };
+
+  /**
+   * @private
+   * @function customEvent
+   * @param {String} carrierKey A key referencing a carrier.
+   * @param {Number} routeNumber A number referencing a route in the route information stack.
+   * @returns {Object} new event data object
+   *
+   * @description This function provides a custom event.
+   */
+  const customEvent = function (carrierKey, routeNumber) {
+    const trackingLink = carrierDefinitions[carrierKey].tracking_link;
+    const trackingNumber = self.data.route_information[routeNumber - 1].carrier_tracking_number;
+
+    return {
+      carrier: {
+        code: carrierDefinitions[carrierKey].carrier_code,
+        tracking_number: self.data.route_information[routeNumber - 1].carrier_tracking_number,
+      },
+      carrier_tracking_link: trackingLink + trackingNumber,
+      description: `HANDOVER_TO_${carrierKey}`,
+      status: 'IN_DELIVERY',
+      route_number: routeNumber,
+    };
+  };
+
+  /**
+ * @private
+ * @function placeboWarehouseEvent
+ * @description This returns the event details for a warehouse event.
+ */
+  const placeboEvent = function (carrier, routeNumber, description, language, time) {
+    return {
+      carrier: {
+        code: carrier,
+        tracking_number: self.data.id,
+      },
+      moment: CommonMoment(StorageService.get(time)).locale(language),
+      description,
+      route_number: routeNumber,
+    };
+  };
+
+  /**
+   * @private
+   * @function addGLSCustomEvents
+   *
+   * @description This adds custom events for the the carrier "GLS".
+   */
+  const addGLSCustomEvents = function () {
+    if (isCarrierDeliveringOnRoute('GLS_DE', 1)) {
+      self.data.events.push(customEvent('GLS_DE', 1));
+    }
+    if (isCarrierDeliveringOnRoute('GLS_FR', 1)) {
+      self.data.events.push(customEvent('GLS_FR', 1));
+    }
+    if (isCarrierDeliveringOnRoute('GLS_ES', 1)) {
+      self.data.events.push(customEvent('GLS_ES', 1));
+    }
+    if (isCarrierDeliveringOnRoute('GLS_FR', 2)) {
+      self.data.events.push(customEvent('GLS_FR', 2));
+    }
+    if (isCarrierDeliveringOnRoute('GLS_ES', 2)) {
+      self.data.events.push(customEvent('GLS_ES', 2));
+    }
+  };
+
+  /**
+   * @private
+   * @function addGLSCustomEvents
+   *
+   * @description This adds custom events for the the carrier "USPS".
+   */
+  const addUSPSCustomEvents = function () {
+    if (isCarrierDeliveringOnRoute('USPS', 1)) {
+      self.data.events.push(customEvent('USPS', 1));
+    }
+    if (isCarrierDeliveringOnRoute('USPS', 3)) {
+      self.data.events.push(customEvent('USPS', 3));
+    }
+  };
+
+  /**
+   * @private
+   * @function addDHLCustomEvents
+   *
+   * @description This adds custom events for the the carrier "DHL" (USA).
+   */
+  const addDHLCustomEvents = function () {
+    if (isCarrierDeliveringOnRoute('DHL', 1)) {
+      self.data.events.push(customEvent('DHL', 1));
+    }
+    if (isCarrierDeliveringOnRoute('DHL', 3)) {
+      self.data.events.push(customEvent('DHL', 3));
+    }
+  };
+
+  /**
+   * @private
+   * @function addWarehouseEvent
+   * @description This methods adds a placebo warehouse event.
+   *              This event is temporary:
+   *              24 hours and 6 minutes after first route completed and before next route starts.
+   */
+  const addWarehousePlaceboEvent = function (language, moment) {
+    const firstRouteNumber = self.data.route_information[0].route_number;
+
+    if (isBundleShipment() && lastEventOnRouteHasStatus(firstRouteNumber, 'DELIVERED') && lastEventIsOlderThan(24, 6)) {
+      const time = StorageService.get(`${self.data.id}:hasWarehousePlaceboEvent`);
+
+      if (!time) {
+        StorageService.set(`${self.data.id}:hasWarehousePlaceboEvent`, moment);
+      }
+
+      self.data.events.push(placeboEvent('coureon', firstRouteNumber + 1, 'IN_TRANSIT.TO_DESTINATION_COUNTRY', language, `${self.data.id}:hasWarehousePlaceboEvent`));
+    } else {
+      StorageService.set(`${self.data.id}:hasWarehousePlaceboEvent`, null);
+    }
+  };
+
+  /**
+ * @private
+ * @function addExportboxPartEvent
+ * @description This method adds a placebo "in transit" event for export box part shipments.
+ *              This event is temporary:
+ *              12 hours and 6 minutes after label was printed and when no new event was added.
+ */
+  const addExportboxPartPlaceboEvent = function (language, moment) {
+    const firstRouteNumber = self.data.route_information[0].route_number;
+
+    if (isExportboxPartShipment() && lastEventOnRouteHasStatus(firstRouteNumber, 'LABEL_PRINTED') && lastEventIsOlderThan(12, 6)) {
+      const time = StorageService.get(`${self.data.id}:hasExportboxPartPlaceboEvent`);
+
+      if (!time) {
+        StorageService.set(`${self.data.id}:hasExportboxPartPlaceboEvent`, moment);
+      }
+
+      self.data.events.push(placeboEvent(self.data.events[0].carrier.code, firstRouteNumber, 'IN_TRANSIT', language, `${self.data.id}:hasExportboxPartPlaceboEvent`));
+    } else {
+      StorageService.set(`${self.data.id}:hasExportboxPartPlaceboEvent`, null);
+    }
+  };
+
+  /**
+   * @private
+   * @function addEvents
+   * @description This method adds Events to the event list.
+   */
+  const addPlaceboEvents = function (language) {
+    if (self.data === null || self.data.events === null || self.data.route_information === null) {
+      return;
+    }
+
+    // Custom event: todo use more specialised placebo events
+    addGLSCustomEvents();
+    addUSPSCustomEvents();
+    addDHLCustomEvents();
+
+    let moment = CommonMoment().locale(language);
+    moment = moment.subtract(2, 'hour');
+    moment = moment.subtract(36, 'minutes');
+
+    // Placebo events:
+    addWarehousePlaceboEvent(language, moment);
+    addExportboxPartPlaceboEvent(language, moment);
+  };
+
+  /**
+   * @private
+   * @function filterDuplicates
+   * @description This filters all successive events with the same status.
+   *              Only the last event with that status is left.
+   * @returns {Array} the filtered list.
+   */
+  const filterDuplicates = function () {
+    const filteredEvents = self.data.events.filter((event, index, list) => {
+      const lastIndex = list.length - 1;
+      return (index < lastIndex) ? event.status !== list[index + 1].status : true;
+    });
+
+    self.data.events = filteredEvents;
+  };
+
+  /**
+   *
+   */
+  self.track = function track(trackingId, cb, cbErr) {
+    const { selectedLanguage } = CommonConfig;
+
+    CommonRequest.tracking.getStatus({ trackingId }, (response) => {
+      if (response && response.content && response.content.result) {
+        self.data = response.content.result;
+
+        addMomentToEvents(selectedLanguage);
+        addPlaceboEvents(selectedLanguage);
+
+        filterDuplicates();
+
+        if (cb) {
+          cb(self.data);
         }
-      }, function (response) {
+      } else {
         self.data = null;
         if (cbErr) {
           cbErr(response);
         }
-      });
-    };
-
-    /**
-     * @private
-     * @function addEvents
-     * @description This method adds Events to the event list.
-     */
-    var addEvents = function (language) {
-      if (self.data === null || self.data.events === null || self.data.route_information === null) {
-        return;
       }
-
-      // Custom event:
-      addGLSCustomEvents();
-      addUSPSCustomEvents();
-      addDHLCustomEvents();
-
-      // Placebo events:
-      addWarehouseEvent(language);
-      addExportboxPartEvent(language);
-    };
-
-    /**
-     * @private
-     * @function addWarehouseEvent
-     * @description This methods adds a placebo warehouse event.
-     *              This event is temporary: 24 hours after first route completed and before next route starts.
-     */
-    var addWarehouseEvent = function (language) {
-      if (hasManyRoutes() && lastEventCompletesFirstRoute() && isLastEventOlderThan(24, 6)) {
-        self.data.events.push(placeboWarehouseEvent(language));
+    }, (response) => {
+      self.data = null;
+      if (cbErr) {
+        cbErr(response);
       }
-    };
+    });
+  };
 
-    /**
-     * @private
-     * @function addExportboxPartEvent
-     * @description This method adds a placebo "in transit" event for export box part shipments. 
-     *              This event is temporary: 24 hours after label was printed and when no new event was added. 
-     */
-    var addExportboxPartEvent = function (language) {
-      // Has many routes and last mile route would mean exportbox part. 
-      if (!hasManyRoutes() && hasLastMileRoute() && lastEventIsLabelPrinted() && isLastEventOlderThan(12, 6)) {
-        self.data.events.push(placeboExportboxPartInTransitEvent(language));
-      }
-    }
 
-    /**
-     * @private
-     * @function placeboWarehouseEvent
-     * @description This returns the event details for a warehouse event.
-     */
-    var placeboWarehouseEvent = function (language) {
-      return {
-        carrier: {
-          code: 'coureon',
-          tracking_number: self.data.id
-        },
-        moment: CommonMoment().locale(language),
-        description: 'IN_TRANSIT.TO_DESTINATION_COUNTRY',
-        route_number: 2
-      };
-    };
-
-    /**
-     * @private
-     * @function placeboExportboxPartInTransitEvent
-     * @description This returns the event details for a exportbox part in transit event.
-     */
-    var placeboExportboxPartInTransitEvent = function (language) {
-      return {
-        carrier: {
-          code: self.data.events[0].carrier.code,
-          tracking_number: self.data.id
-        },
-        moment: CommonMoment().locale(language),
-        description: 'IN_TRANSIT',
-        route_number: 2
-      };
-    };
-
-    /**
-     * @private
-     * @function hasManyRoutes
-     * @description This checks if the tracking data contains more than one route.
-     *              This should be when the shipment is a "Bundle".
-     * @returns {Boolean} if number of routes is higher than one.
-     */
-    var hasManyRoutes = function () {
-      return self.data.route_information && self.data.route_information.length > 1;
-    };
-
-    /**
-     * @private
-     * @function hasLastMileRoute
-     * @description This checks if the tracking data contains a last mile route. 
-     * @returns {Boolean} if one or more than one last mile routes. 
-     */
-    var hasLastMileRoute = function () {
-      return self.data.route_information && self.data.route_information.filter(function (route) {
-        return route.route_number === 2;
-      }).length >= 1;
-    };
-
-    /**
-     * @private
-     * @function lastEventCompletesFirstRoute
-     * @description This checks if the last event in the event list, is the "DELIVERED" event for the first mile.
-     *              This event would complete the first mile.
-     * @returns {Boolean} if event's related route is the first route and if it's status is DELIVERED.
-     */
-    var lastEventCompletesFirstRoute = function () {
-      var numberOfEvents = (self.data.events) ? self.data.events.length : 0;
-      var lastEvent = self.data.events[numberOfEvents - 1];
-      return lastEvent && lastEvent.route_number === 1 && lastEvent.status === 'DELIVERED';
-    };
-
-    /**
-    * @private
-    * @function lastEventIsLabelPrinted
-    * @description This checks if the last event in the event list is a "LABEL_PRINTED" event.
-    * @returns {Boolean} if last event has status LABEL_PRINTED
-    */
-    var lastEventIsLabelPrinted = function () {
-      var numberOfEvents = (self.data.events) ? self.data.events.length : 0;
-      if (numberOfEvents > 1) { return false; }
-
-      var lastEvent = self.data.events[numberOfEvents - 1];
-      return lastEvent && lastEvent.status === 'LABEL_PRINTED';
-    };
-
-    /**
-     * @private
-     * @function isLastEventOlderThan
-     * @description This checks if the last event is as old or older than incoming time.
-     * @returns {Boolean} if the past time since last event is as long or longer than incoming hours.
-     */
-    var isLastEventOlderThan = function (hours, minutes) {
-      var numberOfEvents = (self.data.events) ? self.data.events.length : 0;
-      var lastEvent = self.data.events[numberOfEvents - 1];
-      if (lastEvent) {
-        var pastHours = CommonMoment().diff(lastEvent.moment, 'hours', true);
-        var pastMinutes = (pastHours - Math.floor(pastHours)) * 60;
-        return pastHours >= hours && pastMinutes >= minutes;
-      }
-      return false;
-    };
-
-    /**
-     * @private
-     * @function addGLSCustomEvents
-     * @description This adds custom events for the the carrier "GLS".
-     */
-    var addGLSCustomEvents = function () {
-      if (checkCase('GLS_DE', 1)) {
-        self.data.events.push(customEventForCarrierOnRoute('GLS_DE', 1));
-      }
-      if (checkCase('GLS_FR', 1)) {
-        self.data.events.push(customEventForCarrierOnRoute('GLS_FR', 1));
-      }
-      if (checkCase('GLS_ES', 1)) {
-        self.data.events.push(customEventForCarrierOnRoute('GLS_ES', 1));
-      }
-      if (checkCase('GLS_FR', 2)) {
-        self.data.events.push(customEventForCarrierOnRoute('GLS_FR', 2));
-      }
-      if (checkCase('GLS_ES', 2)) {
-        self.data.events.push(customEventForCarrierOnRoute('GLS_ES', 2));
-      }
-    };
-
-    /**
-     * @private
-     * @function addGLSCustomEvents
-     * @description This adds custom events for the the carrier "USPS".
-     */
-    var addUSPSCustomEvents = function () {
-      if (checkCase('USPS', 1)) {
-        self.data.events.push(customEventForCarrierOnRoute('USPS', 1));
-      }
-      if (checkCase('USPS', 3)) {
-        self.data.events.push(customEventForCarrierOnRoute('USPS', 3));
-      }
-    };
-
-    /**
-     * @private
-     * @function addGLSCustomEvents
-     * @description This adds custom events for the the carrier "DHL" (USA).
-     */
-    var addDHLCustomEvents = function () {
-      if (checkCase('DHL', 1)) {
-        self.data.events.push(customEventForCarrierOnRoute('DHL', 1));
-      }
-      if (checkCase('DHL', 3)) {
-        self.data.events.push(customEventForCarrierOnRoute('DHL', 3));
-      }
-    };
-
-    /**
-     * @private
-     * @function checkCase
-     * @description This function determines if we need a custom event.
-     *              It checks if the route, stated by the route_number, is processed by the carrier we reference with the carrier key.
-     * @returns {Boolean} if we a custom event is needed
-     * @param {String} carrierKey A key used to reference carrier information in the specialCarrierCases object.
-     * @param {Number} route_number A number referencing a route in the route information stack.
-     */
-    var checkCase = function (carrierKey, route_number) {
-      if (route_number > self.data.route_information.length) {
-        return false;
-      }
-      var carrierCaseApplies = specialCarrierCases[carrierKey].service_codes.indexOf(self.data.route_information[route_number - 1].service_code) > -1,
-        precedingCarrierDelivered = (route_number > 1) ? self.data.route_information[route_number - 2].status === 'DELIVERED' : true;
-
-      return carrierCaseApplies && precedingCarrierDelivered;
-    };
-
-    /**
-     * @private
-     * @function customEventForCarrierOnRoute
-     * @description This function bundles all custom event information.
-     * @returns {Object} the new event data
-     * @param {String} carrierKey A key used to reference carrier information in the specialCarrierCases object.
-     * @param {Number} route_number A number referencing a route in the route information stack.
-     */
-    var customEventForCarrierOnRoute = function (carrierKey, route_number) {
-      return {
-        carrier: {
-          code: specialCarrierCases[carrierKey].carrier_code,
-          tracking_number: self.data.route_information[route_number - 1].carrier_tracking_number
-        },
-        carrier_tracking_link: specialCarrierCases[carrierKey].tracking_link + self.data.route_information[route_number - 1].carrier_tracking_number,
-        description: 'HANDOVER_TO_' + carrierKey,
-        status: 'IN_DELIVERY',
-        route_number: route_number
-      };
-    };
-
-    /**
-     * @private
-     * @property specialCarrierCases
-     * @type {Object}
-     *
-     * @description This property is an object, that defines all carriers that need custom events.
-     *              The carrier information are grouped in objects that can be accessed with given carrier keys.
-     */
-    var specialCarrierCases = {
-      GLS_DE: {
-        carrier_code: 'gls',
-        service_codes: ['gls_de_pickup',
-          'gls_de_dropoff'
-        ],
-        tracking_link: 'https://gls-group.eu/DE/de/paketverfolgung?match='
-      },
-      GLS_FR: {
-        carrier_code: 'gls',
-        service_codes: ['gls_fr_dpd_pickup',
-          'gls_fr_dpd_dropoff',
-          'gls_fr_dhl_dropoff',
-          'gls_fr_hermes_pickup',
-          'gls_fr_national',
-          'gls_fr_ups_express_pickup'
-        ],
-        tracking_link: 'https://gls-group.eu/FR/fr/suivi-colis?match='
-      },
-      GLS_ES: {
-        carrier_code: 'gls',
-        service_codes: ['gls_es_dpd_pickup',
-          'gls_es_dpd_dropoff',
-          'gls_es_national',
-          'gls_es_dhl_dropoff',
-          'gls_es_hermes_pickup'
-        ],
-        tracking_link: 'https://gls-group.eu/ES/es/seguimiento-de-envios?match='
-      },
-      USPS: {
-        carrier_code: 'usps',
-        service_codes: ['usps_national'],
-        tracking_link: 'https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1='
-      },
-      DHL: {
-        carrier_code: 'dhl',
-        service_codes: ['dhl_express_international_worldwide'],
-        tracking_link: 'https://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=en&idc='
-      }
-    };
-
-    /**
-     * @private
-     * @function filterDuplicates
-     * @description This filters all successive events with the same status.
-     *              Only the last event with that status is left.
-     * @returns {Array} the filtered list.
-     */
-    var filterDuplicates = function () {
-      var filteredEvents = self.data.events.filter(function (event, index, list) {
-        var lastIndex = list.length - 1;
-        if (index < lastIndex) {
-          return event.status !== list[index + 1].status;
-        }
-        return true;
-      });
-
-      self.data.events = filteredEvents;
-    };
-
-    return self;
-  }
+  return self;
+},
 ];

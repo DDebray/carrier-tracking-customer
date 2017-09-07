@@ -12,7 +12,6 @@ var config = {
       scripts: ASSETS_DIR + 'js/main.js',
       scripts_vendor: ASSETS_DIR + 'js/vendor/**/*.js',
       scripts_env: ASSETS_DIR + 'js/app/environment.js',
-      // images          : ASSETS_DIR + 'images/**/*.{png,jpg,jpeg,gif,svg}',
       images: [ ASSETS_DIR + 'images/**/*', '!' + ASSETS_DIR + 'images/sprite/**/*' ],
       sprite: ASSETS_DIR + 'images/sprite/**/*.{png,jpg,jpeg}',
       copy: ASSETS_DIR + 'copy/**/*',
@@ -31,13 +30,6 @@ var config = {
       },
       root: PUBLIC_DIR
     }
-    //hosts: {
-    //   static : {
-    //     development : 'http://localhost:3000/',
-    //     testing : 'https://www-tracking.coureon.com',
-    //     production : 'https://tracking.coureon.com'
-    //   }
-    // }
   }
 };
 

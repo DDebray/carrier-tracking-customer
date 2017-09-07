@@ -24,7 +24,6 @@ gulp.task('scripts', gulp.series('scripts:clean', function scriptsBuild() {
   gulp.src(paths.source.jshint)
     .pipe(jshint({ esnext : true }))
     .pipe(jshint.reporter('jshint-stylish'));
-    // .pipe(jshint.reporter('fail'));
 
   var
     browserify = require('browserify'),
@@ -34,13 +33,6 @@ gulp.task('scripts', gulp.series('scripts:clean', function scriptsBuild() {
     sourcemaps = require('gulp-sourcemaps'),
     path       = require('path'),
     gutil      = require('gutil');
-
-  // gulp.src(paths.source.scripts_vendor, {base : path.join(process.cwd(), paths.source.root)})
-  //   .pipe(sourcemaps.init())
-  //   .pipe(uglify())
-  //   .on('error', gutil.log)
-  //   .pipe(sourcemaps.write('./'))
-  //   .pipe(gulp.dest(paths.dest.root));
 
   gulp.src(paths.source.scripts_vendor, {base : path.join(process.cwd(), paths.source.root)})
     .pipe(sourcemaps.init())
@@ -55,7 +47,6 @@ gulp.task('scripts', gulp.series('scripts:clean', function scriptsBuild() {
     .pipe(source('bundle.js'))
     .pipe(buffer())
     .pipe(sourcemaps.init())
-    // .pipe(uglify())
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.dest + 'js'));
 }, 'scripts:rev'));
