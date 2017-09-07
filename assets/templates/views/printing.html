@@ -11,8 +11,10 @@
 
         <h2 ng-if="printing.showError()"
             ng-bind="'PAGE.PRINTING.ERROR_TITLE' | translate"></h2>
-        <p ng-if="printing.showError() && ('PAGE.PRINTING.ERROR_DESCRIPTION' | translate) !== 'PAGE.PRINTING.ERROR_DESCRIPTION'"
-            ng-bind="'PAGE.PRINTING.ERROR_DESCRIPTION' | translate"></p>
+
+        <p  ng-if="printing.showError()" 
+            ng-repeat="error in printing.showError().data.messages" 
+            ng-bind="error.text"></p>
 
         <!-- NOTIFICATIONS: -->
         <ul ng-if="printing.showNotifications()"
