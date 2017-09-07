@@ -145,7 +145,10 @@ module.exports = ['$routeParams', '$location', 'CommonRequest', 'CommonConfig', 
     const pastHours = CommonMoment().diff(lastEvent.moment, 'hours', true);
     const pastMinutes = (pastHours - Math.floor(pastHours)) * 60;
 
-    return (lastEvent) ? (pastHours >= hours && pastMinutes >= minutes) : false;
+    const pastTimeIsEnough = (parseInt(pastHours, 10) === hours && pastMinutes >= minutes) 
+      || parseInt(pastHours, 10) > hours;
+
+    return (lastEvent) ? pastTimeIsEnough : false;
   };
 
   /**
@@ -182,7 +185,7 @@ module.exports = ['$routeParams', '$location', 'CommonRequest', 'CommonConfig', 
     return {
       carrier: {
         code: carrier,
-        tracking_number: self.data.id,
+        tracking_number: self.data.route_information[routeNumber - 1].carrier_tracking_number,
       },
       moment: CommonMoment(StorageService.get(time)).locale(language),
       description,
