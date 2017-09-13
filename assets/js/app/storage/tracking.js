@@ -185,7 +185,7 @@ module.exports = ['$routeParams', '$location', 'CommonRequest', 'CommonConfig', 
     return {
       carrier: {
         code: carrier,
-        tracking_number: self.data.route_information[routeNumber - 1].carrier_tracking_number,
+        tracking_number: self.data.route_information[routeNumber].carrier_tracking_number,
       },
       moment: CommonMoment(StorageService.get(time)).locale(language),
       description,
