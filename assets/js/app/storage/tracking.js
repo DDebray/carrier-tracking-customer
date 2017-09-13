@@ -189,7 +189,7 @@ module.exports = ['$routeParams', '$location', 'CommonRequest', 'CommonConfig', 
       },
       moment: CommonMoment(StorageService.get(time)).locale(language),
       description,
-      route_number: routeNumber,
+      route_number: self.data.route_information[routeNumber].route_number,
     };
   };
 
