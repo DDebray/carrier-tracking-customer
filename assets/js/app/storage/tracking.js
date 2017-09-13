@@ -264,7 +264,7 @@ module.exports = ['$routeParams', '$location', 'CommonRequest', 'CommonConfig', 
         StorageService.set(`${self.data.id}:hasWarehousePlaceboEvent`, moment);
       }
 
-      self.data.events.push(placeboEvent('coureon', firstRouteNumber + 1, 'IN_TRANSIT.TO_DESTINATION_COUNTRY', language, `${self.data.id}:hasWarehousePlaceboEvent`));
+      self.data.events.push(placeboEvent('coureon', 1, 'IN_TRANSIT.TO_DESTINATION_COUNTRY', language, `${self.data.id}:hasWarehousePlaceboEvent`));
     } else {
       StorageService.set(`${self.data.id}:hasWarehousePlaceboEvent`, null);
     }
@@ -287,7 +287,7 @@ module.exports = ['$routeParams', '$location', 'CommonRequest', 'CommonConfig', 
         StorageService.set(`${self.data.id}:hasExportboxPartPlaceboEvent`, moment);
       }
 
-      self.data.events.push(placeboEvent(self.data.events[0].carrier.code, firstRouteNumber, 'IN_TRANSIT', language, `${self.data.id}:hasExportboxPartPlaceboEvent`));
+      self.data.events.push(placeboEvent(self.data.events[0].carrier.code, 0, 'IN_TRANSIT', language, `${self.data.id}:hasExportboxPartPlaceboEvent`));
     } else {
       StorageService.set(`${self.data.id}:hasExportboxPartPlaceboEvent`, null);
     }
