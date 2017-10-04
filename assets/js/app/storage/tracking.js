@@ -145,7 +145,7 @@ module.exports = ['$routeParams', '$location', 'CommonRequest', 'CommonConfig', 
     const pastHours = CommonMoment().diff(lastEvent.moment, 'hours', true);
     const pastMinutes = (pastHours - Math.floor(pastHours)) * 60;
 
-    const pastTimeIsEnough = (parseInt(pastHours, 10) === hours && pastMinutes >= minutes) 
+    const pastTimeIsEnough = (parseInt(pastHours, 10) === hours && pastMinutes >= minutes)
       || parseInt(pastHours, 10) > hours;
 
     return (lastEvent) ? pastTimeIsEnough : false;
@@ -295,6 +295,29 @@ module.exports = ['$routeParams', '$location', 'CommonRequest', 'CommonConfig', 
 
   /**
    * @private
+   * @function addRoyalmailPlaceboEvent
+   * @description This method adds a placebo "in transit" event for royalmail shipments.
+   *              This event is temporary:
+   *              6 hours and 0 minutes after label was printed and when no new event was added.
+   */
+  const addRoyalmailPlaceboEvent = function (language, moment) {
+    const firstRouteNumber = self.data.route_information[0].route_number;
+
+    if (isExportboxPartShipment() && lastEventOnRouteHasStatus(firstRouteNumber, 'LABEL_PRINTED') && lastEventIsOlderThan(6, 0)) {
+      const time = StorageService.get(`${self.data.id}:hasRoyalmailPlaceboEvent`);
+
+      if (!time) {
+        StorageService.set(`${self.data.id}:hasRoyalmailPlaceboEvent`, moment);
+      }
+
+      self.data.events.push(placeboEvent(self.data.events[0].carrier.code, 0, 'IN_TRANSIT', language, `${self.data.id}:hasRoyalmailPlaceboEvent`));
+    } else {
+      StorageService.set(`${self.data.id}:hasRoyalmailPlaceboEvent`, null);
+    }
+  };
+
+  /**
+   * @private
    * @function addEvents
    * @description This method adds Events to the event list.
    */
@@ -315,6 +338,7 @@ module.exports = ['$routeParams', '$location', 'CommonRequest', 'CommonConfig', 
     // Placebo events:
     addWarehousePlaceboEvent(language, moment);
     addExportboxPartPlaceboEvent(language, moment);
+    addRoyalmailPlaceboEvent(language, moment);
   };
 
   /**
