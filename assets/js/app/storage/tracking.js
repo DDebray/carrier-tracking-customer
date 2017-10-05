@@ -271,12 +271,12 @@ module.exports = ['$routeParams', '$location', 'CommonRequest', 'CommonConfig', 
   };
 
   /**
- * @private
- * @function addExportboxPartEvent
- * @description This method adds a placebo "in transit" event for export box part shipments.
- *              This event is temporary:
- *              12 hours and 6 minutes after label was printed and when no new event was added.
- */
+   * @private
+   * @function addExportboxPartEvent
+   * @description This method adds a placebo "in transit" event for export box part shipments.
+   *              This event is temporary:
+   *              12 hours and 6 minutes after label was printed and when no new event was added.
+   */
   const addExportboxPartPlaceboEvent = function (language, moment) {
     const firstRouteNumber = self.data.route_information[0].route_number;
 
