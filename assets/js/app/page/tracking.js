@@ -121,7 +121,7 @@ module.exports = [
       carrier.country_code = currentRoute[0].country;
 
 
-      if (carrier.code === 'coureon' || carrier.code === 'bpost') {
+      if (carrier.code === 'coureon') {
         carrier.tracking_url = null;
       }
 
