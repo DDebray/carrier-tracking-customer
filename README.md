@@ -11,13 +11,13 @@ Install NVM on Ubuntu: http://www.liquidweb.com/kb/how-to-install-nvm-node-versi
 
 
 ```
-$ nvm install v5.1.1
+$ nvm install stable
 $ npm install
 ```
 
 If you already have an existing node_modules directory, delete it prior to the new installation.
 ```
-$ nvm install v5.1.1
+$ nvm install stable
 $ rm -R node_modules
 $ npm cache clean
 $ npm install
@@ -32,13 +32,10 @@ $ npm rebuild node-sass
 ## Usage
 
 ```
-$ gulp
+$ npm start
 ```
 ```
-$ gulp build
-```
-```
-$ gulp dev
+$ npm start dev
 ```
 
 ### Hints

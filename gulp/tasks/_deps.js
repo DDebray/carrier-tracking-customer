@@ -7,9 +7,8 @@
  */
 
 var gulp = require('gulp'),
-  checkDeps = require('gulp-check-deps');
+  npmCheck = require('gulp-npm-check');
 
-gulp.task('deps', function() {
-    return gulp.src('package.json')
-      .pipe(checkDeps());
+gulp.task('deps', function(cb) {
+  npmCheck({ throw: false }, cb);
 });
