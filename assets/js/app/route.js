@@ -6,7 +6,7 @@ module.exports = [ '$routeProvider', '$locationProvider', '$httpProvider', 'Comm
     needsToBeLoggedIn = false;
   };
 
-  $httpProvider.defaults.withCredentials = false;
+  $httpProvider.defaults.withCredentials = true;
   $httpProvider.interceptors.push( [ '$q', '$location', '$translate', function ( $q, $location, $translate ) {
     return {
       request: function ( config ) {
@@ -30,17 +30,22 @@ module.exports = [ '$routeProvider', '$locationProvider', '$httpProvider', 'Comm
       // the controller is set in the index.html template,
       // as it needs to exists side by side with the routing controllers
       templateUrl: 'views/landingpage.html',
-      resolve: independentPageResolver,
+      resolve: independentPageResolver
     } )
     .when( '/tracking/:trackingId', {
       controller: 'PageTrackingCtrl as tracking',
       templateUrl: 'views/tracking.html',
-      resolve: independentPageResolver,
+      resolve: independentPageResolver
     } )
     .when( '/printing/:trackingId', {
       controller: 'PagePrintingCtrl as printing',
       templateUrl: 'views/printing.html',
-      resolve: independentPageResolver,
+      resolve: independentPageResolver
+    } )
+    .when( '/return/:authorization', {
+      controller: 'PageReturnCtrl as return',
+      templateUrl: 'views/return.html',
+      resolve: independentPageResolver
     } )
     .otherwise( {
       redirectTo: '/'
