@@ -1,29 +1,45 @@
 module.exports = ['$routeParams', 'CommonRequest', '$timeout', 'CommonUi', 'StorageShipment', 'StorageTransaction',
   function($routeParams, CommonRequest, $timeout, CommonUi, StorageShipment, StorageTransaction) {
     const authorization = $routeParams.authorization;
+    this.shipment = null;
+    this.errors = false;
+    this.notifications = false;
+    this.senderAddress = {};
 
     CommonRequest.setToken(authorization);
-    CommonRequest.return.shipment.get({}).$promise.then(result => console.log(result)).catch(error => console.log(error));
+    CommonRequest.return.shipment.get({}).$promise.then(response => {
+      this.onUpdate(response && response.shipment);
+      console.log(response);
+    }).catch(error => console.log(error));
 
-    this.senderAddress = false;
+    this.onUpdate = shipment => {
+      this.shipment = shipment;
+      this.senderAddress = Object.assign({}, shipment && shipment.address_from || this.senderAddress);
+    };
 
     this.addressForm = {
-      model: () => this.senderAddress,
+      model: () => this.shipment && this.shipment.address_from,
       flags: {
         enhanceFields: false
       },
       submit: {
         label: 'COMMON.ADDRESSES.SAVE',
         action: () => {
-          StorageShipment.updateResource(this.senderAddress);
-          StorageTransaction.updatedAddress = self.senderAddress;
-          self.senderAddress = false;
+          this.shipment.address_from = Object.assign({}, this.senderAddress);
+          //StorageShipment.updateResource(this.senderAddress);
+          // StorageTransaction.updatedAddress = this.shipment.address_from;
         }
       }
     };
 
-    self.selectedAddress = 'SENDER_ADDRESS';
+    this.updateRates = () => {
+      CommonRequest.return.calculateRates.save({}, {shipment: this.shipment}).$promise.then(response => {
+        this.onUpdate(response && response.shipment);
+        console.log(response);
+      }).catch(error => console.log(error));
+    };
 
+/*
     self.addresses = () => StorageShipment.addresses;
 
     self.rates = () => StorageShipment.rates;
@@ -48,5 +64,6 @@ module.exports = ['$routeParams', 'CommonRequest', '$timeout', 'CommonUi', 'Stor
       invoiceAddress.address_type = 'INVOICE_ADDRESS';
       return invoiceAddress;
     };
+*/
   }
 ];

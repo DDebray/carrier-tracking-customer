@@ -1,87 +1,65 @@
 <hero hero-title="'PAGE.RETURN.TITLE' | translate"
-    hero-image="url(images/hero/default_rev_2.jpg)"
-    hero-position="return"
-    >
+      hero-image="url(images/hero/default_rev_2.jpg)"
+      hero-position="return">
   <h1 class="hero__title" ng-bind="'PAGE.RETURN.TITLE' | translate"></h1>
 </hero>
 
-<section class="section">
-    <div class="section__inner"
-        ng-class="{ 'section__inner--centered' : return.showError() }">
+<section class="section" ng-if="return.shipment">
+  <div class="section__inner" ng-class="{ 'section__inner--centered' : return.errors }">
 
-        <h2 ng-if="return.showError()"
-            ng-bind="'PAGE.RETURN.ERROR_TITLE' | translate"></h2>
+    <h2 ng-if="return.errors" ng-bind="'PAGE.RETURN.ERROR_TITLE' | translate"></h2>
+    <p ng-if="return.errors" ng-repeat="error in return.errors" ng-bind="error.text"></p>
 
-        <p  ng-if="return.showError()" 
-            ng-repeat="error in return.showError().data.messages" 
-            ng-bind="error.text"></p>
+    <!-- NOTIFICATIONS: -->
+    <ul ng-if="return.notifications" class="ui-notification-list columns">
+      <li class="ui-notification ui-notification-warning" ng-repeat="notification in return.notifications">
+        <span class="fa ui-notification-icon fa-exclamation-triangle"></span>
+        <span ng-bind="notification.text | translate"></span>
+      </li>
+    </ul>
 
-        <!-- NOTIFICATIONS: -->
-        <ul ng-if="return.showNotifications()"
-            class="ui-notification-list columns">
-            <li class="ui-notification ui-notification-warning"
-                ng-repeat="notification in return.showNotifications()">
-                <span class="fa ui-notification-icon fa-exclamation-triangle"></span>
-                <span ng-bind="(notification.text) | translate"></span>
-            </li>
-        </ul>
+    <!-- ADDRESSES-->
+    <div class="row row-outer-block">
+      <div class="column small-12 large-6 h-spacing-bottom--wide" ng-if="!return.errors">
+        <h1><span translate="PAGE.RETURN.ADDRESSES.TITLE"></span></h1>
 
-        <!-- ADDRESSES: -->
-        <div class="row row-outer-block">
-            <div ng-if="!return.showError()"
-                class="column small-12 large-6 h-spacing-bottom--wide"
-                ng-if="return.addresses()">
+        <div class="area-panel area-panel--merge widget-address widget-address--js-editing">
+          <h3 class="address-headline" ng-bind="'COMMON.ADDRESSES.SENDER' | translate"></h3>
 
-                <h1><span translate="PAGE.RETURN.ADDRESSES.TITLE"></span></h1>
-                <div class="area-panel area-panel--merge"
-                    ng-repeat="(addressType, address) in return.addresses()"
-                    ng-click="address.is_editable ? return.openAddressForm(address, addressType) : null"
-                    ng-class="{ 'widget-address' : address.is_editable, 'widget-address--js-editing' : (address.is_editable && return.openAddress.address_type == addressType) }">
-
-                    <input class="area-panel-select" type="radio" name="invoice_address" id="invoice_address" ng-model="return.selectedAddress" ng-value="addressType">
-                    <label class="area-panel-select-label" for="invoice_address"><span translate="COMMON.ADDRESSES.INVOICE_ADDRESS"></span></label>
-
-                    <h3 class="address-headline"
-                        ng-bind="('COMMON.ADDRESSES.' + addressType) | translate"></h3>
-
-                    <div class="address-container"
-                        watch-height="{ condition: (!return.openAddress || (return.openAddress && return.openAddress.address_type !== addressType)), targetOnTrue: 'js-target-on-true', targetOnFalse: 'js-target-on-false', disableAnimationClass: 'address-container--no-animation' }">
-
-                        <address class="address-display js-target-on-true"
-                            ng-class="{ 'address-display--is-visible' : (address && !return.openAddress || (return.openAddress && return.openAddress.address_type !== addressType)) }"
-                            data="address"
-                            is-editable="address.is_editable"></address>
-
-                        <div class="address-form js-target-on-false"
-                            ng-class="{ 'address-form--is-visible' : (return.openAddress && return.openAddress.address_type === addressType) }"
-                            address-form="return.addressForm"
-                            address-model="return.openAddress"
-                            sender="return.openAddress.address_type == 'SENDER_ADDRESS'"></div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- RATES: -->
-            <div ng-if="!return.showError()"
-                class="column small-12 large-6">
-
-                <h1><span translate="PAGE.RETURN.RATES.TITLE"></span></h1>
-                <div class="area-panel area-panel--container area-panel--merge"
-                    ng-if="return.rates()">
-                    <div class="widget-rate"
-                        ng-repeat="rate in return.rates()"
-                        ng-class="{ 'widget-rate-disabled' : return.openAddress || return.showNotifications() }"
-                        ng-include="'/views/partials/widgets/rate.html'"
-                        data-text-disabled="{{ 'RATE.DISABLED' | translate }}"></div>
-                </div>
-            </div>
+          <div class="address-container">
+            <div class="address-form js-target-on-false address-form--is-visible"
+                 address-form="return.addressForm" address-model="return.senderAddress" sender="true"></div>
+          </div>
         </div>
+
+        <div class="area-panel area-panel--merge">
+          <h3 class="address-headline" ng-bind="'COMMON.ADDRESSES.RECEIVER' | translate"></h3>
+
+          <div class="address-container"
+               watch-height="{ condition: true, targetOnTrue: 'js-target-on-true', targetOnFalse: 'js-target-on-false', disableAnimationClass: 'address-container--no-animation' }">
+<!-- TODO check what that does -->
+            <address class="address-display js-target-on-true address-display--is-visible" data="return.shipment.address_to"></address>
+          </div>
+        </div>
+      </div>
+
+      <!-- RATES: -->
+      <div ng-if="!return.errors" class="column small-12 large-6">
+        <h1><span translate="PAGE.RETURN.RATES.TITLE"></span></h1>
+        <div class="area-panel area-panel--container area-panel--merge" ng-if="return.shipment.rates">
+          <div class="widget-rate"
+               ng-repeat="rate in return.shipment.rates"
+               ng-class="{ 'widget-rate-disabled' : return.shipment.address_from || return.notifications }"
+               ng-include="'/views/partials/widgets/rate.html'"
+               data-text-disabled="{{ 'RATE.DISABLED' | translate }}"></div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
 <banner banner-title="'SECTION.FOOTER.TITLE' | translate"
-    banner-subtitle="'SECTION.FOOTER.SUBTITLE' | translate"
-    tracking-id="{{tracking.data.id.toUpperCase()}}"
-    show-print-button="false"
-    ></banner>
+        banner-subtitle="'SECTION.FOOTER.SUBTITLE' | translate"
+        tracking-id="{{tracking.data.id.toUpperCase()}}"
+        show-print-button="false"
+></banner>
