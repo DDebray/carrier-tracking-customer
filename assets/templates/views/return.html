@@ -1,6 +1,4 @@
-<hero hero-title="'PAGE.RETURN.TITLE' | translate"
-      hero-image="url(images/hero/default_rev_2.jpg)"
-      hero-position="return">
+<hero hero-title="'PAGE.RETURN.TITLE' | translate" hero-image="url(images/hero/default_rev_2.jpg)" hero-position="return">
   <h1 class="hero__title" ng-bind="'PAGE.RETURN.TITLE' | translate"></h1>
 </hero>
 
@@ -12,13 +10,12 @@
       <p ng-repeat="error in return.errors" ng-bind="error.text"></p>
     </div>
 
-    <!-- NOTIFICATIONS: -->
-    <ul ng-if="return.notifications" class="ui-notification-list columns">
-      <li class="ui-notification ui-notification-warning" ng-repeat="notification in return.notifications">
-        <span class="fa ui-notification-icon fa-exclamation-triangle"></span>
-        <span ng-bind="notification.text | translate"></span>
-      </li>
-    </ul>
+    <div class="row row-outer-block">
+      <div class="column small-12 medium-9" ng-include="'/views/partials/package/measurements.html'" ng-repeat="package in [return.package]" help="{ translation : 'ACTION.HELP.TEXT.SP_PACKAGE_MEASUREMENT' }"></div>
+      <div class="column small-12 medium-3" ng-include="'/views/partials/package/weight.html'" ng-repeat="package in [return.package]" help="{ translation : 'ACTION.HELP.TEXT.SP_PACKAGE_WEIGHT', directionX : 'left' }"></div>
+    </div>
+
+    <hr class="section__divider">
 
     <!-- ADDRESSES-->
     <div class="row row-outer-block" ng-if="return.shipment">
@@ -30,7 +27,8 @@
 
           <div class="address-container">
             <address class="address-display address-display--static" ng-if="!return.isEditingAddress"
-                     data="return.shipment.address_from" is-editable="true"></address>
+                     data="return.shipment.address_from" is-editable="true"
+                     ng-click="return.isEditingAddress = true"></address>
             <div class="address-form address-form--static" ng-if="return.isEditingAddress"
                  address-form="return.addressForm" address-model="return.senderAddress" sender="true"></div>
           </div>
@@ -48,15 +46,16 @@
       <!-- RATES: -->
       <div class="column small-12 large-6">
         <h1><span translate="PAGE.RETURN.RATES.TITLE"></span></h1>
+        {{ return.shipment.rates }}
         <div class="area-panel area-panel--container area-panel--merge" ng-if="return.shipment.rates">
           <div class="widget-rate"
                ng-repeat="rate in return.shipment.rates"
-               ng-class="{ 'widget-rate-disabled' : return.shipment.address_from || return.notifications }"
+               ng-class="{ 'widget-rate-disabled' : !return.shipment.address_from || return.errors }"
                ng-include="'/views/partials/widgets/rate.html'"
                data-text-disabled="{{ 'RATE.DISABLED' | translate }}"></div>
         </div>
 
-        <ul ng-if="return.errors" class="ui-notification-list columns">
+        <ul ng-if="return.errors" class="ui-notification-list column row">
           <li class="ui-notification ui-notification-warning" ng-repeat="error in return.errors">
             <span class="fa ui-notification-icon fa-exclamation-triangle"></span>
             <span ng-bind="error.text | translate"></span>
@@ -67,8 +66,5 @@
   </div>
 </section>
 
-<banner banner-title="'SECTION.FOOTER.TITLE' | translate"
-        banner-subtitle="'SECTION.FOOTER.SUBTITLE' | translate"
-        tracking-id="{{tracking.data.id.toUpperCase()}}"
-        show-print-button="false"
-></banner>
+<banner banner-title="'SECTION.FOOTER.TITLE' | translate" banner-subtitle="'SECTION.FOOTER.SUBTITLE' | translate"
+        tracking-id="{{tracking.data.id.toUpperCase()}}" show-print-button="false"></banner>

@@ -1,13 +1,32 @@
-module.exports = ['$routeParams', 'CommonRequest', '$timeout', 'CommonUi', 'StorageShipment', 'StorageTransaction',
-  function($routeParams, CommonRequest, $timeout, CommonUi, StorageShipment, StorageTransaction) {
+module.exports = ['$routeParams', 'CommonRequest',
+  function($routeParams, CommonRequest) {
     const authorization = $routeParams.authorization;
     this.shipment = null;
     this.errors = false;
-    this.notifications = false;
+    this.isEditingAddress = true;
     this.senderAddress = {
       country: 'DE'
     };
-    this.isEditingAddress = true;
+    this.package = {
+      length: 60,
+      width: 30,
+      height: 15,
+      weight: 2,
+      distance_unit: 'cm',
+      mass_unit: 'kg'
+    };
+
+    const getAssembledShipment = () => {
+      return Object.assign({}, {
+        packages: [this.package],
+        address_from: this.senderAddress
+      });
+    };
+
+    const disassembleShipment = shipment => {
+      this.senderAddress = Object.assign({}, shipment && shipment.address_from || this.senderAddress);
+      this.package = Object.assign({}, shipment && shipment.packages && shipment.packages[0] || this.package);
+    };
 
     this.onUpdate = response => {
       console.log(response);
@@ -18,12 +37,12 @@ module.exports = ['$routeParams', 'CommonRequest', '$timeout', 'CommonUi', 'Stor
       }
 
       if (response.status === 'ERROR') {
-        return this.errors = response.messages;
+        return (this.errors = response.messages);
       }
 
       const shipment = response.content && response.content.shipment || this.shipment;
       this.shipment = shipment;
-      this.senderAddress = Object.assign({}, shipment && shipment.address_from || this.senderAddress);
+      disassembleShipment(shipment);
     };
 
     CommonRequest.setToken(authorization);
@@ -37,7 +56,6 @@ module.exports = ['$routeParams', 'CommonRequest', '$timeout', 'CommonUi', 'Stor
       submit: {
         label: 'COMMON.ADDRESSES.SAVE',
         action: () => {
-          this.shipment.address_from = Object.assign({}, this.senderAddress);
           this.updateRates();
           this.isEditingAddress = false;
         }
@@ -45,34 +63,7 @@ module.exports = ['$routeParams', 'CommonRequest', '$timeout', 'CommonUi', 'Stor
     };
 
     this.updateRates = () => {
-      return CommonRequest.return.calculateRates.save({}, {shipment: this.shipment}).$promise.then(this.onUpdate).catch(this.onUpdate);
+      return CommonRequest.return.calculateRates.save({}, {shipment: getAssembledShipment()}).$promise.then(this.onUpdate).catch(this.onUpdate);
     };
-
-/*
-    self.addresses = () => StorageShipment.addresses;
-
-    self.rates = () => StorageShipment.rates;
-
-    this.senderAddressForm = (address, addressType) => {
-      this.senderAddress = address;
-    };
-
-    self.selectRate = rate => {
-      if (!this.senderAddress) {
-        StorageTransaction.selectedRate = rate;
-        console.log(rate);
-      }
-    };
-
-    self.showError = () => StorageShipment.error;
-
-    self.showNotifications = () => StorageShipment.notifications;
-
-    var getInvoiceAddress = function () {
-      var invoiceAddress = Object.assign( {}, self.addresses()[ self.selectedAddress ] );
-      invoiceAddress.address_type = 'INVOICE_ADDRESS';
-      return invoiceAddress;
-    };
-*/
   }
 ];
