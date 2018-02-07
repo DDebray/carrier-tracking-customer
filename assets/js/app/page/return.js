@@ -31,13 +31,13 @@ module.exports = ['$routeParams', 'CommonRequest',
     this.onUpdate = response => {
       console.log(response);
 
-      if (!response) {
+      if (!response || !response.status) {
         // TODO show generic error
         return;
       }
 
-      if (response.status === 'ERROR') {
-        return (this.errors = response.messages);
+      if (response.status === 'ERROR' || typeof response.status === 'number') {
+        return (this.errors = response.messages || response.data && response.data.messages);
       }
 
       const shipment = response.content && response.content.shipment || this.shipment;
@@ -65,5 +65,9 @@ module.exports = ['$routeParams', 'CommonRequest',
     this.updateRates = () => {
       return CommonRequest.return.calculateRates.save({}, {shipment: getAssembledShipment()}).$promise.then(this.onUpdate).catch(this.onUpdate);
     };
+
+    this.selectRate = rate => {
+      console.log(rate);
+    }
   }
 ];

@@ -10,12 +10,12 @@
       <p ng-repeat="error in return.errors" ng-bind="error.text"></p>
     </div>
 
-    <div class="row row-outer-block">
+    <div class="row row-outer-block" ng-if="return.shipment">
       <div class="column small-12 medium-9" ng-include="'/views/partials/package/measurements.html'" ng-repeat="package in [return.package]" help="{ translation : 'ACTION.HELP.TEXT.SP_PACKAGE_MEASUREMENT' }"></div>
       <div class="column small-12 medium-3" ng-include="'/views/partials/package/weight.html'" ng-repeat="package in [return.package]" help="{ translation : 'ACTION.HELP.TEXT.SP_PACKAGE_WEIGHT', directionX : 'left' }"></div>
     </div>
 
-    <hr class="section__divider">
+    <hr class="section__divider" ng-if="return.shipment">
 
     <!-- ADDRESSES-->
     <div class="row row-outer-block" ng-if="return.shipment">
@@ -46,7 +46,6 @@
       <!-- RATES: -->
       <div class="column small-12 large-6">
         <h1><span translate="PAGE.RETURN.RATES.TITLE"></span></h1>
-        {{ return.shipment.rates }}
         <div class="area-panel area-panel--container area-panel--merge" ng-if="return.shipment.rates">
           <div class="widget-rate"
                ng-repeat="rate in return.shipment.rates"
