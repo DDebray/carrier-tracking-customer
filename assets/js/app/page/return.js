@@ -4,39 +4,48 @@ module.exports = ['$routeParams', 'CommonRequest', '$timeout', 'CommonUi', 'Stor
     this.shipment = null;
     this.errors = false;
     this.notifications = false;
-    this.senderAddress = {};
+    this.senderAddress = {
+      country: 'DE'
+    };
+    this.isEditingAddress = true;
 
-    CommonRequest.setToken(authorization);
-    CommonRequest.return.shipment.get({}).$promise.then(response => {
-      this.onUpdate(response && response.shipment);
+    this.onUpdate = response => {
       console.log(response);
-    }).catch(error => console.log(error));
 
-    this.onUpdate = shipment => {
+      if (!response) {
+        // TODO show generic error
+        return;
+      }
+
+      if (response.status === 'ERROR') {
+        return this.errors = response.messages;
+      }
+
+      const shipment = response.content && response.content.shipment || this.shipment;
       this.shipment = shipment;
       this.senderAddress = Object.assign({}, shipment && shipment.address_from || this.senderAddress);
     };
 
+    CommonRequest.setToken(authorization);
+    CommonRequest.return.shipment.get({}).$promise.then(this.onUpdate).catch(this.onUpdate);
+
     this.addressForm = {
-      model: () => this.shipment && this.shipment.address_from,
+      model: () => this.senderAddress,
       flags: {
-        enhanceFields: false
+        enhanceFields: true
       },
       submit: {
         label: 'COMMON.ADDRESSES.SAVE',
         action: () => {
           this.shipment.address_from = Object.assign({}, this.senderAddress);
-          //StorageShipment.updateResource(this.senderAddress);
-          // StorageTransaction.updatedAddress = this.shipment.address_from;
+          this.updateRates();
+          this.isEditingAddress = false;
         }
       }
     };
 
     this.updateRates = () => {
-      CommonRequest.return.calculateRates.save({}, {shipment: this.shipment}).$promise.then(response => {
-        this.onUpdate(response && response.shipment);
-        console.log(response);
-      }).catch(error => console.log(error));
+      return CommonRequest.return.calculateRates.save({}, {shipment: this.shipment}).$promise.then(this.onUpdate).catch(this.onUpdate);
     };
 
 /*

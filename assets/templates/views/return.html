@@ -4,11 +4,13 @@
   <h1 class="hero__title" ng-bind="'PAGE.RETURN.TITLE' | translate"></h1>
 </hero>
 
-<section class="section" ng-if="return.shipment">
-  <div class="section__inner" ng-class="{ 'section__inner--centered' : return.errors }">
+<section class="section" ng-if="return.shipment || return.errors">
+  <div class="section__inner" ng-class="{ 'section__inner--centered' : return.errors && !return.shipment }">
 
-    <h2 ng-if="return.errors" ng-bind="'PAGE.RETURN.ERROR_TITLE' | translate"></h2>
-    <p ng-if="return.errors" ng-repeat="error in return.errors" ng-bind="error.text"></p>
+    <div ng-if="return.errors && !return.shipment">
+      <h2 ng-bind="'PAGE.RETURN.ERROR_TITLE' | translate"></h2>
+      <p ng-repeat="error in return.errors" ng-bind="error.text"></p>
+    </div>
 
     <!-- NOTIFICATIONS: -->
     <ul ng-if="return.notifications" class="ui-notification-list columns">
@@ -19,15 +21,17 @@
     </ul>
 
     <!-- ADDRESSES-->
-    <div class="row row-outer-block">
-      <div class="column small-12 large-6 h-spacing-bottom--wide" ng-if="!return.errors">
+    <div class="row row-outer-block" ng-if="return.shipment">
+      <div class="column small-12 large-6 h-spacing-bottom--wide">
         <h1><span translate="PAGE.RETURN.ADDRESSES.TITLE"></span></h1>
 
         <div class="area-panel area-panel--merge widget-address widget-address--js-editing">
           <h3 class="address-headline" ng-bind="'COMMON.ADDRESSES.SENDER' | translate"></h3>
 
           <div class="address-container">
-            <div class="address-form js-target-on-false address-form--is-visible"
+            <address class="address-display address-display--static" ng-if="!return.isEditingAddress"
+                     data="return.shipment.address_from" is-editable="true"></address>
+            <div class="address-form address-form--static" ng-if="return.isEditingAddress"
                  address-form="return.addressForm" address-model="return.senderAddress" sender="true"></div>
           </div>
         </div>
@@ -35,16 +39,14 @@
         <div class="area-panel area-panel--merge">
           <h3 class="address-headline" ng-bind="'COMMON.ADDRESSES.RECEIVER' | translate"></h3>
 
-          <div class="address-container"
-               watch-height="{ condition: true, targetOnTrue: 'js-target-on-true', targetOnFalse: 'js-target-on-false', disableAnimationClass: 'address-container--no-animation' }">
-<!-- TODO check what that does -->
-            <address class="address-display js-target-on-true address-display--is-visible" data="return.shipment.address_to"></address>
+          <div class="address-container">
+            <address class="address-display address-display--static" data="return.shipment.address_to"></address>
           </div>
         </div>
       </div>
 
       <!-- RATES: -->
-      <div ng-if="!return.errors" class="column small-12 large-6">
+      <div class="column small-12 large-6">
         <h1><span translate="PAGE.RETURN.RATES.TITLE"></span></h1>
         <div class="area-panel area-panel--container area-panel--merge" ng-if="return.shipment.rates">
           <div class="widget-rate"
@@ -53,6 +55,13 @@
                ng-include="'/views/partials/widgets/rate.html'"
                data-text-disabled="{{ 'RATE.DISABLED' | translate }}"></div>
         </div>
+
+        <ul ng-if="return.errors" class="ui-notification-list columns">
+          <li class="ui-notification ui-notification-warning" ng-repeat="error in return.errors">
+            <span class="fa ui-notification-icon fa-exclamation-triangle"></span>
+            <span ng-bind="error.text | translate"></span>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

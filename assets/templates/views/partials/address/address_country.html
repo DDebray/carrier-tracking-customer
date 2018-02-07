@@ -2,4 +2,4 @@
     ng-required="form.required.country(this)"
     ng-change="form.onChange(this)"
     ng-options="country.code as country.name for country in form.countryList"
-    disabled></select>
+    ng-disabled="form.readonly.country"></select>
