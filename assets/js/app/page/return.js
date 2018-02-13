@@ -15,19 +15,21 @@ module.exports = ['$routeParams', '$timeout', 'CommonRequest', 'CommonUi',
     this.senderAddress = {
       country: 'DE'
     };
+    this.isPruneAddress = true;
     this.package = {
       length: 60,
       width: 30,
       height: 15,
       weight: 2,
       distance_unit: 'cm',
-      mass_unit: 'kg'
+      mass_unit: 'kg',
+      onChange: () => this.updateRates()
     };
 
-    const getAssembledShipment = (rateCode, senderAddress) => {
+    const getAssembledShipment = rateCode => {
       return Object.assign({}, {
         packages: [this.package],
-        address_from: senderAddress || this.senderAddress,
+        address_from: this.isPruneAddress ? fakeAddress : this.senderAddress,
         selected_rate_code: rateCode
       });
     };
@@ -35,12 +37,10 @@ module.exports = ['$routeParams', '$timeout', 'CommonRequest', 'CommonUi',
     const disassembleShipment = shipment => {
       const addressFrom = shipment && shipment.address_from;
       this.senderAddress = Object.assign({}, addressFrom && addressFrom.name !== fakeAddress.name && addressFrom || this.senderAddress);
-      this.package = Object.assign({}, shipment && shipment.packages && shipment.packages[0] || this.package);
+      this.package = Object.assign({}, shipment && shipment.packages && shipment.packages[0] || this.package, { onChange: this.package.onChange });
     };
 
     this.onUpdate = response => {
-      console.log('onUpdate', response); // DEBUG
-
       if (!response || !response.status) {
         // TODO show generic error
         return;
@@ -51,15 +51,24 @@ module.exports = ['$routeParams', '$timeout', 'CommonRequest', 'CommonUi',
       }
 
       const shipment = response.content && response.content.shipment || this.shipment;
+      this.errors = false;
       this.shipment = shipment;
       disassembleShipment(shipment);
+
+      if (!shipment.rates || !shipment.rates.length) {
+        this.errors = [{ text: 'PAGE.RETURN.NO_RATES' }];
+      }
+    };
+
+    this.updateRates = () => {
+      return CommonRequest.return.calculateRates.save({}, { shipment: getAssembledShipment(null) }).$promise.then(this.onUpdate).catch(this.onUpdate);
     };
 
     CommonRequest.setToken(authorization);
     CommonRequest.return.shipment.get({}).$promise
       .then(this.onUpdate)
       .catch(this.onUpdate)
-      .then(() => this.updateRates(fakeAddress));
+      .then(this.updateRates);
 
     this.addressForm = {
       model: () => this.senderAddress,
@@ -72,12 +81,9 @@ module.exports = ['$routeParams', '$timeout', 'CommonRequest', 'CommonUi',
           this.addressForm.submit.label = 'PAGE.RETURN.SENDER_ADDRESS.UPDATE';
           this.updateRates();
           this.isEditingAddress = false;
+          this.isPruneAddress = false;
         }
       }
-    };
-
-    this.updateRates = address => {
-      return CommonRequest.return.calculateRates.save({}, { shipment: getAssembledShipment(null, address) }).$promise.then(this.onUpdate).catch(this.onUpdate);
     };
 
     this.selectRate = rate => {
@@ -124,8 +130,13 @@ module.exports = ['$routeParams', '$timeout', 'CommonRequest', 'CommonUi',
         return $timeout(() => CommonUi.modal.action.check(taskId), response && 3000 || 0);
       }
 
+      if (response.status !== 'OK' || typeof response.status === 'number') {
+        this.errors = response.messages;
+        return CommonUi.modal.close();
+      }
+
       CommonUi.modal.data.isBusy = false;
       CommonUi.modal.data.downloads = response.content && response.content.download_result && response.content.download_result.download_urls;
-    }
+    };
   }
 ];

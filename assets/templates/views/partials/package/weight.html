@@ -6,7 +6,6 @@
       step="any"
       required
       ng-change="package.onChange ? package.onChange('weight') : null"
-      ng-model-options="{ updateOn : 'change blur' }"
-      ng-class="{'input state-error' : package.volumetricWeightErrors(row).hasError}"/>
+      ng-model-options="{ updateOn : 'change blur' }">
   <span class="legend" ng-bind="package.mass_unit"></span>
 </div>

@@ -47,10 +47,10 @@
       <!-- RATES: -->
       <div class="column small-12 large-6">
         <h1 translate="PAGE.RETURN.RATES.TITLE"></h1>
-        <div class="area-panel area-panel--container area-panel--merge" ng-if="return.shipment.rates">
+        <div class="area-panel area-panel--container area-panel--merge" ng-if="return.shipment.rates && !return.errors">
           <div class="widget-rate"
                ng-repeat="rate in return.shipment.rates"
-               ng-class="{ 'widget-rate-disabled' : !return.shipment.address_from || return.isEditingAddress || return.errors }"
+               ng-class="{ 'widget-rate-disabled' : !return.shipment.address_from || return.isPruneAddress || return.errors }"
                ng-include="'/views/partials/widgets/rate.html'"
                data-text-disabled="{{ 'RETURN_RATE.DISABLED' | translate }}"></div>
         </div>
