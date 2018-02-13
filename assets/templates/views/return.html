@@ -11,8 +11,9 @@
     </div>
 
     <div class="row row-outer-block" ng-if="return.shipment">
-      <div class="column small-12 medium-9" ng-include="'/views/partials/package/measurements.html'" ng-repeat="package in [return.package]" help="{ translation : 'ACTION.HELP.TEXT.SP_PACKAGE_MEASUREMENT' }"></div>
-      <div class="column small-12 medium-3" ng-include="'/views/partials/package/weight.html'" ng-repeat="package in [return.package]" help="{ translation : 'ACTION.HELP.TEXT.SP_PACKAGE_WEIGHT', directionX : 'left' }"></div>
+      <h2 translate="PAGE.RETURN.YOUR_PACKAGE" class="column small-12"></h2>
+      <div class="column small-12 medium-9" ng-include="'/views/partials/package/measurements.html'" ng-repeat="package in [return.package]"></div>
+      <div class="column small-12 medium-3" ng-include="'/views/partials/package/weight.html'" ng-repeat="package in [return.package]"></div>
     </div>
 
     <hr class="section__divider" ng-if="return.shipment">
@@ -20,10 +21,10 @@
     <!-- ADDRESSES-->
     <div class="row row-outer-block" ng-if="return.shipment">
       <div class="column small-12 large-6 h-spacing-bottom--wide">
-        <h1><span translate="PAGE.RETURN.ADDRESSES.TITLE"></span></h1>
+        <h1 translate="PAGE.RETURN.ADDRESSES.TITLE"></h1>
 
         <div class="area-panel area-panel--merge widget-address widget-address--js-editing">
-          <h3 class="address-headline" ng-bind="'COMMON.ADDRESSES.SENDER' | translate"></h3>
+          <h3 class="address-headline" translate="COMMON.ADDRESSES.SENDER"></h3>
 
           <div class="address-container">
             <address class="address-display address-display--static" ng-if="!return.isEditingAddress"
@@ -35,7 +36,7 @@
         </div>
 
         <div class="area-panel area-panel--merge">
-          <h3 class="address-headline" ng-bind="'COMMON.ADDRESSES.RECEIVER' | translate"></h3>
+          <h3 class="address-headline" translate="COMMON.ADDRESSES.RECEIVER"></h3>
 
           <div class="address-container">
             <address class="address-display address-display--static" data="return.shipment.address_to"></address>
@@ -45,13 +46,13 @@
 
       <!-- RATES: -->
       <div class="column small-12 large-6">
-        <h1><span translate="PAGE.RETURN.RATES.TITLE"></span></h1>
+        <h1 translate="PAGE.RETURN.RATES.TITLE"></h1>
         <div class="area-panel area-panel--container area-panel--merge" ng-if="return.shipment.rates">
           <div class="widget-rate"
                ng-repeat="rate in return.shipment.rates"
-               ng-class="{ 'widget-rate-disabled' : !return.shipment.address_from || return.errors }"
+               ng-class="{ 'widget-rate-disabled' : !return.shipment.address_from || return.isEditingAddress || return.errors }"
                ng-include="'/views/partials/widgets/rate.html'"
-               data-text-disabled="{{ 'RATE.DISABLED' | translate }}"></div>
+               data-text-disabled="{{ 'RETURN_RATE.DISABLED' | translate }}"></div>
         </div>
 
         <ul ng-if="return.errors" class="ui-notification-list column row">

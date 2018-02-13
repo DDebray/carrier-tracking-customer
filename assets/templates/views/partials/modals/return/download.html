@@ -1,0 +1,19 @@
+<h2 class="h-center" translate="PAGE.RETURN.MODAL.DOWNLOAD.TITLE"></h2>
+<div class="h-center" translate="PAGE.RETURN.MODAL.DOWNLOAD.TEXT" ng-if="modal.data.downloads"></div>
+
+<div ng-if="modal.data.isBusy" class="h-center h-spacing-top--wide">
+  <span class="fa fa-circle-o-notch fa-spin modal__icon-busy"></span>
+  <div class="legend h-spacing-top" translate="PAGE.PRINTING.MODAL.DOWNLOAD.PENDING_MESSAGE"></div>
+</div>
+
+<div class="h-center h-spacing-top--wide" ng-if="modal.data.downloads" ng-repeat="download in modal.data.downloads">
+  <a ng-href="{{ download.url }}" target="{{ model.data.downloads.length > 1 ? '_blank' : '_self' }}" rel="noopener noreferrer" class="button button--blush">
+    <span class="icon-inline--left icon-inline--middle h-whitify">
+        <span ng-class="'image-layout-' + (download.format || 'a4').toLowerCase()"></span>
+    </span>
+
+    <span ng-bind="('PAGE.RETURN.MODAL.DOWNLOAD.BUTTON' | translate).replace('%format%', (('COMMON.LABEL.LAYOUT_' + (download.format || 'a4').toUpperCase()) | translate))"></span>
+  </a>
+</div>
+
+<div class="area-loading" ng-if="modal.data.isBusy"></div>

@@ -33,6 +33,13 @@
     }
   }
 
+  &__title {
+    margin: ($_ySpacing * (-1)) ($_xSpacing * (-1)) $_ySpacing;
+    padding: ($_ySpacing / 1.5) $_xSpacing;
+    background-image: linear-gradient(to bottom, transparent 1px, $_rgbAlabaster 1px, $_rgbAlabaster 100%);
+    border-bottom: 1px solid $_rgbAthensGray;
+  }
+
   &--container {
     padding:0;
   }
