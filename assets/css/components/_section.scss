@@ -25,6 +25,12 @@
         }
     }
 
+    &__divider {
+        margin: ($_defaultSpacing * 2) 0 ($_defaultSpacing * 3);
+        border: 0 solid $_rgbAlto;
+        border-top-width: 1px;
+    }
+
     &__title {
         margin-bottom: 72px;
         font-size: $_fsLarge;

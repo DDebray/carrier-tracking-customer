@@ -31,6 +31,7 @@ application
 .controller( 'UiCtrl', require( './ui/controller' ) )
   .controller( 'PageBaseCtrl', require( './page/base' ) )
   .controller( 'PageTrackingCtrl', require( './page/tracking' ) )
-  .controller( 'PagePrintingCtrl', require( './page/printing' ) );
+  .controller( 'PagePrintingCtrl', require( './page/printing' ) )
+  .controller('PageReturnCtrl', require('./page/return'));
 
 module.exports = application;

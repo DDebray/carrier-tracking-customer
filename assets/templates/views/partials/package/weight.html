@@ -1,0 +1,11 @@
+<div class="input-legend-small">
+  <label class="table-columns-package-custom-label table-columns-package-custom-label-input-legend" translate="MEASUREMENT.WEIGHT"></label>
+  <input type="number"
+      ng-model="package.weight"
+      min="0.001"
+      step="any"
+      required
+      ng-change="package.onChange ? package.onChange('weight') : null"
+      ng-model-options="{ updateOn : 'change blur' }">
+  <span class="legend" ng-bind="package.mass_unit"></span>
+</div>

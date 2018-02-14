@@ -1,0 +1,29 @@
+<h2 class="h-center" translate="PAGE.RETURN.MODAL.CONFIRM.TITLE"></h2>
+<div class="h-center" translate="PAGE.RETURN.MODAL.CONFIRM.TEXT"></div>
+
+<div class="row area-flex-nested-parent h-spacing-top--wide h-spacing-bottom--wide">
+  <div class="column row-marge-top area-flex-nested-parent small-flex-auto medium-flex-auto large-flex-equal xlarge-flex-equal">
+    <div class="area-panel area-flex-nested-target">
+      <div class="area-panel__title" translate="COMMON.ADDRESSES.SENDER"></div>
+      <address data="modal.data.shipment.address_from" is-editable="false"></address>
+    </div>
+  </div>
+
+  <div class="column row-marge-top area-flex-nested-parent small-flex-auto medium-flex-auto large-flex-equal xlarge-flex-equal">
+    <div class="area-panel area-flex-nested-target">
+      <div class="area-panel__title" translate="COMMON.ADDRESSES.RECEIVER"></div>
+      <address data="modal.data.shipment.address_to" is-editable="false"></address>
+    </div>
+  </div>
+</div>
+
+<div class="h-center h-spacing-bottom--wide">
+  <button type="button" class="button button--blush" translate="PAGE.RETURN.MODAL.CONFIRM.SUBMIT" ng-click="modal.action.confirm(modal)"
+          ng-disabled="modal.data.isBusy" ng-class="{ 'button--disabled': modal.data.isBusy }"></button>
+</div>
+
+<div class="area-loading" ng-if="modal.data.isBusy"></div>
+
+<div class="h-center">
+  <sup translate="PAGE.RETURN.MODAL.CONFIRM.FOOTER"></sup>
+</div>

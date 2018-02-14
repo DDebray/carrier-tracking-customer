@@ -1,0 +1,38 @@
+<div class="row clearfix">
+<span class="column small-4 input-legend-small">
+  <label class="table-columns-package-custom-label table-columns-package-custom-label-input-legend"
+         translate="MEASUREMENT.LENGTH"></label>
+  <input type="number"
+         ng-model="package.length"
+         min="0.001"
+         step="any"
+         required
+         ng-change="package.onChange && package.onChange('length')"
+         ng-model-options="{ updateOn : 'change blur' }">
+  <span class="legend" ng-bind="package.distance_unit"></span>
+</span>
+  <span class="column small-4 input-legend-small">
+  <label class="table-columns-package-custom-label table-columns-package-custom-label-input-legend"
+         translate="MEASUREMENT.WIDTH"></label>
+  <input type="number"
+         ng-model="package.width"
+         min="0.001"
+         step="any"
+         required
+         ng-change="package.onChange && package.onChange('width')"
+         ng-model-options="{ updateOn : 'change blur' }">
+  <span class="legend" ng-bind="package.distance_unit"></span>
+</span>
+  <span class="column small-4 behavior-view-left input-legend-small">
+  <label class="table-columns-package-custom-label table-columns-package-custom-label-input-legend"
+         translate="MEASUREMENT.HEIGHT"></label>
+  <input type="number"
+         ng-model="package.height"
+         min="0.001"
+         step="any"
+         required
+         ng-change="package.onChange && package.onChange('height')"
+         ng-model-options="{ updateOn : 'change blur' }">
+  <span class="legend" ng-bind="package.distance_unit"></span>
+</span>
+</div>

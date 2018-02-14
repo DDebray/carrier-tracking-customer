@@ -1,0 +1,24 @@
+.area-flex {
+  display:flex;
+  flex-flow:row nowrap;
+  align-items:center;
+
+  &-equal {
+    flex:1;
+    margin:0;
+  }
+
+  &-nested {
+    &-parent {
+      display:flex;
+      flex-flow:row wrap;
+
+      &-row {
+        flex-flow:row nowrap;
+      }
+    }
+    &-target {
+      width:100%;
+    }
+  }
+}

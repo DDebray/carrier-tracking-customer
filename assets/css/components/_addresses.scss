@@ -27,6 +27,11 @@
     &--is-visible {
       opacity: 1;
     }
+
+    &--static {
+      position: static;
+      opacity: 1;
+    }
   }
 
   &-display {

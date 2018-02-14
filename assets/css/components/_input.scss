@@ -1,0 +1,17 @@
+.input {
+  &-legend-small {
+    white-space: nowrap;
+    position: relative;
+
+    input,
+    select {
+      display: inline;
+      width: calc(100% - 20px);
+    }
+    .legend {
+      display: inline;
+      margin-left: 2px;
+      vertical-align: middle;
+    }
+  }
+}

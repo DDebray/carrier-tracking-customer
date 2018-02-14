@@ -15,6 +15,9 @@ module.exports = [
       model: function () {
         return self.openAddress;
       },
+      readonly: {
+        country: true
+      },
       flags: {
         enhanceFields: true
       },
