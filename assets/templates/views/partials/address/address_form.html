@@ -94,8 +94,7 @@
                 ng-model="form.data.postal_code"
                 ng-change="form.onChange(this)"
                 ng-model-options="{ updateOn : form.updateOn }"
-                placeholder="{{ form.usePlaceholders ? ((form.labels.postal_code || 'COMMON.ADDRESSES.POSTAL_CODE') | translate) : '' }}"
-                pattern="^[0-9]{5}$" />
+                placeholder="{{ form.usePlaceholders ? ((form.labels.postal_code || 'COMMON.ADDRESSES.POSTAL_CODE') | translate) : '' }}" />
         </div>
         <div class="column small-8 medium-9"
             ng-if="!form.hide.city">
