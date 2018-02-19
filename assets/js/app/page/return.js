@@ -4,6 +4,7 @@ module.exports = ['$routeParams', '$timeout', 'CommonRequest', 'CommonUi',
     this.shipment = null;
     this.errors = false;
     this.isEditingAddress = true;
+    
     const fakeAddress = {
       name: 'Max Mustermann',
       street1: 'Alexanderplatz',
@@ -12,9 +13,11 @@ module.exports = ['$routeParams', '$timeout', 'CommonRequest', 'CommonUi',
       city: 'Berlin',
       country: 'DE'
     };
+    
     this.senderAddress = {
       country: 'DE'
     };
+    
     this.isPruneAddress = true;
     this.package = {
       length: 60,
@@ -61,7 +64,7 @@ module.exports = ['$routeParams', '$timeout', 'CommonRequest', 'CommonUi',
     };
 
     this.updateRates = () => {
-      return CommonRequest.return.calculateRates.save({}, { shipment: getAssembledShipment(null) }).$promise.then(this.onUpdate).catch(this.onUpdate);
+    	return CommonRequest.return.calculateRates.save({}, { shipment: getAssembledShipment(null) }).$promise.then(this.onUpdate).catch(this.onUpdate);
     };
 
     CommonRequest.setToken(authorization);
@@ -79,9 +82,9 @@ module.exports = ['$routeParams', '$timeout', 'CommonRequest', 'CommonUi',
         label: 'PAGE.RETURN.SENDER_ADDRESS.SAVE',
         action: () => {
           this.addressForm.submit.label = 'PAGE.RETURN.SENDER_ADDRESS.UPDATE';
+          this.isPruneAddress = false;
           this.updateRates();
           this.isEditingAddress = false;
-          this.isPruneAddress = false;
         }
       }
     };
@@ -130,13 +133,17 @@ module.exports = ['$routeParams', '$timeout', 'CommonRequest', 'CommonUi',
         return $timeout(() => CommonUi.modal.action.check(taskId), response && 3000 || 0);
       }
 
-      if (response.status !== 'OK' || typeof response.status === 'number') {
-        this.errors = response.messages;
-        return CommonUi.modal.close();
+      if (response.status !== 'OK' || typeof response.status === 'number' || response.content.progress.error > 0) {
+        // this.errors = response.messages;
+    	  this.errors = response.content.download_result.errors;
+    	  CommonUi.modal.data.errors = response.content.download_result.errors;
+    	  CommonUi.modal.closable = true;
+    	  this.updateRates();
+      } else {
+    	  CommonUi.modal.data.downloads = response.content && response.content.download_result && response.content.download_result.download_urls;    	  
       }
-
+      
       CommonUi.modal.data.isBusy = false;
-      CommonUi.modal.data.downloads = response.content && response.content.download_result && response.content.download_result.download_urls;
     };
   }
 ];

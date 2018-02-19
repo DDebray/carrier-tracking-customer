@@ -34,27 +34,10 @@ module.exports = [ '$resource', '$http', 'CommonConfig', function ( $resource, $
       }
     } ),
     countries: generateResource( 'countries', 'cx' ),
-
-
-
-
-    // transaction: generateResource('transaction', 'cx', null, {
-    //   start: {
-    //     method: 'POST',
-    //     url:
-    //   }
-    // }),
-    // externalTracking : generateResource('tracking', 'ruediger', null, {
-    //   getStatus : {
-    //     method : 'GET',
-    //     url : 'tracking/:trackingId'
-    //   }
-    // }),
     cms: {
       news: generateResource( 'news', 'cms' ),
       cooperations: generateResource( 'cooperations', 'cms' )
     },
-
     return: {
       shipment: generateResource('shipment', 'return', null, {
         create: {

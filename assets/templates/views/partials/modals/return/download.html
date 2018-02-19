@@ -16,4 +16,9 @@
   </a>
 </div>
 
+<div ng-if="modal.data.errors">
+	<h2 ng-bind="'PAGE.RETURN.ERROR_TITLE' | translate"></h2>
+    <p ng-repeat="error in modal.data.errors" ng-bind="error"></p>
+</div>
+
 <div class="area-loading" ng-if="modal.data.isBusy"></div>
