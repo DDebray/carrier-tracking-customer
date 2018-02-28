@@ -35,7 +35,10 @@ module.exports = function () {
           'yodel',
           'usps',
           'bpost',
-          'royalmail'
+          'royalmail',
+          'posti',
+          'postnord',
+          'schenker'
         ];
 
       var rateCode = ( scope.rate() || {} ).code || '';
