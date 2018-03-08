@@ -47,6 +47,26 @@ module.exports = ['$routeParams', '$location', 'CommonRequest', 'CommonConfig', 
       service_codes: ['dhl_express_international_worldwide'],
       tracking_link: 'https://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=en&idc=',
     },
+    YODEL: {
+      carrier_code: 'yodel',
+      service_codes: ['yodel_national'],
+      tracking_link: 'http://www.yodel.co.uk/tracking/',
+    },
+    BPOST: {
+      carrier_code: 'bpost',
+      service_codes: ['bpost_scan_national', 'bpost_sign_national'],
+      tracking_link: 'https://mercury.landmarkglobal.com/tracking/track.php?cid=0936&refid=',
+    },
+    NEXIVE: {
+      carrier_code: 'nexive',
+      service_codes: ['nexive_national'],
+      tracking_link: 'https://www.sistemacompleto.it/Tracking-Spedizioni-Nexive.aspx?b={0}&lang=IT',
+    },
+    COLISSIMO: {
+      carrier_code: 'colissimo',
+      service_codes: ['colissimo_national_sign', 'colissimo_national_scan'],
+      tracking_link: 'https://www.laposte.fr/particulier/outils/de/ein-paket-verfolgen?code=',
+    },
   };
 
   /**
@@ -248,6 +268,66 @@ module.exports = ['$routeParams', '$location', 'CommonRequest', 'CommonConfig', 
 
   /**
    * @private
+   * @function addYodelCustomEvents
+   *
+   * @description This adds custom events for the the carrier Yodel.
+   */
+  const addYODELCustomEvents = function () {
+    if (isCarrierDeliveringOnRoute('YODEL', 1)) {
+      self.data.events.push(customEvent('YODEL', 1));
+    }
+    if (isCarrierDeliveringOnRoute('YODEL', 2)) {
+      self.data.events.push(customEvent('YODEL', 2));
+    }
+  };
+
+  /**
+   * @private
+   * @function addBpostCustomEvents
+   *
+   * @description This adds custom events for the the carrier Bpost.
+   */
+  const addBPOSTCustomEvents = function () {
+    if (isCarrierDeliveringOnRoute('BPOST', 1)) {
+      self.data.events.push(customEvent('BPOST', 1));
+    }
+    if (isCarrierDeliveringOnRoute('BPOST', 2)) {
+      self.data.events.push(customEvent('BPOST', 2));
+    }
+  };
+
+  /**
+   * @private
+   * @function addNexiveCustomEvents
+   *
+   * @description This adds custom events for the the carrier Nexive.
+   */
+  const addNEXIVECustomEvents = function () {
+    if (isCarrierDeliveringOnRoute('NEXIVE', 1)) {
+      self.data.events.push(customEvent('NEXIVE', 1));
+    }
+    if (isCarrierDeliveringOnRoute('NEXIVE', 2)) {
+      self.data.events.push(customEvent('NEXIVE', 2));
+    }
+  };
+
+  /**
+   * @private
+   * @function addColissimoCustomEvents
+   *
+   * @description This adds custom events for the the carrier Colissimo.
+   */
+  const addCOLISSIMOCustomEvents = function () {
+    if (isCarrierDeliveringOnRoute('COLISSIMO', 1)) {
+      self.data.events.push(customEvent('COLISSIMO', 1));
+    }
+    if (isCarrierDeliveringOnRoute('COLISSIMO', 2)) {
+      self.data.events.push(customEvent('COLISSIMO', 2));
+    }
+  };
+
+  /**
+   * @private
    * @function addWarehouseEvent
    * @description This methods adds a placebo warehouse event.
    *              This event is temporary:
@@ -329,6 +409,10 @@ module.exports = ['$routeParams', '$location', 'CommonRequest', 'CommonConfig', 
     addGLSCustomEvents();
     addUSPSCustomEvents();
     addDHLCustomEvents();
+    addYODELCustomEvents();
+    addBPOSTCustomEvents();
+    addNEXIVECustomEvents();
+    addCOLISSIMOCustomEvents();
 
     let moment = CommonMoment().locale(language);
     moment = moment.subtract(2, 'hour');
