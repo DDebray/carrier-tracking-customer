@@ -120,9 +120,12 @@ module.exports = [
       }
       carrier.country_code = currentRoute[0].country;
 
-
       if (carrier.code === 'coureon') {
         carrier.tracking_url = null;
+      }
+
+      if (carrier.code === 'hg_logistics'){
+        carrier.code = 'coureon';
       }
 
       return carrier;
