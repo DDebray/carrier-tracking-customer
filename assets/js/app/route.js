@@ -42,11 +42,6 @@ module.exports = [ '$routeProvider', '$locationProvider', '$httpProvider', 'Comm
       templateUrl: 'views/printing.html',
       resolve: independentPageResolver
     } )
-    .when( '/return/:authorization', {
-      controller: 'PageReturnCtrl as return',
-      templateUrl: 'views/return.html',
-      resolve: independentPageResolver
-    } )
     .otherwise( {
       redirectTo: '/'
     } );

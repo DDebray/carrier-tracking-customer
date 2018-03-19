@@ -37,19 +37,6 @@ module.exports = [ '$resource', '$http', 'CommonConfig', function ( $resource, $
     cms: {
       news: generateResource( 'news', 'cms' ),
       cooperations: generateResource( 'cooperations', 'cms' )
-    },
-    return: {
-      shipment: generateResource('shipment', 'return', null, {
-        create: {
-          method: 'POST',
-          url: 'shipment/create'
-        }
-      }),
-      task: generateResource('labels/task/:taskId', 'return'),
-      calculateRates: generateResource('shipment/calculate_rates', 'return')
-    },
-    setToken: function (token) {
-      $http.defaults.headers.common.token = token;
-    },
+    }
   };
 } ];
