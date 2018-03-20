@@ -1,5 +1,6 @@
 <div class="header__inner">
-  <a class="header__logo"
-      ng-href="{{('COMMON.LOGO_LINK' | translate)}}"></a>
+  <a class="header__logo" ng-href="{{((base.client.toUpperCase() + '.LOGO_LINK') | translate)}}">
+    <img ng-if="base.client !== 'coureon'" ng-src="/images/whitelabel/{{base.client}}.svg">
+  </a>
   <language-select config="base.languageSelectConfiguration"></language-select>
 </div>

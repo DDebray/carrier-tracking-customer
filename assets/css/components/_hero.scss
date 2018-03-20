@@ -71,6 +71,10 @@
     border-top-left-radius:: $_borderRadiusDefault;
     border-bottom-left-radius: $_borderRadiusDefault;
     @include placeholderColor($_rgbMineShaft);
+
+    &:focus {
+        border: 0 none;
+    }
 }
 
 .hero__form__input--default {

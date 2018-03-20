@@ -2,13 +2,13 @@
     <ul class="footer__links">
         <li>
             <a class="footer__link"
-                ng-href="{{('COMMON.IMPRINT_LINK' | translate)}}"
-                ng-bind="'COMMON.IMPRINT' | translate"></a>
+                ng-href="{{((base.client.toUpperCase() + '.IMPRINT_LINK') | translate)}}"
+                translate="COMMON.IMPRINT"></a>
         </li>
-        <li>
+        <li ng-if="base.showTerms">
             <a class="footer__link"
-                ng-href="{{('COMMON.TERMS_LINK' | translate)}}"
-                ng-bind="'COMMON.TERMS' | translate"></a>
+                ng-href="{{('COUREON.TERMS_LINK' | translate)}}"
+                translate="COMMON.TERMS"></a>
         </li>
     </ul>
 </div>

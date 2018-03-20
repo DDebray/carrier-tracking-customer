@@ -8,6 +8,11 @@
     &__list {
         list-style-type: none;
         padding-left: 0;
+        pointer-events: none;
+    }
+
+    &:hover &__list {
+        pointer-events: all;
     }
 
     &__list-item {
