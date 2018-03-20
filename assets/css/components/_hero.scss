@@ -68,7 +68,7 @@
     line-height: 1.6rem;
     width: 100%;
     height: 100%;
-    border-top-left-radius:: $_borderRadiusDefault;
+    border-top-left-radius: $_borderRadiusDefault;
     border-bottom-left-radius: $_borderRadiusDefault;
     @include placeholderColor($_rgbMineShaft);
 
@@ -120,7 +120,6 @@
 //  MEDIA QUERIES
 // ================
 //
-@media (min-wdith: $_wMedium) {}
 @media (max-width: $_wLarge) {
     .hero {
         padding: 15px;
