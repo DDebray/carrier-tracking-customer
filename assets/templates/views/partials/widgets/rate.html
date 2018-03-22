@@ -1,5 +1,5 @@
 <div class="widget-rate-content-wrapper"
-    ng-click="(printing || return).selectRate(rate)">
+    ng-click="printing.selectRate(rate)">
     <div class="widget-rate-title">
 
         <!-- service name still missing -->
@@ -21,7 +21,7 @@
                 </span>
                 <span ng-bind="'RATE.IS_NOT_PICKUP' | translate"></span>
             </div>
-            <div ng-if="printing">
+            <div>
                 <span class="icon-inline-left">
                 <span class="fa fa-tachometer"></span>
                 </span>
@@ -30,7 +30,7 @@
                     .replace('%%', (printing.getSelectedSurcharge(rate).days_max || rate.days_max) && (printing.getSelectedSurcharge(rate).days_max !== printing.getSelectedSurcharge(rate).days_min || rate.days_max !== rate.days_min) ? ' - ' +  (printing.getSelectedSurcharge(rate).days_max || rate.days_max) : '')"></span>
             </div>
         </span>
-        <span ng-if="printing" class="widget-rate-price"
+        <span class="widget-rate-price"
             ng-class="{ cta : true }">
             <span ng-bind-html="(
                 rate.gross_amount ?
