@@ -1,0 +1,10 @@
+.theme--coureon {
+  .header__logo {
+    @include cif('coureon', 1.294rem, 11.764rem);
+    color: $_rgbPacificBlue;
+
+    &:hover {
+      color: #0099cb;
+    }
+  }
+}

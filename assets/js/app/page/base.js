@@ -65,5 +65,16 @@ module.exports = [
     };
 
     self.env = CommonConfig.environment();
+
+    var host = $location.$$host,
+      subdomain = host.split('.').shift(),
+      subdomainComponents = subdomain.split('-'),
+      blacklistedComponents = ['app', 'testing', 'development', 'staging', 'production', 'tracking', 'coureon', 'localhost', 'www'];
+
+    self.client = subdomainComponents.filter(component => blacklistedComponents.indexOf(component) === -1).shift() || 'coureon';
+
+    self.heroImage = self.client === 'coureon' ? 'url(/images/hero/default_rev_2.jpg)' : ('url(/images/whitelabel/' + self.client + '-background.jpg)');
+    self.showBanner = self.client === 'coureon';
+    self.showTerms = self.client === 'coureon';
   }
 ];

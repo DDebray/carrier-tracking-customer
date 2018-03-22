@@ -1,6 +1,6 @@
 <hero hero-position="landingpage"
     hero-title="'SECTION.HERO.TITLE' | translate"
-    hero-image="url(images/hero/default_rev_2.jpg)">
+    hero-image="{{ base.heroImage }}">
     <form class="hero__form"
         ng-submit="tracking.getStatus()"
         autocomplete="off"
@@ -33,4 +33,4 @@
     </div>
 </section>
 
-<banner banner-title="'SECTION.FOOTER.TITLE' | translate" banner-link="http://www.coureon.com" banner-subtitle="'SECTION.FOOTER.SUBTITLE' | translate"></banner>
+<banner ng-if="base.showBanner" banner-title="'SECTION.FOOTER.TITLE' | translate" banner-link="http://www.coureon.com" banner-subtitle="'SECTION.FOOTER.SUBTITLE' | translate"></banner>

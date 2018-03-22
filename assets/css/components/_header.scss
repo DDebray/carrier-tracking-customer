@@ -12,14 +12,16 @@
   }
 
   &__logo {
-    @include cif('coureon', 1.294rem, 11.764rem);
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
     align-self: center;
-    color: $_rgbPacificBlue;
     cursor: pointer;
     height: 100%;
 
-    &:hover {
-      color: #0099cb;
+    img {
+      display: block;
+      height: 60%;
     }
   }
 }
