@@ -32,10 +32,7 @@ $ npm rebuild node-sass
 ## Usage
 
 ```
-$ npm start
-```
-```
-$ npm start dev
+$ ENV=staging npm start dev
 ```
 
 ### Hints
