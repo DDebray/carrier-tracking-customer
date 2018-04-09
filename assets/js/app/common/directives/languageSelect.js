@@ -61,9 +61,34 @@ module.exports = function () {
        * @method setDefault
        */
       var setDefault = function () {
-        var defaultObj = config.languages.filter(function (l) {
-          return l.code === config.default.toUpperCase();
-        })[0];
+
+		var browserLang = window.navigator.languages[0]; 					// get preferred language from browser
+        var preferredLang = window.localStorage.getItem('prefLang');		// get preferred language by user
+        if (preferredLang == null || preferredLang == undefined){
+			prefFlag = 0;
+        } else {
+			prefFlag = 1;
+		}
+		if(browserLang == null || browserLang == undefined){
+			browserFlag = 0;
+        } else {
+			browserFlag = 1;
+		}
+		
+		if (prefFlag) {
+		  var defaultObj = config.languages.filter(function (l) {
+			return l.code === config.default.toUpperCase();
+          })[0];
+		} else if(browserFlag) {
+		  var defaultObj = config.languages.filter(function (l) {
+			return l.code === config.default.toUpperCase();
+          })[0];
+		}
+		else {
+		  var defaultObj = config.languages.filter(function (l) {
+            return l.code === config.default.toUpperCase();
+          })[0];
+		}
         var index = config.languages.indexOf(defaultObj);
         config.languages.splice(index, 1);
         config.languages.unshift(defaultObj);
@@ -77,6 +102,7 @@ module.exports = function () {
        */
       scope.changeLanguage = function (language) {
         var index = config.languages.indexOf(language);
+		window.localStorage.setItem('prefLang',config.languages[index].code);	//Store user preferred language in a local storage variable
         config.languages.splice(index, 1);
         config.languages.unshift(language);
         config.changed(language);
