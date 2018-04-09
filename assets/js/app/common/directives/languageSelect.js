@@ -64,17 +64,19 @@ module.exports = function () {
 
 		    var browserLang = window.navigator.languages[0]; 					// get preferred language from browser
         var preferredLang = window.localStorage.getItem('prefLang');		// get preferred language by user
+        var prefFlag = 0;
+        var browserFlag = 0;
         if (preferredLang == null || preferredLang == undefined) {
 			    prefFlag = 0;
         } else {
 			    prefFlag = 1;
 		    }
 		    if(browserLang == null || browserLang == undefined) {
-			    browserFlag = 0;
+			     browserFlag = 0;
         } else {
 		    	browserFlag = 1;
 		    }
-		
+
 		    if (prefFlag) {
 		      var defaultObj = config.languages.filter(function (l) {
 			      return l.code === preferredLang.toUpperCase();
